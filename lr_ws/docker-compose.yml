@@ -1,0 +1,30 @@
+services:
+  lr-dev-full-build:
+    build:
+      context: ./                             # Location of the Dockerfile (Build context is lr_ws)
+      dockerfile: ./docker/lrdev.dockerfile   # Dockerfile name
+    container_name: lunar_roadster_dev_full
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws    # Sync the workspace between host and container
+      - /dev/:/dev/
+    privileged: true
+    environment:
+      - TERM=xterm-256color                   # Enable colors in terminal
+    tty: true                                 # use terminal, i.e. the `-t` flag
+    stdin_open: true                          # allow terminal input, i.e. the `-i` flag
+    working_dir: /root/Lunar_ROADSTER/lr_ws   # Set the working directory in the container
+    ports:
+      - 5900:5900                            # <external port>:<container port>
+      - 9090:9090                             # Websocket for health monitoring via rosbridge_suite
+  
+  lr-dev:
+    image: bhaswantha/lr-dev:v1.0.0
+    privileged: true
+    network_mode: "host"
+    container_name: lunar_roadster_dev
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws
+      - /dev/:/dev/
+    tty: true
+    stdin_open: true
+    working_dir: /root/Lunar_ROADSTER/lr_ws
