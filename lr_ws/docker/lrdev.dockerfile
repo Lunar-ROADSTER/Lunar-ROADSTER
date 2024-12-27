@@ -59,12 +59,12 @@ RUN apt-get update && apt-get install -y \
   libgl1-mesa-glx \
   nano \
   iputils-ping \
-  tree 
+  tree \
   # Install vnc, xvfb for VNC configuration, fluxbox for VNC window managment
-  # x11vnc \
-  # xvfb \
-  # fluxbox \
-  # && rm -rf /var/lib/apt/lists/*
+  x11vnc \
+  xvfb \
+  fluxbox \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install essential development tools and utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -79,19 +79,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # --------------------------- VNC configuration -----------------------------
 # Setup a VNC password
-# RUN  mkdir ~/.vnc \
-#   && x11vnc -storepasswd lunarroadster ~/.vnc/passwd \
-#   # Start the VNC server
-#   && echo '# VNC setup' >> /root/.zshrc \
-#   && echo '# VNC setup' >> /root/.bashrc \
-#   && echo "export DISPLAY=:0" >> ~/.zshrc \
-#   && echo "export DISPLAY=:0" >> ~/.bashrc \
-#   # Always try to start windows management in background to be ready for VNC
-#   && echo "( fluxbox > /dev/null 2>&1 & )" >> ~/.zshrc \
-#   && echo "( fluxbox > /dev/null 2>&1 & )" >> ~/.bashrc \
-#   # Clean up unnecessary output files
-#   && echo "rm -f /root/Lunar_ROADSTER/lr_ws/nohup.out" >> ~/.zshrc \
-#   && echo "rm -f /root/Lunar_ROADSTER/lr_ws/nohup.out" >> ~/.bashrc
+RUN  mkdir ~/.vnc \
+  && x11vnc -storepasswd lunarroadster ~/.vnc/passwd \
+  # Start the VNC server
+  && echo '# VNC setup' >> /root/.zshrc \
+  && echo '# VNC setup' >> /root/.bashrc \
+  && echo "export DISPLAY=:0" >> ~/.zshrc \
+  && echo "export DISPLAY=:0" >> ~/.bashrc \
+  # Always try to start windows management in background to be ready for VNC
+  && echo "( fluxbox > /dev/null 2>&1 & )" >> ~/.zshrc \
+  && echo "( fluxbox > /dev/null 2>&1 & )" >> ~/.bashrc \
+  # Clean up unnecessary output files
+  && echo "rm -f /root/Lunar_ROADSTER/lr_ws/nohup.out" >> ~/.zshrc \
+  && echo "rm -f /root/Lunar_ROADSTER/lr_ws/nohup.out" >> ~/.bashrc
 # ---------------------------------------------------------------------------
 
 
@@ -143,12 +143,11 @@ RUN rosdep install --from-paths src --ignore-src -r -y
 
 # ----------- Container entrypoint --------------
 # Copy entrypoint script for workspace setup
-COPY ./docker/lr_entrypoint.sh /lr_entrypoint.sh
-RUN chmod +x /lr_entrypoint.sh
+RUN chmod +x /root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh
 
 # Make entry
 WORKDIR /root/Lunar_ROADSTER/lr_ws
-ENTRYPOINT [ "/lr_entrypoint.sh" ]
-CMD [ "zsh" ]
+ENTRYPOINT [ "/root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh" ]
+CMD [ "zsh", "-i" ]
 # -----------------------------------------------
 

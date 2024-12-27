@@ -18,7 +18,7 @@ services:
       - 9090:9090                             # Websocket for health monitoring via rosbridge_suite
   
   lr-dev:
-    image: bhaswantha/lr-dev:v1.0.0
+    image: bhaswantha/lr-dev:v1.0.3
     privileged: true
     network_mode: "host"
     container_name: lunar_roadster_dev
