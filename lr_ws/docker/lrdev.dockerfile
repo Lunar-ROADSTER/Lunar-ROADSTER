@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y zsh bash wget \
   && echo 'eval "$(register-python-argcomplete3 colcon)"' >> /root/.zshrc \
   # Welcome message
   && echo '# Welcome message' >> /root/.zshrc \
-  && echo "figlet -f slant -w 120 'Lunar ROADSTER'" >> ~/.zshrc
+  && echo "figlet -f slant -w 120 'Lunar ROADSTER'" >> /root/.zshrc
 
 SHELL ["/usr/bin/zsh", "-c"]
 # ---------------------------------------------------------------------------

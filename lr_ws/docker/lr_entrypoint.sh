@@ -1,7 +1,5 @@
-#!/bin/zsh
+#!/usr/bin/zsh
 set -e
-
-# source ~/.zshrc
 
 # Start the VNC server
 # Xvfb :0 -screen 0 1024x768x24 &
