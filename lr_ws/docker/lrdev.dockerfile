@@ -143,11 +143,11 @@ RUN rosdep install --from-paths src --ignore-src -r -y
 
 # ----------- Container entrypoint --------------
 # Copy entrypoint script for workspace setup
-RUN chmod +x /root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh
+# RUN chmod +x /root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh
 
-# Make entry
-WORKDIR /root/Lunar_ROADSTER/lr_ws
-ENTRYPOINT [ "/root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh" ]
+# # Make entry
+# WORKDIR /root/Lunar_ROADSTER/lr_ws
+# ENTRYPOINT [ "/root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh" ]
 CMD [ "zsh", "-i" ]
 # -----------------------------------------------
 
