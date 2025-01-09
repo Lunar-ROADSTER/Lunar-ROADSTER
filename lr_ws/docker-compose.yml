@@ -1,9 +1,9 @@
 services:
-  lr-dev-full-build:
+  lr-dev-full-build-linux:
     build:
       context: ./                             # Location of the Dockerfile (Build context is lr_ws)
-      dockerfile: ./docker/lrdev.dockerfile   # Dockerfile name
-    container_name: lunar_roadster_dev_full
+      dockerfile: ./docker/lrdev_linux.dockerfile   # Dockerfile name
+    container_name: lunar_roadster_dev_full_linux
     volumes:
       - .:/root/Lunar_ROADSTER/lr_ws    # Sync the workspace between host and container
       - /dev/:/dev/
@@ -16,11 +16,43 @@ services:
     ports:
       - 5900:5900                            # <external port>:<container port>
       - 9090:9090                             # Websocket for health monitoring via rosbridge_suite
+
+  lr-dev-full-build-jetson:
+    build:
+      context: ./                            
+      dockerfile: ./docker/lrdev_jetson.dockerfile   
+    container_name: lunar_roadster_dev_full_jetson
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws    
+      - /dev/:/dev/
+    privileged: true
+    environment:
+      - TERM=xterm-256color                  
+    tty: true                                 
+    stdin_open: true                         
+    working_dir: /root/Lunar_ROADSTER/lr_ws   
+    ports:
+      - 5900:5900                           
+      - 9090:9090                            
   
-  lr-dev:
+  lr-dev-linux:
     image: bhaswantha/lr-dev:v1.0.5
     privileged: true
-    container_name: lunar_roadster_dev
+    container_name: lunar_roadster_dev_linux
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws
+      - /dev/:/dev/
+    tty: true
+    stdin_open: true
+    working_dir: /root/Lunar_ROADSTER/lr_ws
+    ports:
+      - 5900:5900
+      - 9090:9090
+
+  lr-dev-jetson:
+    image: bhaswantha/lr-dev:v1.0.5
+    privileged: true
+    container_name: lunar_roadster_dev_jetson
     volumes:
       - .:/root/Lunar_ROADSTER/lr_ws
       - /dev/:/dev/
