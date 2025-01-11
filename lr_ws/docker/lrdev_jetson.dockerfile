@@ -1,4 +1,4 @@
-# ------- Use the ROS 2 Humble base image (lighter than desktop) -------- 
+# ------- Use the ROS 2 Humble image -------- 
 FROM dustynv/ros:humble-desktop-l4t-r36.4.0
 
 # Set environment variables
@@ -34,19 +34,19 @@ SHELL ["/usr/bin/zsh", "-c"]
 # ---------------------------------------------------------------------------
 
 # --------------------------- Install Micro-ROS -----------------------------
-WORKDIR /root/microros_ws
-RUN git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup \
- && apt-get update && rosdep update \
- && rosdep install --from-path src --ignore-src -y \
- && . /opt/ros/$ROS_DISTRO/setup.sh \
- && colcon build \
- && . install/local_setup.sh \
- && ros2 run micro_ros_setup create_firmware_ws.sh host \
- && ros2 run micro_ros_setup build_firmware.sh \
- && . install/local_setup.sh \
- && ros2 run micro_ros_setup create_agent_ws.sh \
- && ros2 run micro_ros_setup build_agent.sh \
- && . install/local_setup.sh
+# WORKDIR /root/microros_ws
+# RUN git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup \
+#  && apt-get update && rosdep update \
+#  && rosdep install --from-path src --ignore-src -y \
+#  && . /opt/ros/$ROS_DISTRO/setup.sh \
+#  && colcon build \
+#  && . install/local_setup.sh \
+#  && ros2 run micro_ros_setup create_firmware_ws.sh host \
+#  && ros2 run micro_ros_setup build_firmware.sh \
+#  && . install/local_setup.sh \
+#  && ros2 run micro_ros_setup create_agent_ws.sh \
+#  && ros2 run micro_ros_setup build_agent.sh \
+#  && . install/local_setup.sh
 # ---------------------------------------------------------------------------
 
 
