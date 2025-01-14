@@ -10,6 +10,13 @@ ENV DEBIAN_FRONTEND=noninteractive \
   ROS_DISTRO=humble \
   WORKSPACE=/root/Lunar_ROADSTER/lr_ws
 
+# Copy ZED SDK from the source image
+# COPY --from=zed_sdk /usr/local/zed /usr/local/zed
+
+# Add ZED SDK environment variables
+# ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/zed/lib
+# ENV PATH=$PATH:/usr/local/zed/bin
+
 COPY ./ $WORKSPACE
 
 # ---------------- Base environment configuration -------------------------
@@ -103,37 +110,38 @@ RUN  mkdir ~/.vnc \
 # Build cmake from source for cross-compliation
 # See the following, WITHOUT PURGE! https://stackoverflow.com/a/59689105
 # (purging cmake can affect ROS: https://askubuntu.com/a/829311)
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.23.4/cmake-3.23.4.tar.gz -P /root/ \
-  && cd /root/ \
-  && tar zxvf cmake-3.23.4.tar.gz \
-  && cd cmake-3.23.4 \
-  && ./bootstrap \
-  && make \
-  && make install \ 
-  && cd /root/ \
-  && rm -rf cmake-3.23.4 cmake-3.23.4.tar.gz
+# RUN wget https://github.com/Kitware/CMake/releases/download/v3.23.4/cmake-3.23.4.tar.gz -P /root/ \
+#   && cd /root/ \
+#   && tar zxvf cmake-3.23.4.tar.gz \
+#   && cd cmake-3.23.4 \
+#   && ./bootstrap \
+#   && make \
+#   && make install \ 
+#   && cd /root/ \
+#   && rm -rf cmake-3.23.4 cmake-3.23.4.tar.gz \
+#   && rm -rf /var/lib/apt/lists/*
 
 # Install ROS 2 core tools (minimal visualization and debugging tools)
 # Run the following with DEBIAN_FRONTEND=noninteractive to avoid prompt for keyboard language, see https://askubuntu.com/questions/876240/how-to-automate-setting-up-of-keyboard-configuration-package
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  # General ROS2 debug
-  ros-$ROS_DISTRO-rviz2 \
-  ros-$ROS_DISTRO-rqt-graph \
-  ros-$ROS_DISTRO-rqt-reconfigure \
-  ros-$ROS_DISTRO-plotjuggler-ros \
-  # Teleop
-  ros-$ROS_DISTRO-joy \
-  # robot_localization package ekf/ukf
-  ros-$ROS_DISTRO-robot-localization \
-  # PCL
-  keyboard-configuration \
-  libpcl-dev \
-  ros-$ROS_DISTRO-pcl-conversions \
-  ros-$ROS_DISTRO-pcl-ros \
-  ros-$ROS_DISTRO-pcl-msgs \
-  # Health monitoring gui
-  ros-$ROS_DISTRO-rosbridge-suite \
-  && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+#   # General ROS2 debug
+#   ros-$ROS_DISTRO-rviz2 \
+#   ros-$ROS_DISTRO-rqt-graph \
+#   ros-$ROS_DISTRO-rqt-reconfigure \
+#   ros-$ROS_DISTRO-plotjuggler-ros \
+#   # Teleop
+#   ros-$ROS_DISTRO-joy \
+#   # robot_localization package ekf/ukf
+#   ros-$ROS_DISTRO-robot-localization \
+#   # PCL
+#   keyboard-configuration \
+#   libpcl-dev \
+#   ros-$ROS_DISTRO-pcl-conversions \
+#   ros-$ROS_DISTRO-pcl-ros \
+#   ros-$ROS_DISTRO-pcl-msgs \
+#   # Health monitoring gui
+#   ros-$ROS_DISTRO-rosbridge-suite \
+#   && rm -rf /var/lib/apt/lists/*
 
 # Setup Python environment
 COPY ./docker/requirements.txt /root/requirements.txt
