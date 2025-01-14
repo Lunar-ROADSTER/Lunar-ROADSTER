@@ -1,5 +1,9 @@
-# ------- Use the ROS 2 Humble image -------- 
-FROM dustynv/ros:humble-desktop-l4t-r36.4.0
+# ------- ZED Camera SDK -------- 
+FROM stereolabs/zed:4.2-runtime-cuda12.1-ubuntu22.04
+
+# ------- ROS 2 Humble image -------- 
+# FROM dustynv/ros:humble-desktop-l4t-r36.2.0
+FROM dustynv/ros:humble-desktop-l4t-r35.4.1
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -33,22 +37,6 @@ RUN apt-get update && apt-get install -y zsh bash wget \
 SHELL ["/usr/bin/zsh", "-c"]
 # ---------------------------------------------------------------------------
 
-# --------------------------- Install Micro-ROS -----------------------------
-# WORKDIR /root/microros_ws
-# RUN git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup \
-#  && apt-get update && rosdep update \
-#  && rosdep install --from-path src --ignore-src -y \
-#  && . /opt/ros/$ROS_DISTRO/setup.sh \
-#  && colcon build \
-#  && . install/local_setup.sh \
-#  && ros2 run micro_ros_setup create_firmware_ws.sh host \
-#  && ros2 run micro_ros_setup build_firmware.sh \
-#  && . install/local_setup.sh \
-#  && ros2 run micro_ros_setup create_agent_ws.sh \
-#  && ros2 run micro_ros_setup build_agent.sh \
-#  && . install/local_setup.sh
-# ---------------------------------------------------------------------------
-
 
 # ----------------------- Base system packages ------------------------------
 # Install "starter pack" of some basic tools
@@ -69,10 +57,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
   cmake \
   python3-pip \
+  python3-colcon-common-extensions \
   nano \
   curl \
   && rm -rf /var/lib/apt/lists/*
 # ---------------------------------------------------------------------------
+
+
+# --------------------------- Install Micro-ROS -----------------------------
+# WORKDIR /root/microros_ws
+# RUN git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup \
+#   && apt-get update && rosdep update \
+#   && rosdep install --from-path src --ignore-src -y \
+#   && . /opt/ros/$ROS_DISTRO/setup.sh \
+#   && colcon build \
+#   && . install/local_setup.sh \
+#   && ros2 run micro_ros_setup create_firmware_ws.sh host \
+#   && ros2 run micro_ros_setup build_firmware.sh \
+#   && . install/local_setup.sh \
+#   && ros2 run micro_ros_setup create_agent_ws.sh \
+#   && ros2 run micro_ros_setup build_agent.sh \
+#   && . install/local_setup.sh
+  # ---------------------------------------------------------------------------  
 
 
 # --------------------------- VNC configuration -----------------------------
@@ -139,7 +145,7 @@ COPY ./src $WORKSPACE/src
 RUN rosdep install --from-paths src --ignore-src -r -y
 # --------------------------------------------------------------------------------------
 
-# ----------- Container entrypoint --------------
+# -------------------------- Container entrypoint --------------------------------------
 # Copy entrypoint script for workspace setup
 RUN chmod +x /root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh
 
@@ -147,5 +153,5 @@ RUN chmod +x /root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh
 WORKDIR /root/Lunar_ROADSTER/lr_ws
 ENTRYPOINT [ "/root/Lunar_ROADSTER/lr_ws/docker/lr_entrypoint.sh" ]
 CMD [ "zsh", "-i" ]
-# -----------------------------------------------
+# ---------------------------------------------------------------------------------------
 

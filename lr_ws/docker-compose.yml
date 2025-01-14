@@ -16,6 +16,14 @@ services:
     ports:
       - 5900:5900                            # <external port>:<container port>
       - 9090:9090                             # Websocket for health monitoring via rosbridge_suite
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
 
   lr-dev-full-build-jetson:
     build:
@@ -33,7 +41,15 @@ services:
     working_dir: /root/Lunar_ROADSTER/lr_ws   
     ports:
       - 5900:5900                           
-      - 9090:9090                            
+      - 9090:9090  
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+                          
   
   lr-dev-linux:
     image: bhaswantha/lr-dev:v1.0.5
@@ -48,6 +64,14 @@ services:
     ports:
       - 5900:5900
       - 9090:9090
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
 
   lr-dev-jetson:
     image: bhaswantha/lr-dev-jetson:v1.0.0
@@ -62,3 +86,11 @@ services:
     ports:
       - 5900:5900
       - 9090:9090
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
