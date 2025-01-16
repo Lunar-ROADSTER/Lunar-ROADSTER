@@ -2,8 +2,7 @@
 FROM stereolabs/zed:4.2-runtime-cuda12.1-ubuntu22.04
 
 # ------- ROS 2 Humble image -------- 
-FROM dustynv/ros:humble-desktop-l4t-r36.2.0
-# FROM dustynv/ros:humble-desktop-l4t-r35.4.1 # This image  installs ubuntu 20.04 
+# FROM dustynv/ros:humble-desktop-l4t-r36.2.0
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -53,39 +52,78 @@ RUN apt-get update && apt-get install -y \
   nano \
   iputils-ping \
   tree \
+  curl \
   # Install vnc, xvfb for VNC configuration, fluxbox for VNC window managment
   x11vnc \
   xvfb \
   fluxbox \
   && rm -rf /var/lib/apt/lists/*
 
+# Add ROS 2 repository and keys
+RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
 # Install essential development tools and utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
   cmake \
   python3-pip \
-  python3-colcon-common-extensions \
   nano \
-  curl \
+  python3-rosdep \
+  python3-colcon-common-extensions \
+  python3-argcomplete && \
+  rosdep init && \
+  rosdep update \
   && rm -rf /var/lib/apt/lists/*
 # ---------------------------------------------------------------------------
 
 
+# --------------------------- Install ROS2 Humble -----------------------------
+
+# Install ROS 2 Base (minimal installation without GUI tools)
+RUN apt-get update && apt-get install -y \
+  ros-${ROS_DISTRO}-ros-base \
+  && rm -rf /var/lib/apt/lists/*
+
+# Install ROS 2 core tools (minimal visualization and debugging tools)
+# Run the following with DEBIAN_FRONTEND=noninteractive to avoid prompt for keyboard language, see https://askubuntu.com/questions/876240/how-to-automate-setting-up-of-keyboard-configuration-package
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  # General ROS2 debug
+  ros-$ROS_DISTRO-rviz2 \
+  ros-$ROS_DISTRO-rqt-graph \
+  ros-$ROS_DISTRO-rqt-reconfigure \
+  ros-$ROS_DISTRO-plotjuggler-ros \
+  # Teleop
+  ros-$ROS_DISTRO-joy \
+  # robot_localization package ekf/ukf
+  ros-$ROS_DISTRO-robot-localization \
+  # PCL
+  keyboard-configuration \
+  libpcl-dev \
+  ros-$ROS_DISTRO-pcl-conversions \
+  ros-$ROS_DISTRO-pcl-ros \
+  ros-$ROS_DISTRO-pcl-msgs \
+  # Health monitoring gui
+  ros-$ROS_DISTRO-rosbridge-suite \
+  && rm -rf /var/lib/apt/lists/*
+# ---------------------------------------------------------------------------  
+
+
 # --------------------------- Install Micro-ROS -----------------------------
-# WORKDIR /root/microros_ws
-# RUN git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup \
-#   && apt-get update && rosdep update \
-#   && rosdep install --from-path src --ignore-src -y \
-#   && . /opt/ros/$ROS_DISTRO/setup.sh \
-#   && colcon build \
-#   && . install/local_setup.sh \
-#   && ros2 run micro_ros_setup create_firmware_ws.sh host \
-#   && ros2 run micro_ros_setup build_firmware.sh \
-#   && . install/local_setup.sh \
-#   && ros2 run micro_ros_setup create_agent_ws.sh \
-#   && ros2 run micro_ros_setup build_agent.sh \
-#   && . install/local_setup.sh
-  # ---------------------------------------------------------------------------  
+WORKDIR /root/microros_ws
+RUN git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup \
+  && apt-get update && rosdep update \
+  && rosdep install --from-path src --ignore-src -y \
+  && . /opt/ros/$ROS_DISTRO/setup.sh \
+  && colcon build \
+  && . install/local_setup.sh \
+  && ros2 run micro_ros_setup create_firmware_ws.sh host \
+  && ros2 run micro_ros_setup build_firmware.sh \
+  && . install/local_setup.sh \
+  && ros2 run micro_ros_setup create_agent_ws.sh \
+  && ros2 run micro_ros_setup build_agent.sh \
+  && . install/local_setup.sh
+# ---------------------------------------------------------------------------  
 
 
 # --------------------------- VNC configuration -----------------------------
@@ -120,27 +158,6 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.23.4/cmake-3.23.4
   && cd /root/ \
   && rm -rf cmake-3.23.4 cmake-3.23.4.tar.gz 
 
-# Install ROS 2 core tools (minimal visualization and debugging tools)
-# Run the following with DEBIAN_FRONTEND=noninteractive to avoid prompt for keyboard language, see https://askubuntu.com/questions/876240/how-to-automate-setting-up-of-keyboard-configuration-package
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  # General ROS2 debug
-  ros-$ROS_DISTRO-rviz2 \
-  ros-$ROS_DISTRO-rqt-graph \
-  ros-$ROS_DISTRO-rqt-reconfigure \
-  ros-$ROS_DISTRO-plotjuggler-ros \
-  # Teleop
-  ros-$ROS_DISTRO-joy \
-  # robot_localization package ekf/ukf
-  ros-$ROS_DISTRO-robot-localization \
-  # PCL
-  keyboard-configuration \
-  libpcl-dev \
-  ros-$ROS_DISTRO-pcl-conversions \
-  ros-$ROS_DISTRO-pcl-ros \
-  ros-$ROS_DISTRO-pcl-msgs \
-  # Health monitoring gui
-  ros-$ROS_DISTRO-rosbridge-suite \
-  && rm -rf /var/lib/apt/lists/*
 
 # Setup Python environment
 COPY ./docker/requirements.txt /root/requirements.txt
