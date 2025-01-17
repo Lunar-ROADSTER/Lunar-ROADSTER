@@ -14,15 +14,8 @@ services:
     stdin_open: true                          # allow terminal input, i.e. the `-i` flag
     working_dir: /root/Lunar_ROADSTER/lr_ws   # Set the working directory in the container
     ports:
-      - 5900:5900                            # <external port>:<container port>
+      - 5910:5910                            # <external port>:<container port>
       - 9090:9090                             # Websocket for health monitoring via rosbridge_suite
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
 
 
   lr-dev-full-build-jetson:
@@ -40,15 +33,8 @@ services:
     stdin_open: true                         
     working_dir: /root/Lunar_ROADSTER/lr_ws   
     ports:
-      - 5900:5900                           
-      - 9090:9090  
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+      - 5910:5910
+      - 9090:9090
                           
   
   lr-dev-linux:
@@ -62,19 +48,12 @@ services:
     stdin_open: true
     working_dir: /root/Lunar_ROADSTER/lr_ws
     ports:
-      - 5900:5900
+      - 5910:5910
       - 9090:9090
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
 
 
   lr-dev-jetson:
-    image: bhaswantha/lr-dev-jetson:v1.1.4 # bhaswantha/lr-dev-jetson:v1.1.3
+    image: bhaswantha/lr-dev-jetson:v1.1.5 # bhaswantha/lr-dev-jetson:v1.1.3, 1.1.4
     privileged: true
     container_name: lunar_roadster_dev_jetson
     volumes:
@@ -84,13 +63,5 @@ services:
     stdin_open: true
     working_dir: /root/Lunar_ROADSTER/lr_ws
     ports:
-      - 5900:5900
+      - 5910:5910
       - 9090:9090
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-

@@ -1,5 +1,6 @@
 # ------- ZED Camera SDK -------- 
-FROM stereolabs/zed:4.2-runtime-cuda12.1-ubuntu22.04
+# FROM stereolabs/zed:4.2-runtime-cuda12.1-ubuntu22.04
+FROM stereolabs/zed:4.2-runtime-jetson-jp6.1.0
 
 # ------- ROS 2 Humble image -------- 
 # FROM dustynv/ros:humble-desktop-l4t-r36.2.0
