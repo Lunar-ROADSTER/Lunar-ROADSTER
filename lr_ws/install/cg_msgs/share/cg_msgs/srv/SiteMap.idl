@@ -1,0 +1,24 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from cg_msgs/srv/SiteMap.srv
+// generated code does not contain a copyright notice
+
+#include "cg_msgs/msg/SiteMap.idl"
+
+module cg_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "request")
+    struct SiteMap_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    @verbatim (language="comment", text=
+      "response")
+    struct SiteMap_Response {
+      cg_msgs::msg::SiteMap site_map;
+
+      boolean map_fully_explored;
+
+      boolean success;
+    };
+  };
+};
