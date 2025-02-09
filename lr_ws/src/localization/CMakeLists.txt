@@ -29,38 +29,7 @@ INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIRS})
 include_directories(include)
 
 # Build nodes
-add_executable(slip_estimate_node src/slip_estimate_main.cpp
-  src/slip_estimate_node.cpp
-)
-ament_target_dependencies(slip_estimate_node
-rclcpp
-cg_msgs
-nav_msgs
-geometry_msgs
-)
 
-# Add a custom library, and link the library with the executable
-add_library(kalman_filter_linear src/kalman_filter_linear.cpp)
-target_link_libraries(slip_estimate_node kalman_filter_linear)
-
-# build nodes
-# add_executable(beacon_transformer src/beacon_transformer_main.cpp
-#   src/beacon_transformer.cpp
-# )
-# ament_target_dependencies(beacon_transformer
-#   rclcpp
-#   geometry_msgs
-#   sensor_msgs
-#   tf2
-#   tf2_ros
-#   tf2_geometry_msgs
-#   Eigen3
-# )
-# target_link_libraries(
-#   beacon_transformer
-# )
-
-# build nodes
 add_executable(ts_prism_transformer src/ts_prism_transformer_main.cpp
   src/ts_prism_transformer.cpp
 )
@@ -84,13 +53,6 @@ if(BUILD_TESTING)
 endif()
 
 # Install targets
-install(TARGETS slip_estimate_node
-  DESTINATION lib/${PROJECT_NAME})
-
-# Install targets
-# install(TARGETS beacon_transformer
-#   DESTINATION lib/${PROJECT_NAME}
-# )
 install(TARGETS ts_prism_transformer
   DESTINATION lib/${PROJECT_NAME}
 )

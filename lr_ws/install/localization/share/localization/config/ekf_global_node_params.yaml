@@ -125,7 +125,7 @@ ekf_global_node:
     # odom0_twist_rejection_threshold: 1.0
 
     ##########################################################
-    ## INPUT PARAMETERS FOR CRATERGRADER SENSING MODALITIES ##
+    ## INPUT PARAMETERS FOR LUNARROADSTER SENSING MODALITIES ##
     ##########################################################
 
     # For use with bag data
@@ -138,21 +138,21 @@ ekf_global_node:
     #  vroll, vpitch, vyaw,
     #  ax, ay, az].
 
-    # Drive Encoders
-    odom0: encoder/odom
-    # Only setting velocities (vx, vy, vyaw) to true, as per Configuring robot_localization -> Fusing Unmeasured Variables, available here: 
-    # http://docs.ros.org/en/melodic/api/robot_localization/html/configuring_robot_localization.html
-    odom0_config: [
-      false, false, false, 
-      false, false, false,
-      true, true, false,
-      false, false, true,
-      false, false, false
-    ]
-    odom0_queue_size: 2
-    odom0_nodelay: true
-    odom0_differential: true
-    odom0_relative: false
+    # # Drive Encoders
+    # odom0: encoder/odom
+    # # Only setting velocities (vx, vy, vyaw) to true, as per Configuring robot_localization -> Fusing Unmeasured Variables, available here: 
+    # # http://docs.ros.org/en/melodic/api/robot_localization/html/configuring_robot_localization.html
+    # odom0_config: [
+    #   false, false, false, 
+    #   false, false, false,
+    #   true, true, false,
+    #   false, false, true,
+    #   false, false, false
+    # ]
+    # odom0_queue_size: 2
+    # odom0_nodelay: true
+    # odom0_differential: true
+    # odom0_relative: false
 
     # IMU
     imu0: imu/data/base_link
@@ -172,12 +172,12 @@ ekf_global_node:
     # this to true, and *make sure* your data conforms to REP-103, specifically, that the data is in ENU frame.
     imu0_remove_gravitational_acceleration: true
 
-    # # Beacons
-    # pose0: uwb_beacon/average_tag
+    # # Total Station
+    # pose0: transformed_total_station_prism
     # pose0_config: [
     #   true, true, true,
     #   false, false, false,  
-    #   true, true, true,
+    #   false, false, false,
     #   false, false, false,
     #   false, false, false
     # ]
@@ -185,49 +185,6 @@ ekf_global_node:
     # pose0_nodelay: true
     # pose0_differential: false
     # pose0_relative: false
-
-    # Total Station
-    pose0: transformed_total_station_prism
-    pose0_config: [
-      true, true, true,
-      false, false, false,  
-      false, false, false,
-      false, false, false,
-      false, false, false
-    ]
-    pose0_queue_size: 5
-    pose0_nodelay: true
-    pose0_differential: false
-    pose0_relative: false
-
-
-    # pose1: uwb_beacon/base_link_transformed/tag_1
-    # pose1_config: [
-    #   true, true, true,
-    #   false, false, false,
-    #   false, false, false,
-    #   false, false, false,
-    #   false, false, false
-    # ]
-    # pose1_queue_size: 5
-    # pose1_nodelay: true
-    # pose1_differential: false
-    # pose1_relative: false
-    # pose1_rejection_threshold: 2.0
-
-    # Suncam
-    pose1: /bearing
-    pose1_config: [
-      false, false, false,
-      false, false, true,
-      false, false, false,
-      false, false, false,
-      false, false, false
-    ]
-    pose1_queue_size: 5
-    pose1_nodelay: false
-    pose1_differential: false
-    pose1_relative: false
 
     # [ADVANCED] The process noise covariance matrix can be difficult to tune, and can vary for each application, so it is
     # exposed as a configuration parameter. This matrix represents the noise we add to the total error after each
@@ -252,11 +209,12 @@ ekf_global_node:
                                 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.01, 0.0,    0.0,
                                 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.01, 0.0,
                                 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.015]
+
     # [ADVANCED] This represents the initial value for the state estimate error covariance matrix. Setting a diagonal
     # value (variance) to a large value will result in rapid convergence for initial measurements of the variable in
     # question. Users should take care not to use large values for variables that will not be measured directly. The values
     # are ordered as x, y, z, roll, pitch, yaw, vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az. Defaults to the matrix below
-    #if unspecified.
+    # if unspecified.
     initial_estimate_covariance: [10.0, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,     0.0,    0.0,    0.0,
                                   0.0,    10.0, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,     0.0,    0.0,    0.0,
                                   0.0,    0.0,    10.0, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,     0.0,    0.0,    0.0,

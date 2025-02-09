@@ -1,6 +1,6 @@
 set(_AMENT_PACKAGE_NAME "localization")
 set(localization_VERSION "0.0.0")
-set(localization_MAINTAINER "Russell Wong <rqwong@andrew.cmu.edu>")
+set(localization_MAINTAINER "Russell Wong <rqwong@andrew.cmu.edu>, Boxiang Fu <boxiangf@andrew.cmu.edu>, Bhaswanth Ayapilla <bayapill@andrew.cmu.edu>")
 set(localization_BUILD_DEPENDS "cg_msgs" "rclcpp" "nav_msgs" "geometry_msgs" "sensor_msgs" "tf2" "tf2_ros" "tf2_geometry_msgs" "eigen")
 set(localization_BUILDTOOL_DEPENDS "ament_cmake")
 set(localization_BUILD_EXPORT_DEPENDS "cg_msgs" "rclcpp" "nav_msgs" "geometry_msgs" "sensor_msgs" "tf2" "tf2_ros" "tf2_geometry_msgs" "eigen")

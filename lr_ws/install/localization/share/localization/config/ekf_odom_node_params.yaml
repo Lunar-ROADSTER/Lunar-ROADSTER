@@ -125,7 +125,7 @@ ekf_odom_node:
     # odom0_twist_rejection_threshold: 1.0
 
     ##########################################################
-    ## INPUT PARAMETERS FOR CRATERGRADER SENSING MODALITIES ##
+    ## INPUT PARAMETERS FOR LUNARROADSTER SENSING MODALITIES ##
     ##########################################################
 
     # For use with bag data
@@ -146,21 +146,21 @@ ekf_odom_node:
     #  vroll, vpitch, vyaw,
     #  ax, ay, az].
 
-    # Drive Encoders
-    odom0: encoder/odom
-    # Only setting velocities (vx, vy, vyaw) to true, as per Configuring robot_localization -> Fusing Unmeasured Variables, available here: 
-    # http://docs.ros.org/en/melodic/api/robot_localization/html/configuring_robot_localization.html
-    odom0_config: [
-      true, true, true,
-      false, false, true,
-      true, true, false,
-      false, false, true,
-      false, false, false
-    ]
-    odom0_queue_size: 2
-    odom0_nodelay: true
-    odom0_differential: true
-    odom0_relative: false
+    # # Drive Encoders
+    # odom0: encoder/odom
+    # # Only setting velocities (vx, vy, vyaw) to true, as per Configuring robot_localization -> Fusing Unmeasured Variables, available here: 
+    # # http://docs.ros.org/en/melodic/api/robot_localization/html/configuring_robot_localization.html
+    # odom0_config: [
+    #   true, true, true,
+    #   false, false, true,
+    #   true, true, false,
+    #   false, false, true,
+    #   false, false, false
+    # ]
+    # odom0_queue_size: 2
+    # odom0_nodelay: true
+    # odom0_differential: true
+    # odom0_relative: false
 
     # IMU
     imu0: imu/data/base_link

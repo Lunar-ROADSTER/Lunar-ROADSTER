@@ -198,32 +198,6 @@ localization_uninstall/fast:
 .PHONY : localization_uninstall/fast
 
 #=============================================================================
-# Target rules for targets named slip_estimate_node
-
-# Build rule for target.
-slip_estimate_node: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 slip_estimate_node
-.PHONY : slip_estimate_node
-
-# fast build rule for target.
-slip_estimate_node/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/slip_estimate_node.dir/build.make CMakeFiles/slip_estimate_node.dir/build
-.PHONY : slip_estimate_node/fast
-
-#=============================================================================
-# Target rules for targets named kalman_filter_linear
-
-# Build rule for target.
-kalman_filter_linear: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 kalman_filter_linear
-.PHONY : kalman_filter_linear
-
-# fast build rule for target.
-kalman_filter_linear/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kalman_filter_linear.dir/build.make CMakeFiles/kalman_filter_linear.dir/build
-.PHONY : kalman_filter_linear/fast
-
-#=============================================================================
 # Target rules for targets named ts_prism_transformer
 
 # Build rule for target.
@@ -235,78 +209,6 @@ ts_prism_transformer: cmake_check_build_system
 ts_prism_transformer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts_prism_transformer.dir/build.make CMakeFiles/ts_prism_transformer.dir/build
 .PHONY : ts_prism_transformer/fast
-
-src/kalman_filter_linear.o: src/kalman_filter_linear.cpp.o
-.PHONY : src/kalman_filter_linear.o
-
-# target to build an object file
-src/kalman_filter_linear.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kalman_filter_linear.dir/build.make CMakeFiles/kalman_filter_linear.dir/src/kalman_filter_linear.cpp.o
-.PHONY : src/kalman_filter_linear.cpp.o
-
-src/kalman_filter_linear.i: src/kalman_filter_linear.cpp.i
-.PHONY : src/kalman_filter_linear.i
-
-# target to preprocess a source file
-src/kalman_filter_linear.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kalman_filter_linear.dir/build.make CMakeFiles/kalman_filter_linear.dir/src/kalman_filter_linear.cpp.i
-.PHONY : src/kalman_filter_linear.cpp.i
-
-src/kalman_filter_linear.s: src/kalman_filter_linear.cpp.s
-.PHONY : src/kalman_filter_linear.s
-
-# target to generate assembly for a file
-src/kalman_filter_linear.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/kalman_filter_linear.dir/build.make CMakeFiles/kalman_filter_linear.dir/src/kalman_filter_linear.cpp.s
-.PHONY : src/kalman_filter_linear.cpp.s
-
-src/slip_estimate_main.o: src/slip_estimate_main.cpp.o
-.PHONY : src/slip_estimate_main.o
-
-# target to build an object file
-src/slip_estimate_main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/slip_estimate_node.dir/build.make CMakeFiles/slip_estimate_node.dir/src/slip_estimate_main.cpp.o
-.PHONY : src/slip_estimate_main.cpp.o
-
-src/slip_estimate_main.i: src/slip_estimate_main.cpp.i
-.PHONY : src/slip_estimate_main.i
-
-# target to preprocess a source file
-src/slip_estimate_main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/slip_estimate_node.dir/build.make CMakeFiles/slip_estimate_node.dir/src/slip_estimate_main.cpp.i
-.PHONY : src/slip_estimate_main.cpp.i
-
-src/slip_estimate_main.s: src/slip_estimate_main.cpp.s
-.PHONY : src/slip_estimate_main.s
-
-# target to generate assembly for a file
-src/slip_estimate_main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/slip_estimate_node.dir/build.make CMakeFiles/slip_estimate_node.dir/src/slip_estimate_main.cpp.s
-.PHONY : src/slip_estimate_main.cpp.s
-
-src/slip_estimate_node.o: src/slip_estimate_node.cpp.o
-.PHONY : src/slip_estimate_node.o
-
-# target to build an object file
-src/slip_estimate_node.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/slip_estimate_node.dir/build.make CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.o
-.PHONY : src/slip_estimate_node.cpp.o
-
-src/slip_estimate_node.i: src/slip_estimate_node.cpp.i
-.PHONY : src/slip_estimate_node.i
-
-# target to preprocess a source file
-src/slip_estimate_node.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/slip_estimate_node.dir/build.make CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.i
-.PHONY : src/slip_estimate_node.cpp.i
-
-src/slip_estimate_node.s: src/slip_estimate_node.cpp.s
-.PHONY : src/slip_estimate_node.s
-
-# target to generate assembly for a file
-src/slip_estimate_node.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/slip_estimate_node.dir/build.make CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.s
-.PHONY : src/slip_estimate_node.cpp.s
 
 src/ts_prism_transformer.o: src/ts_prism_transformer.cpp.o
 .PHONY : src/ts_prism_transformer.o
@@ -371,18 +273,7 @@ help:
 	@echo "... test"
 	@echo "... localization_uninstall"
 	@echo "... uninstall"
-	@echo "... kalman_filter_linear"
-	@echo "... slip_estimate_node"
 	@echo "... ts_prism_transformer"
-	@echo "... src/kalman_filter_linear.o"
-	@echo "... src/kalman_filter_linear.i"
-	@echo "... src/kalman_filter_linear.s"
-	@echo "... src/slip_estimate_main.o"
-	@echo "... src/slip_estimate_main.i"
-	@echo "... src/slip_estimate_main.s"
-	@echo "... src/slip_estimate_node.o"
-	@echo "... src/slip_estimate_node.i"
-	@echo "... src/slip_estimate_node.s"
 	@echo "... src/ts_prism_transformer.o"
 	@echo "... src/ts_prism_transformer.i"
 	@echo "... src/ts_prism_transformer.s"
