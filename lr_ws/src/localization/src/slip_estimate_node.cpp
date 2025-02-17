@@ -24,6 +24,9 @@ SlipEstimateNode::SlipEstimateNode() : Node("slip_estimate_node") {
       std::chrono::milliseconds(100),
       std::bind(&SlipEstimateNode::timerCallback, this));
 
+  // Tf Broadcaster
+  tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
+
   // Load parameters
   this->declare_parameter<float>("Qx", 10.0);
   this->get_parameter("Qx", Qx_);
@@ -91,9 +94,9 @@ SlipEstimateNode::SlipEstimateNode() : Node("slip_estimate_node") {
   Eigen::VectorXd x0_(6);
 
   // state vector x0 = [x; xdot; y; ydot; ax; ay]
-  A_ << 1, kf_dt_, 0,   0, 0.5 * kf_dt_**2, 0,
+  A_ << 1, kf_dt_, 0,   0, 0.5 * pow(kf_dt_,2), 0,
         0,   1,    0,   0, kf_dt, 0,
-        0,   0,    1, kf_dt_, 0, 0.5 * kf_dt_**2,
+        0,   0,    1, kf_dt_, 0, 0.5 * pow(kf_dt_,2),
         0,   0,    0,   1, 0, kf_dt_,
         0, 0, 0, 0, 1, 0,
         0, 0, 0, 0, 0, 1;
@@ -176,7 +179,34 @@ void SlipEstimateNode::timerCallback()
   slip_msg_.vel_avg = vel_kf_avg_;
   slip_msg_.header.stamp = this->get_clock()->now();
   slip_pub_->publish(slip_msg_);
+
+
+  /* Publish transforms -- New code*/
+
+  if(!got_imu_data_) return;
+
+  // Broadcast the estimated transform
+  static double x = 0, y = 0;
+  double yaw = tf2::getYaw(latest_imu_orientation_);
+  x += vel_kf_ * kf_dt_ * cos(yaw);
+  y += vel_kf_ * kf_dt_ * sin(yaw);
+
+  
+  imuTransformStamped.header.stamp = this->get_clock()->now();
+  imuTransformStamped.header.frame_id = map_frame;  // Reference frame
+  imuTransformStamped.child_frame_id = base_link_frame;  // Estimated robot frame
+
+  imuTransformStamped.transform.translation.x = x;
+  imuTransformStamped.transform.translation.y = y;
+  imuTransformStamped.transform.translation.z = 0.0;
+
+  // Use IMU orientation
+  imuTransformStamped.transform.rotation = latest_imu_orientation_;
+
+  tf_broadcaster_->sendTransform(imuTransformStamped);
+
 }
+
 
 void SlipEstimateNode::actStateCallback(const cg_msgs::msg::ActuatorState::SharedPtr msg)
 {
@@ -184,27 +214,13 @@ void SlipEstimateNode::actStateCallback(const cg_msgs::msg::ActuatorState::Share
   vel_wheels_ = std::abs(msg->wheel_velocity);
 }
 
-// void SlipEstimateNode::uwbAvgCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr msg)
-// {
-//   // Kalman filter velocity estimate
-//   Eigen::VectorXd z_(2);
-//   z_ << msg->pose.pose.position.x, msg->pose.pose.position.y;
-
-//   // Cycle estimator
-//   kf_vel_.predict();
-//   kf_vel_.update(z_);
-
-//   // Extract estimate of velocity magnitude
-//   Eigen::VectorXd xhat_(4);
-//   xhat_ = kf_vel_.state(); // [x; xdot; y; ydot]
-//   vel_kf_ = sqrt(pow(xhat_(1), 2.0) + pow(xhat_(3), 2.0));
-
-//   // Update moving average
-//   vel_kf_avg_ = updateMovingAverage(vel_kf_window_, vel_kf_, vel_kf_window_size_);
-// }
 
 void SlipEstimateNode::imuAvgCallback(const sensor_msgs::msg::Imu::SharedPtr imu_msg)
 {
+  // Store latest IMU orientation -- New code
+  latest_imu_orientation_ = imu_msg->orientation;
+  got_imu_data_ = true;
+
   // Extract linear accelerations from IMU
   double measured_ax = imu_msg->linear_acceleration.x;
   double measured_ay = imu_msg->linear_acceleration.y;

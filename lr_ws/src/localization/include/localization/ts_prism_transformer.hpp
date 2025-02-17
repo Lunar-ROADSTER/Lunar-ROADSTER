@@ -41,6 +41,7 @@ private:
     std::shared_ptr<tf2_ros::TransformListener> transform_listener_{nullptr};
     std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
     bool got_tf{false};
+    std::shared_ptr<tf2_ros::TransformBroadcaster> transform_broadcaster_; // Add this line to broadcast transforms -- New code
 
     // TODO turn these into ROS parameters
     std::string prism_frame = "total_station_prism";
@@ -51,6 +52,7 @@ private:
     geometry_msgs::msg::PoseWithCovarianceStamped latest_bearing_;
     sensor_msgs::msg::Imu imu_last;
     geometry_msgs::msg::TransformStamped ts_prism_transformStamped;
+    geometry_msgs::msg::TrnsformStamped local_ts_prism_transform;
     geometry_msgs::msg::TransformStamped base_link_transform;
     bool got_imu{false};
     bool got_bearing_{false};

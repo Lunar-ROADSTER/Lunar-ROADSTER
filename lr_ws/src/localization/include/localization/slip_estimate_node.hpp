@@ -10,6 +10,11 @@
 #include <list> // moving average filter
 #include "localization/kalman_filter_linear.hpp"
 
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/msg/transform_stamped.hpp>
+#include <tf2/LinearMath/Quaternion.h>
+
+
 namespace cg {
 namespace slip {
 
@@ -88,6 +93,16 @@ private:
   /* Helpers */
   // Update list of values for moving average, modify the list being passed as an argument
   float updateMovingAverage(std::list<float> &list, const float &new_val, const int &window_size);
+
+
+  /* New code*/
+  std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
+  geometry_msgs::msg::Quaternion latest_imu_orientation_;
+  bool got_imu_data_ = false;
+  geometry_msgs::msg::TransformStamped imuTransformStamped;
+  std::string base_link_frame = "base_link";
+  std::string map_frame = "map";
+
 
 }; // class SlipEstimateNode
 
