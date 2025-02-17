@@ -20,8 +20,8 @@ namespace cg
       transformed_ts_prism_pub_ = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>(
           "/transformed_total_station_prism", 1);
       
-      bearing_subscription_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
-          "/bearing", 10, std::bind(&TSPrismTransformer::bearing_callback, this, _1));
+      // bearing_subscription_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
+      //     "/bearing", 10, std::bind(&TSPrismTransformer::bearing_callback, this, _1));
 
       int pub_freq{10};
       tf_timer_ = this->create_wall_timer(
@@ -33,22 +33,22 @@ namespace cg
       transform_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
     }
 
-    void TSPrismTransformer::bearing_callback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr bearing_msg) {
-      got_bearing_ = true;
-      latest_bearing_ = *bearing_msg;
-    }
+    // void TSPrismTransformer::bearing_callback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr bearing_msg) {
+    //   got_bearing_ = true;
+    //   latest_bearing_ = *bearing_msg;
+    // }
 
     void TSPrismTransformer::ts_prism_callback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr prism_msg)
     {
       updated_pose_ = *prism_msg;
-      if (got_imu && got_bearing_)
+      if (got_imu)
       {
-        // Obtain yaw angle from bearing and roll/pitch from IMU in quaternion forms
-        tf2::Quaternion bearing_q(
-          latest_bearing_.pose.pose.orientation.x,
-          latest_bearing_.pose.pose.orientation.y,
-          latest_bearing_.pose.pose.orientation.z,
-          latest_bearing_.pose.pose.orientation.w);
+        // Obtain roll/pitch/yaw from IMU in quaternion forms
+        // tf2::Quaternion bearing_q(
+        //   latest_bearing_.pose.pose.orientation.x,
+        //   latest_bearing_.pose.pose.orientation.y,
+        //   latest_bearing_.pose.pose.orientation.z,
+        //   latest_bearing_.pose.pose.orientation.w);
         tf2::Quaternion imu_q(
           imu_last.orientation.x,
           imu_last.orientation.y,
@@ -56,16 +56,16 @@ namespace cg
           imu_last.orientation.w);
 
         // Convert quaternions to roll/pitch/yaw
-        tf2::Matrix3x3 bearing_m(bearing_q);
+        // tf2::Matrix3x3 bearing_m(bearing_q);
         tf2::Matrix3x3 imu_m(imu_q);
-        double bearing_roll, bearing_pitch, bearing_yaw;
+        // double bearing_roll, bearing_pitch, bearing_yaw;
         double imu_roll, imu_pitch, imu_yaw;
-        bearing_m.getRPY(bearing_roll, bearing_pitch, bearing_yaw);
+        // bearing_m.getRPY(bearing_roll, bearing_pitch, bearing_yaw);
         imu_m.getRPY(imu_roll, imu_pitch, imu_yaw);
 
         // Compute 3DOF orientation from map to base_link, based on raw IMU and bearing measurements
         tf2::Quaternion map_to_base_link_q;
-        map_to_base_link_q.setRPY(imu_roll, imu_pitch, bearing_yaw);
+        map_to_base_link_q.setRPY(imu_roll, imu_pitch, imu_yaw);
         Eigen::Quaternion<double> map_to_base_link_rotation(
           map_to_base_link_q.w(),
           map_to_base_link_q.x(),

@@ -83,13 +83,13 @@ int32_t deltaPosM2Curr = 0;
 bool cmd_msg_received = false;
 
 // limit switch
-#define LIMIT_SWITCH_PIN_1 8 // Define GPIO pin for Limit Switch 1
-#define LIMIT_SWITCH_PIN_2 9 // Define GPIO pin for Limit Switch 2
+// #define LIMIT_SWITCH_PIN_1 8 // Define GPIO pin for Limit Switch 1
+// #define LIMIT_SWITCH_PIN_2 9 // Define GPIO pin for Limit Switch 2
 
-bool limit_switch_1_active = false;
-bool limit_switch_2_active = false;
+// bool limit_switch_1_active = false;
+// bool limit_switch_2_active = false;
 
-uint8_t term_byte = 0;
+// uint8_t term_byte = 0;
 
 // interface setup
 #define ROBOCLAW_ADDRESS 0x80
@@ -123,11 +123,11 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
         if (cmd_msg_received)
         {
             // Read limit switches states
-            limit_switch_1_active = (digitalRead(LIMIT_SWITCH_PIN_1) == LOW);
-            limit_switch_2_active = (digitalRead(LIMIT_SWITCH_PIN_2) == LOW);
+            // limit_switch_1_active = (digitalRead(LIMIT_SWITCH_PIN_1) == LOW);
+            // limit_switch_2_active = (digitalRead(LIMIT_SWITCH_PIN_2) == LOW);
 
             // update term byte
-            term_byte = (limit_switch_2_active << 1) | (limit_switch_1_active << 0);
+            // term_byte = (limit_switch_2_active << 1) | (limit_switch_1_active << 0);
 
             // Command RoboClaws
             int drive_cmd_raw = cmd_msg.data & 0xFF; // First byte indicates drive command in range [0, 255]
@@ -142,24 +142,24 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 
             static int last_valid_steer_cmd = 127; // Initialize to neutral
 
-            // Update last valid value only if limit switch is not active
-            if (!limit_switch_1_active && !limit_switch_2_active)
+            // Update last valid steer value only if limit switch is not active
+            if (steer_cmd <= 240 && steer_cmd >= 15)
             {
                 last_valid_steer_cmd = steer_cmd;
             }
 
             // Limit steer when limit switch is activated
-            if (limit_switch_1_active && steer_cmd > 127)
+            if (steer_cmd > 240 || steer_cmd)
             {
                 // steer_cmd = 127;
                 steer_cmd = last_valid_steer_cmd; // Prevent further increase
             }
 
-            if (limit_switch_2_active && steer_cmd < 127)
-            {
-                // steer_cmd = 127;
-                steer_cmd = last_valid_cmd; // Prevent further decrease
-            }
+            // if (limit_switch_2_active && steer_cmd < 127)
+            // {
+            //     // steer_cmd = 127;
+            //     steer_cmd = last_valid_cmd; // Prevent further decrease
+            // }
 
             int tool_cmd_raw = (cmd_msg.data >> 16) & 0xFF; // Third byte indicates tool height command in range [0, 255]
             if (abs(tool_cmd_raw) <= 1)
@@ -214,7 +214,7 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
         deltaPosM2Last = deltaPosM2Curr;
 
         // Terminal byte (limit switches, heartbeat, etc.)
-        // uint8_t term_byte = 0;
+        uint8_t term_byte = 0;
 
         // [Steer 1 Encoder, Steer 2 Encoder, Tool Encoder Value, Drive 1 Speed, Drive 2 Speed, Drive Delta Pos Front, Drive Delta Pos Rear, Term Byte]
         feedback_msg.data = (static_cast<uint64_t>(term_byte) << 56) | (static_cast<uint64_t>(drive_delta_pos_rear) << 48) | (static_cast<uint64_t>(drive_delta_pos_front) << 40) | (static_cast<uint64_t>(R2spd1Scale) << 32) | (static_cast<uint64_t>(R1spd1Scale) << 24) | (static_cast<uint64_t>(R3enc1Scale) << 16) | (static_cast<uint64_t>(R2enc2Scale) << 8) | static_cast<uint64_t>(R1enc2Scale);
@@ -307,8 +307,8 @@ void setup()
     pinMode(CONN_PIN, OUTPUT);
     digitalWrite(CONN_PIN, LOW);
 
-    pinMode(LIMIT_SWITCH_PIN_1, INPUT_PULLUP);
-    pinMode(LIMIT_SWITCH_PIN_2, INPUT_PULLUP);
+    // pinMode(LIMIT_SWITCH_PIN_1, INPUT_PULLUP);
+    // pinMode(LIMIT_SWITCH_PIN_2, INPUT_PULLUP);
 
     micro_ros_init_successful = false;
     feedback_msg.data = 0;

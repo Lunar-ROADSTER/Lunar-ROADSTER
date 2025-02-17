@@ -54,8 +54,8 @@ endif()
 add_library(cg_msgs::cg_msgs__rosidl_generator_py SHARED IMPORTED)
 
 set_target_properties(cg_msgs::cg_msgs__rosidl_generator_py PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "/home/boxiangf/anaconda3/lib/python3.12/site-packages/numpy/core/include"
-  INTERFACE_LINK_LIBRARIES "cg_msgs::cg_msgs__rosidl_generator_c;/home/boxiangf/anaconda3/lib/libpython3.12.so;cg_msgs::cg_msgs__rosidl_typesupport_c;builtin_interfaces::builtin_interfaces__rosidl_generator_py;std_msgs::std_msgs__rosidl_generator_py"
+  INTERFACE_INCLUDE_DIRECTORIES "/home/bhaswanth_a/miniconda3/lib/python3.12/site-packages/numpy/_core/include"
+  INTERFACE_LINK_LIBRARIES "cg_msgs::cg_msgs__rosidl_generator_c;/home/bhaswanth_a/miniconda3/lib/libpython3.12.so;cg_msgs::cg_msgs__rosidl_typesupport_c;builtin_interfaces::builtin_interfaces__rosidl_generator_py;std_msgs::std_msgs__rosidl_generator_py"
 )
 
 if(CMAKE_VERSION VERSION_LESS 2.8.12)
