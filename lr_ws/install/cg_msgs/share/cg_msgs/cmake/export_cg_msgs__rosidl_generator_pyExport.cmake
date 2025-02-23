@@ -4,7 +4,7 @@ if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.6)
    message(FATAL_ERROR "CMake >= 2.6.0 required")
 endif()
 cmake_policy(PUSH)
-cmake_policy(VERSION 2.6...3.20)
+cmake_policy(VERSION 2.6...3.21)
 #----------------------------------------------------------------
 # Generated CMake target import file.
 #----------------------------------------------------------------
@@ -54,8 +54,7 @@ endif()
 add_library(cg_msgs::cg_msgs__rosidl_generator_py SHARED IMPORTED)
 
 set_target_properties(cg_msgs::cg_msgs__rosidl_generator_py PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "/home/bhaswanth_a/miniconda3/lib/python3.12/site-packages/numpy/_core/include"
-  INTERFACE_LINK_LIBRARIES "cg_msgs::cg_msgs__rosidl_generator_c;/home/bhaswanth_a/miniconda3/lib/libpython3.12.so;cg_msgs::cg_msgs__rosidl_typesupport_c;builtin_interfaces::builtin_interfaces__rosidl_generator_py;std_msgs::std_msgs__rosidl_generator_py"
+  INTERFACE_LINK_LIBRARIES "cg_msgs::cg_msgs__rosidl_generator_c;/usr/lib/aarch64-linux-gnu/libpython3.10.so;cg_msgs::cg_msgs__rosidl_typesupport_c;builtin_interfaces::builtin_interfaces__rosidl_generator_py;std_msgs::std_msgs__rosidl_generator_py"
 )
 
 if(CMAKE_VERSION VERSION_LESS 2.8.12)

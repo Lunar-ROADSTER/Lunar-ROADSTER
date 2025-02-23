@@ -1,8 +1,8 @@
-# Install script for directory: /home/bhaswanth_a/Lunar_ROADSTER/lr_ws/build/vectornav_msgs/vectornav_msgs__py
+# Install script for directory: /root/Lunar_ROADSTER/lr_ws/build/vectornav_msgs/vectornav_msgs__py
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/bhaswanth_a/Lunar_ROADSTER/lr_ws/install/vectornav_msgs")
+  set(CMAKE_INSTALL_PREFIX "/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

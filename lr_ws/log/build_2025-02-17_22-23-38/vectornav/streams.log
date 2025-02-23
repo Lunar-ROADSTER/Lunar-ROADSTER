@@ -1,0 +1,167 @@
+[0.067s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/vectornav': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/vectornav/vectornav -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/vectornav
+[0.339s] -- The C compiler identification is GNU 11.4.0
+[0.616s] -- The CXX compiler identification is GNU 11.4.0
+[0.653s] -- Detecting C compiler ABI info
+[0.932s] -- Detecting C compiler ABI info - done
+[0.965s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.966s] -- Detecting C compile features
+[0.968s] -- Detecting C compile features - done
+[0.985s] -- Detecting CXX compiler ABI info
+[1.262s] -- Detecting CXX compiler ABI info - done
+[1.298s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.301s] -- Detecting CXX compile features
+[1.303s] -- Detecting CXX compile features - done
+[1.313s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.795s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.198s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[2.405s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.427s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.471s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.535s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.632s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.839s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.852s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[3.228s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[3.342s] -- Found FastRTPS: /opt/ros/humble/include  
+[3.531s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.574s] -- Looking for pthread.h
+[3.821s] -- Looking for pthread.h - found
+[3.822s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[4.081s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[4.086s] -- Found Threads: TRUE  
+[4.318s] -- Found rclcpp_action: 16.0.11 (/opt/ros/humble/share/rclcpp_action/cmake)
+[4.473s] -- Found rclcpp_components: 16.0.11 (/opt/ros/humble/share/rclcpp_components/cmake)
+[4.586s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[4.702s] -- Found vectornav_msgs: 3.0.0 (/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake)
+[4.767s] -- Found tf2_geometry_msgs: 0.25.9 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[4.828s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[4.834s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[4.835s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[5.015s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[5.402s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[5.404s] -- Configured cppcheck include dirs: 
+[5.404s] -- Configured cppcheck exclude dirs and/or files: 
+[5.436s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[5.436s] -- Configured cpplint exclude dirs and/or files: 
+[5.446s] -- Added test 'flake8' to check Python code syntax and style conventions
+[5.458s] -- Added test 'lint_cmake' to check CMake code style
+[5.465s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[5.491s] -- Added test 'uncrustify' to check C / C++ code style
+[5.492s] -- Configured uncrustify additional arguments: 
+[5.499s] -- Added test 'xmllint' to check XML markup files
+[5.510s] -- Configuring done
+[5.723s] -- Generating done
+[5.784s] -- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/vectornav
+[5.829s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/vectornav' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/vectornav/vectornav -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/vectornav
+[5.834s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/vectornav': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/vectornav -- -j4 -l4
+[5.965s] [  3%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/attitude.cpp.o[0m
+[7.122s] [  6%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/conversions.cpp.o[0m
+[8.322s] [  9%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/criticalsection.cpp.o[0m
+[8.949s] [ 12%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/dllvalidator.cpp.o[0m
+[9.028s] [ 15%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/error_detection.cpp.o[0m
+[9.877s] [ 18%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/event.cpp.o[0m
+[10.527s] [ 21%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/ezasyncdata.cpp.o[0m
+[11.851s] [ 25%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/memoryport.cpp.o[0m
+[12.604s] [ 28%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/packet.cpp.o[0m
+[15.144s] [ 31%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/packetfinder.cpp.o[0m
+[16.930s] [ 34%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/port.cpp.o[0m
+[17.032s] [ 37%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/position.cpp.o[0m
+[18.079s] [ 40%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/rtcmlistener.cpp.o[0m
+[19.016s] [ 43%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/rtcmmessage.cpp.o[0m
+[19.772s] [ 46%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/searcher.cpp.o[0m
+[21.587s] [ 50%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/sensors.cpp.o[0m
+[24.565s] [ 53%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/serialport.cpp.o[0m
+[26.027s] [ 56%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/thread.cpp.o[0m
+[26.705s] [ 59%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/types.cpp.o[0m
+[26.823s] [ 62%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/util.cpp.o[0m
+[28.139s] [ 65%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/utilities.cpp.o[0m
+[29.130s] [ 68%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/vntime.cpp.o[0m
+[29.793s] [ 71%] [32mBuilding CXX object vnproglib-1.2.0.0/cpp/CMakeFiles/vncxx.dir/src/compositedata.cpp.o[0m
+[32.431s] [ 75%] [32m[1mLinking CXX shared library libvncxx.so[0m
+[32.813s] [ 75%] Built target vncxx
+[32.870s] [ 78%] [32mBuilding CXX object CMakeFiles/vn_sensor_msgs_lib.dir/src/vn_sensor_msgs.cc.o[0m
+[129.128s] [ 81%] [32m[1mLinking CXX shared library libvn_sensor_msgs_lib.so[0m
+[134.096s] [ 81%] Built target vn_sensor_msgs_lib
+[134.142s] [ 84%] [32mBuilding CXX object CMakeFiles/vectornav_lib.dir/src/vectornav.cc.o[0m
+[134.144s] [ 87%] [32mBuilding CXX object CMakeFiles/vn_sensor_msgs.dir/src/vn_sensor_msgs_node.cc.o[0m
+[148.274s] [ 90%] [32m[1mLinking CXX executable vn_sensor_msgs[0m
+[149.948s] [ 90%] Built target vn_sensor_msgs
+[178.481s] [ 93%] [32m[1mLinking CXX shared library libvectornav_lib.so[0m
+[180.312s] [ 93%] Built target vectornav_lib
+[180.360s] [ 96%] [32mBuilding CXX object CMakeFiles/vectornav.dir/src/vectornav_node.cc.o[0m
+[191.947s] [100%] [32m[1mLinking CXX executable vectornav[0m
+[192.771s] [100%] Built target vectornav
+[192.798s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/vectornav' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/vectornav -- -j4 -l4
+[192.807s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/vectornav': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/vectornav
+[192.821s] -- Install configuration: ""
+[192.824s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/libvectornav_lib.so
+[192.907s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/libvectornav_lib.so" to ""
+[192.908s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/libvn_sensor_msgs_lib.so
+[193.135s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/libvn_sensor_msgs_lib.so" to ""
+[193.136s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/vectornav/vectornav
+[193.140s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/vectornav/vectornav" to ""
+[193.140s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/vectornav/vn_sensor_msgs
+[193.144s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/vectornav/vn_sensor_msgs" to ""
+[193.148s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config
+[193.149s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config/vectornav.yaml
+[193.150s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config/vectornav_composable.yaml
+[193.151s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config/vn_100_800hz.yaml
+[193.151s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config/vn_sensor_msgs_composable.yaml
+[193.153s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//launch
+[193.154s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//launch/vectornav.launch.py
+[193.155s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//launch/vectornav_composable.launch.py
+[193.160s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/ament_index/resource_index/package_run_dependencies/vectornav
+[193.162s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/ament_index/resource_index/parent_prefix_path/vectornav
+[193.166s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/environment/ament_prefix_path.sh
+[193.167s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/environment/ament_prefix_path.dsv
+[193.167s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/environment/path.sh
+[193.167s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/environment/path.dsv
+[193.169s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/local_setup.bash
+[193.169s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/local_setup.sh
+[193.170s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/local_setup.zsh
+[193.171s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/local_setup.dsv
+[193.172s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/package.dsv
+[193.174s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/ament_index/resource_index/packages/vectornav
+[193.176s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/ament_index/resource_index/rclcpp_components/vectornav
+[193.178s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/cmake/ament_cmake_export_dependencies-extras.cmake
+[193.179s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/cmake/vectornavConfig.cmake
+[193.179s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/cmake/vectornavConfig-version.cmake
+[193.180s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/package.xml
+[193.182s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/libvncxx.so
+[193.192s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn
+[193.195s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/attitude.h
+[193.196s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/boostpython.h
+[193.197s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/compiler.h
+[193.199s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/compositedata.h
+[193.199s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/consts.h
+[193.199s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/conversions.h
+[193.200s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/criticalsection.h
+[193.200s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/dllvalidator.h
+[193.201s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/error_detection.h
+[193.202s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/event.h
+[193.202s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/exceptions.h
+[193.203s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/export.h
+[193.204s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/ezasyncdata.h
+[193.204s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/int.h
+[193.205s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/matrix.h
+[193.206s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/memoryport.h
+[193.207s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/mock.h
+[193.208s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/nocopy.h
+[193.208s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/packet.h
+[193.210s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/packetfinder.h
+[193.211s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/port.h
+[193.222s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/position.h
+[193.222s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/registers.h
+[193.223s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/rtcmlistener.h
+[193.223s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/rtcmmessage.h
+[193.223s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/searcher.h
+[193.224s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/sensors.h
+[193.224s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/serialport.h
+[193.224s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/signal.h
+[193.225s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/thread.h
+[193.225s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/types.h
+[193.225s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/util.h
+[193.226s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/utilities.h
+[193.227s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/vector.h
+[193.232s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/vntime.h
+[193.233s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/vectornav' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/vectornav

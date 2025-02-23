@@ -60,6 +60,7 @@ services:
       - .:/root/Lunar_ROADSTER/lr_ws
       - /dev/:/dev/
     tty: true
+    network_mode: "host"
     stdin_open: true
     working_dir: /root/Lunar_ROADSTER/lr_ws
     ports:

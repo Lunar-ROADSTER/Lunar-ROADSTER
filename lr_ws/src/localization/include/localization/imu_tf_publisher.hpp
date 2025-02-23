@@ -35,11 +35,13 @@ private:
 
     std::string base_link_frame = "base_link";
     std::string map_frame = "map";
-    // std::string imu_frame = "imu_frame";
+    std::string imu_frame = "imu_link";
 
     /* Callbacks */
     void imuCallback(const sensor_msgs::msg::Imu::SharedPtr imu_msg);
     void publishImuMarker(const sensor_msgs::msg::Imu::SharedPtr msg);
+
+    visualization_msgs::msg::Marker marker;
 
 };
 

@@ -1,0 +1,1251 @@
+[0.000000] (-) TimerEvent: {}
+[0.001845] (cg_msgs) JobQueued: {'identifier': 'cg_msgs', 'dependencies': OrderedDict()}
+[0.002411] (vectornav_msgs) JobQueued: {'identifier': 'vectornav_msgs', 'dependencies': OrderedDict()}
+[0.002571] (localization) JobQueued: {'identifier': 'localization', 'dependencies': OrderedDict([('cg_msgs', '/root/Lunar_ROADSTER/lr_ws/install/cg_msgs')])}
+[0.002730] (vectornav) JobQueued: {'identifier': 'vectornav', 'dependencies': OrderedDict([('vectornav_msgs', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs')])}
+[0.002957] (cg_msgs) JobStarted: {'identifier': 'cg_msgs'}
+[0.050545] (vectornav_msgs) JobStarted: {'identifier': 'vectornav_msgs'}
+[0.090331] (cg_msgs) JobProgress: {'identifier': 'cg_msgs', 'progress': 'cmake'}
+[0.090814] (cg_msgs) JobProgress: {'identifier': 'cg_msgs', 'progress': 'build'}
+[0.091033] (cg_msgs) Command: {'cmd': ['/usr/local/bin/cmake', '--build', '/root/Lunar_ROADSTER/lr_ws/build/cg_msgs', '--', '-j4', '-l4'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/cg_msgs', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', '6698373d4184'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64:'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws/src'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/cg_msgs'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble')]), 'shell': False}
+[0.102738] (-) TimerEvent: {}
+[0.112422] (vectornav_msgs) JobProgress: {'identifier': 'vectornav_msgs', 'progress': 'cmake'}
+[0.116001] (vectornav_msgs) JobProgress: {'identifier': 'vectornav_msgs', 'progress': 'build'}
+[0.117412] (vectornav_msgs) Command: {'cmd': ['/usr/local/bin/cmake', '--build', '/root/Lunar_ROADSTER/lr_ws/build/vectornav_msgs', '--', '-j4', '-l4'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/vectornav_msgs', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', '6698373d4184'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64:'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws/src'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/vectornav_msgs'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble')]), 'shell': False}
+[0.203059] (-) TimerEvent: {}
+[0.304168] (-) TimerEvent: {}
+[0.324351] (cg_msgs) StdoutLine: {'line': b'[  0%] Built target cg_msgs__cpp\n'}
+[0.399591] (cg_msgs) StdoutLine: {'line': b'[  0%] Built target ament_cmake_python_copy_cg_msgs\n'}
+[0.404348] (-) TimerEvent: {}
+[0.408699] (vectornav_msgs) StdoutLine: {'line': b'[  0%] Built target vectornav_msgs__cpp\n'}
+[0.424488] (vectornav_msgs) StdoutLine: {'line': b'[ 12%] Built target vectornav_msgs__rosidl_generator_c\n'}
+[0.443322] (cg_msgs) StdoutLine: {'line': b'[ 12%] Built target cg_msgs__rosidl_generator_c\n'}
+[0.489806] (cg_msgs) StdoutLine: {'line': b'[ 24%] Built target cg_msgs__rosidl_typesupport_cpp\n'}
+[0.502758] (vectornav_msgs) StdoutLine: {'line': b'[ 12%] Built target ament_cmake_python_copy_vectornav_msgs\n'}
+[0.504490] (-) TimerEvent: {}
+[0.605013] (cg_msgs) StdoutLine: {'line': b'[ 36%] Built target cg_msgs__rosidl_typesupport_fastrtps_cpp\n'}
+[0.605614] (-) TimerEvent: {}
+[0.620543] (vectornav_msgs) StdoutLine: {'line': b'[ 24%] Built target vectornav_msgs__rosidl_typesupport_cpp\n'}
+[0.659939] (cg_msgs) StdoutLine: {'line': b'[ 48%] Built target cg_msgs__rosidl_typesupport_introspection_cpp\n'}
+[0.682789] (vectornav_msgs) StdoutLine: {'line': b'[ 35%] Built target vectornav_msgs__rosidl_typesupport_fastrtps_cpp\n'}
+[0.701924] (vectornav_msgs) StdoutLine: {'line': b'[ 47%] Built target vectornav_msgs__rosidl_typesupport_introspection_cpp\n'}
+[0.705809] (-) TimerEvent: {}
+[0.746608] (cg_msgs) StdoutLine: {'line': b'[ 60%] Built target cg_msgs__rosidl_typesupport_fastrtps_c\n'}
+[0.762197] (vectornav_msgs) StdoutLine: {'line': b'[ 59%] Built target vectornav_msgs__rosidl_typesupport_fastrtps_c\n'}
+[0.787272] (cg_msgs) StdoutLine: {'line': b'[ 72%] Built target cg_msgs__rosidl_typesupport_introspection_c\n'}
+[0.805244] (cg_msgs) StdoutLine: {'line': b'[ 84%] Built target cg_msgs__rosidl_typesupport_c\n'}
+[0.807050] (-) TimerEvent: {}
+[0.834429] (vectornav_msgs) StdoutLine: {'line': b'[ 74%] Built target vectornav_msgs__rosidl_typesupport_c\n'}
+[0.848149] (vectornav_msgs) StdoutLine: {'line': b'[ 83%] Built target vectornav_msgs__rosidl_typesupport_introspection_c\n'}
+[0.886339] (cg_msgs) StdoutLine: {'line': b'[ 84%] Built target cg_msgs\n'}
+[0.906536] (vectornav_msgs) StdoutLine: {'line': b'[ 83%] Built target vectornav_msgs\n'}
+[0.908902] (-) TimerEvent: {}
+[0.957437] (cg_msgs) StdoutLine: {'line': b'[ 85%] Built target cg_msgs__py\n'}
+[0.972842] (vectornav_msgs) StdoutLine: {'line': b'[ 84%] Built target vectornav_msgs__py\n'}
+[1.009281] (-) TimerEvent: {}
+[1.069402] (vectornav_msgs) StdoutLine: {'line': b'[ 95%] Built target vectornav_msgs__rosidl_generator_py\n'}
+[1.074362] (cg_msgs) StdoutLine: {'line': b'[ 96%] Built target cg_msgs__rosidl_generator_py\n'}
+[1.109477] (-) TimerEvent: {}
+[1.202670] (cg_msgs) StdoutLine: {'line': b'[ 97%] Built target cg_msgs__rosidl_typesupport_c__pyext\n'}
+[1.209656] (-) TimerEvent: {}
+[1.221583] (cg_msgs) StdoutLine: {'line': b'[ 99%] Built target cg_msgs__rosidl_typesupport_introspection_c__pyext\n'}
+[1.232965] (cg_msgs) StdoutLine: {'line': b'[100%] Built target cg_msgs__rosidl_typesupport_fastrtps_c__pyext\n'}
+[1.255919] (vectornav_msgs) StdoutLine: {'line': b'[ 98%] Built target vectornav_msgs__rosidl_typesupport_c__pyext\n'}
+[1.257207] (vectornav_msgs) StdoutLine: {'line': b'[ 98%] Built target vectornav_msgs__rosidl_typesupport_introspection_c__pyext\n'}
+[1.272450] (vectornav_msgs) StdoutLine: {'line': b'[100%] Built target vectornav_msgs__rosidl_typesupport_fastrtps_c__pyext\n'}
+[1.309923] (-) TimerEvent: {}
+[1.411873] (-) TimerEvent: {}
+[1.513223] (-) TimerEvent: {}
+[1.614111] (-) TimerEvent: {}
+[1.704915] (cg_msgs) StdoutLine: {'line': b'running egg_info\n'}
+[1.707958] (cg_msgs) StdoutLine: {'line': b'writing cg_msgs.egg-info/PKG-INFO\n'}
+[1.708790] (cg_msgs) StdoutLine: {'line': b'writing dependency_links to cg_msgs.egg-info/dependency_links.txt\n'}
+[1.710328] (cg_msgs) StdoutLine: {'line': b'writing top-level names to cg_msgs.egg-info/top_level.txt\n'}
+[1.714280] (-) TimerEvent: {}
+[1.720926] (cg_msgs) StdoutLine: {'line': b"reading manifest file 'cg_msgs.egg-info/SOURCES.txt'\n"}
+[1.730703] (cg_msgs) StdoutLine: {'line': b"writing manifest file 'cg_msgs.egg-info/SOURCES.txt'\n"}
+[1.814559] (-) TimerEvent: {}
+[1.820593] (cg_msgs) StdoutLine: {'line': b'[100%] Built target ament_cmake_python_build_cg_msgs_egg\n'}
+[1.849036] (cg_msgs) CommandEnded: {'returncode': 0}
+[1.853094] (cg_msgs) JobProgress: {'identifier': 'cg_msgs', 'progress': 'install'}
+[1.874595] (cg_msgs) Command: {'cmd': ['/usr/local/bin/cmake', '--install', '/root/Lunar_ROADSTER/lr_ws/build/cg_msgs'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/cg_msgs', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', '6698373d4184'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64:'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws/src'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/cg_msgs'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble')]), 'shell': False}
+[1.887216] (vectornav_msgs) StdoutLine: {'line': b'running egg_info\n'}
+[1.890450] (vectornav_msgs) StdoutLine: {'line': b'writing vectornav_msgs.egg-info/PKG-INFO\n'}
+[1.893476] (vectornav_msgs) StdoutLine: {'line': b'writing dependency_links to vectornav_msgs.egg-info/dependency_links.txt\n'}
+[1.893856] (cg_msgs) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[1.894164] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/ament_index/resource_index/rosidl_interfaces/cg_msgs\n'}
+[1.895015] (vectornav_msgs) StdoutLine: {'line': b'writing top-level names to vectornav_msgs.egg-info/top_level.txt\n'}
+[1.895345] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs\n'}
+[1.896019] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg\n'}
+[1.896562] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/actuator_command.h\n'}
+[1.897458] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/rosidl_generator_c__visibility_control.h\n'}
+[1.897771] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail\n'}
+[1.898037] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__functions.c\n'}
+[1.898296] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__functions.h\n'}
+[1.898642] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__struct.h\n'}
+[1.899597] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__type_support.h\n'}
+[1.901627] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__functions.c\n'}
+[1.902231] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__functions.h\n'}
+[1.903053] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__struct.h\n'}
+[1.903735] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__type_support.h\n'}
+[1.904232] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__functions.c\n'}
+[1.904837] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__functions.h\n'}
+[1.905661] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__struct.h\n'}
+[1.907049] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__type_support.h\n'}
+[1.907704] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__functions.c\n'}
+[1.908780] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__functions.h\n'}
+[1.909956] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__struct.h\n'}
+[1.910803] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__type_support.h\n'}
+[1.911702] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__functions.c\n'}
+[1.912366] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__functions.h\n'}
+[1.912675] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__struct.h\n'}
+[1.913170] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__type_support.h\n'}
+[1.913953] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__functions.c\n'}
+[1.914260] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__functions.h\n'}
+[1.914764] (-) TimerEvent: {}
+[1.917158] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__struct.h\n'}
+[1.918781] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__type_support.h\n'}
+[1.919412] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__functions.c\n'}
+[1.920061] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__functions.h\n'}
+[1.920356] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__struct.h\n'}
+[1.920625] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__type_support.h\n'}
+[1.920910] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__functions.c\n'}
+[1.921410] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__functions.h\n'}
+[1.921688] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__struct.h\n'}
+[1.922736] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__type_support.h\n'}
+[1.923145] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__functions.c\n'}
+[1.923443] (vectornav_msgs) StdoutLine: {'line': b"reading manifest file 'vectornav_msgs.egg-info/SOURCES.txt'\n"}
+[1.923744] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__functions.h\n'}
+[1.924168] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__struct.h\n'}
+[1.924648] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__type_support.h\n'}
+[1.925256] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__functions.c\n'}
+[1.925660] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__functions.h\n'}
+[1.929928] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__struct.h\n'}
+[1.931150] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__type_support.h\n'}
+[1.931914] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__functions.c\n'}
+[1.932609] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__functions.h\n'}
+[1.933354] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__struct.h\n'}
+[1.934349] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__type_support.h\n'}
+[1.935660] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/beacon_tag.h\n'}
+[1.936717] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/beacon_multi_tag.h\n'}
+[1.937360] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/encoder_telemetry.h\n'}
+[1.937843] (vectornav_msgs) StdoutLine: {'line': b"writing manifest file 'vectornav_msgs.egg-info/SOURCES.txt'\n"}
+[1.938148] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/point2_d.h\n'}
+[1.938455] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/pose2_d.h\n'}
+[1.938765] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/slip.h\n'}
+[1.939610] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/mux_mode.h\n'}
+[1.940299] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/actuator_state.h\n'}
+[1.940882] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/site_map.h\n'}
+[1.941863] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/trajectory.h\n'}
+[1.942541] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv\n'}
+[1.944056] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/site_map.h\n'}
+[1.946477] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail\n'}
+[1.947345] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__functions.c\n'}
+[1.947988] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__functions.h\n'}
+[1.948733] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__struct.h\n'}
+[1.949029] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__type_support.h\n'}
+[1.950222] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__functions.c\n'}
+[1.950605] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__functions.h\n'}
+[1.951095] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__struct.h\n'}
+[1.951900] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__type_support.h\n'}
+[1.952493] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__functions.c\n'}
+[1.953152] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__functions.h\n'}
+[1.953673] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__struct.h\n'}
+[1.954661] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__type_support.h\n'}
+[1.955617] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__functions.c\n'}
+[1.956194] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__functions.h\n'}
+[1.956910] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__struct.h\n'}
+[1.957587] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__type_support.h\n'}
+[1.958073] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/update_trajectory.h\n'}
+[1.958938] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/enable_worksystem.h\n'}
+[1.959512] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/save_map.h\n'}
+[1.959974] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/environment/library_path.sh\n'}
+[1.960380] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/environment/library_path.dsv\n'}
+[1.960732] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib/libcg_msgs__rosidl_generator_c.so\n'}
+[1.961173] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs\n'}
+[1.961714] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg\n'}
+[1.962017] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail\n'}
+[1.962279] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__rosidl_typesupport_fastrtps_c.h\n'}
+[1.962537] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__rosidl_typesupport_fastrtps_c.h\n'}
+[1.962790] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__rosidl_typesupport_fastrtps_c.h\n'}
+[1.963093] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__rosidl_typesupport_fastrtps_c.h\n'}
+[1.963354] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__rosidl_typesupport_fastrtps_c.h\n'}
+[1.964113] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__rosidl_typesupport_fastrtps_c.h\n'}
+[1.965635] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__rosidl_typesupport_fastrtps_c.h\n'}
+[1.966067] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__rosidl_typesupport_fastrtps_c.h\n'}
+[1.966753] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__rosidl_typesupport_fastrtps_c.h\n'}
+[1.967421] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__rosidl_typesupport_fastrtps_c.h\n'}
+[1.968067] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__rosidl_typesupport_fastrtps_c.h\n'}
+[1.968823] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[1.969366] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv\n'}
+[1.969876] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail\n'}
+[1.970506] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__rosidl_typesupport_fastrtps_c.h\n'}
+[1.971094] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__rosidl_typesupport_fastrtps_c.h\n'}
+[1.971514] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__rosidl_typesupport_fastrtps_c.h\n'}
+[1.971780] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__rosidl_typesupport_fastrtps_c.h\n'}
+[1.972221] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib/libcg_msgs__rosidl_typesupport_fastrtps_c.so\n'}
+[1.972763] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs\n'}
+[1.973294] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg\n'}
+[1.973796] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/actuator_command.hpp\n'}
+[1.975497] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/rosidl_generator_cpp__visibility_control.hpp\n'}
+[1.975962] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail\n'}
+[1.976236] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__builder.hpp\n'}
+[1.976495] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__struct.hpp\n'}
+[1.976742] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__traits.hpp\n'}
+[1.977302] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__type_support.hpp\n'}
+[1.980203] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__builder.hpp\n'}
+[1.981044] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__struct.hpp\n'}
+[1.981552] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__traits.hpp\n'}
+[1.981842] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__type_support.hpp\n'}
+[1.982110] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__builder.hpp\n'}
+[1.982399] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__struct.hpp\n'}
+[1.982659] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__traits.hpp\n'}
+[1.983047] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__type_support.hpp\n'}
+[1.983610] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__builder.hpp\n'}
+[1.983899] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__struct.hpp\n'}
+[1.984424] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__traits.hpp\n'}
+[1.984717] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__type_support.hpp\n'}
+[1.985254] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__builder.hpp\n'}
+[1.985556] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__struct.hpp\n'}
+[1.986693] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__traits.hpp\n'}
+[1.987282] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__type_support.hpp\n'}
+[1.988086] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__builder.hpp\n'}
+[1.988858] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__struct.hpp\n'}
+[1.989420] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__traits.hpp\n'}
+[1.990079] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__type_support.hpp\n'}
+[1.991263] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__builder.hpp\n'}
+[1.991768] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__struct.hpp\n'}
+[1.992318] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__traits.hpp\n'}
+[1.993059] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__type_support.hpp\n'}
+[1.993585] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__builder.hpp\n'}
+[1.994308] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__struct.hpp\n'}
+[1.995012] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__traits.hpp\n'}
+[1.996526] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__type_support.hpp\n'}
+[1.996822] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__builder.hpp\n'}
+[1.997107] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__struct.hpp\n'}
+[1.997392] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__traits.hpp\n'}
+[1.997682] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__type_support.hpp\n'}
+[1.997963] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__builder.hpp\n'}
+[1.998306] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__struct.hpp\n'}
+[1.998566] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__traits.hpp\n'}
+[1.998818] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__type_support.hpp\n'}
+[1.999251] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__builder.hpp\n'}
+[1.999508] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__struct.hpp\n'}
+[1.999776] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__traits.hpp\n'}
+[2.000031] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__type_support.hpp\n'}
+[2.000290] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/beacon_tag.hpp\n'}
+[2.000534] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/beacon_multi_tag.hpp\n'}
+[2.000813] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/encoder_telemetry.hpp\n'}
+[2.001060] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/point2_d.hpp\n'}
+[2.001334] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/pose2_d.hpp\n'}
+[2.001613] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/slip.hpp\n'}
+[2.001857] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/mux_mode.hpp\n'}
+[2.002095] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/actuator_state.hpp\n'}
+[2.002344] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/site_map.hpp\n'}
+[2.002608] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/trajectory.hpp\n'}
+[2.002921] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv\n'}
+[2.003172] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/site_map.hpp\n'}
+[2.003486] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail\n'}
+[2.003797] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__builder.hpp\n'}
+[2.004062] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__struct.hpp\n'}
+[2.004316] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__traits.hpp\n'}
+[2.004570] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__type_support.hpp\n'}
+[2.004809] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__builder.hpp\n'}
+[2.005055] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__struct.hpp\n'}
+[2.005297] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__traits.hpp\n'}
+[2.005541] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__type_support.hpp\n'}
+[2.005801] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__builder.hpp\n'}
+[2.006064] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__struct.hpp\n'}
+[2.006321] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__traits.hpp\n'}
+[2.006569] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__type_support.hpp\n'}
+[2.006815] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__builder.hpp\n'}
+[2.007177] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__struct.hpp\n'}
+[2.007472] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__traits.hpp\n'}
+[2.007732] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__type_support.hpp\n'}
+[2.007982] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/update_trajectory.hpp\n'}
+[2.008246] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/enable_worksystem.hpp\n'}
+[2.008518] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/save_map.hpp\n'}
+[2.008775] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs\n'}
+[2.009041] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg\n'}
+[2.009304] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail\n'}
+[2.009560] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.009824] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/dds_fastrtps\n'}
+[2.010066] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.010365] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.010621] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.011184] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.011491] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.011758] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.012035] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.012288] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.012549] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.012806] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.013144] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[2.013425] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv\n'}
+[2.013678] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail\n'}
+[2.013945] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.014201] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/dds_fastrtps\n'}
+[2.014452] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.014700] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.015090] (-) TimerEvent: {}
+[2.015543] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.016537] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib/libcg_msgs__rosidl_typesupport_fastrtps_cpp.so\n'}
+[2.017881] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs\n'}
+[2.018220] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg\n'}
+[2.018541] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail\n'}
+[2.019087] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__rosidl_typesupport_introspection_c.h\n'}
+[2.019383] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__type_support.c\n'}
+[2.019867] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__rosidl_typesupport_introspection_c.h\n'}
+[2.020166] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__type_support.c\n'}
+[2.020429] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__rosidl_typesupport_introspection_c.h\n'}
+[2.020851] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__type_support.c\n'}
+[2.021148] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__rosidl_typesupport_introspection_c.h\n'}
+[2.021799] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__type_support.c\n'}
+[2.022122] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__rosidl_typesupport_introspection_c.h\n'}
+[2.022386] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__type_support.c\n'}
+[2.022664] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__rosidl_typesupport_introspection_c.h\n'}
+[2.023122] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__type_support.c\n'}
+[2.023381] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__rosidl_typesupport_introspection_c.h\n'}
+[2.024913] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__type_support.c\n'}
+[2.025224] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__rosidl_typesupport_introspection_c.h\n'}
+[2.025477] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__type_support.c\n'}
+[2.025914] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__rosidl_typesupport_introspection_c.h\n'}
+[2.032903] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__type_support.c\n'}
+[2.033282] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__rosidl_typesupport_introspection_c.h\n'}
+[2.033555] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__type_support.c\n'}
+[2.033823] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__rosidl_typesupport_introspection_c.h\n'}
+[2.034181] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__type_support.c\n'}
+[2.034435] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[2.034688] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv\n'}
+[2.035115] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail\n'}
+[2.035434] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__rosidl_typesupport_introspection_c.h\n'}
+[2.035704] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__type_support.c\n'}
+[2.035966] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__rosidl_typesupport_introspection_c.h\n'}
+[2.036242] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__type_support.c\n'}
+[2.036530] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__rosidl_typesupport_introspection_c.h\n'}
+[2.036798] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__type_support.c\n'}
+[2.037062] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__rosidl_typesupport_introspection_c.h\n'}
+[2.037345] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__type_support.c\n'}
+[2.038107] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib/libcg_msgs__rosidl_typesupport_introspection_c.so\n'}
+[2.038399] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib/libcg_msgs__rosidl_typesupport_c.so\n'}
+[2.038647] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs\n'}
+[2.038971] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg\n'}
+[2.039246] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail\n'}
+[2.039497] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.039741] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_command__type_support.cpp\n'}
+[2.040234] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.040525] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_tag__type_support.cpp\n'}
+[2.040796] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.041051] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/beacon_multi_tag__type_support.cpp\n'}
+[2.041297] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.041554] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/encoder_telemetry__type_support.cpp\n'}
+[2.041799] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.042050] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/point2_d__type_support.cpp\n'}
+[2.043004] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.043347] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/pose2_d__type_support.cpp\n'}
+[2.043634] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.043922] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/slip__type_support.cpp\n'}
+[2.044204] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.044544] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/mux_mode__type_support.cpp\n'}
+[2.044800] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.045065] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/actuator_state__type_support.cpp\n'}
+[2.045344] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.045614] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/site_map__type_support.cpp\n'}
+[2.045876] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.048000] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/msg/detail/trajectory__type_support.cpp\n'}
+[2.048463] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv\n'}
+[2.048761] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail\n'}
+[2.049024] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.049295] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/site_map__type_support.cpp\n'}
+[2.049580] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.049841] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/update_trajectory__type_support.cpp\n'}
+[2.050094] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.050348] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/enable_worksystem__type_support.cpp\n'}
+[2.050596] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.050950] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/include/cg_msgs/cg_msgs/srv/detail/save_map__type_support.cpp\n'}
+[2.051252] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib/libcg_msgs__rosidl_typesupport_introspection_cpp.so\n'}
+[2.051509] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib/libcg_msgs__rosidl_typesupport_cpp.so\n'}
+[2.051833] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/environment/pythonpath.sh\n'}
+[2.052093] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/environment/pythonpath.dsv\n'}
+[2.052348] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs-0.0.0-py3.10.egg-info\n'}
+[2.052614] (cg_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs-0.0.0-py3.10.egg-info/PKG-INFO\n'}
+[2.052888] (cg_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs-0.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[2.053166] (cg_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs-0.0.0-py3.10.egg-info/top_level.txt\n'}
+[2.054567] (cg_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs-0.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[2.054928] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs\n'}
+[2.055326] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/__init__.py\n'}
+[2.055888] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg\n'}
+[2.056212] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_actuator_command.py\n'}
+[2.056488] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_actuator_command_s.c\n'}
+[2.056972] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_beacon_tag.py\n'}
+[2.057246] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_beacon_tag_s.c\n'}
+[2.057778] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_beacon_multi_tag.py\n'}
+[2.058082] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_beacon_multi_tag_s.c\n'}
+[2.058384] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_encoder_telemetry.py\n'}
+[2.058822] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_encoder_telemetry_s.c\n'}
+[2.059249] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_point2_d.py\n'}
+[2.059533] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_point2_d_s.c\n'}
+[2.059998] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_pose2_d.py\n'}
+[2.060280] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_pose2_d_s.c\n'}
+[2.061025] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_slip.py\n'}
+[2.061590] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_slip_s.c\n'}
+[2.062360] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_mux_mode.py\n'}
+[2.062934] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_mux_mode_s.c\n'}
+[2.063249] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_actuator_state.py\n'}
+[2.063510] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_actuator_state_s.c\n'}
+[2.063932] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_site_map.py\n'}
+[2.064187] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_site_map_s.c\n'}
+[2.064441] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_trajectory.py\n'}
+[2.064901] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/_trajectory_s.c\n'}
+[2.066029] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg/__init__.py\n'}
+[2.066433] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv\n'}
+[2.066955] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/_site_map.py\n'}
+[2.067266] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/_site_map_s.c\n'}
+[2.067545] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/_update_trajectory.py\n'}
+[2.067985] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/_update_trajectory_s.c\n'}
+[2.068263] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/_enable_worksystem.py\n'}
+[2.068514] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/_enable_worksystem_s.c\n'}
+[2.068966] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/_save_map.py\n'}
+[2.069246] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/_save_map_s.c\n'}
+[2.069503] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv/__init__.py\n'}
+[2.069937] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/_cg_msgs_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[2.070215] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/_cg_msgs_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[2.070470] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/_cg_msgs_s.ep.rosidl_typesupport_c.c\n'}
+[2.071020] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/libcg_msgs__rosidl_generator_py.so\n'}
+[2.071395] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/cg_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.071852] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/cg_msgs_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.072253] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/cg_msgs_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.072548] (vectornav_msgs) StdoutLine: {'line': b'[100%] Built target ament_cmake_python_build_vectornav_msgs_egg\n'}
+[2.086126] (vectornav_msgs) CommandEnded: {'returncode': 0}
+[2.087433] (vectornav_msgs) JobProgress: {'identifier': 'vectornav_msgs', 'progress': 'install'}
+[2.087546] (vectornav_msgs) Command: {'cmd': ['/usr/local/bin/cmake', '--install', '/root/Lunar_ROADSTER/lr_ws/build/vectornav_msgs'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/vectornav_msgs', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', '6698373d4184'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64:'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws/src'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/vectornav_msgs'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble')]), 'shell': False}
+[2.101361] (vectornav_msgs) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[2.102333] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/ament_index/resource_index/rosidl_interfaces/vectornav_msgs\n'}
+[2.102796] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs\n'}
+[2.103610] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg\n'}
+[2.103955] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/attitude_group.h\n'}
+[2.104618] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/rosidl_generator_c__visibility_control.h\n'}
+[2.105841] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail\n'}
+[2.106558] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__functions.c\n'}
+[2.107164] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__functions.h\n'}
+[2.107865] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__struct.h\n'}
+[2.108189] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__type_support.h\n'}
+[2.108489] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__functions.c\n'}
+[2.108778] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__functions.h\n'}
+[2.109077] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__struct.h\n'}
+[2.109375] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__type_support.h\n'}
+[2.109800] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__functions.c\n'}
+[2.110105] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__functions.h\n'}
+[2.110424] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__struct.h\n'}
+[2.111191] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__type_support.h\n'}
+[2.111556] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__functions.c\n'}
+[2.112255] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__functions.h\n'}
+[2.112569] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__struct.h\n'}
+[2.113285] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__type_support.h\n'}
+[2.113985] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__functions.c\n'}
+[2.114335] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__functions.h\n'}
+[2.114640] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__struct.h\n'}
+[2.116509] (-) TimerEvent: {}
+[2.117380] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__type_support.h\n'}
+[2.118275] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__functions.c\n'}
+[2.118831] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__functions.h\n'}
+[2.119485] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__struct.h\n'}
+[2.119941] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__type_support.h\n'}
+[2.120265] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__functions.c\n'}
+[2.120801] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__functions.h\n'}
+[2.121146] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__struct.h\n'}
+[2.121468] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__type_support.h\n'}
+[2.122004] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__functions.c\n'}
+[2.122642] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__functions.h\n'}
+[2.123321] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__struct.h\n'}
+[2.123917] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__type_support.h\n'}
+[2.124480] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__functions.c\n'}
+[2.124946] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__functions.h\n'}
+[2.125285] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__struct.h\n'}
+[2.125803] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__type_support.h\n'}
+[2.126178] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__functions.c\n'}
+[2.126473] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__functions.h\n'}
+[2.127051] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__struct.h\n'}
+[2.127380] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__type_support.h\n'}
+[2.127684] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__functions.c\n'}
+[2.127942] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__functions.h\n'}
+[2.131293] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__struct.h\n'}
+[2.132020] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__type_support.h\n'}
+[2.132640] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/common_group.h\n'}
+[2.133442] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/dop.h\n'}
+[2.134063] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/gps_group.h\n'}
+[2.134829] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/imu_group.h\n'}
+[2.135595] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/ins_group.h\n'}
+[2.136144] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/ins_status.h\n'}
+[2.136657] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/time_group.h\n'}
+[2.137259] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/time_status.h\n'}
+[2.137953] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/time_utc.h\n'}
+[2.138569] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/vpe_status.h\n'}
+[2.139403] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action\n'}
+[2.141323] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/mag_cal.h\n'}
+[2.142189] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail\n'}
+[2.142805] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__functions.c\n'}
+[2.143390] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__functions.h\n'}
+[2.143950] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__struct.h\n'}
+[2.144389] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__type_support.h\n'}
+[2.146457] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/environment/library_path.sh\n'}
+[2.147238] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/environment/library_path.dsv\n'}
+[2.147557] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib/libvectornav_msgs__rosidl_generator_c.so\n'}
+[2.147848] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs\n'}
+[2.148138] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg\n'}
+[2.148482] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail\n'}
+[2.149117] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__rosidl_typesupport_fastrtps_c.h\n'}
+[2.149562] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__rosidl_typesupport_fastrtps_c.h\n'}
+[2.150021] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__rosidl_typesupport_fastrtps_c.h\n'}
+[2.150369] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__rosidl_typesupport_fastrtps_c.h\n'}
+[2.150663] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__rosidl_typesupport_fastrtps_c.h\n'}
+[2.151041] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__rosidl_typesupport_fastrtps_c.h\n'}
+[2.151347] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__rosidl_typesupport_fastrtps_c.h\n'}
+[2.151618] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__rosidl_typesupport_fastrtps_c.h\n'}
+[2.151882] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__rosidl_typesupport_fastrtps_c.h\n'}
+[2.152146] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__rosidl_typesupport_fastrtps_c.h\n'}
+[2.152561] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__rosidl_typesupport_fastrtps_c.h\n'}
+[2.152835] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[2.153419] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action\n'}
+[2.153739] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail\n'}
+[2.154013] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__rosidl_typesupport_fastrtps_c.h\n'}
+[2.154820] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib/libvectornav_msgs__rosidl_typesupport_fastrtps_c.so\n'}
+[2.155693] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs\n'}
+[2.156241] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg\n'}
+[2.156750] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/attitude_group.hpp\n'}
+[2.157329] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/rosidl_generator_cpp__visibility_control.hpp\n'}
+[2.157634] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail\n'}
+[2.157916] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__builder.hpp\n'}
+[2.158175] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__struct.hpp\n'}
+[2.158435] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__traits.hpp\n'}
+[2.159646] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__type_support.hpp\n'}
+[2.160165] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__builder.hpp\n'}
+[2.160543] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__struct.hpp\n'}
+[2.161145] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__traits.hpp\n'}
+[2.161616] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__type_support.hpp\n'}
+[2.162248] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__builder.hpp\n'}
+[2.163000] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__struct.hpp\n'}
+[2.163426] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__traits.hpp\n'}
+[2.163807] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__type_support.hpp\n'}
+[2.164429] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__builder.hpp\n'}
+[2.165257] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__struct.hpp\n'}
+[2.166118] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__traits.hpp\n'}
+[2.167007] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__type_support.hpp\n'}
+[2.167601] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__builder.hpp\n'}
+[2.167970] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__struct.hpp\n'}
+[2.168295] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__traits.hpp\n'}
+[2.169089] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__type_support.hpp\n'}
+[2.169389] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__builder.hpp\n'}
+[2.170024] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__struct.hpp\n'}
+[2.170313] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__traits.hpp\n'}
+[2.170710] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__type_support.hpp\n'}
+[2.171088] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__builder.hpp\n'}
+[2.171356] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__struct.hpp\n'}
+[2.171834] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__traits.hpp\n'}
+[2.172179] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__type_support.hpp\n'}
+[2.172792] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__builder.hpp\n'}
+[2.173579] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__struct.hpp\n'}
+[2.174287] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__traits.hpp\n'}
+[2.174779] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__type_support.hpp\n'}
+[2.175590] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__builder.hpp\n'}
+[2.176243] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__struct.hpp\n'}
+[2.176728] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__traits.hpp\n'}
+[2.177040] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__type_support.hpp\n'}
+[2.178676] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__builder.hpp\n'}
+[2.179120] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__struct.hpp\n'}
+[2.179452] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__traits.hpp\n'}
+[2.181828] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__type_support.hpp\n'}
+[2.182128] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__builder.hpp\n'}
+[2.182428] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__struct.hpp\n'}
+[2.182819] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__traits.hpp\n'}
+[2.183605] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__type_support.hpp\n'}
+[2.183916] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/common_group.hpp\n'}
+[2.184184] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/dop.hpp\n'}
+[2.184525] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/gps_group.hpp\n'}
+[2.186233] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/imu_group.hpp\n'}
+[2.187103] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/ins_group.hpp\n'}
+[2.187772] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/ins_status.hpp\n'}
+[2.188458] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/time_group.hpp\n'}
+[2.188976] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/time_status.hpp\n'}
+[2.189566] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/time_utc.hpp\n'}
+[2.190151] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/vpe_status.hpp\n'}
+[2.191022] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action\n'}
+[2.192068] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/mag_cal.hpp\n'}
+[2.192899] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail\n'}
+[2.193652] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__builder.hpp\n'}
+[2.193979] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__struct.hpp\n'}
+[2.194324] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__traits.hpp\n'}
+[2.194719] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__type_support.hpp\n'}
+[2.195732] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs\n'}
+[2.196098] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg\n'}
+[2.196816] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail\n'}
+[2.197355] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.197977] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dds_fastrtps\n'}
+[2.198562] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.198965] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.199454] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.199929] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.200397] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.200838] (cg_msgs) StdoutLine: {'line': b"Listing '/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs'...\n"}
+[2.201338] (cg_msgs) StdoutLine: {'line': b"Listing '/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/msg'...\n"}
+[2.201776] (cg_msgs) StdoutLine: {'line': b"Listing '/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/srv'...\n"}
+[2.202195] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.202503] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.202815] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.203142] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.203429] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.203931] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[2.204411] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action\n'}
+[2.204819] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail\n'}
+[2.205407] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[2.205814] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/dds_fastrtps\n'}
+[2.206247] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib/libvectornav_msgs__rosidl_typesupport_fastrtps_cpp.so\n'}
+[2.206549] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs\n'}
+[2.206913] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg\n'}
+[2.207313] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail\n'}
+[2.207600] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__rosidl_typesupport_introspection_c.h\n'}
+[2.207977] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__type_support.c\n'}
+[2.208535] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__rosidl_typesupport_introspection_c.h\n'}
+[2.208816] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__type_support.c\n'}
+[2.209139] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__rosidl_typesupport_introspection_c.h\n'}
+[2.209663] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__type_support.c\n'}
+[2.209963] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__rosidl_typesupport_introspection_c.h\n'}
+[2.210247] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__type_support.c\n'}
+[2.210511] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__rosidl_typesupport_introspection_c.h\n'}
+[2.211345] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__type_support.c\n'}
+[2.211635] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__rosidl_typesupport_introspection_c.h\n'}
+[2.212102] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__type_support.c\n'}
+[2.212406] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__rosidl_typesupport_introspection_c.h\n'}
+[2.212879] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__type_support.c\n'}
+[2.213158] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__rosidl_typesupport_introspection_c.h\n'}
+[2.213440] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__type_support.c\n'}
+[2.213743] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__rosidl_typesupport_introspection_c.h\n'}
+[2.214223] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__type_support.c\n'}
+[2.214699] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__rosidl_typesupport_introspection_c.h\n'}
+[2.215084] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__type_support.c\n'}
+[2.215554] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__rosidl_typesupport_introspection_c.h\n'}
+[2.215856] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__type_support.c\n'}
+[2.216369] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[2.216641] (-) TimerEvent: {}
+[2.217052] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action\n'}
+[2.218359] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail\n'}
+[2.219048] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__rosidl_typesupport_introspection_c.h\n'}
+[2.219409] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__type_support.c\n'}
+[2.219713] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib/libvectornav_msgs__rosidl_typesupport_introspection_c.so\n'}
+[2.220011] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib/libvectornav_msgs__rosidl_typesupport_c.so\n'}
+[2.220447] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs\n'}
+[2.220718] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg\n'}
+[2.221013] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail\n'}
+[2.222899] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.223452] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/attitude_group__type_support.cpp\n'}
+[2.223908] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.224348] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/cg_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.224676] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/cg_msgs_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.224948] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages/cg_msgs/cg_msgs_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.225240] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/common_group__type_support.cpp\n'}
+[2.225498] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.225796] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/dop__type_support.cpp\n'}
+[2.226098] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.226399] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/gps_group__type_support.cpp\n'}
+[2.226694] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.227079] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/imu_group__type_support.cpp\n'}
+[2.227377] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.227693] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_group__type_support.cpp\n'}
+[2.227992] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.228294] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/ins_status__type_support.cpp\n'}
+[2.231340] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.231690] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_group__type_support.cpp\n'}
+[2.231989] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.232289] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_status__type_support.cpp\n'}
+[2.232616] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.233003] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/time_utc__type_support.cpp\n'}
+[2.233295] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.233551] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/msg/detail/vpe_status__type_support.cpp\n'}
+[2.233808] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action\n'}
+[2.234063] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail\n'}
+[2.234829] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__rosidl_typesupport_introspection_cpp.hpp\n'}
+[2.235238] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/include/vectornav_msgs/vectornav_msgs/action/detail/mag_cal__type_support.cpp\n'}
+[2.235708] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib/libvectornav_msgs__rosidl_typesupport_introspection_cpp.so\n'}
+[2.237280] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib/libvectornav_msgs__rosidl_typesupport_cpp.so\n'}
+[2.239992] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib/libcg_msgs__rosidl_generator_py.so\n'}
+[2.241465] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/environment/pythonpath.sh\n'}
+[2.242375] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/environment/pythonpath.dsv\n'}
+[2.243444] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/ActuatorCommand.idl\n'}
+[2.244238] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs-3.0.0-py3.10.egg-info\n'}
+[2.245100] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/BeaconTag.idl\n'}
+[2.248383] (vectornav_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs-3.0.0-py3.10.egg-info/PKG-INFO\n'}
+[2.249864] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/BeaconMultiTag.idl\n'}
+[2.251498] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/EncoderTelemetry.idl\n'}
+[2.252487] (vectornav_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs-3.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[2.253403] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/Point2D.idl\n'}
+[2.253776] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/Pose2D.idl\n'}
+[2.254163] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/Slip.idl\n'}
+[2.255317] (vectornav_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs-3.0.0-py3.10.egg-info/top_level.txt\n'}
+[2.255746] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/MuxMode.idl\n'}
+[2.256132] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/ActuatorState.idl\n'}
+[2.258561] (vectornav_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs-3.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[2.259446] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/SiteMap.idl\n'}
+[2.259910] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/msg/Trajectory.idl\n'}
+[2.266728] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/SiteMap.idl\n'}
+[2.267661] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs\n'}
+[2.268167] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/UpdateTrajectory.idl\n'}
+[2.268507] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/__init__.py\n'}
+[2.270334] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg\n'}
+[2.270695] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/EnableWorksystem.idl\n'}
+[2.271172] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/SaveMap.idl\n'}
+[2.272417] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/SiteMap.srv\n'}
+[2.272777] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_attitude_group.py\n'}
+[2.273667] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_attitude_group_s.c\n'}
+[2.274180] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_common_group.py\n'}
+[2.275100] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_common_group_s.c\n'}
+[2.275517] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/SiteMap_Request.msg\n'}
+[2.275871] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_dop.py\n'}
+[2.276593] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_dop_s.c\n'}
+[2.277292] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/SiteMap_Response.msg\n'}
+[2.280082] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_gps_group.py\n'}
+[2.280955] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_gps_group_s.c\n'}
+[2.283531] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_imu_group.py\n'}
+[2.284277] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/UpdateTrajectory.srv\n'}
+[2.284736] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/UpdateTrajectory_Request.msg\n'}
+[2.285228] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_imu_group_s.c\n'}
+[2.285601] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_ins_group.py\n'}
+[2.286406] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_ins_group_s.c\n'}
+[2.287133] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_ins_status.py\n'}
+[2.287657] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_ins_status_s.c\n'}
+[2.288164] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_time_group.py\n'}
+[2.289158] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_time_group_s.c\n'}
+[2.290714] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_time_status.py\n'}
+[2.291443] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_time_status_s.c\n'}
+[2.292037] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_time_utc.py\n'}
+[2.292517] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_time_utc_s.c\n'}
+[2.293100] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_vpe_status.py\n'}
+[2.293542] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/_vpe_status_s.c\n'}
+[2.295978] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg/__init__.py\n'}
+[2.296366] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/action\n'}
+[2.296999] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/UpdateTrajectory_Response.msg\n'}
+[2.299183] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/action/_mag_cal.py\n'}
+[2.301368] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/action/_mag_cal_s.c\n'}
+[2.302040] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/action/__init__.py\n'}
+[2.303376] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/_vectornav_msgs_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[2.305917] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/_vectornav_msgs_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[2.306688] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/_vectornav_msgs_s.ep.rosidl_typesupport_c.c\n'}
+[2.308647] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/EnableWorksystem.srv\n'}
+[2.309040] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/libvectornav_msgs__rosidl_generator_py.so\n'}
+[2.310527] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/vectornav_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.310946] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/vectornav_msgs_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.311375] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/vectornav_msgs_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.311695] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/EnableWorksystem_Request.msg\n'}
+[2.314229] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/EnableWorksystem_Response.msg\n'}
+[2.315770] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/SaveMap.srv\n'}
+[2.316372] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/SaveMap_Request.msg\n'}
+[2.317306] (-) TimerEvent: {}
+[2.318138] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/srv/SaveMap_Response.msg\n'}
+[2.319958] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/ament_index/resource_index/package_run_dependencies/cg_msgs\n'}
+[2.321714] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/ament_index/resource_index/parent_prefix_path/cg_msgs\n'}
+[2.333792] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/environment/ament_prefix_path.sh\n'}
+[2.334211] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/environment/ament_prefix_path.dsv\n'}
+[2.334492] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/environment/path.sh\n'}
+[2.334786] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/environment/path.dsv\n'}
+[2.335257] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/local_setup.bash\n'}
+[2.337302] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/local_setup.sh\n'}
+[2.337658] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/local_setup.zsh\n'}
+[2.339062] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/local_setup.dsv\n'}
+[2.339590] (cg_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.dsv\n'}
+[2.339959] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/ament_index/resource_index/packages/cg_msgs\n'}
+[2.340236] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_generator_cExport.cmake\n'}
+[2.340492] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_generator_cExport-noconfig.cmake\n'}
+[2.340742] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[2.341056] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[2.341317] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_generator_cppExport.cmake\n'}
+[2.341595] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[2.341853] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[2.343353] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgs__rosidl_typesupport_introspection_cExport.cmake\n'}
+[2.343733] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[2.344001] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgs__rosidl_typesupport_cExport.cmake\n'}
+[2.344298] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgs__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[2.344565] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgs__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[2.344804] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[2.346249] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgs__rosidl_typesupport_cppExport.cmake\n'}
+[2.346545] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgs__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[2.346921] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_generator_pyExport.cmake\n'}
+[2.347277] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/export_cg_msgs__rosidl_generator_pyExport-noconfig.cmake\n'}
+[2.347540] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/rosidl_cmake-extras.cmake\n'}
+[2.347788] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[2.348103] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[2.348408] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[2.348701] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[2.348961] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[2.349342] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[2.349606] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgsConfig.cmake\n'}
+[2.349854] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake/cg_msgsConfig-version.cmake\n'}
+[2.350112] (cg_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.xml\n'}
+[2.350378] (cg_msgs) CommandEnded: {'returncode': 0}
+[2.389620] (vectornav_msgs) StdoutLine: {'line': b"Listing '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs'...\n"}
+[2.390210] (vectornav_msgs) StdoutLine: {'line': b"Listing '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/action'...\n"}
+[2.390508] (vectornav_msgs) StdoutLine: {'line': b"Listing '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/msg'...\n"}
+[2.390928] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/vectornav_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.397554] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/vectornav_msgs_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.398598] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages/vectornav_msgs/vectornav_msgs_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so\n'}
+[2.405198] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib/libvectornav_msgs__rosidl_generator_py.so\n'}
+[2.406330] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/AttitudeGroup.idl\n'}
+[2.406724] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/CommonGroup.idl\n'}
+[2.407362] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/DOP.idl\n'}
+[2.407738] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/GpsGroup.idl\n'}
+[2.408037] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/ImuGroup.idl\n'}
+[2.408485] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/InsGroup.idl\n'}
+[2.408793] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/InsStatus.idl\n'}
+[2.409077] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/TimeGroup.idl\n'}
+[2.419764] (-) TimerEvent: {}
+[2.421122] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/TimeStatus.idl\n'}
+[2.422696] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/TimeUTC.idl\n'}
+[2.423205] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/VpeStatus.idl\n'}
+[2.423911] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/action/MagCal.idl\n'}
+[2.425183] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/AttitudeGroup.msg\n'}
+[2.425712] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/CommonGroup.msg\n'}
+[2.426043] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/DOP.msg\n'}
+[2.426643] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/GpsGroup.msg\n'}
+[2.431537] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/ImuGroup.msg\n'}
+[2.432725] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/InsGroup.msg\n'}
+[2.433189] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/InsStatus.msg\n'}
+[2.433745] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/TimeGroup.msg\n'}
+[2.434491] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/TimeStatus.msg\n'}
+[2.434976] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/TimeUTC.msg\n'}
+[2.435572] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/msg/VpeStatus.msg\n'}
+[2.435897] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/action/MagCal.action\n'}
+[2.436179] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/ament_index/resource_index/package_run_dependencies/vectornav_msgs\n'}
+[2.436440] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/ament_index/resource_index/parent_prefix_path/vectornav_msgs\n'}
+[2.437884] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/environment/ament_prefix_path.sh\n'}
+[2.438210] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/environment/ament_prefix_path.dsv\n'}
+[2.438469] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/environment/path.sh\n'}
+[2.438747] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/environment/path.dsv\n'}
+[2.439182] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/local_setup.bash\n'}
+[2.439460] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/local_setup.sh\n'}
+[2.439735] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/local_setup.zsh\n'}
+[2.440103] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/local_setup.dsv\n'}
+[2.440390] (vectornav_msgs) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/package.dsv\n'}
+[2.440729] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/ament_index/resource_index/packages/vectornav_msgs\n'}
+[2.440990] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_generator_cExport.cmake\n'}
+[2.441324] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_generator_cExport-noconfig.cmake\n'}
+[2.441615] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[2.441882] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[2.442150] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_generator_cppExport.cmake\n'}
+[2.442428] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[2.442684] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[2.443132] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgs__rosidl_typesupport_introspection_cExport.cmake\n'}
+[2.443645] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[2.444016] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgs__rosidl_typesupport_cExport.cmake\n'}
+[2.444337] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgs__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[2.444718] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgs__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[2.445036] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[2.445340] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgs__rosidl_typesupport_cppExport.cmake\n'}
+[2.445666] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgs__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[2.445991] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_generator_pyExport.cmake\n'}
+[2.446375] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/export_vectornav_msgs__rosidl_generator_pyExport-noconfig.cmake\n'}
+[2.447117] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/rosidl_cmake-extras.cmake\n'}
+[2.447466] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[2.447782] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[2.448103] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[2.448498] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[2.448812] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[2.449124] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[2.449452] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgsConfig.cmake\n'}
+[2.449759] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/cmake/vectornav_msgsConfig-version.cmake\n'}
+[2.450056] (vectornav_msgs) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/share/vectornav_msgs/package.xml\n'}
+[2.485502] (cg_msgs) JobEnded: {'identifier': 'cg_msgs', 'rc': 0}
+[2.487900] (localization) JobStarted: {'identifier': 'localization'}
+[2.513493] (vectornav_msgs) CommandEnded: {'returncode': 0}
+[2.524539] (-) TimerEvent: {}
+[2.609082] (vectornav_msgs) JobEnded: {'identifier': 'vectornav_msgs', 'rc': 0}
+[2.611877] (vectornav) JobStarted: {'identifier': 'vectornav'}
+[2.624736] (-) TimerEvent: {}
+[2.654053] (localization) JobProgress: {'identifier': 'localization', 'progress': 'cmake'}
+[2.654267] (localization) JobProgress: {'identifier': 'localization', 'progress': 'build'}
+[2.654366] (localization) Command: {'cmd': ['/usr/local/bin/cmake', '--build', '/root/Lunar_ROADSTER/lr_ws/build/localization', '--', '-j4', '-l4'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/localization', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', '6698373d4184'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws/src'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/localization'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/opt/ros/humble')]), 'shell': False}
+[2.685974] (vectornav) JobProgress: {'identifier': 'vectornav', 'progress': 'cmake'}
+[2.708518] (vectornav) JobProgress: {'identifier': 'vectornav', 'progress': 'build'}
+[2.708990] (vectornav) Command: {'cmd': ['/usr/local/bin/cmake', '--build', '/root/Lunar_ROADSTER/lr_ws/build/vectornav', '--', '-j4', '-l4'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/vectornav', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', '6698373d4184'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws/src'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/vectornav'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble')]), 'shell': False}
+[2.725102] (-) TimerEvent: {}
+[2.811259] (localization) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target kalman_filter_linear\x1b[0m\n'}
+[2.825764] (-) TimerEvent: {}
+[2.850949] (localization) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target imu_tf_publisher\x1b[0m\n'}
+[2.923035] (localization) StdoutLine: {'line': b'[ 20%] Built target kalman_filter_linear\n'}
+[2.925906] (-) TimerEvent: {}
+[2.996681] (vectornav) StdoutLine: {'line': b'[ 75%] Built target vncxx\n'}
+[3.027122] (-) TimerEvent: {}
+[3.032445] (localization) StdoutLine: {'line': b'[ 50%] Built target ts_prism_transformer\n'}
+[3.059605] (localization) StdoutLine: {'line': b'[ 60%] \x1b[32mBuilding CXX object CMakeFiles/slip_estimate_node.dir/src/slip_estimate_main.cpp.o\x1b[0m\n'}
+[3.080540] (localization) StdoutLine: {'line': b'[ 70%] \x1b[32mBuilding CXX object CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.o\x1b[0m\n'}
+[3.087573] (localization) StdoutLine: {'line': b'[ 80%] \x1b[32mBuilding CXX object CMakeFiles/imu_tf_publisher.dir/src/imu_tf_publisher.cpp.o\x1b[0m\n'}
+[3.107325] (vectornav) StdoutLine: {'line': b'[ 81%] Built target vn_sensor_msgs_lib\n'}
+[3.126457] (-) TimerEvent: {}
+[3.230695] (-) TimerEvent: {}
+[3.274760] (vectornav) StdoutLine: {'line': b'[ 87%] Built target vectornav_lib\n'}
+[3.331043] (-) TimerEvent: {}
+[3.367499] (vectornav) StdoutLine: {'line': b'[ 93%] Built target vn_sensor_msgs\n'}
+[3.431297] (-) TimerEvent: {}
+[3.465838] (vectornav) StdoutLine: {'line': b'[100%] Built target vectornav\n'}
+[3.504556] (vectornav) CommandEnded: {'returncode': 0}
+[3.527218] (vectornav) JobProgress: {'identifier': 'vectornav', 'progress': 'install'}
+[3.527475] (vectornav) Command: {'cmd': ['/usr/local/bin/cmake', '--install', '/root/Lunar_ROADSTER/lr_ws/build/vectornav'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/vectornav', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', '6698373d4184'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws/src'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/vectornav'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble')]), 'shell': False}
+[3.531990] (-) TimerEvent: {}
+[3.541806] (vectornav) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[3.549543] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/libvectornav_lib.so\n'}
+[3.552118] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/libvn_sensor_msgs_lib.so\n'}
+[3.554389] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/vectornav/vectornav\n'}
+[3.556910] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/vectornav/vn_sensor_msgs\n'}
+[3.560390] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config\n'}
+[3.561271] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config/vectornav.yaml\n'}
+[3.561824] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config/vectornav_composable.yaml\n'}
+[3.562182] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config/vn_100_800hz.yaml\n'}
+[3.562481] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//config/vn_sensor_msgs_composable.yaml\n'}
+[3.563129] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//launch\n'}
+[3.563438] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//launch/vectornav.launch.py\n'}
+[3.563974] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav//launch/vectornav_composable.launch.py\n'}
+[3.564322] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/ament_index/resource_index/package_run_dependencies/vectornav\n'}
+[3.564807] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/ament_index/resource_index/parent_prefix_path/vectornav\n'}
+[3.565097] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/environment/ament_prefix_path.sh\n'}
+[3.566767] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/environment/ament_prefix_path.dsv\n'}
+[3.567782] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/environment/path.sh\n'}
+[3.571506] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/environment/path.dsv\n'}
+[3.572714] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/local_setup.bash\n'}
+[3.573760] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/local_setup.sh\n'}
+[3.574824] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/local_setup.zsh\n'}
+[3.581967] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/local_setup.dsv\n'}
+[3.582989] (vectornav) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/package.dsv\n'}
+[3.585977] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/ament_index/resource_index/packages/vectornav\n'}
+[3.587212] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/ament_index/resource_index/rclcpp_components/vectornav\n'}
+[3.588068] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[3.588820] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/cmake/vectornavConfig.cmake\n'}
+[3.590717] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/cmake/vectornavConfig-version.cmake\n'}
+[3.591401] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/share/vectornav/package.xml\n'}
+[3.593853] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/lib/libvncxx.so\n'}
+[3.595393] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn\n'}
+[3.596770] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/attitude.h\n'}
+[3.597684] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/boostpython.h\n'}
+[3.598602] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/compiler.h\n'}
+[3.599274] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/compositedata.h\n'}
+[3.599849] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/consts.h\n'}
+[3.600912] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/conversions.h\n'}
+[3.601528] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/criticalsection.h\n'}
+[3.603600] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/dllvalidator.h\n'}
+[3.604231] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/error_detection.h\n'}
+[3.605151] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/event.h\n'}
+[3.605754] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/exceptions.h\n'}
+[3.607277] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/export.h\n'}
+[3.607911] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/ezasyncdata.h\n'}
+[3.608221] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/int.h\n'}
+[3.608733] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/matrix.h\n'}
+[3.610060] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/memoryport.h\n'}
+[3.612062] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/mock.h\n'}
+[3.612746] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/nocopy.h\n'}
+[3.613658] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/packet.h\n'}
+[3.614034] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/packetfinder.h\n'}
+[3.614345] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/port.h\n'}
+[3.615197] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/position.h\n'}
+[3.615726] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/registers.h\n'}
+[3.616312] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/rtcmlistener.h\n'}
+[3.616781] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/rtcmmessage.h\n'}
+[3.617064] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/searcher.h\n'}
+[3.617327] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/sensors.h\n'}
+[3.617761] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/serialport.h\n'}
+[3.618048] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/signal.h\n'}
+[3.618377] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/thread.h\n'}
+[3.618819] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/types.h\n'}
+[3.619370] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/util.h\n'}
+[3.619806] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/utilities.h\n'}
+[3.620081] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/vector.h\n'}
+[3.621924] (vectornav) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/vectornav/include/vn/vntime.h\n'}
+[3.629383] (vectornav) CommandEnded: {'returncode': 0}
+[3.636654] (-) TimerEvent: {}
+[3.736943] (vectornav) JobEnded: {'identifier': 'vectornav', 'rc': 0}
+[3.739655] (-) TimerEvent: {}
+[3.843164] (-) TimerEvent: {}
+[3.944136] (-) TimerEvent: {}
+[4.045430] (-) TimerEvent: {}
+[4.147016] (-) TimerEvent: {}
+[4.250570] (-) TimerEvent: {}
+[4.354132] (-) TimerEvent: {}
+[4.456381] (-) TimerEvent: {}
+[4.560824] (-) TimerEvent: {}
+[4.663761] (-) TimerEvent: {}
+[4.764999] (-) TimerEvent: {}
+[4.866268] (-) TimerEvent: {}
+[4.967589] (-) TimerEvent: {}
+[5.036982] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/imu_tf_publisher.hpp:8\x1b[m\x1b[K,\n'}
+[5.039348] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:1\x1b[m\x1b[K:\n'}
+[5.039736] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [\x1b[01;35m\x1b[K-Wcpp\x1b[m\x1b[K]\n'}
+[5.040069] (localization) StderrLine: {'line': b'   35 | #\x1b[01;35m\x1b[Kwarning\x1b[m\x1b[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead\n'}
+[5.040337] (localization) StderrLine: {'line': b'      |  \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[5.067856] (-) TimerEvent: {}
+[5.168833] (-) TimerEvent: {}
+[5.269818] (-) TimerEvent: {}
+[5.328166] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/slip_estimate_main.cpp:3\x1b[m\x1b[K:\n'}
+[5.328886] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/slip_estimate_node.hpp:13:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kfatal error: \x1b[m\x1b[Ktf2_ros/transform_broadcaster.h: No such file or directory\n'}
+[5.329277] (localization) StderrLine: {'line': b'   13 | #include \x1b[01;31m\x1b[K<tf2_ros/transform_broadcaster.h>\x1b[m\x1b[K\n'}
+[5.329618] (localization) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.329917] (localization) StderrLine: {'line': b'compilation terminated.\n'}
+[5.350402] (localization) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/slip_estimate_node.dir/build.make:76: CMakeFiles/slip_estimate_node.dir/src/slip_estimate_main.cpp.o] Error 1\n'}
+[5.351276] (localization) StderrLine: {'line': b'gmake[2]: *** Waiting for unfinished jobs....\n'}
+[5.370104] (-) TimerEvent: {}
+[5.447352] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/slip_estimate_node.cpp:1\x1b[m\x1b[K:\n'}
+[5.450758] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/slip_estimate_node.hpp:13:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kfatal error: \x1b[m\x1b[Ktf2_ros/transform_broadcaster.h: No such file or directory\n'}
+[5.452638] (localization) StderrLine: {'line': b'   13 | #include \x1b[01;31m\x1b[K<tf2_ros/transform_broadcaster.h>\x1b[m\x1b[K\n'}
+[5.454343] (localization) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.456045] (localization) StderrLine: {'line': b'compilation terminated.\n'}
+[5.464708] (localization) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/slip_estimate_node.dir/build.make:90: CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.o] Error 1\n'}
+[5.467001] (localization) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:143: CMakeFiles/slip_estimate_node.dir/all] Error 2\n'}
+[5.468816] (localization) StderrLine: {'line': b'gmake[1]: *** Waiting for unfinished jobs....\n'}
+[5.470587] (-) TimerEvent: {}
+[5.571948] (-) TimerEvent: {}
+[5.675155] (-) TimerEvent: {}
+[5.777263] (-) TimerEvent: {}
+[5.879898] (-) TimerEvent: {}
+[5.981691] (-) TimerEvent: {}
+[6.084113] (-) TimerEvent: {}
+[6.185798] (-) TimerEvent: {}
+[6.286912] (-) TimerEvent: {}
+[6.387943] (-) TimerEvent: {}
+[6.488946] (-) TimerEvent: {}
+[6.590021] (-) TimerEvent: {}
+[6.691429] (-) TimerEvent: {}
+[6.792460] (-) TimerEvent: {}
+[6.893554] (-) TimerEvent: {}
+[6.994659] (-) TimerEvent: {}
+[7.095905] (-) TimerEvent: {}
+[7.197099] (-) TimerEvent: {}
+[7.298398] (-) TimerEvent: {}
+[7.401021] (-) TimerEvent: {}
+[7.503137] (-) TimerEvent: {}
+[7.604719] (-) TimerEvent: {}
+[7.706594] (-) TimerEvent: {}
+[7.808329] (-) TimerEvent: {}
+[7.909886] (-) TimerEvent: {}
+[8.012382] (-) TimerEvent: {}
+[8.114185] (-) TimerEvent: {}
+[8.215348] (-) TimerEvent: {}
+[8.316429] (-) TimerEvent: {}
+[8.417492] (-) TimerEvent: {}
+[8.518590] (-) TimerEvent: {}
+[8.619798] (-) TimerEvent: {}
+[8.720900] (-) TimerEvent: {}
+[8.822056] (-) TimerEvent: {}
+[8.923327] (-) TimerEvent: {}
+[9.024488] (-) TimerEvent: {}
+[9.126040] (-) TimerEvent: {}
+[9.227100] (-) TimerEvent: {}
+[9.328832] (-) TimerEvent: {}
+[9.429820] (-) TimerEvent: {}
+[9.530711] (-) TimerEvent: {}
+[9.631776] (-) TimerEvent: {}
+[9.732709] (-) TimerEvent: {}
+[9.833622] (-) TimerEvent: {}
+[9.934531] (-) TimerEvent: {}
+[10.035545] (-) TimerEvent: {}
+[10.136374] (-) TimerEvent: {}
+[10.237406] (-) TimerEvent: {}
+[10.338383] (-) TimerEvent: {}
+[10.439566] (-) TimerEvent: {}
+[10.540554] (-) TimerEvent: {}
+[10.641551] (-) TimerEvent: {}
+[10.742595] (-) TimerEvent: {}
+[10.843617] (-) TimerEvent: {}
+[10.945311] (-) TimerEvent: {}
+[11.046642] (-) TimerEvent: {}
+[11.147729] (-) TimerEvent: {}
+[11.248732] (-) TimerEvent: {}
+[11.349713] (-) TimerEvent: {}
+[11.450630] (-) TimerEvent: {}
+[11.551601] (-) TimerEvent: {}
+[11.652500] (-) TimerEvent: {}
+[11.753482] (-) TimerEvent: {}
+[11.854678] (-) TimerEvent: {}
+[11.955717] (-) TimerEvent: {}
+[12.056779] (-) TimerEvent: {}
+[12.157714] (-) TimerEvent: {}
+[12.258667] (-) TimerEvent: {}
+[12.359673] (-) TimerEvent: {}
+[12.460616] (-) TimerEvent: {}
+[12.561526] (-) TimerEvent: {}
+[12.662497] (-) TimerEvent: {}
+[12.763727] (-) TimerEvent: {}
+[12.865958] (-) TimerEvent: {}
+[12.967479] (-) TimerEvent: {}
+[13.069982] (-) TimerEvent: {}
+[13.172272] (-) TimerEvent: {}
+[13.274217] (-) TimerEvent: {}
+[13.375237] (-) TimerEvent: {}
+[13.476198] (-) TimerEvent: {}
+[13.577151] (-) TimerEvent: {}
+[13.678199] (-) TimerEvent: {}
+[13.779260] (-) TimerEvent: {}
+[13.880281] (-) TimerEvent: {}
+[13.981191] (-) TimerEvent: {}
+[14.082134] (-) TimerEvent: {}
+[14.183083] (-) TimerEvent: {}
+[14.284145] (-) TimerEvent: {}
+[14.385098] (-) TimerEvent: {}
+[14.486055] (-) TimerEvent: {}
+[14.587040] (-) TimerEvent: {}
+[14.688008] (-) TimerEvent: {}
+[14.788921] (-) TimerEvent: {}
+[14.889921] (-) TimerEvent: {}
+[14.991021] (-) TimerEvent: {}
+[15.092098] (-) TimerEvent: {}
+[15.193114] (-) TimerEvent: {}
+[15.294154] (-) TimerEvent: {}
+[15.395431] (-) TimerEvent: {}
+[15.496385] (-) TimerEvent: {}
+[15.597405] (-) TimerEvent: {}
+[15.698444] (-) TimerEvent: {}
+[15.799493] (-) TimerEvent: {}
+[15.900636] (-) TimerEvent: {}
+[16.001667] (-) TimerEvent: {}
+[16.103034] (-) TimerEvent: {}
+[16.204212] (-) TimerEvent: {}
+[16.305659] (-) TimerEvent: {}
+[16.406742] (-) TimerEvent: {}
+[16.508364] (-) TimerEvent: {}
+[16.555989] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid cg::imu_rlts::ImuTfPublisher::imuCallback(sensor_msgs::msg::Imu_<std::allocator<void> >::SharedPtr)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[16.557242] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:29:37:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kusing _header_type = struct std_msgs::msg::Header_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kstruct std_msgs::msg::Header_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} has no member named \xe2\x80\x98\x1b[01m\x1b[Kchild_frame_id\x1b[m\x1b[K\xe2\x80\x99\n'}
+[16.557755] (localization) StderrLine: {'line': b'   29 |             transformStamped.header.\x1b[01;31m\x1b[Kchild_frame_id\x1b[m\x1b[K = base_link_frame;\n'}
+[16.558109] (localization) StderrLine: {'line': b'      |                                     \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[16.583244] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid cg::imu_rlts::ImuTfPublisher::publishImuMarker(sensor_msgs::msg::Imu_<std::allocator<void> >::SharedPtr)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[16.584058] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:64:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kmarker_scale\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[16.584375] (localization) StderrLine: {'line': b'   64 |             \x1b[01;31m\x1b[Kmarker_scale\x1b[m\x1b[K.z = 0.05;\n'}
+[16.584706] (localization) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[16.589269] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Kint main(int, char**)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[16.590534] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:80:35:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KImuTfPublisher\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Kcg::imu_rlts::ImuTfPublisher\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[16.591151] (localization) StderrLine: {'line': b'   80 |     rclcpp::spin(std::make_shared<\x1b[01;31m\x1b[KImuTfPublisher\x1b[m\x1b[K>());\n'}
+[16.591448] (localization) StderrLine: {'line': b'      |                                   \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[16.591782] (localization) StderrLine: {'line': b'      |                                   \x1b[32m\x1b[Kcg::imu_rlts::ImuTfPublisher\x1b[m\x1b[K\n'}
+[16.592063] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:1\x1b[m\x1b[K:\n'}
+[16.592358] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/imu_tf_publisher.hpp:19:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kcg::imu_rlts::ImuTfPublisher\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[16.592713] (localization) StderrLine: {'line': b'   19 | class \x1b[01;36m\x1b[KImuTfPublisher\x1b[m\x1b[K : public rclcpp::Node {\n'}
+[16.592987] (localization) StderrLine: {'line': b'      |       \x1b[01;36m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[16.593265] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:80:50:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[Kmake_shared<<expression error> >()\x1b[m\x1b[K\xe2\x80\x99\n'}
+[16.593509] (localization) StderrLine: {'line': b'   80 |     rclcpp::spin(\x1b[01;31m\x1b[Kstd::make_shared<ImuTfPublisher>()\x1b[m\x1b[K);\n'}
+[16.593833] (localization) StderrLine: {'line': b'      |                  \x1b[01;31m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[16.594160] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/c++/11/memory:77\x1b[m\x1b[K,\n'}
+[16.594412] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:153\x1b[m\x1b[K,\n'}
+[16.594720] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/imu_tf_publisher.hpp:4\x1b[m\x1b[K,\n'}
+[16.595049] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:1\x1b[m\x1b[K:\n'}
+[16.595295] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/shared_ptr.h:875:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class _Tp, class ... _Args> std::shared_ptr<_Tp> std::make_shared(_Args&& ...)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[16.595563] (localization) StderrLine: {'line': b'  875 |     \x1b[01;36m\x1b[Kmake_shared\x1b[m\x1b[K(_Args&&... __args)\n'}
+[16.595869] (localization) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[16.596098] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/shared_ptr.h:875:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[16.596339] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:80:50:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[16.596575] (localization) StderrLine: {'line': b'   80 |     rclcpp::spin(\x1b[01;31m\x1b[Kstd::make_shared<ImuTfPublisher>()\x1b[m\x1b[K);\n'}
+[16.596871] (localization) StderrLine: {'line': b'      |                  \x1b[01;31m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[16.608728] (-) TimerEvent: {}
+[16.710297] (-) TimerEvent: {}
+[16.811974] (-) TimerEvent: {}
+[16.913107] (-) TimerEvent: {}
+[17.014313] (-) TimerEvent: {}
+[17.115364] (-) TimerEvent: {}
+[17.216505] (-) TimerEvent: {}
+[17.317606] (-) TimerEvent: {}
+[17.418525] (-) TimerEvent: {}
+[17.519535] (-) TimerEvent: {}
+[17.620437] (-) TimerEvent: {}
+[17.721304] (-) TimerEvent: {}
+[17.822339] (-) TimerEvent: {}
+[17.923395] (-) TimerEvent: {}
+[18.024435] (-) TimerEvent: {}
+[18.125519] (-) TimerEvent: {}
+[18.226600] (-) TimerEvent: {}
+[18.327576] (-) TimerEvent: {}
+[18.428459] (-) TimerEvent: {}
+[18.529624] (-) TimerEvent: {}
+[18.630477] (-) TimerEvent: {}
+[18.731518] (-) TimerEvent: {}
+[18.832434] (-) TimerEvent: {}
+[18.933501] (-) TimerEvent: {}
+[19.034760] (-) TimerEvent: {}
+[19.136598] (-) TimerEvent: {}
+[19.238274] (-) TimerEvent: {}
+[19.339309] (-) TimerEvent: {}
+[19.440367] (-) TimerEvent: {}
+[19.541576] (-) TimerEvent: {}
+[19.642531] (-) TimerEvent: {}
+[19.743413] (-) TimerEvent: {}
+[19.844306] (-) TimerEvent: {}
+[19.945251] (-) TimerEvent: {}
+[20.046166] (-) TimerEvent: {}
+[20.147066] (-) TimerEvent: {}
+[20.248024] (-) TimerEvent: {}
+[20.349079] (-) TimerEvent: {}
+[20.450265] (-) TimerEvent: {}
+[20.551537] (-) TimerEvent: {}
+[20.652567] (-) TimerEvent: {}
+[20.753578] (-) TimerEvent: {}
+[20.854616] (-) TimerEvent: {}
+[20.956692] (-) TimerEvent: {}
+[21.057820] (-) TimerEvent: {}
+[21.159718] (-) TimerEvent: {}
+[21.261380] (-) TimerEvent: {}
+[21.362527] (-) TimerEvent: {}
+[21.464285] (-) TimerEvent: {}
+[21.566206] (-) TimerEvent: {}
+[21.667208] (-) TimerEvent: {}
+[21.768150] (-) TimerEvent: {}
+[21.869310] (-) TimerEvent: {}
+[21.970322] (-) TimerEvent: {}
+[22.071435] (-) TimerEvent: {}
+[22.172441] (-) TimerEvent: {}
+[22.273345] (-) TimerEvent: {}
+[22.374280] (-) TimerEvent: {}
+[22.475854] (-) TimerEvent: {}
+[22.576880] (-) TimerEvent: {}
+[22.677818] (-) TimerEvent: {}
+[22.779070] (-) TimerEvent: {}
+[22.880115] (-) TimerEvent: {}
+[22.981419] (-) TimerEvent: {}
+[23.082536] (-) TimerEvent: {}
+[23.183486] (-) TimerEvent: {}
+[23.284419] (-) TimerEvent: {}
+[23.385342] (-) TimerEvent: {}
+[23.486230] (-) TimerEvent: {}
+[23.587210] (-) TimerEvent: {}
+[23.688119] (-) TimerEvent: {}
+[23.789118] (-) TimerEvent: {}
+[23.890073] (-) TimerEvent: {}
+[23.991031] (-) TimerEvent: {}
+[24.092025] (-) TimerEvent: {}
+[24.192925] (-) TimerEvent: {}
+[24.293823] (-) TimerEvent: {}
+[24.394801] (-) TimerEvent: {}
+[24.495847] (-) TimerEvent: {}
+[24.596827] (-) TimerEvent: {}
+[24.697724] (-) TimerEvent: {}
+[24.798648] (-) TimerEvent: {}
+[24.900285] (-) TimerEvent: {}
+[25.001269] (-) TimerEvent: {}
+[25.102272] (-) TimerEvent: {}
+[25.203254] (-) TimerEvent: {}
+[25.304235] (-) TimerEvent: {}
+[25.405174] (-) TimerEvent: {}
+[25.506123] (-) TimerEvent: {}
+[25.607167] (-) TimerEvent: {}
+[25.708166] (-) TimerEvent: {}
+[25.809611] (-) TimerEvent: {}
+[25.910542] (-) TimerEvent: {}
+[26.011544] (-) TimerEvent: {}
+[26.112648] (-) TimerEvent: {}
+[26.213861] (-) TimerEvent: {}
+[26.315601] (-) TimerEvent: {}
+[26.416494] (-) TimerEvent: {}
+[26.518328] (-) TimerEvent: {}
+[26.620028] (-) TimerEvent: {}
+[26.721277] (-) TimerEvent: {}
+[26.822297] (-) TimerEvent: {}
+[26.923367] (-) TimerEvent: {}
+[27.024561] (-) TimerEvent: {}
+[27.125767] (-) TimerEvent: {}
+[27.226804] (-) TimerEvent: {}
+[27.283336] (localization) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/imu_tf_publisher.dir/build.make:76: CMakeFiles/imu_tf_publisher.dir/src/imu_tf_publisher.cpp.o] Error 1\n'}
+[27.284703] (localization) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:221: CMakeFiles/imu_tf_publisher.dir/all] Error 2\n'}
+[27.286270] (localization) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[27.294539] (localization) CommandEnded: {'returncode': 2}
+[27.327086] (-) TimerEvent: {}
+[27.335737] (localization) JobEnded: {'identifier': 'localization', 'rc': 2}
+[27.348947] (-) EventReactorShutdown: {}

@@ -1,8 +1,8 @@
-# Install script for directory: /home/bhaswanth_a/Lunar_ROADSTER/lr_ws/build/cg_msgs/cg_msgs__py
+# Install script for directory: /root/Lunar_ROADSTER/lr_ws/build/cg_msgs/cg_msgs__py
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/bhaswanth_a/Lunar_ROADSTER/lr_ws/install/cg_msgs")
+  set(CMAKE_INSTALL_PREFIX "/root/Lunar_ROADSTER/lr_ws/install/cg_msgs")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

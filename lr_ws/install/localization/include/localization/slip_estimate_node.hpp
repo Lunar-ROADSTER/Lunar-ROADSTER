@@ -5,6 +5,7 @@
 #include <cg_msgs/msg/slip.hpp>
 #include <cg_msgs/msg/actuator_state.hpp>
 #include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
+#include <sensor_msgs/msg/imu.hpp>
 #include <cmath> // std::abs
 #include <algorithm> // std::max
 #include <list> // moving average filter
@@ -13,6 +14,8 @@
 #include <tf2_ros/transform_broadcaster.h>
 #include <geometry_msgs/msg/transform_stamped.hpp>
 #include <tf2/LinearMath/Quaternion.h>
+#include <tf2/utils.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 
 namespace cg {
@@ -87,7 +90,6 @@ private:
   /* Callbacks */
   void actStateCallback(const cg_msgs::msg::ActuatorState::SharedPtr msg);
   void timerCallback(); // For looping publish
-  void uwbAvgCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr msg);
   void imuAvgCallback(const sensor_msgs::msg::Imu::SharedPtr imu_msg);
 
   /* Helpers */

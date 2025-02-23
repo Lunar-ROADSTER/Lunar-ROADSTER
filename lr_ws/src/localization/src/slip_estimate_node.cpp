@@ -10,9 +10,6 @@ SlipEstimateNode::SlipEstimateNode() : Node("slip_estimate_node") {
     "/slip_estimate", 1
   );
 
-  uwb_avg_sub_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
-      "/uwb_beacon/average_tag", 1, std::bind(&SlipEstimateNode::uwbAvgCallback, this, std::placeholders::_1));
-
   act_sub_ = this->create_subscription<cg_msgs::msg::ActuatorState>(
       "/actuator/state", 1, std::bind(&SlipEstimateNode::actStateCallback, this, std::placeholders::_1));
 
@@ -95,7 +92,7 @@ SlipEstimateNode::SlipEstimateNode() : Node("slip_estimate_node") {
 
   // state vector x0 = [x; xdot; y; ydot; ax; ay]
   A_ << 1, kf_dt_, 0,   0, 0.5 * pow(kf_dt_,2), 0,
-        0,   1,    0,   0, kf_dt, 0,
+        0,   1,    0,   0, kf_dt_, 0,
         0,   0,    1, kf_dt_, 0, 0.5 * pow(kf_dt_,2),
         0,   0,    0,   1, 0, kf_dt_,
         0, 0, 0, 0, 1, 0,

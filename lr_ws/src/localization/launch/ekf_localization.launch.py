@@ -15,33 +15,6 @@ def generate_launch_description():
     'ekf_global_node_params.yaml'
   )
 
-  # return LaunchDescription([
-  #   Node(
-  #     package='robot_localization',
-  #     executable='ekf_node',
-  #     name='ekf_odom_node',
-  #     parameters=[ekf_odom_params],
-  #     remappings=[
-  #       ('odometry/filtered', 'odometry/filtered/ekf_odom_node')
-  #     ]
-  #   ),
-  #   Node(
-  #     package='robot_localization',
-  #     executable='ekf_node',
-  #     name='ekf_global_node',
-  #     parameters=[ekf_global_params],
-  #     remappings=[
-  #       ('odometry/filtered', 'odometry/filtered/ekf_global_node')
-  #     ]
-  #   ),
-  #   Node(
-  #           package='localization',
-  #           executable='ts_prism_transformer',
-  #           name='ts_prism_transformer',
-  #           output='screen')
-  # ])
-
-  # TESTING WITHOUT TOTAL STATION
   return LaunchDescription([
     Node(
       package='robot_localization',
@@ -60,5 +33,32 @@ def generate_launch_description():
       remappings=[
         ('odometry/filtered', 'odometry/filtered/ekf_global_node')
       ]
-    )
+    ),
+    Node(
+            package='localization',
+            executable='ts_prism_transformer',
+            name='ts_prism_transformer',
+            output='screen')
   ])
+
+  # # TESTING WITHOUT TOTAL STATION
+  # return LaunchDescription([
+  #   Node(
+  #     package='robot_localization',
+  #     executable='ekf_node',
+  #     name='ekf_odom_node',
+  #     parameters=[ekf_odom_params],
+  #     remappings=[
+  #       ('odometry/filtered', 'odometry/filtered/ekf_odom_node')
+  #     ]
+  #   ),
+  #   Node(
+  #     package='robot_localization',
+  #     executable='ekf_node',
+  #     name='ekf_global_node',
+  #     parameters=[ekf_global_params],
+  #     remappings=[
+  #       ('odometry/filtered', 'odometry/filtered/ekf_global_node')
+  #     ]
+  #   )
+  # ])

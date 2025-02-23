@@ -1,0 +1,6 @@
+/usr/bin/ld: CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.o: in function `tf2::impl::toQuaternion(geometry_msgs::msg::Quaternion_<std::allocator<void> > const&)':
+slip_estimate_node.cpp:(.text._ZN3tf24impl12toQuaternionERKN13geometry_msgs3msg11Quaternion_ISaIvEEE[_ZN3tf24impl12toQuaternionERKN13geometry_msgs3msg11Quaternion_ISaIvEEE]+0x34): undefined reference to `tf2::fromMsg(geometry_msgs::msg::Quaternion_<std::allocator<void> > const&, tf2::Quaternion&)'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/slip_estimate_node.dir/build.make:247: slip_estimate_node] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:143: CMakeFiles/slip_estimate_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
