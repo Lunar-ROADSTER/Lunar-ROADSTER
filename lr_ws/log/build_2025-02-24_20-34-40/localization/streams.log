@@ -1,0 +1,109 @@
+[0.132s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/localization': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/localization -- -j4 -l4
+[0.227s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.843s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[1.067s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.086s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.122s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.177s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.247s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.401s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.407s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.887s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.103s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[2.259s] -- Found cg_msgs: 0.0.0 (/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake)
+[2.320s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[2.390s] -- Found visualization_msgs: 4.2.4 (/opt/ros/humble/share/visualization_msgs/cmake)
+[2.502s] -- Found tf2: 0.25.9 (/opt/ros/humble/share/tf2/cmake)
+[2.522s] -- Found tf2_ros: 0.25.9 (/opt/ros/humble/share/tf2_ros/cmake)
+[2.952s] -- Found tf2_geometry_msgs: 0.25.9 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[2.967s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[2.975s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[3.019s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[3.418s] -- Added test 'copyright' to check source files copyright and LICENSE
+[3.461s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.464s] -- Configured cppcheck include dirs: /root/Lunar_ROADSTER/lr_ws/src/localization/include
+[3.479s] -- Configured cppcheck exclude dirs and/or files: 
+[3.514s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[3.526s] -- Configured cpplint exclude dirs and/or files: 
+[3.536s] -- Added test 'flake8' to check Python code syntax and style conventions
+[3.546s] -- Added test 'lint_cmake' to check CMake code style
+[3.558s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[3.563s] -- Added test 'uncrustify' to check C / C++ code style
+[3.563s] -- Configured uncrustify additional arguments: 
+[3.568s] -- Added test 'xmllint' to check XML markup files
+[3.576s] -- Configuring done
+[3.702s] -- Generating done
+[3.747s] -- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/localization
+[3.848s] [35m[1mConsolidate compiler generated dependencies of target kalman_filter_linear[0m
+[3.859s] [35m[1mConsolidate compiler generated dependencies of target imu_tf_publisher[0m
+[3.890s] [35m[1mConsolidate compiler generated dependencies of target ts_prism_transformer[0m
+[3.919s] [ 10%] [32mBuilding CXX object CMakeFiles/kalman_filter_linear.dir/src/kalman_filter_linear.cpp.o[0m
+[3.996s] [ 20%] [32mBuilding CXX object CMakeFiles/imu_tf_publisher.dir/src/imu_tf_publisher.cpp.o[0m
+[4.078s] [ 30%] [32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o[0m
+[4.089s] [ 40%] [32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o[0m
+[6.571s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:8[m[K,
+[6.571s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1[m[K:
+[6.572s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K-Wcpp[m[K]
+[6.572s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[6.572s]       |  [01;35m[K^~~~~~~[m[K
+[7.024s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/imu_tf_publisher.hpp:8[m[K,
+[7.025s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/imu_tf_publisher.cpp:1[m[K:
+[7.025s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K-Wcpp[m[K]
+[7.025s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[7.025s]       |  [01;35m[K^~~~~~~[m[K
+[7.412s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:8[m[K,
+[7.413s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3[m[K:
+[7.414s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K-Wcpp[m[K]
+[7.414s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[7.414s]       |  [01;35m[K^~~~~~~[m[K
+[10.402s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:214[m[K,
+[10.402s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[10.402s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/kalman_filter_linear.hpp:2[m[K,
+[10.402s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/kalman_filter_linear.cpp:1[m[K:
+[10.403s] [01m[K/usr/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h:[m[K In function ‘[01m[KPacket Eigen::internal::pload(const typename Eigen::internal::unpacket_traits<T>::type*) [with Packet = Eigen::internal::eigen_packet_wrapper<int, 2>; typename Eigen::internal::unpacket_traits<T>::type = signed char][m[K’:
+[10.403s] [01m[K/usr/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h:1671:9:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvoid* memcpy(void*, const void*, size_t)[m[K’ copying an object of non-trivial type ‘[01m[KEigen::internal::Packet4c[m[K’ {aka ‘[01m[Kstruct Eigen::internal::eigen_packet_wrapper<int, 2>[m[K’} from an array of ‘[01m[Kconst int8_t[m[K’ {aka ‘[01m[Kconst signed char[m[K’} [[01;35m[K-Wclass-memaccess[m[K]
+[10.403s]  1671 |   [01;35m[Kmemcpy(&res, from, sizeof(Packet4c))[m[K;
+[10.404s]       |   [01;35m[K~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[10.404s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:172[m[K,
+[10.404s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[10.405s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/kalman_filter_linear.hpp:2[m[K,
+[10.405s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/kalman_filter_linear.cpp:1[m[K:
+[10.405s] [01m[K/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:159:8:[m[K [01;36m[Knote: [m[K‘[01m[KEigen::internal::Packet4c[m[K’ {aka ‘[01m[Kstruct Eigen::internal::eigen_packet_wrapper<int, 2>[m[K’} declared here
+[10.406s]   159 | struct [01;36m[Keigen_packet_wrapper[m[K
+[10.406s]       |        [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[10.407s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:214[m[K,
+[10.407s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[10.407s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/kalman_filter_linear.hpp:2[m[K,
+[10.408s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/kalman_filter_linear.cpp:1[m[K:
+[10.408s] [01m[K/usr/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h:[m[K In function ‘[01m[KPacket Eigen::internal::ploadu(const typename Eigen::internal::unpacket_traits<T>::type*) [with Packet = Eigen::internal::eigen_packet_wrapper<int, 2>; typename Eigen::internal::unpacket_traits<T>::type = signed char][m[K’:
+[10.408s] [01m[K/usr/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h:1716:9:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvoid* memcpy(void*, const void*, size_t)[m[K’ copying an object of non-trivial type ‘[01m[KEigen::internal::Packet4c[m[K’ {aka ‘[01m[Kstruct Eigen::internal::eigen_packet_wrapper<int, 2>[m[K’} from an array of ‘[01m[Kconst int8_t[m[K’ {aka ‘[01m[Kconst signed char[m[K’} [[01;35m[K-Wclass-memaccess[m[K]
+[10.408s]  1716 |   [01;35m[Kmemcpy(&res, from, sizeof(Packet4c))[m[K;
+[10.409s]       |   [01;35m[K~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[10.409s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:172[m[K,
+[10.409s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[10.409s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/kalman_filter_linear.hpp:2[m[K,
+[10.410s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/kalman_filter_linear.cpp:1[m[K:
+[10.410s] [01m[K/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:159:8:[m[K [01;36m[Knote: [m[K‘[01m[KEigen::internal::Packet4c[m[K’ {aka ‘[01m[Kstruct Eigen::internal::eigen_packet_wrapper<int, 2>[m[K’} declared here
+[10.410s]   159 | struct [01;36m[Keigen_packet_wrapper[m[K
+[10.410s]       |        [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[37.405s] [ 50%] [32m[1mLinking CXX static library libkalman_filter_linear.a[0m
+[38.995s] [ 50%] Built target kalman_filter_linear
+[56.457s] [ 60%] [32m[1mLinking CXX executable imu_tf_publisher[0m
+[59.140s] [ 60%] Built target imu_tf_publisher
+[74.298s] [ 70%] [32m[1mLinking CXX executable ts_prism_transformer[0m
+[76.346s] [ 70%] Built target ts_prism_transformer
+[76.378s] [35m[1mConsolidate compiler generated dependencies of target slip_estimate_node[0m
+[76.490s] [ 80%] [32mBuilding CXX object CMakeFiles/slip_estimate_node.dir/src/slip_estimate_main.cpp.o[0m
+[78.531s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/slip_estimate_node.hpp:18[m[K,
+[78.532s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/slip_estimate_main.cpp:3[m[K:
+[78.532s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K-Wcpp[m[K]
+[78.532s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[78.532s]       |  [01;35m[K^~~~~~~[m[K
+[95.389s] [ 90%] [32mBuilding CXX object CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.o[0m
+[97.422s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/slip_estimate_node.hpp:18[m[K,
+[97.422s]                  from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/slip_estimate_node.cpp:1[m[K:
+[97.423s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K-Wcpp[m[K]
+[97.423s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[97.424s]       |  [01;35m[K^~~~~~~[m[K
+[145.556s] [100%] [32m[1mLinking CXX executable slip_estimate_node[0m
+[148.137s] [100%] Built target slip_estimate_node

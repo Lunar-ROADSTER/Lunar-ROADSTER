@@ -1,0 +1,55 @@
+[0.125s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/motion_control': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/motion_control -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/motion_control
+[0.498s] -- The C compiler identification is GNU 11.4.0
+[0.910s] -- The CXX compiler identification is GNU 11.4.0
+[0.961s] -- Detecting C compiler ABI info
+[1.299s] -- Detecting C compiler ABI info - done
+[1.345s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.347s] -- Detecting C compile features
+[1.351s] -- Detecting C compile features - done
+[1.368s] -- Detecting CXX compiler ABI info
+[1.728s] -- Detecting CXX compiler ABI info - done
+[1.770s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.772s] -- Detecting CXX compile features
+[1.776s] -- Detecting CXX compile features - done
+[1.789s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[2.351s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.950s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[3.267s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[3.298s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[3.377s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[3.449s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[3.568s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.772s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[3.784s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.533s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[4.786s] -- Found FastRTPS: /opt/ros/humble/include  
+[5.170s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[5.292s] -- Looking for pthread.h
+[5.896s] -- Looking for pthread.h - found
+[5.900s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[6.486s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[6.491s] -- Found Threads: TRUE  
+[6.851s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[7.023s] -- Found cg_msgs: 0.0.0 (/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake)
+[7.107s] -- Found tf2_ros: 0.25.9 (/opt/ros/humble/share/tf2_ros/cmake)
+[7.758s] -- Found diagnostic_updater: 4.0.0 (/opt/ros/humble/share/diagnostic_updater/cmake)
+[8.061s] [31mCMake Error at CMakeLists.txt:20 (find_package):
+[8.062s]   By not providing "Findplanning.cmake" in CMAKE_MODULE_PATH this project has
+[8.063s]   asked CMake to find a package configuration file provided by "planning",
+[8.063s]   but CMake did not find one.
+[8.063s] 
+[8.064s]   Could not find a package configuration file provided by "planning" with any
+[8.064s]   of the following names:
+[8.064s] 
+[8.064s]     planningConfig.cmake
+[8.065s]     planning-config.cmake
+[8.065s] 
+[8.065s]   Add the installation prefix of "planning" to CMAKE_PREFIX_PATH or set
+[8.065s]   "planning_DIR" to a directory containing one of the above files.  If
+[8.066s]   "planning" provides a separate development package or SDK, be sure it has
+[8.066s]   been installed.
+[8.066s] 
+[8.066s] [0m
+[8.067s] -- Configuring incomplete, errors occurred!
+[8.068s] See also "/root/Lunar_ROADSTER/lr_ws/build/motion_control/CMakeFiles/CMakeOutput.log".
+[8.142s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/motion_control' returned '1': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/motion_control -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/motion_control
