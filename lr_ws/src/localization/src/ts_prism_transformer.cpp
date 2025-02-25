@@ -91,20 +91,8 @@ namespace cg
 
         transformed_ts_prism_pub_->publish(updated_pose_);
 
-        // TF Broadcast: Map to Prism -- New code
-        local_ts_prism_transform.header.stamp = this->get_clock()->now();
-        local_ts_prism_transform.header.frame_id = map_frame;
-        local_ts_prism_transform.child_frame_id = prism_frame;
-
-        local_ts_prism_transform.transform.translation.x = updated_pose_.pose.pose.position.x;
-        local_ts_prism_transform.transform.translation.y = updated_pose_.pose.pose.position.y;
-        local_ts_prism_transform.transform.translation.z = updated_pose_.pose.pose.position.z;
-        local_ts_prism_transform.transform.rotation = updated_pose_.pose.pose.orientation;
-
-        transform_broadcaster_->sendTransform(local_ts_prism_transform);
-
       } else {
-        std::cout << "No imu or bearing received\n";
+        std::cout << "No imu received\n";
       }
     }
 
