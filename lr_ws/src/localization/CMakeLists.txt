@@ -68,7 +68,9 @@ ament_target_dependencies(ts_prism_transformer
 target_link_libraries(ts_prism_transformer tf2_ros::tf2_ros)  
 
 # ----------------------- IMU TF Publisher -----------------------
-add_executable(imu_tf_publisher src/imu_tf_publisher.cpp)
+add_executable(imu_tf_publisher
+  src/imu_tf_publisher_main.cpp
+  src/imu_tf_publisher.cpp)
 
 ament_target_dependencies(imu_tf_publisher
   rclcpp
