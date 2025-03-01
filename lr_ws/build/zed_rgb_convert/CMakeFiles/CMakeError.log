@@ -1,0 +1,19 @@
+Determining if the function sgemm_ exists failed with the following output:
+Change Dir: /home/williamfbx/Lunar-ROADSTER/lr_ws/build/zed_rgb_convert/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_11cba/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_11cba.dir/build.make CMakeFiles/cmTC_11cba.dir/build
+gmake[1]: Entering directory '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/zed_rgb_convert/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_11cba.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=sgemm_ -std=gnu99 -o CMakeFiles/cmTC_11cba.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_11cba
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_11cba.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=sgemm_ CMakeFiles/cmTC_11cba.dir/CheckFunctionExists.c.o -o cmTC_11cba 
+/usr/bin/ld: CMakeFiles/cmTC_11cba.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x14): undefined reference to `sgemm_'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_11cba.dir/build.make:99: cmTC_11cba] Error 1
+gmake[1]: Leaving directory '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/zed_rgb_convert/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_11cba/fast] Error 2
+
+
+

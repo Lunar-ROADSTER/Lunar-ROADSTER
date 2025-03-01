@@ -1,0 +1,27 @@
+[33mCMake Warning (dev) at CMakeLists.txt:38 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+[0m
+In file included from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/elevation_mapping/src/ElevationMapping.cpp:28[m[K:
+[01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+   35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+      |  [01;35m[K^~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/elevation_mapping/src/input_sources/Input.cpp:[m[K In member function ‘[01m[Kbool elevation_mapping::Input::configure(std::string&, const string&, const elevation_mapping::SensorProcessorBase::GeneralParameters&)[m[K’:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/elevation_mapping/src/input_sources/Input.cpp:20:72:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[KsourceConfigurationName[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   20 | bool Input::configure(std::string& inputSourceName, [01;35m[Kconst std::string& sourceConfigurationName[m[K, const SensorProcessorBase::GeneralParameters& generalSensorProcessorParameters) {
+      |                                                     [01;35m[K~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/elevation_mapping/test/input_sources/InputSourcesTest.cpp:[m[K In function ‘[01m[Kvoid assertSuccessAndNumberOfSources(const string&, bool, uint32_t)[m[K’:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/elevation_mapping/test/input_sources/InputSourcesTest.cpp:18:8:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Ksuccess[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   18 |   bool [01;35m[Ksuccess[m[K = inputSourceManager.configureFromRos(inputConfiguration);
+      |        [01;35m[K^~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/elevation_mapping/test/input_sources/InputSourcesTest.cpp:15:89:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[KsuccessExpected[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   15 | static void assertSuccessAndNumberOfSources(const std::string& inputConfiguration, [01;35m[Kbool successExpected[m[K,
+      |                                                                                    [01;35m[K~~~~~^~~~~~~~~~~~~~~[m[K

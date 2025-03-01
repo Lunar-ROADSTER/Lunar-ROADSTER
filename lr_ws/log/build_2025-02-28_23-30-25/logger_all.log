@@ -1,0 +1,425 @@
+[0.062s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.062s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x73a69c726410>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x73a69c725f00>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x73a69c725f00>>)
+[0.230s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.230s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.230s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.230s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.230s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.230s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.230s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/williamfbx/Lunar-ROADSTER/lr_ws'
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.230s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.231s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extensions ['ignore', 'ignore_ament_install']
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extension 'ignore'
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extension 'ignore_ament_install'
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extensions ['colcon_pkg']
+[0.238s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extension 'colcon_pkg'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extensions ['colcon_meta']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extension 'colcon_meta'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extensions ['ros']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extension 'ros'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extensions ['cmake', 'python']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extension 'cmake'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extension 'python'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extensions ['python_setup_py']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(docker) by extension 'python_setup_py'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extension 'ignore'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extension 'ignore_ament_install'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extensions ['colcon_pkg']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extension 'colcon_pkg'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extensions ['colcon_meta']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extension 'colcon_meta'
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extensions ['ros']
+[0.239s] Level 1:colcon.colcon_core.package_identification:_identify(src/arduino) by extension 'ros'
+[0.241s] DEBUG:colcon.colcon_core.package_identification:Package 'src/arduino' with type 'ros.ament_cmake' and name 'arduino'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extension 'ignore'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extension 'ignore_ament_install'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extensions ['colcon_pkg']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extension 'colcon_pkg'
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extensions ['colcon_meta']
+[0.241s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extension 'colcon_meta'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extensions ['ros']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/cg_msgs) by extension 'ros'
+[0.242s] DEBUG:colcon.colcon_core.package_identification:Package 'src/cg_msgs' with type 'ros.ament_cmake' and name 'cg_msgs'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extensions ['ignore', 'ignore_ament_install']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extension 'ignore'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extension 'ignore_ament_install'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extensions ['colcon_pkg']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extension 'colcon_pkg'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extensions ['colcon_meta']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extension 'colcon_meta'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extensions ['ros']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extension 'ros'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extensions ['cmake', 'python']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extension 'cmake'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extension 'python'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extensions ['python_setup_py']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers) by extension 'python_setup_py'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extensions ['ignore', 'ignore_ament_install']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extension 'ignore'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extension 'ignore_ament_install'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extensions ['colcon_pkg']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extension 'colcon_pkg'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extensions ['colcon_meta']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extension 'colcon_meta'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extensions ['ros']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extension 'ros'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extensions ['cmake', 'python']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extension 'cmake'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extension 'python'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extensions ['python_setup_py']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/vectornav) by extension 'python_setup_py'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extensions ['ignore', 'ignore_ament_install']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extension 'ignore'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extension 'ignore_ament_install'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extensions ['colcon_pkg']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extension 'colcon_pkg'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extensions ['colcon_meta']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extension 'colcon_meta'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extensions ['ros']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extension 'ros'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extensions ['cmake', 'python']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extension 'cmake'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extension 'python'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extensions ['python_setup_py']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-examples) by extension 'python_setup_py'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extensions ['ignore', 'ignore_ament_install']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extension 'ignore'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extension 'ignore_ament_install'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extensions ['colcon_pkg']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extension 'colcon_pkg'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extensions ['colcon_meta']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extension 'colcon_meta'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extensions ['ros']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extension 'ros'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extensions ['cmake', 'python']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extension 'cmake'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extension 'python'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extensions ['python_setup_py']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/drivers/zed-ros2-wrapper) by extension 'python_setup_py'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extensions ['ignore', 'ignore_ament_install']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extension 'ignore'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extension 'ignore_ament_install'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extensions ['colcon_pkg']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extension 'colcon_pkg'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extensions ['colcon_meta']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extension 'colcon_meta'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extensions ['ros']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/imu) by extension 'ros'
+[0.244s] DEBUG:colcon.colcon_core.package_identification:Package 'src/imu' with type 'ros.ament_cmake' and name 'imu'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extensions ['ignore', 'ignore_ament_install']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extension 'ignore'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extension 'ignore_ament_install'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extensions ['colcon_pkg']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extension 'colcon_pkg'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extensions ['colcon_meta']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extension 'colcon_meta'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extensions ['ros']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/localization) by extension 'ros'
+[0.245s] DEBUG:colcon.colcon_core.package_identification:Package 'src/localization' with type 'ros.ament_cmake' and name 'localization'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extensions ['ignore', 'ignore_ament_install']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extension 'ignore'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extension 'ignore_ament_install'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extensions ['colcon_pkg']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extension 'colcon_pkg'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extensions ['colcon_meta']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extension 'colcon_meta'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extensions ['ros']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/motion_control) by extension 'ros'
+[0.246s] DEBUG:colcon.colcon_core.package_identification:Package 'src/motion_control' with type 'ros.ament_cmake' and name 'motion_control'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extensions ['ignore', 'ignore_ament_install']
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extension 'ignore'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extension 'ignore_ament_install'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extensions ['colcon_pkg']
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extension 'colcon_pkg'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extensions ['colcon_meta']
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extension 'colcon_meta'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extensions ['ros']
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/sensing) by extension 'ros'
+[0.246s] DEBUG:colcon.colcon_core.package_identification:Package 'src/sensing' with type 'ros.ament_cmake' and name 'sensing'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extensions ['ignore', 'ignore_ament_install']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extension 'ignore'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extension 'ignore_ament_install'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extensions ['colcon_pkg']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extension 'colcon_pkg'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extensions ['colcon_meta']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extension 'colcon_meta'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extensions ['ros']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/teleop) by extension 'ros'
+[0.247s] DEBUG:colcon.colcon_core.package_identification:Package 'src/teleop' with type 'ros.ament_cmake' and name 'teleop'
+[0.247s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.247s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.247s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.247s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.247s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.261s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.261s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.263s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 271 installed packages in /opt/ros/humble
+[0.270s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'cmake_args' from command line to 'None'
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'cmake_target' from command line to 'None'
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'cg_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.291s] DEBUG:colcon.colcon_core.verb:Building package 'cg_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs', 'merge_install': False, 'path': '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/cg_msgs', 'symlink_install': False, 'test_result_base': None}
+[0.291s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'cmake_target' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'cmake_clean_cache' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'cmake_clean_first' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'cmake_force_configure' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'ament_cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'catkin_cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'imu' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.292s] DEBUG:colcon.colcon_core.verb:Building package 'imu' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/imu', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/imu', 'merge_install': False, 'path': '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/imu', 'symlink_install': False, 'test_result_base': None}
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'cmake_target' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'cmake_clean_cache' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'cmake_clean_first' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'cmake_force_configure' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'ament_cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'catkin_cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'sensing' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.292s] DEBUG:colcon.colcon_core.verb:Building package 'sensing' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing', 'merge_install': False, 'path': '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/sensing', 'symlink_install': False, 'test_result_base': None}
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'cmake_target' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'cmake_clean_cache' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'cmake_clean_first' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'cmake_force_configure' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'ament_cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'catkin_cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'arduino' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.292s] DEBUG:colcon.colcon_core.verb:Building package 'arduino' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/arduino', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/arduino', 'merge_install': False, 'path': '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/arduino', 'symlink_install': False, 'test_result_base': None}
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'cmake_target' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'cmake_clean_cache' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'cmake_clean_first' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'cmake_force_configure' from command line to 'False'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'ament_cmake_args' from command line to 'None'
+[0.292s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'catkin_cmake_args' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'localization' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.293s] DEBUG:colcon.colcon_core.verb:Building package 'localization' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/localization', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/localization', 'merge_install': False, 'path': '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/localization', 'symlink_install': False, 'test_result_base': None}
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'cmake_args' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'cmake_target' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'cmake_clean_cache' from command line to 'False'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'cmake_clean_first' from command line to 'False'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'cmake_force_configure' from command line to 'False'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'ament_cmake_args' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'catkin_cmake_args' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'motion_control' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.293s] DEBUG:colcon.colcon_core.verb:Building package 'motion_control' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/motion_control', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control', 'merge_install': False, 'path': '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/motion_control', 'symlink_install': False, 'test_result_base': None}
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'cmake_args' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'cmake_target' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'cmake_clean_cache' from command line to 'False'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'cmake_clean_first' from command line to 'False'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'cmake_force_configure' from command line to 'False'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'ament_cmake_args' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'catkin_cmake_args' from command line to 'None'
+[0.293s] Level 5:colcon.colcon_core.verb:set package 'teleop' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.293s] DEBUG:colcon.colcon_core.verb:Building package 'teleop' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/teleop', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/teleop', 'merge_install': False, 'path': '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/teleop', 'symlink_install': False, 'test_result_base': None}
+[0.293s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.294s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.294s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/cg_msgs' with build type 'ament_cmake'
+[0.294s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/cg_msgs'
+[0.296s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.296s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.296s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.298s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/imu' with build type 'ament_cmake'
+[0.298s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/imu'
+[0.298s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.298s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.299s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/sensing' with build type 'ament_cmake'
+[0.299s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/sensing'
+[0.299s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.300s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.304s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/cg_msgs -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs
+[0.307s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/imu': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/imu -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/imu
+[0.308s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/sensing -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing
+[0.755s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/sensing -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing
+[0.757s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing -- -j12 -l12
+[0.793s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing -- -j12 -l12
+[0.801s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing
+[0.809s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(sensing)
+[0.809s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/williamfbx/Lunar-ROADSTER/lr_ws/build/sensing
+[0.812s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing' for CMake module files
+[0.812s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing' for CMake config files
+[0.812s] Level 1:colcon.colcon_core.shell:create_environment_hook('sensing', 'cmake_prefix_path')
+[0.813s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/hook/cmake_prefix_path.ps1'
+[0.813s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/hook/cmake_prefix_path.dsv'
+[0.814s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/hook/cmake_prefix_path.sh'
+[0.815s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/bin'
+[0.815s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/lib/pkgconfig/sensing.pc'
+[0.815s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/lib/python3.10/site-packages'
+[0.815s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/bin'
+[0.816s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.ps1'
+[0.817s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.dsv'
+[0.817s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.sh'
+[0.818s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.bash'
+[0.819s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.zsh'
+[0.820s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/colcon-core/packages/sensing)
+[0.820s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(sensing)
+[0.821s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing' for CMake module files
+[0.821s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing' for CMake config files
+[0.821s] Level 1:colcon.colcon_core.shell:create_environment_hook('sensing', 'cmake_prefix_path')
+[0.821s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/hook/cmake_prefix_path.ps1'
+[0.822s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/hook/cmake_prefix_path.dsv'
+[0.822s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/hook/cmake_prefix_path.sh'
+[0.822s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/bin'
+[0.822s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/lib/pkgconfig/sensing.pc'
+[0.823s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/lib/python3.10/site-packages'
+[0.823s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/bin'
+[0.823s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.ps1'
+[0.824s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.dsv'
+[0.824s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.sh'
+[0.824s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.bash'
+[0.824s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/sensing/package.zsh'
+[0.825s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing/share/colcon-core/packages/sensing)
+[1.225s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/imu' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/imu -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/imu
+[1.227s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/imu': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/imu -- -j12 -l12
+[1.481s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/cg_msgs -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs
+[1.481s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs -- -j12 -l12
+[7.775s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs -- -j12 -l12
+[7.778s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs
+[7.846s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cg_msgs)
+[7.846s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/williamfbx/Lunar-ROADSTER/lr_ws/build/cg_msgs
+[7.846s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs' for CMake module files
+[7.847s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs' for CMake config files
+[7.849s] Level 1:colcon.colcon_core.shell:create_environment_hook('cg_msgs', 'cmake_prefix_path')
+[7.849s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/cmake_prefix_path.ps1'
+[7.849s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/cmake_prefix_path.dsv'
+[7.849s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/cmake_prefix_path.sh'
+[7.850s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib'
+[7.850s] Level 1:colcon.colcon_core.shell:create_environment_hook('cg_msgs', 'ld_library_path_lib')
+[7.850s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/ld_library_path_lib.ps1'
+[7.850s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/ld_library_path_lib.dsv'
+[7.850s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/ld_library_path_lib.sh'
+[7.851s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/bin'
+[7.851s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib/pkgconfig/cg_msgs.pc'
+[7.851s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib/python3.10/site-packages'
+[7.851s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/bin'
+[7.851s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.ps1'
+[7.851s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.dsv'
+[7.852s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.sh'
+[7.852s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.bash'
+[7.852s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.zsh'
+[7.852s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/colcon-core/packages/cg_msgs)
+[7.852s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cg_msgs)
+[7.853s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs' for CMake module files
+[7.853s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs' for CMake config files
+[7.853s] Level 1:colcon.colcon_core.shell:create_environment_hook('cg_msgs', 'cmake_prefix_path')
+[7.854s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/cmake_prefix_path.ps1'
+[7.854s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/cmake_prefix_path.dsv'
+[7.854s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/cmake_prefix_path.sh'
+[7.854s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib'
+[7.854s] Level 1:colcon.colcon_core.shell:create_environment_hook('cg_msgs', 'ld_library_path_lib')
+[7.854s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/ld_library_path_lib.ps1'
+[7.855s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/ld_library_path_lib.dsv'
+[7.855s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/hook/ld_library_path_lib.sh'
+[7.855s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/bin'
+[7.855s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib/pkgconfig/cg_msgs.pc'
+[7.855s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib/python3.10/site-packages'
+[7.855s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/bin'
+[7.855s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.ps1'
+[7.856s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.dsv'
+[7.856s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.sh'
+[7.856s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.bash'
+[7.856s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/package.zsh'
+[7.857s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/colcon-core/packages/cg_msgs)
+[7.857s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/arduino' with build type 'ament_cmake'
+[7.857s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/arduino'
+[7.857s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[7.857s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[7.859s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/localization' with build type 'ament_cmake'
+[7.859s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/localization'
+[7.859s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[7.859s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[7.861s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/motion_control' with build type 'ament_cmake'
+[7.861s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/motion_control'
+[7.861s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[7.861s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[7.863s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/teleop' with build type 'ament_cmake'
+[7.863s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/williamfbx/Lunar-ROADSTER/lr_ws/src/teleop'
+[7.863s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[7.863s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[7.868s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/arduino': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/arduino -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/arduino
+[7.870s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/localization': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/localization -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/localization
+[7.872s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/motion_control': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/motion_control -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control
+[7.875s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/teleop': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/teleop -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/teleop
+[8.738s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/motion_control' returned '1': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/motion_control -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control
+[8.750s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(motion_control)
+[8.751s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control' for CMake module files
+[8.751s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control' for CMake config files
+[8.751s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/bin'
+[8.751s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/lib/pkgconfig/motion_control.pc'
+[8.751s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/lib/python3.10/site-packages'
+[8.752s] Level 1:colcon.colcon_core.environment:checking '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/bin'
+[8.752s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/share/motion_control/package.ps1'
+[8.753s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/share/motion_control/package.dsv'
+[8.754s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/share/motion_control/package.sh'
+[8.754s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/share/motion_control/package.bash'
+[8.755s] INFO:colcon.colcon_core.shell:Creating package script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/share/motion_control/package.zsh'
+[8.755s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control/share/colcon-core/packages/motion_control)
+[10.699s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[10.699s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[10.699s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[10.699s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[10.706s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[10.706s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[10.706s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[10.726s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[10.726s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/local_setup.ps1'
+[10.727s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/_local_setup_util_ps1.py'
+[10.728s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/setup.ps1'
+[10.729s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/local_setup.sh'
+[10.729s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/_local_setup_util_sh.py'
+[10.729s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/setup.sh'
+[10.730s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/local_setup.bash'
+[10.730s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/setup.bash'
+[10.731s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/local_setup.zsh'
+[10.731s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/williamfbx/Lunar-ROADSTER/lr_ws/install/setup.zsh'

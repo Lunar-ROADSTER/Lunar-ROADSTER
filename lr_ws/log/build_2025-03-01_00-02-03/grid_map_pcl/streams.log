@@ -1,0 +1,222 @@
+[0.029s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/grid_map/grid_map_pcl -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl
+[0.102s] -- The C compiler identification is GNU 11.4.0
+[0.155s] -- The CXX compiler identification is GNU 11.4.0
+[0.160s] -- Detecting C compiler ABI info
+[0.210s] -- Detecting C compiler ABI info - done
+[0.215s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.215s] -- Detecting C compile features
+[0.216s] -- Detecting C compile features - done
+[0.218s] -- Detecting CXX compiler ABI info
+[0.272s] -- Detecting CXX compiler ABI info - done
+[0.278s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.278s] -- Detecting CXX compile features
+[0.278s] -- Detecting CXX compile features - done
+[0.279s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.414s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.476s] -- Found grid_map_cmake_helpers: 2.0.1 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers/share/grid_map_cmake_helpers/cmake)
+[0.477s] -- Found grid_map_core: 2.0.1 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake)
+[0.481s] -- Found grid_map_msgs: 2.0.1 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/share/grid_map_msgs/cmake)
+[0.503s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.506s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.512s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.519s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.529s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.563s] -- Found grid_map_ros: 2.0.1 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros/share/grid_map_ros/cmake)
+[0.625s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.627s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.643s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.681s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.683s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.695s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.697s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.704s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.711s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.720s] -- Looking for pthread.h
+[0.784s] -- Looking for pthread.h - found
+[0.784s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.850s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.851s] -- Found Threads: TRUE  
+[0.960s] -- Checking for module 'eigen3'
+[0.973s] --   Found eigen3, version 3.4.0
+[1.005s] -- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+[1.005s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[1.017s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found suitable version "1.74.0", minimum required is "1.65.0") found components: system filesystem date_time iostreams serialization 
+[1.028s] -- Checking for module 'flann'
+[1.043s] --   Found flann, version 1.9.1
+[1.078s] -- Found FLANN: /usr/lib/x86_64-linux-gnu/libflann_cpp.so  
+[1.079s] -- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+[1.126s] -- Found GLEW: /usr/lib/x86_64-linux-gnu/libGLEW.so  
+[1.134s] -- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so  found components: OpenGL GLX 
+[1.370s] -- Found MPI_C: /usr/lib/x86_64-linux-gnu/libmpi.so (found version "3.1") 
+[1.370s] -- Found MPI: TRUE (found version "3.1") found components: C 
+[1.377s] -- Found JsonCpp: /usr/lib/x86_64-linux-gnu/libjsoncpp.so (found suitable version "1.9.5", minimum required is "0.7.0") 
+[1.394s] -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.11") 
+[1.430s] -- Found PNG: /usr/lib/x86_64-linux-gnu/libpng.so (found version "1.6.37") 
+[1.453s] -- Found Eigen3: /usr/include/eigen3 (found version "3.4.0") 
+[1.585s] -- Found X11: /usr/include   
+[1.585s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+[1.766s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+[1.767s] -- Looking for gethostbyname
+[1.931s] -- Looking for gethostbyname - found
+[1.935s] -- Looking for connect
+[2.093s] -- Looking for connect - found
+[2.093s] -- Looking for remove
+[2.292s] -- Looking for remove - found
+[2.293s] -- Looking for shmat
+[2.490s] -- Looking for shmat - found
+[2.492s] -- Looking for IceConnectionNumber in ICE
+[2.684s] -- Looking for IceConnectionNumber in ICE - found
+[2.918s] -- Found EXPAT: /usr/lib/x86_64-linux-gnu/libexpat.so (found version "2.4.7") 
+[2.921s] -- Found double-conversion: /usr/lib/x86_64-linux-gnu/libdouble-conversion.so  
+[2.928s] -- Found LZ4: /usr/lib/x86_64-linux-gnu/liblz4.so (found version "1.9.3") 
+[2.934s] -- Found LZMA: /usr/lib/x86_64-linux-gnu/liblzma.so (found version "5.2.5") 
+[2.992s] -- Found JPEG: /usr/lib/x86_64-linux-gnu/libjpeg.so (found version "80") 
+[3.011s] -- Found TIFF: /usr/lib/x86_64-linux-gnu/libtiff.so (found version "4.3.0")  
+[3.024s] -- Found Freetype: /usr/lib/x86_64-linux-gnu/libfreetype.so (found version "2.11.1") 
+[3.040s] -- Found utf8cpp: /usr/include/utf8cpp  
+[3.279s] -- Checking for module 'libusb-1.0'
+[3.326s] --   Found libusb-1.0, version 1.0.25
+[3.423s] -- Found libusb: /usr/lib/x86_64-linux-gnu/libusb-1.0.so  
+[3.428s] -- Found OpenNI: /usr/lib/libOpenNI.so;libusb::libusb (found version "1.5.4.0") 
+[3.428s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[3.598s] -- Found OpenNI2: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb (found version "2.2.0.33") 
+[3.598s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[3.599s] [0m** WARNING ** io features related to pcap will be disabled[0m
+[4.078s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[4.102s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[4.116s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[4.542s] -- Found Qhull version 8.0.2
+[5.015s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[5.514s] -- looking for PCL_COMMON
+[5.515s] -- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
+[5.524s] -- looking for PCL_KDTREE
+[5.525s] -- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  
+[5.527s] -- looking for PCL_OCTREE
+[5.528s] -- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
+[5.530s] -- looking for PCL_SEARCH
+[5.536s] -- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  
+[5.537s] -- looking for PCL_SAMPLE_CONSENSUS
+[5.537s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  
+[5.537s] -- looking for PCL_FILTERS
+[5.538s] -- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  
+[5.543s] -- looking for PCL_2D
+[5.543s] -- Found PCL_2D: /usr/include/pcl-1.12  
+[5.545s] -- looking for PCL_GEOMETRY
+[5.545s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.12  
+[5.546s] -- looking for PCL_IO
+[5.546s] -- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+[5.550s] -- looking for PCL_FEATURES
+[5.551s] -- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  
+[5.551s] -- looking for PCL_ML
+[5.557s] -- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  
+[5.557s] -- looking for PCL_SEGMENTATION
+[5.557s] -- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  
+[5.558s] -- looking for PCL_VISUALIZATION
+[5.565s] -- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  
+[5.566s] -- looking for PCL_SURFACE
+[5.568s] -- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  
+[5.568s] -- looking for PCL_REGISTRATION
+[5.573s] -- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  
+[5.574s] -- looking for PCL_KEYPOINTS
+[5.574s] -- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  
+[5.576s] -- looking for PCL_TRACKING
+[5.581s] -- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  
+[5.581s] -- looking for PCL_RECOGNITION
+[5.582s] -- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  
+[5.586s] -- looking for PCL_STEREO
+[5.588s] -- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  
+[5.589s] -- looking for PCL_APPS
+[5.594s] -- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  
+[5.597s] -- looking for PCL_IN_HAND_SCANNER
+[5.597s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.12  
+[5.597s] -- looking for PCL_MODELER
+[5.597s] -- Found PCL_MODELER: /usr/include/pcl-1.12  
+[5.597s] -- looking for PCL_POINT_CLOUD_EDITOR
+[5.599s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.12  
+[5.600s] -- looking for PCL_OUTOFCORE
+[5.606s] -- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  
+[5.607s] -- looking for PCL_PEOPLE
+[5.611s] -- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  
+[5.612s] -- Found PCL: pcl_common;pcl_kdtree;pcl_octree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_io;pcl_features;pcl_ml;pcl_segmentation;pcl_visualization;pcl_surface;pcl_registration;pcl_keypoints;pcl_tracking;pcl_recognition;pcl_stereo;pcl_apps;pcl_outofcore;pcl_people;Boost::system;Boost::filesystem;Boost::date_time;Boost::iostreams;Boost::serialization;/usr/lib/libOpenNI.so;libusb::libusb;/usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb;VTK::ChartsCore;VTK::CommonColor;VTK::CommonComputationalGeometry;VTK::CommonCore;VTK::CommonDataModel;VTK::CommonExecutionModel;VTK::CommonMath;VTK::CommonMisc;VTK::CommonTransforms;VTK::FiltersCore;VTK::FiltersExtraction;VTK::FiltersGeneral;VTK::FiltersGeometry;VTK::FiltersModeling;VTK::FiltersSources;VTK::ImagingCore;VTK::ImagingSources;VTK::InteractionImage;VTK::InteractionStyle;VTK::InteractionWidgets;VTK::IOCore;VTK::IOGeometry;VTK::IOImage;VTK::IOLegacy;VTK::IOPLY;VTK::RenderingAnnotation;VTK::RenderingCore;VTK::RenderingContext2D;VTK::RenderingLOD;VTK::RenderingFreeType;VTK::ViewsCore;VTK::ViewsContext2D;VTK::RenderingOpenGL2;VTK::GUISupportQt;FLANN::FLANN;QHULL::QHULL  
+[6.550s] -- Setting build type to Release as none was specified.
+[6.662s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[6.786s] -- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+[6.804s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[6.805s] -- Configured cppcheck include dirs: /home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/grid_map/grid_map_pcl/include
+[6.805s] -- Configured cppcheck exclude dirs and/or files: 
+[6.806s] -- Added test 'flake8' to check Python code syntax and style conventions
+[6.809s] -- Added test 'lint_cmake' to check CMake code style
+[6.809s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[6.812s] -- Added test 'uncrustify' to check C / C++ code style
+[6.812s] -- Configured uncrustify additional arguments: 
+[6.814s] -- Added test 'xmllint' to check XML markup files
+[6.817s] -- Configuring done
+[7.215s] -- Generating done
+[7.249s] -- Build files have been written to: /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl
+[7.286s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl' returned '0': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/grid_map/grid_map_pcl -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl
+[7.288s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl -- -j12 -l12
+[7.459s] [  5%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[7.467s] [ 10%] [32mBuilding CXX object CMakeFiles/grid_map_pcl.dir/src/GridMapPclLoader.cpp.o[0m
+[7.483s] [ 15%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[7.494s] [ 21%] [32mBuilding CXX object CMakeFiles/grid_map_pcl.dir/src/PclLoaderParameters.cpp.o[0m
+[7.513s] [ 26%] [32mBuilding CXX object CMakeFiles/grid_map_pcl.dir/src/helpers.cpp.o[0m
+[7.516s] [ 31%] [32mBuilding CXX object CMakeFiles/grid_map_pcl.dir/src/PointcloudProcessor.cpp.o[0m
+[7.521s] [ 36%] [32mBuilding CXX object CMakeFiles/grid_map_pcl.dir/src/GridMapPclConverter.cpp.o[0m
+[11.296s] [ 42%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[11.407s] [ 42%] Built target gtest_main
+[33.058s] [ 47%] [32m[1mLinking CXX static library libgtest.a[0m
+[33.159s] [ 47%] Built target gtest
+[36.779s] [ 52%] [32m[1mLinking CXX shared library libgrid_map_pcl.so[0m
+[40.286s] [ 52%] Built target grid_map_pcl
+[40.339s] [ 57%] [32mBuilding CXX object CMakeFiles/grid_map_pcl_loader_node.dir/src/grid_map_pcl_loader_node.cpp.o[0m
+[56.248s] [ 63%] [32m[1mLinking CXX executable grid_map_pcl_loader_node[0m
+[57.157s] [ 63%] Built target grid_map_pcl_loader_node
+[57.174s] [ 68%] [32mBuilding CXX object CMakeFiles/grid_map_pcl-test.dir/test/GridMapPclLoaderTest.cpp.o[0m
+[63.677s] [ 78%] [32mBuilding CXX object CMakeFiles/grid_map_pcl-test.dir/test/test_helpers.cpp.o[0m
+[63.677s] [ 78%] [32mBuilding CXX object CMakeFiles/grid_map_pcl-test.dir/test/test_grid_map_pcl.cpp.o[0m
+[68.040s] [ 94%] [32mBuilding CXX object CMakeFiles/grid_map_pcl-test.dir/test/HelpersTest.cpp.o[0m
+[68.040s] [ 94%] [32mBuilding CXX object CMakeFiles/grid_map_pcl-test.dir/test/PointcloudProcessorTest.cpp.o[0m
+[68.040s] [ 94%] [32mBuilding CXX object CMakeFiles/grid_map_pcl-test.dir/test/PointcloudCreator.cpp.o[0m
+[74.808s] [100%] [32m[1mLinking CXX executable grid_map_pcl-test[0m
+[75.633s] [100%] Built target grid_map_pcl-test
+[75.647s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl' returned '0': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl -- -j12 -l12
+[75.649s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl
+[75.657s] -- Install configuration: "Release"
+[75.657s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/lib/libgrid_map_pcl.so
+[75.658s] -- Set runtime path of "/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/lib/libgrid_map_pcl.so" to ""
+[75.658s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/lib/grid_map_pcl/grid_map_pcl_loader_node
+[75.659s] -- Set runtime path of "/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/lib/grid_map_pcl/grid_map_pcl_loader_node" to ""
+[75.659s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/include/grid_map_pcl
+[75.659s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/include/grid_map_pcl/GridMapPclConverter.hpp
+[75.659s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/include/grid_map_pcl/PclLoaderParameters.hpp
+[75.659s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/include/grid_map_pcl/grid_map_pcl.hpp
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/include/grid_map_pcl/helpers.hpp
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/include/grid_map_pcl/PointcloudProcessor.hpp
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/include/grid_map_pcl/GridMapPclLoader.hpp
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/config
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/config/parameters.yaml
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/launch
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/launch/grid_map_pcl_loader_launch.py
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/test_data/
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/test_data//parameters.yaml
+[75.660s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/test_data//plane_noisy.pcd
+[75.662s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/environment/library_path.sh
+[75.662s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/environment/library_path.dsv
+[75.662s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/ament_index/resource_index/package_run_dependencies/grid_map_pcl
+[75.662s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/ament_index/resource_index/parent_prefix_path/grid_map_pcl
+[75.662s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/environment/ament_prefix_path.sh
+[75.662s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/environment/ament_prefix_path.dsv
+[75.663s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/environment/path.sh
+[75.663s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/environment/path.dsv
+[75.663s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/local_setup.bash
+[75.663s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/local_setup.sh
+[75.663s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/local_setup.zsh
+[75.663s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/local_setup.dsv
+[75.663s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/package.dsv
+[75.664s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/ament_index/resource_index/packages/grid_map_pcl
+[75.664s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/cmake/ament_cmake_export_include_directories-extras.cmake
+[75.664s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/cmake/ament_cmake_export_libraries-extras.cmake
+[75.664s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/cmake/grid_map_pclConfig.cmake
+[75.664s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/cmake/grid_map_pclConfig-version.cmake
+[75.664s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_pcl/share/grid_map_pcl/package.xml
+[75.667s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl' returned '0': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_ros/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cv/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_pcl

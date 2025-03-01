@@ -1,0 +1,78 @@
+[0.010s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/grid_map/grid_map_octomap -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap
+[0.053s] -- The C compiler identification is GNU 11.4.0
+[0.101s] -- The CXX compiler identification is GNU 11.4.0
+[0.106s] -- Detecting C compiler ABI info
+[0.163s] -- Detecting C compiler ABI info - done
+[0.168s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.168s] -- Detecting C compile features
+[0.169s] -- Detecting C compile features - done
+[0.170s] -- Detecting CXX compiler ABI info
+[0.229s] -- Detecting CXX compiler ABI info - done
+[0.237s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.237s] -- Detecting CXX compile features
+[0.238s] -- Detecting CXX compile features - done
+[0.239s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.350s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.409s] -- Found grid_map_cmake_helpers: 2.0.1 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers/share/grid_map_cmake_helpers/cmake)
+[0.409s] -- Found grid_map_core: 2.0.1 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake)
+[0.416s] -- Found Octomap (version 1.9.8): /opt/ros/humble/include
+[0.417s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.472s] -- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+[0.474s] -- Looking for pthread.h
+[0.532s] -- Looking for pthread.h - found
+[0.532s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.593s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.594s] -- Found Threads: TRUE  
+[0.597s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.597s] -- Configured cppcheck include dirs: /home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/grid_map/grid_map_octomap/include
+[0.597s] -- Configured cppcheck exclude dirs and/or files: 
+[0.597s] -- Added test 'lint_cmake' to check CMake code style
+[0.598s] -- Added test 'uncrustify' to check C / C++ code style
+[0.598s] -- Configured uncrustify additional arguments: 
+[0.598s] -- Added test 'xmllint' to check XML markup files
+[0.600s] -- Configuring done
+[0.605s] -- Generating done
+[0.607s] -- Build files have been written to: /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap
+[0.610s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap' returned '0': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} /usr/bin/cmake /home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/grid_map/grid_map_octomap -DCMAKE_INSTALL_PREFIX=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap
+[0.612s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap -- -j12 -l12
+[0.652s] [ 11%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[0.657s] [ 22%] [32mBuilding CXX object CMakeFiles/grid_map_octomap.dir/src/GridMapOctomapConverter.cpp.o[0m
+[0.661s] [ 33%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[1.365s] [ 44%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[1.404s] [ 44%] Built target gtest_main
+[3.380s] [ 55%] [32m[1mLinking CXX static library libgrid_map_octomap.a[0m
+[3.426s] [ 55%] Built target grid_map_octomap
+[4.733s] [ 66%] [32m[1mLinking CXX static library libgtest.a[0m
+[4.794s] [ 66%] Built target gtest
+[4.814s] [ 77%] [32mBuilding CXX object CMakeFiles/grid_map_octomap-test.dir/test/OctomapConverterTest.cpp.o[0m
+[4.814s] [ 88%] [32mBuilding CXX object CMakeFiles/grid_map_octomap-test.dir/test/test_grid_map_octomap.cpp.o[0m
+[6.407s] [100%] [32m[1mLinking CXX executable grid_map_octomap-test[0m
+[6.543s] [100%] Built target grid_map_octomap-test
+[6.554s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap' returned '0': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap -- -j12 -l12
+[6.555s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap
+[6.563s] -- Install configuration: ""
+[6.563s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/lib/libgrid_map_octomap.a
+[6.564s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/include/grid_map_octomap
+[6.564s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/include/grid_map_octomap/grid_map_octomap.hpp
+[6.565s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/include/grid_map_octomap/GridMapOctomapConverter.hpp
+[6.565s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/environment/library_path.sh
+[6.565s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/environment/library_path.dsv
+[6.565s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/ament_index/resource_index/package_run_dependencies/grid_map_octomap
+[6.565s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/ament_index/resource_index/parent_prefix_path/grid_map_octomap
+[6.565s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/environment/ament_prefix_path.sh
+[6.566s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/environment/ament_prefix_path.dsv
+[6.566s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/environment/path.sh
+[6.566s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/environment/path.dsv
+[6.566s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/local_setup.bash
+[6.566s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/local_setup.sh
+[6.566s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/local_setup.zsh
+[6.567s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/local_setup.dsv
+[6.567s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/package.dsv
+[6.567s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/ament_index/resource_index/packages/grid_map_octomap
+[6.567s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/cmake/ament_cmake_export_dependencies-extras.cmake
+[6.567s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/cmake/ament_cmake_export_include_directories-extras.cmake
+[6.567s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/cmake/ament_cmake_export_libraries-extras.cmake
+[6.567s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/cmake/grid_map_octomapConfig.cmake
+[6.567s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/cmake/grid_map_octomapConfig-version.cmake
+[6.568s] -- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/package.xml
+[6.570s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap' returned '0': AMENT_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib:${LD_LIBRARY_PATH} /usr/bin/cmake --install /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_octomap

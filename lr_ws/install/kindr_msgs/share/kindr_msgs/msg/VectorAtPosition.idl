@@ -1,0 +1,47 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from kindr_msgs/msg/VectorAtPosition.msg
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Point.idl"
+#include "geometry_msgs/msg/Vector3.idl"
+#include "std_msgs/msg/Header.idl"
+
+module kindr_msgs {
+  module msg {
+    module VectorAtPosition_Constants {
+      const uint8 TYPE_TYPELESS = 0;
+      const uint8 TYPE_JERK = 6;
+      const uint8 TYPE_ACCELERATION = 7;
+      const uint8 TYPE_VELOCITY = 8;
+      const uint8 TYPE_POSITION = 9;
+      const uint8 TYPE_FORCE = 10;
+      const uint8 TYPE_MOMEMTUM = 11;
+      const uint8 TYPE_ANGULAR_JERK = 12;
+      const uint8 TYPE_ANGULAR_ACCELERATION = 13;
+      const uint8 TYPE_ANGULAR_VELOCITY = 14;
+      const uint8 TYPE_TORQUE = 16;
+      const uint8 TYPE_ANGULAR_MOMEMTUM = 17;
+    };
+    @verbatim (language="comment", text=
+      "Vector type definition (based on Kindr definitions)")
+    struct VectorAtPosition {
+      std_msgs::msg::Header header;
+
+      uint8 type;
+
+      string name;
+
+      @verbatim (language="comment", text=
+        "Frame defined in header")
+      geometry_msgs::msg::Vector3 vector;
+
+      @verbatim (language="comment", text=
+        "Point of origin of the vector")
+      geometry_msgs::msg::Point position;
+
+      @verbatim (language="comment", text=
+        "If empty same as vector frame")
+      string position_frame_id;
+    };
+  };
+};

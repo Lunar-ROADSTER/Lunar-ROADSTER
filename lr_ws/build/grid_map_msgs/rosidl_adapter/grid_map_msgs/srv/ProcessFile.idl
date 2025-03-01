@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from grid_map_msgs/srv/ProcessFile.srv
+// generated code does not contain a copyright notice
+
+
+module grid_map_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "Absolute file path.")
+    struct ProcessFile_Request {
+      string file_path;
+
+      @verbatim (language="comment", text=
+        "For ROS bags: topic name that should be processed (optional).")
+      string topic_name;
+    };
+    struct ProcessFile_Response {
+      @verbatim (language="comment", text=
+        "True if file processing was successful.")
+      boolean success;
+    };
+  };
+};

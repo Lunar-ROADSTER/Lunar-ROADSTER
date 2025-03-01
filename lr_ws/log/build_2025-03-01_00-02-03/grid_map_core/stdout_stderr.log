@@ -1,0 +1,145 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found grid_map_cmake_helpers: 2.0.1 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_cmake_helpers/share/grid_map_cmake_helpers/cmake)
+-- Setting build type to Release as none was specified.
+-- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/williamfbx/Lunar-ROADSTER/lr_ws/src/drivers/grid_map/grid_map_core/include>
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/williamfbx/Lunar-ROADSTER/lr_ws/build/grid_map_core
+[  2%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/GridMapMath.cpp.o[0m
+[ 11%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/BufferRegion.cpp.o[0m
+[ 11%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/Polygon.cpp.o[0m
+[ 11%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/SubmapGeometry.cpp.o[0m
+[ 14%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/CubicInterpolation.cpp.o[0m
+[ 17%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/iterators/GridMapIterator.cpp.o[0m
+[ 20%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[ 22%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/iterators/CircleIterator.cpp.o[0m
+[ 28%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/iterators/SubmapIterator.cpp.o[0m
+[ 28%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/GridMap.cpp.o[0m
+[ 31%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[ 34%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/iterators/EllipseIterator.cpp.o[0m
+[ 37%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/iterators/SpiralIterator.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/iterators/PolygonIterator.cpp.o[0m
+[ 42%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[ 45%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/iterators/LineIterator.cpp.o[0m
+[ 45%] Built target gtest_main
+[ 48%] [32mBuilding CXX object CMakeFiles/grid_map_core.dir/src/iterators/SlidingWindowIterator.cpp.o[0m
+[ 51%] [32m[1mLinking CXX static library libgrid_map_core.a[0m
+[ 51%] Built target grid_map_core
+[ 54%] [32m[1mLinking CXX static library libgtest.a[0m
+[ 54%] Built target gtest
+[ 57%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/test_grid_map_core.cpp.o[0m
+[ 62%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/CubicInterpolationTest.cpp.o[0m
+[ 62%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/test_helpers.cpp.o[0m
+[ 65%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/GridMapTest.cpp.o[0m
+[ 71%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/LineIteratorTest.cpp.o[0m
+[ 71%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/CubicConvolutionInterpolationTest.cpp.o[0m
+[ 74%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/EllipseIteratorTest.cpp.o[0m
+[ 77%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/PolygonTest.cpp.o[0m
+[ 80%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/GridMapMathTest.cpp.o[0m
+[ 82%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/GridMapIteratorTest.cpp.o[0m
+[ 85%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/SubmapIteratorTest.cpp.o[0m
+[ 88%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/PolygonIteratorTest.cpp.o[0m
+[ 91%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/EigenPluginsTest.cpp.o[0m
+[ 94%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/SpiralIteratorTest.cpp.o[0m
+[ 97%] [32mBuilding CXX object CMakeFiles/grid_map_core-test.dir/test/SlidingWindowIteratorTest.cpp.o[0m
+[100%] [32m[1mLinking CXX executable grid_map_core-test[0m
+[100%] Built target grid_map_core-test
+-- Install configuration: "Release"
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/lib/libgrid_map_core.a
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/grid_map_core.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/GridMapMath.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/Polygon.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/EllipseIterator.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/SubmapIterator.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/SlidingWindowIterator.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/LineIterator.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/iterators.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/CircleIterator.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/PolygonIterator.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/GridMapIterator.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/iterators/SpiralIterator.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/GridMap.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/TypeDefs.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/CubicInterpolation.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/eigen_plugins
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/eigen_plugins/DenseBasePlugin.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/eigen_plugins/FunctorsPlugin.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/eigen_plugins/Functors.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/BufferRegion.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/gtest_eigen.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/include/grid_map_core/grid_map_core/SubmapGeometry.hpp
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/move_method.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/interpolationSineWorld.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/spiral_iterator_preview.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/ellipse_iterator_preview.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/grid_map_iterator_preview.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/line_iterator_preview.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/submap_iterator_preview.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/polygon_iterator.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/submap_iterator.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/spiral_iterator.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/ellipse_iterator.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/line_iterator.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/circle_iterator_preview.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/grid_map_iterator.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/polygon_iterator_preview.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/iterators/circle_iterator.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/grid_map_layers.pdf
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/grid_map_conventions.pdf
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/grid_map_layers.png
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/setposition_method.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/grid_map_conventions.png
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/doc/interpolationGaussWorld.gif
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/environment/library_path.sh
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/environment/library_path.dsv
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/ament_index/resource_index/package_run_dependencies/grid_map_core
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/ament_index/resource_index/parent_prefix_path/grid_map_core
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/environment/ament_prefix_path.sh
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/environment/ament_prefix_path.dsv
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/environment/path.sh
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/environment/path.dsv
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/local_setup.bash
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/local_setup.sh
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/local_setup.zsh
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/local_setup.dsv
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/package.dsv
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/ament_index/resource_index/packages/grid_map_core
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake/export_grid_map_coreExport.cmake
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake/export_grid_map_coreExport-release.cmake
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake/grid_map_core-extras.cmake
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake/grid_map_coreConfig.cmake
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake/grid_map_coreConfig-version.cmake
+-- Installing: /home/williamfbx/Lunar-ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/package.xml
