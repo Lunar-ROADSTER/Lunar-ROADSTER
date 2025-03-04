@@ -323,6 +323,7 @@ libgrid_map_rviz_plugin.so: /usr/lib/x86_64-linux-gnu/libdraco.so.4.0.0
 libgrid_map_rviz_plugin.so: /usr/lib/x86_64-linux-gnu/librt.a
 libgrid_map_rviz_plugin.so: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
 libgrid_map_rviz_plugin.so: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreMain.so
+libgrid_map_rviz_plugin.so: /usr/lib/x86_64-linux-gnu/libfreeimage.so
 libgrid_map_rviz_plugin.so: /usr/lib/x86_64-linux-gnu/libfreetype.so
 libgrid_map_rviz_plugin.so: /usr/lib/x86_64-linux-gnu/libz.so
 libgrid_map_rviz_plugin.so: /usr/lib/x86_64-linux-gnu/libOpenGL.so

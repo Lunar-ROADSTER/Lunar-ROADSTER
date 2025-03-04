@@ -144,6 +144,7 @@ librviz_plugin_zed_od.so: /opt/ros/humble/lib/libshape_msgs__rosidl_generator_c.
 librviz_plugin_zed_od.so: /opt/ros/humble/lib/librviz_rendering.so
 librviz_plugin_zed_od.so: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
 librviz_plugin_zed_od.so: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreMain.so
+librviz_plugin_zed_od.so: /usr/lib/x86_64-linux-gnu/libfreeimage.so
 librviz_plugin_zed_od.so: /usr/lib/x86_64-linux-gnu/libfreetype.so
 librviz_plugin_zed_od.so: /usr/lib/x86_64-linux-gnu/libOpenGL.so
 librviz_plugin_zed_od.so: /usr/lib/x86_64-linux-gnu/libGLX.so
