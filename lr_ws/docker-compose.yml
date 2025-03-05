@@ -11,6 +11,7 @@ services:
     environment:
       - TERM=xterm-256color                   # Enable colors in terminal
     tty: true                                 # use terminal, i.e. the `-t` flag
+    network_mode: "host"
     stdin_open: true                          # allow terminal input, i.e. the `-i` flag
     working_dir: /root/Lunar_ROADSTER/lr_ws   # Set the working directory in the container
     ports:
@@ -29,7 +30,8 @@ services:
     privileged: true
     environment:
       - TERM=xterm-256color                  
-    tty: true                                 
+    tty: true    
+    network_mode: "host"
     stdin_open: true                         
     working_dir: /root/Lunar_ROADSTER/lr_ws   
     ports:
@@ -45,6 +47,7 @@ services:
       - .:/root/Lunar_ROADSTER/lr_ws
       - /dev/:/dev/
     tty: true
+    network_mode: "host"
     stdin_open: true
     working_dir: /root/Lunar_ROADSTER/lr_ws
     ports:
