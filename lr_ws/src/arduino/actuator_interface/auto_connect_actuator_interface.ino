@@ -158,10 +158,10 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 
     // Read Tool Encoder Value 
     if (NUM_ROBOCLAWS_TOOL > 0){
-      int32_t R3enc1 = roboclaws_tool[0].ReadEncM1(ROBOCLAW_ADDRESS, &rc_2_tool_status, &rc_2_tool_valid);
+      R3enc1 = roboclaws_tool[0].ReadEncM1(ROBOCLAW_ADDRESS, &rc_2_tool_status, &rc_2_tool_valid);
       if (rc_2_tool_valid){
-        uint8_t R3enc1Scale = int32_to_byte(R3enc1, BYTE_TO_QP_TOOL_SCALE, BYTE_TO_QP_TOOL_OFFSET);
-      }
+        R3enc1Scale = int32_to_byte(R3enc1, BYTE_TO_QP_TOOL_SCALE, BYTE_TO_QP_TOOL_OFFSET);
+      } 
     }
     
     // Read Speed Values
