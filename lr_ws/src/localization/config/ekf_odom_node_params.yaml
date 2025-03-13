@@ -6,7 +6,7 @@ ekf_odom_node:
     # The frequency, in Hz, at which the filter will output a position estimate. Note that the filter will not begin
     # computation until it receives at least one message from one of the inputs. It will then run continuously at the
     # frequency specified here, regardless of whether it receives more measurements. Defaults to 30 if unspecified.
-    frequency: 20.0
+    frequency: 10.0
 
     # The period, in seconds, after which we consider a sensor to have timed out. In this event, we carry out a predict
     # cycle on the EKF without correcting it. This parameter can be thought of as the minimum frequency with which the
@@ -131,13 +131,13 @@ ekf_odom_node:
     # For use with bag data
     reset_on_time_jump: true
 
-    initial_state: [
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0
-    ]
+    # initial_state: [
+    #   0.0, 0.0, 0.0,
+    #   0.0, 0.0, 0.0,
+    #   0.0, 0.0, 0.0,
+    #   0.0, 0.0, 0.0,
+    #   0.0, 0.0, 0.0
+    # ]
 
     # Recall config settings are in the form of:
     # [x, y, z,
@@ -150,8 +150,15 @@ ekf_odom_node:
     odom0: encoder/odom
     # Only setting velocities (vx, vy, vyaw) to true, as per Configuring robot_localization -> Fusing Unmeasured Variables, available here: 
     # http://docs.ros.org/en/melodic/api/robot_localization/html/configuring_robot_localization.html
+    # odom0_config: [
+    #   true, true, true,
+    #   false, false, true,
+    #   true, true, false,
+    #   false, false, true,
+    #   false, false, false
+    # ]
     odom0_config: [
-      true, true, true,
+      false, false, false,
       false, false, true,
       true, true, false,
       false, false, true,
@@ -164,11 +171,16 @@ ekf_odom_node:
 
     # IMU
     imu0: imu/data/base_link
+    # imu0_config: [false, false, false,
+    #               true,  true,  false,
+    #               false, false, false,
+    #               false, false, true,
+    #               true,  false, false]
     imu0_config: [false, false, false,
-                  true,  true,  false,
+                  true,  true,  true,
                   false, false, false,
                   false, false, true,
-                  true,  false, false]
+                  false,  false, false]
     imu0_queue_size: 5
     imu0_nodelay: true
     imu0_differential: true
