@@ -21,14 +21,14 @@ def generate_launch_description():
         launch_arguments={"camera_model": LaunchConfiguration("camera_model")}.items()
     )
 
-    # imu_launch = IncludeLaunchDescription(
-    #   PythonLaunchDescriptionSource(
-    #     os.path.join(get_package_share_directory('imu'), 'launch/imu_launch.py')
-    #   )
-    # )
+    imu_launch = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource(
+        os.path.join(get_package_share_directory('imu'), 'launch/imu_launch.py')
+      )
+    )
 
     return LaunchDescription([
         camera_model_arg,
         zed_launch,
-        # imu_launch
+        imu_launch
     ])
