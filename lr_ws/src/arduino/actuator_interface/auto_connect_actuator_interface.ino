@@ -86,7 +86,7 @@ bool cmd_msg_received = false;
 // interface setup
 #define ROBOCLAW_ADDRESS 0x80
 #define NUM_ROBOCLAWS_MOBILITY 2
-#define NUM_ROBOCLAWS_TOOL 1
+#define NUM_ROBOCLAWS_TOOL 0 // No Roboclaw to control tool at the moment
 #define ROBOCLAW_READ_TIMEOUT_USEC 10000 // 8k --> ~3.3hz, lower = faster loop but below 8k observed to not successfully read from the RoboClaws (tested 7k, 6k, 5k, 100)
 RoboClaw roboclaws_mobility[] = {
   RoboClaw(&Serial1, ROBOCLAW_READ_TIMEOUT_USEC), // Pins 18(Tx) and 19(Rx) on the Due
@@ -99,6 +99,10 @@ RoboClaw roboclaws_tool[] = {
 int roboclaw_signs[] = {
   -1, 1
 };
+
+// Read Tool Encoder Value safely
+int32_t R3enc1 = 0;  // Default to 0 if encoder is missing
+uint8_t R3enc1Scale = 0;  // Default scaled value
 
 
 /* Callbacks */
@@ -135,8 +139,10 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
       }
 
       // Send Tool Commands
-      for (int i = 0; i < NUM_ROBOCLAWS_TOOL; ++i) {
+      if (NUM_ROBOCLAWS_TOOL > 0){
+        for (int i = 0; i < NUM_ROBOCLAWS_TOOL; ++i) {
         roboclaws_tool[i].SpeedAccelDeccelPositionM1(ROBOCLAW_ADDRESS, TOOL_CTRL_ACCEL_QPPS, TOOL_CTRL_SPD_QPPS, TOOL_CTRL_DECCEL_QPPS, tool_cmd, 1);
+        }
       }
 
     } // if (cmd_msg_received)
@@ -151,9 +157,13 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
     uint8_t R2enc2Scale = int32_to_byte(R2enc2, BYTE_TO_QP_STEER_SCALE, BYTE_TO_QPPS_DRIVE_STEER_OFFSET);
 
     // Read Tool Encoder Value 
-    int32_t R3enc1 = roboclaws_tool[0].ReadEncM1(ROBOCLAW_ADDRESS, &rc_2_tool_status, &rc_2_tool_valid);
-    uint8_t R3enc1Scale = int32_to_byte(R3enc1, BYTE_TO_QP_TOOL_SCALE, BYTE_TO_QP_TOOL_OFFSET);
-
+    if (NUM_ROBOCLAWS_TOOL > 0){
+      R3enc1 = roboclaws_tool[0].ReadEncM1(ROBOCLAW_ADDRESS, &rc_2_tool_status, &rc_2_tool_valid);
+      if (rc_2_tool_valid){
+        R3enc1Scale = int32_to_byte(R3enc1, BYTE_TO_QP_TOOL_SCALE, BYTE_TO_QP_TOOL_OFFSET);
+      } 
+    }
+    
     // Read Speed Values
     // Read Drive 1 Speed
     int32_t R1spd1 = roboclaws_mobility[0].ReadSpeedM1(ROBOCLAW_ADDRESS, &rc_0_drive_status, &rc_0_drive_valid);
