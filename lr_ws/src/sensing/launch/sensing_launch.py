@@ -8,17 +8,24 @@ import os
 
 def generate_launch_description():
     
-    camera_model_arg = DeclareLaunchArgument(
-        "camera_model",
-        default_value="zed2i",
-        description="Model of the ZED camera"
-    )
 
-    zed_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('zed_wrapper'), 'launch/zed_camera.launch.py')
-        ),
-        launch_arguments={"camera_model": LaunchConfiguration("camera_model")}.items()
+    # camera_model_arg = DeclareLaunchArgument(
+    #     "camera_model",
+    #     default_value="zed2i",
+    #     description="Model of the ZED camera"
+    # )
+
+    # zed_launch = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(
+    #         os.path.join(get_package_share_directory('zed_wrapper'), 'launch/zed_camera.launch.py')
+    #     ),
+    #     launch_arguments={"camera_model": LaunchConfiguration("camera_model")}.items()
+    # )
+
+    realsense_launch = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource(
+        os.path.join(get_package_share_directory('realsense'), 'launch/realsense_launch.py')
+        )
     )
 
     imu_launch = IncludeLaunchDescription(
@@ -28,7 +35,8 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        camera_model_arg,
-        zed_launch,
+        # camera_model_arg,
+        # zed_launch,
+        realsense_launch,
         imu_launch
     ])

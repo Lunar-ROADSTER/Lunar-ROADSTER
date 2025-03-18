@@ -23,7 +23,7 @@ services:
     build:
       context: ./                            
       dockerfile: ./docker/lrdev_jetson.dockerfile   
-    container_name: lunar_roadster_dev_full_jetson
+    container_name: lunar_roadster_dev_full_jetson_cuda
     volumes:
       - .:/root/Lunar_ROADSTER/lr_ws    
       - /dev/:/dev/
