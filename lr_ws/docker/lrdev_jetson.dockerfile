@@ -11,6 +11,12 @@ ENV DEBIAN_FRONTEND=noninteractive \
   ROS_DISTRO=humble \
   WORKSPACE=/root/Lunar_ROADSTER/lr_ws
 
+# ---------------- NVIDIA Libraries Configuration -------------------------
+# Ensure NVIDIA drivers and CUDA libraries are accessible inside the container
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES all
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu/tegra:$LD_LIBRARY_PATH
+
 # Copy ZED SDK from the source image
 # COPY --from=zed_sdk /usr/local/zed /usr/local/zed
 
