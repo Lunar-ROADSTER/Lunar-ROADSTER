@@ -1,0 +1,17 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from lx_msgs/msg/RoverCommand.msg
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Twist.idl"
+
+module lx_msgs {
+  module msg {
+    struct RoverCommand {
+      geometry_msgs::msg::Twist mobility_twist;
+
+      double actuator_speed;
+
+      double drum_speed;
+    };
+  };
+};

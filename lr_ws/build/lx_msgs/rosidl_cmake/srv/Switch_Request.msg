@@ -1,0 +1,4 @@
+bool switch_state
+BermSection current_berm_segment
+BermSection prev_berm_segment
+bool first_seg_dump

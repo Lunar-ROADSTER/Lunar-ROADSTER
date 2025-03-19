@@ -1,0 +1,147 @@
+[0.148s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_amcl': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_amcl -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl
+[0.664s] -- The C compiler identification is GNU 11.4.0
+[1.257s] -- The CXX compiler identification is GNU 11.4.0
+[1.322s] -- Detecting C compiler ABI info
+[1.681s] -- Detecting C compiler ABI info - done
+[1.715s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.715s] -- Detecting C compile features
+[1.717s] -- Detecting C compile features - done
+[1.741s] -- Detecting CXX compiler ABI info
+[2.077s] -- Detecting CXX compiler ABI info - done
+[2.113s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.116s] -- Detecting CXX compile features
+[2.119s] -- Detecting CXX compile features - done
+[2.140s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[2.921s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[3.502s] -- Found nav2_common: 1.1.18 (/root/Lunar_ROADSTER/lr_ws/install/nav2_common/share/nav2_common/cmake)
+[3.516s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[3.774s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[3.809s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[3.860s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[3.933s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.029s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[4.292s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[4.308s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.767s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[4.917s] -- Found FastRTPS: /opt/ros/humble/include  
+[5.169s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[5.236s] -- Looking for pthread.h
+[5.589s] -- Looking for pthread.h - found
+[5.589s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[5.934s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[5.940s] -- Found Threads: TRUE  
+[6.242s] -- Found rclcpp_lifecycle: 16.0.11 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+[6.358s] -- Found rclcpp_components: 16.0.11 (/opt/ros/humble/share/rclcpp_components/cmake)
+[6.526s] -- Found message_filters: 4.3.5 (/opt/ros/humble/share/message_filters/cmake)
+[6.550s] -- Found tf2_geometry_msgs: 0.25.12 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[6.726s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[6.731s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[6.733s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[7.144s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[7.239s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[7.338s] -- Found std_srvs: 4.2.4 (/opt/ros/humble/share/std_srvs/cmake)
+[7.385s] -- Found nav2_util: 1.1.18 (/root/Lunar_ROADSTER/lr_ws/install/nav2_util/share/nav2_util/cmake)
+[7.680s] -- Found pluginlib: 5.1.0 (/opt/ros/humble/share/pluginlib/cmake)
+[7.768s] -- Setting build type to Release as none was specified.
+[7.782s] -- Looking for drand48
+[8.136s] -- Looking for drand48 - found
+[8.550s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[9.103s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[9.109s] -- Configured cppcheck include dirs: /root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_amcl/include;/root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_amcl/src/include
+[9.109s] -- Configured cppcheck exclude dirs and/or files: 
+[9.143s] -- Added test 'lint_cmake' to check CMake code style
+[9.197s] -- Added test 'uncrustify' to check C / C++ code style
+[9.197s] -- Configured uncrustify additional arguments: 
+[9.211s] -- Added test 'xmllint' to check XML markup files
+[9.247s] -- Configuring done
+[10.169s] -- Generating done
+[10.266s] -- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/nav2_amcl
+[10.360s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_amcl' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_amcl -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl
+[10.368s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_amcl': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/nav2_amcl -- -j4 -l4
+[10.539s] [  4%] [32mBuilding C object src/map/CMakeFiles/map_lib.dir/map.c.o[0m
+[10.787s] [  8%] [32mBuilding C object src/map/CMakeFiles/map_lib.dir/map_draw.c.o[0m
+[10.889s] [ 12%] [32mBuilding CXX object src/map/CMakeFiles/map_lib.dir/map_cspace.cpp.o[0m
+[12.534s] [ 16%] [32mBuilding C object src/map/CMakeFiles/map_lib.dir/map_range.c.o[0m
+[12.875s] [ 20%] [32m[1mLinking CXX shared library libmap_lib.so[0m
+[13.159s] [ 20%] Built target map_lib
+[13.225s] [ 25%] [32mBuilding C object src/pf/CMakeFiles/pf_lib.dir/pf.c.o[0m
+[14.003s] [ 29%] [32mBuilding C object src/pf/CMakeFiles/pf_lib.dir/pf_vector.c.o[0m
+[14.280s] [ 33%] [32mBuilding C object src/pf/CMakeFiles/pf_lib.dir/eig3.c.o[0m
+[14.866s] [ 37%] [32mBuilding C object src/pf/CMakeFiles/pf_lib.dir/pf_draw.c.o[0m
+[14.961s] [ 41%] [32mBuilding C object src/pf/CMakeFiles/pf_lib.dir/pf_pdf.c.o[0m
+[15.287s] [ 45%] [32mBuilding C object src/pf/CMakeFiles/pf_lib.dir/pf_kdtree.c.o[0m
+[15.964s] [ 50%] [32m[1mLinking C shared library libpf_lib.so[0m
+[16.153s] [ 50%] Built target pf_lib
+[16.220s] [ 54%] [32mBuilding CXX object src/sensors/CMakeFiles/sensors_lib.dir/laser/laser.cpp.o[0m
+[17.849s] [ 58%] [32mBuilding CXX object src/sensors/CMakeFiles/sensors_lib.dir/laser/likelihood_field_model.cpp.o[0m
+[19.489s] [ 62%] [32mBuilding CXX object src/sensors/CMakeFiles/sensors_lib.dir/laser/likelihood_field_model_prob.cpp.o[0m
+[21.178s] [ 66%] [32mBuilding CXX object src/sensors/CMakeFiles/sensors_lib.dir/laser/beam_model.cpp.o[0m
+[22.671s] [ 70%] [32m[1mLinking CXX shared library libsensors_lib.so[0m
+[22.963s] [ 70%] Built target sensors_lib
+[23.030s] [ 75%] [32mBuilding CXX object src/motion_model/CMakeFiles/motions_lib.dir/omni_motion_model.cpp.o[0m
+[27.457s] [ 79%] [32mBuilding CXX object src/motion_model/CMakeFiles/motions_lib.dir/differential_motion_model.cpp.o[0m
+[32.307s] [ 83%] [32m[1mLinking CXX shared library libmotions_lib.so[0m
+[33.193s] [ 83%] Built target motions_lib
+[33.260s] [ 87%] [32mBuilding CXX object CMakeFiles/amcl_core.dir/src/amcl_node.cpp.o[0m
+[193.374s] [ 91%] [32m[1mLinking CXX shared library libamcl_core.so[0m
+[195.074s] [ 91%] Built target amcl_core
+[195.136s] [ 95%] [32mBuilding CXX object CMakeFiles/amcl.dir/src/main.cpp.o[0m
+[218.364s] [100%] [32m[1mLinking CXX executable amcl[0m
+[219.739s] [100%] Built target amcl
+[219.773s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_amcl' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/nav2_amcl -- -j4 -l4
+[219.775s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_amcl': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/nav2_amcl
+[219.796s] -- Install configuration: "Release"
+[219.803s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/libamcl_core.so
+[219.832s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/libamcl_core.so" to ""
+[219.835s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/nav2_amcl/amcl
+[219.841s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/nav2_amcl/amcl" to ""
+[219.842s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include/
+[219.847s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl
+[219.852s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/amcl_node.hpp
+[219.856s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/angleutils.hpp
+[219.858s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/map
+[219.862s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/map/map.hpp
+[219.865s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/motion_model
+[219.869s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/motion_model/differential_motion_model.hpp
+[219.873s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/motion_model/motion_model.hpp
+[219.876s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/motion_model/omni_motion_model.hpp
+[219.878s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/pf
+[219.882s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/pf/eig3.hpp
+[219.885s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/pf/pf.hpp
+[219.889s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/pf/pf_kdtree.hpp
+[219.891s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/pf/pf_pdf.hpp
+[219.893s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/pf/pf_vector.hpp
+[219.896s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/portable_utils.hpp
+[219.898s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/sensors
+[219.902s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/sensors/laser
+[219.906s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/include//nav2_amcl/sensors/laser/laser.hpp
+[219.917s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/environment/library_path.sh
+[219.920s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/environment/library_path.dsv
+[219.923s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/plugins.xml
+[219.932s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/ament_index/resource_index/package_run_dependencies/nav2_amcl
+[219.938s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/ament_index/resource_index/parent_prefix_path/nav2_amcl
+[219.941s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/environment/ament_prefix_path.sh
+[219.944s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/environment/ament_prefix_path.dsv
+[219.946s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/environment/path.sh
+[219.948s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/environment/path.dsv
+[219.950s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/local_setup.bash
+[219.952s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/local_setup.sh
+[219.956s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/local_setup.zsh
+[219.958s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/local_setup.dsv
+[219.960s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/package.dsv
+[219.964s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/ament_index/resource_index/packages/nav2_amcl
+[219.969s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/ament_index/resource_index/nav2_amcl__pluginlib__plugin/nav2_amcl
+[219.974s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/ament_index/resource_index/rclcpp_components/nav2_amcl
+[219.981s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/cmake/ament_cmake_export_include_directories-extras.cmake
+[220.137s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/cmake/ament_cmake_export_libraries-extras.cmake
+[220.138s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/cmake/ament_cmake_export_dependencies-extras.cmake
+[220.139s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/cmake/nav2_amclConfig.cmake
+[220.141s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/cmake/nav2_amclConfig-version.cmake
+[220.144s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/share/nav2_amcl/package.xml
+[220.147s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/libpf_lib.so
+[220.151s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/libmap_lib.so
+[220.154s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/libmotions_lib.so
+[220.160s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/libmotions_lib.so" to ""
+[220.162s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/libsensors_lib.so
+[220.167s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib/libsensors_lib.so" to ""
+[220.175s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_amcl' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/nav2_amcl

@@ -1,0 +1,70 @@
+[0.051s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/lx_library': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/lx_library -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/lx_library
+[0.470s] -- The C compiler identification is GNU 11.4.0
+[0.942s] -- The CXX compiler identification is GNU 11.4.0
+[1.032s] -- Detecting C compiler ABI info
+[2.024s] -- Detecting C compiler ABI info - done
+[2.067s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.069s] -- Detecting C compile features
+[2.077s] -- Detecting C compile features - done
+[2.097s] -- Detecting CXX compiler ABI info
+[2.543s] -- Detecting CXX compiler ABI info - done
+[2.594s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.595s] -- Detecting CXX compile features
+[2.596s] -- Detecting CXX compile features - done
+[2.612s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[3.262s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[3.693s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[3.898s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[3.925s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[3.966s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[4.029s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.112s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[4.333s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[4.348s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.749s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[4.871s] -- Found FastRTPS: /opt/ros/humble/include  
+[5.084s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[5.140s] -- Looking for pthread.h
+[5.451s] -- Looking for pthread.h - found
+[5.455s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[5.805s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[5.812s] -- Found Threads: TRUE  
+[6.224s] -- Found geometry_msgs: 4.2.4 (/opt/ros/humble/share/geometry_msgs/cmake)
+[6.292s] -- Found lx_msgs: 0.0.0 (/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/share/lx_msgs/cmake)
+[7.053s] -- Configuring done
+[7.229s] -- Generating done
+[7.288s] -- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/lx_library
+[7.392s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/lx_library' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/lx_library -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/lx_library
+[7.393s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/lx_library': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/lx_library -- -j4 -l4
+[7.687s] [ 33%] [32mBuilding CXX object CMakeFiles/lx_library.dir/src/lx_utils.cpp.o[0m
+[7.931s] [ 66%] [32mBuilding CXX object CMakeFiles/lx_library.dir/src/task.cpp.o[0m
+[22.303s] [100%] [32m[1mLinking CXX static library liblx_library.a[0m
+[22.521s] [100%] Built target lx_library
+[22.545s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/lx_library' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/lx_library -- -j4 -l4
+[22.546s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/lx_library': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/lx_library
+[22.561s] -- Install configuration: ""
+[22.578s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/environment/library_path.sh
+[22.579s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/environment/library_path.dsv
+[22.580s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/include/lx_library
+[22.580s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/include/lx_library/lx_utils.hpp
+[22.580s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/include/lx_library/task.hpp
+[22.581s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/lib/liblx_library.a
+[22.590s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/ament_index/resource_index/package_run_dependencies/lx_library
+[22.594s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/ament_index/resource_index/parent_prefix_path/lx_library
+[22.596s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/environment/ament_prefix_path.sh
+[22.598s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/environment/ament_prefix_path.dsv
+[22.600s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/environment/path.sh
+[22.602s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/environment/path.dsv
+[22.603s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/local_setup.bash
+[22.605s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/local_setup.sh
+[22.606s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/local_setup.zsh
+[22.608s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/local_setup.dsv
+[22.611s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/package.dsv
+[22.614s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/ament_index/resource_index/packages/lx_library
+[22.618s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/cmake/lx_libraryExport.cmake
+[22.621s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/cmake/lx_libraryExport-noconfig.cmake
+[22.623s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/cmake/ament_cmake_export_targets-extras.cmake
+[22.624s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/cmake/lx_libraryConfig.cmake
+[22.626s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/cmake/lx_libraryConfig-version.cmake
+[22.628s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/lx_library/share/lx_library/package.xml
+[22.644s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/lx_library' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/lx_library

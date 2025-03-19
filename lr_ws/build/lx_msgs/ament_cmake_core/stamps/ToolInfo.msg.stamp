@@ -1,0 +1,2 @@
+float64 drum_pos
+float64 drum_current
