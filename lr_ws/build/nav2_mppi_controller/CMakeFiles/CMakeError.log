@@ -1,0 +1,60 @@
+Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_AVX512 failed with the following output:
+Change Dir: /root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3cbe6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3cbe6.dir/build.make CMakeFiles/cmTC_3cbe6.dir/build
+gmake[1]: Entering directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3cbe6.dir/src.cxx.o
+/usr/bin/c++ -DCOMPILER_SUPPORTS_AVX512  -mno-avx512f -o CMakeFiles/cmTC_3cbe6.dir/src.cxx.o -c /root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command-line option '-mno-avx512f'
+gmake[1]: *** [CMakeFiles/cmTC_3cbe6.dir/build.make:78: CMakeFiles/cmTC_3cbe6.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_3cbe6/fast] Error 2
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_SSE4 failed with the following output:
+Change Dir: /root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3761c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3761c.dir/build.make CMakeFiles/cmTC_3761c.dir/build
+gmake[1]: Entering directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3761c.dir/src.cxx.o
+/usr/bin/c++ -DCOMPILER_SUPPORTS_SSE4  -msse4.2 -o CMakeFiles/cmTC_3761c.dir/src.cxx.o -c /root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command-line option '-msse4.2'
+gmake[1]: *** [CMakeFiles/cmTC_3761c.dir/build.make:78: CMakeFiles/cmTC_3761c.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_3761c/fast] Error 2
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_AVX2 failed with the following output:
+Change Dir: /root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_82d42/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_82d42.dir/build.make CMakeFiles/cmTC_82d42.dir/build
+gmake[1]: Entering directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_82d42.dir/src.cxx.o
+/usr/bin/c++ -DCOMPILER_SUPPORTS_AVX2  -mavx2 -o CMakeFiles/cmTC_82d42.dir/src.cxx.o -c /root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command-line option '-mavx2'
+gmake[1]: *** [CMakeFiles/cmTC_82d42.dir/build.make:78: CMakeFiles/cmTC_82d42.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_82d42/fast] Error 2
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_FMA failed with the following output:
+Change Dir: /root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2e08c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2e08c.dir/build.make CMakeFiles/cmTC_2e08c.dir/build
+gmake[1]: Entering directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_2e08c.dir/src.cxx.o
+/usr/bin/c++ -DCOMPILER_SUPPORTS_FMA  -mfma -o CMakeFiles/cmTC_2e08c.dir/src.cxx.o -c /root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command-line option '-mfma'
+gmake[1]: *** [CMakeFiles/cmTC_2e08c.dir/build.make:78: CMakeFiles/cmTC_2e08c.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_mppi_controller/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_2e08c/fast] Error 2
+
+
+Source file was:
+int main() { return 0; }

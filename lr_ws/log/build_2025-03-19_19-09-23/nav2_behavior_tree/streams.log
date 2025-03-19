@@ -1,0 +1,247 @@
+[0.338s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_behavior_tree': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/nav2_behavior_tree -- -j4 -l4
+[1.115s] [  1%] Built target nav2_behavior_tree
+[1.273s] [  2%] Built target nav2_controller_cancel_bt_node
+[1.307s] [  3%] Built target nav2_compute_path_to_pose_action_bt_node
+[1.333s] [  4%] Built target nav2_compute_path_through_poses_action_bt_node
+[1.591s] [  5%] Built target nav2_wait_cancel_bt_node
+[1.742s] [  6%] Built target nav2_spin_cancel_bt_node
+[1.757s] [  7%] Built target nav2_back_up_cancel_bt_node
+[1.760s] [  8%] Built target nav2_assisted_teleop_cancel_bt_node
+[1.992s] [  9%] Built target nav2_drive_on_heading_cancel_bt_node
+[2.035s] [ 10%] Built target nav2_follow_path_action_bt_node
+[2.053s] [ 11%] Built target nav2_back_up_action_bt_node
+[2.240s] [ 11%] Built target nav2_smooth_path_action_bt_node
+[2.458s] [ 12%] Built target nav2_drive_on_heading_bt_node
+[2.474s] [ 13%] Built target nav2_spin_action_bt_node
+[2.477s] [ 14%] Built target nav2_wait_action_bt_node
+[2.654s] [ 15%] Built target nav2_assisted_teleop_action_bt_node
+[2.884s] [ 16%] Built target nav2_transform_available_condition_bt_node
+[2.889s] [ 17%] Built target nav2_clear_costmap_service_bt_node
+[2.904s] [ 18%] Built target nav2_is_stuck_condition_bt_node
+[3.062s] [ 19%] Built target nav2_goal_reached_condition_bt_node
+[3.330s] [ 20%] Built target nav2_is_path_valid_condition_bt_node
+[3.332s] [ 21%] Built target nav2_globally_updated_goal_condition_bt_node
+[3.333s] [ 21%] Built target nav2_goal_updated_condition_bt_node
+[3.564s] [ 22%] Built target nav2_time_expired_condition_bt_node
+[3.764s] [ 23%] Built target nav2_distance_traveled_condition_bt_node
+[3.766s] [ 24%] Built target nav2_path_expiring_timer_condition
+[3.768s] [ 25%] Built target nav2_initial_pose_received_condition_bt_node
+[3.988s] [ 26%] Built target nav2_is_battery_charging_condition_bt_node
+[4.176s] [ 27%] Built target nav2_rate_controller_bt_node
+[4.272s] [ 28%] Built target nav2_is_battery_low_condition_bt_node
+[4.292s] [ 29%] Built target nav2_reinitialize_global_localization_service_bt_node
+[4.431s] [ 30%] Built target nav2_distance_controller_bt_node
+[4.919s] [ 31%] Built target nav2_truncate_path_local_action_bt_node
+[4.934s] [ 32%] Built target nav2_speed_controller_bt_node
+[4.967s] [ 33%] Built target nav2_truncate_path_action_bt_node
+[4.969s] [ 34%] Built target nav2_goal_updater_node_bt_node
+[5.121s] [ 35%] Built target nav2_recovery_node_bt_node
+[5.378s] [ 36%] Built target nav2_navigate_through_poses_action_bt_node
+[5.380s] [ 37%] Built target nav2_path_longer_on_approach_bt_node
+[5.444s] [ 38%] Built target nav2_navigate_to_pose_action_bt_node
+[5.608s] [ 39%] Built target nav2_remove_passed_goals_action_bt_node
+[5.625s] [ 40%] Built target nav2_pipeline_sequence_bt_node
+[5.824s] [ 41%] Built target nav2_get_pose_from_path_action_bt_node
+[5.833s] [ 42%] Built target nav2_round_robin_node_bt_node
+[6.163s] [ 43%] Built target nav2_single_trigger_bt_node
+[6.220s] [ 44%] Built target nav2_planner_selector_bt_node
+[6.390s] [ 45%] Built target nav2_smoother_selector_bt_node
+[6.414s] [ 46%] Built target nav2_controller_selector_bt_node
+[6.599s] [ 47%] Built target nav2_progress_checker_selector_bt_node
+[6.646s] [ 48%] Built target nav2_goal_checker_selector_bt_node
+[6.756s] [ 49%] Built target gtest_main
+[6.770s] [ 50%] Built target nav2_goal_updated_controller_bt_node
+[6.851s] [ 50%] Built target gtest
+[7.189s] [ 51%] Built target test_bt_conversions
+[7.210s] [ 52%] Built target test_condition_distance_traveled
+[7.546s] [ 53%] Built target test_condition_path_expiring_timer
+[7.581s] [ 53%] Built target test_condition_time_expired
+[7.726s] [ 54%] Built target test_condition_goal_reached
+[7.810s] [ 55%] Built target test_condition_goal_updated
+[7.819s] [ 56%] Built target test_condition_globally_updated_goal
+[7.833s] [ 57%] Built target test_condition_initial_pose_received
+[8.034s] [ 58%] Built target test_condition_is_battery_low
+[8.050s] [ 59%] Built target test_condition_is_stuck
+[8.228s] [ 60%] Built target test_condition_is_battery_charging
+[8.258s] [ 61%] Built target test_condition_transform_available
+[8.436s] [ 62%] Built target test_decorator_distance_controller
+[8.456s] [ 63%] Built target test_condition_is_path_valid
+[8.638s] [ 64%] Built target test_decorator_speed_controller
+[8.656s] [ 65%] Built target test_decorator_rate_controller
+[8.845s] [ 66%] Built target test_single_trigger_node
+[9.027s] [ 67%] Built target test_decorator_path_longer_on_approach
+[9.045s] [ 68%] Built target test_goal_updater_node
+[9.059s] [ 69%] Built target test_goal_updated_controller
+[9.313s] [ 70%] Built target test_control_recovery_node
+[9.539s] [ 71%] Built target test_bt_action_node
+[9.558s] [ 72%] Built target test_control_pipeline_sequence
+[9.582s] [ 73%] Built target test_control_round_robin_node
+[9.717s] [ 74%] Built target test_action_spin_action
+[9.799s] [ 75%] Built target test_action_back_up_action
+[9.816s] [ 76%] Built target test_action_wait_action
+[9.837s] [ 77%] Built target test_action_drive_on_heading
+[10.082s] [ 78%] Built target test_action_wait_cancel_action
+[10.103s] [ 79%] Built target test_action_assisted_teleop_action
+[10.124s] [ 80%] Built target test_action_spin_cancel_action
+[10.141s] [ 81%] Built target test_action_controller_cancel_action
+[10.543s] [ 82%] Built target test_action_assisted_teleop_cancel_action
+[10.544s] [ 83%] Built target test_action_drive_on_heading_cancel_action
+[10.550s] [ 84%] Built target test_action_clear_costmap_service
+[10.668s] [ 85%] Built target test_action_back_up_cancel_action
+[10.722s] [ 86%] Built target test_action_compute_path_to_pose_action
+[10.736s] [ 87%] Built target test_action_reinitialize_global_localization_service
+[10.877s] [ 88%] Built target test_action_compute_path_through_poses_action
+[11.270s] [ 89%] Built target test_action_smooth_path_action
+[11.271s] [ 90%] Built target test_action_navigate_to_pose_action
+[11.293s] [ 90%] Built target test_action_follow_path_action
+[11.471s] [ 91%] Built target test_action_navigate_through_poses_action
+[11.488s] [ 92%] Built target test_truncate_path_action
+[11.727s] [ 93%] Built target test_remove_passed_goals_action
+[11.727s] [ 94%] Built target test_truncate_path_local_action
+[11.872s] [ 95%] Built target test_planner_selector_node
+[11.903s] [ 96%] Built target test_get_pose_from_path_action
+[12.091s] [ 97%] Built target test_goal_checker_selector_node
+[12.453s] [ 98%] Built target test_progress_checker_selector_node
+[12.803s] [ 99%] Built target test_smoother_selector_node
+[13.165s] [100%] Built target test_controller_selector_node
+[13.195s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_behavior_tree' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/nav2_behavior_tree -- -j4 -l4
+[13.284s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_behavior_tree': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/nav2_behavior_tree
+[13.303s] -- Install configuration: "Release"
+[13.308s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_behavior_tree.so
+[13.319s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_compute_path_to_pose_action_bt_node.so
+[13.333s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_compute_path_through_poses_action_bt_node.so
+[13.337s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_controller_cancel_bt_node.so
+[13.346s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_wait_cancel_bt_node.so
+[13.354s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_spin_cancel_bt_node.so
+[13.370s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_back_up_cancel_bt_node.so
+[13.381s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_assisted_teleop_cancel_bt_node.so
+[13.391s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_drive_on_heading_cancel_bt_node.so
+[13.399s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_smooth_path_action_bt_node.so
+[13.405s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_follow_path_action_bt_node.so
+[13.412s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_back_up_action_bt_node.so
+[13.422s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_drive_on_heading_bt_node.so
+[13.427s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_spin_action_bt_node.so
+[13.433s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_wait_action_bt_node.so
+[13.440s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_assisted_teleop_action_bt_node.so
+[13.446s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_clear_costmap_service_bt_node.so
+[13.452s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_is_stuck_condition_bt_node.so
+[13.461s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_transform_available_condition_bt_node.so
+[13.464s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_goal_reached_condition_bt_node.so
+[13.469s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_globally_updated_goal_condition_bt_node.so
+[13.475s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_goal_updated_condition_bt_node.so
+[13.481s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_is_path_valid_condition_bt_node.so
+[13.487s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_time_expired_condition_bt_node.so
+[13.493s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_path_expiring_timer_condition.so
+[13.499s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_distance_traveled_condition_bt_node.so
+[13.504s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_initial_pose_received_condition_bt_node.so
+[13.510s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_is_battery_charging_condition_bt_node.so
+[13.515s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_is_battery_low_condition_bt_node.so
+[13.524s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_reinitialize_global_localization_service_bt_node.so
+[13.533s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_rate_controller_bt_node.so
+[13.537s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_distance_controller_bt_node.so
+[13.547s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_speed_controller_bt_node.so
+[13.553s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_truncate_path_action_bt_node.so
+[13.563s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_truncate_path_local_action_bt_node.so
+[13.572s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_goal_updater_node_bt_node.so
+[13.577s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_path_longer_on_approach_bt_node.so
+[13.586s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_recovery_node_bt_node.so
+[13.594s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_navigate_to_pose_action_bt_node.so
+[13.602s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_navigate_through_poses_action_bt_node.so
+[13.606s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_remove_passed_goals_action_bt_node.so
+[13.772s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_get_pose_from_path_action_bt_node.so
+[13.777s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_pipeline_sequence_bt_node.so
+[13.789s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_round_robin_node_bt_node.so
+[13.794s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_single_trigger_bt_node.so
+[13.823s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_planner_selector_bt_node.so
+[13.824s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_controller_selector_bt_node.so
+[13.830s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_smoother_selector_bt_node.so
+[13.838s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_goal_checker_selector_bt_node.so
+[13.873s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_progress_checker_selector_bt_node.so
+[13.889s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib/libnav2_goal_updated_controller_bt_node.so
+[13.890s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include/
+[13.890s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree
+[13.890s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/behavior_tree_engine.hpp
+[13.891s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/bt_action_node.hpp
+[13.891s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/bt_action_server.hpp
+[13.891s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/bt_action_server_impl.hpp
+[13.891s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/bt_cancel_action_node.hpp
+[13.892s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/bt_conversions.hpp
+[13.892s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/bt_service_node.hpp
+[13.892s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins
+[13.892s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action
+[13.893s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/assisted_teleop_action.hpp
+[13.895s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/assisted_teleop_cancel_node.hpp
+[13.895s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/back_up_action.hpp
+[13.895s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/back_up_cancel_node.hpp
+[13.895s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/clear_costmap_service.hpp
+[13.896s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/compute_path_through_poses_action.hpp
+[13.896s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/compute_path_to_pose_action.hpp
+[13.897s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/controller_cancel_node.hpp
+[13.897s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/controller_selector_node.hpp
+[13.897s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/drive_on_heading_action.hpp
+[13.898s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/drive_on_heading_cancel_node.hpp
+[13.898s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/follow_path_action.hpp
+[13.898s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/get_pose_from_path_action.hpp
+[13.898s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/goal_checker_selector_node.hpp
+[13.899s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/navigate_through_poses_action.hpp
+[13.899s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/navigate_to_pose_action.hpp
+[13.899s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/planner_selector_node.hpp
+[13.899s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/progress_checker_selector_node.hpp
+[13.900s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/reinitialize_global_localization_service.hpp
+[13.900s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/remove_passed_goals_action.hpp
+[13.900s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/smooth_path_action.hpp
+[13.900s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/smoother_selector_node.hpp
+[13.901s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/spin_action.hpp
+[13.909s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/spin_cancel_node.hpp
+[13.910s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/truncate_path_action.hpp
+[13.910s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/truncate_path_local_action.hpp
+[13.910s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/wait_action.hpp
+[13.911s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/action/wait_cancel_node.hpp
+[13.911s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition
+[13.911s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/distance_traveled_condition.hpp
+[13.911s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/globally_updated_goal_condition.hpp
+[13.912s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/goal_reached_condition.hpp
+[13.912s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/goal_updated_condition.hpp
+[13.912s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/initial_pose_received_condition.hpp
+[13.912s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/is_battery_charging_condition.hpp
+[13.913s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/is_battery_low_condition.hpp
+[13.917s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/is_path_valid_condition.hpp
+[13.917s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/is_stuck_condition.hpp
+[13.918s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/path_expiring_timer_condition.hpp
+[13.918s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/time_expired_condition.hpp
+[13.918s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/condition/transform_available_condition.hpp
+[13.918s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/control
+[13.919s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/control/pipeline_sequence.hpp
+[13.919s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/control/recovery_node.hpp
+[13.919s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/control/round_robin_node.hpp
+[13.919s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/decorator
+[13.920s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/decorator/distance_controller.hpp
+[13.920s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/decorator/goal_updated_controller.hpp
+[13.920s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/decorator/goal_updater_node.hpp
+[13.920s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/decorator/path_longer_on_approach.hpp
+[13.921s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/decorator/rate_controller.hpp
+[13.921s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/decorator/single_trigger_node.hpp
+[13.921s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/plugins/decorator/speed_controller.hpp
+[13.922s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/include//nav2_behavior_tree/ros_topic_logger.hpp
+[13.933s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/nav2_tree_nodes.xml
+[13.934s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/environment/library_path.sh
+[13.935s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/environment/library_path.dsv
+[13.935s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/ament_index/resource_index/package_run_dependencies/nav2_behavior_tree
+[13.936s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/ament_index/resource_index/parent_prefix_path/nav2_behavior_tree
+[13.936s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/environment/ament_prefix_path.sh
+[13.937s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/environment/ament_prefix_path.dsv
+[13.938s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/environment/path.sh
+[13.938s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/environment/path.dsv
+[13.938s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/local_setup.bash
+[13.939s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/local_setup.sh
+[13.939s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/local_setup.zsh
+[13.940s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/local_setup.dsv
+[13.940s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/package.dsv
+[14.014s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/ament_index/resource_index/packages/nav2_behavior_tree
+[14.023s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/cmake/ament_cmake_export_include_directories-extras.cmake
+[14.024s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/cmake/ament_cmake_export_libraries-extras.cmake
+[14.024s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/cmake/ament_cmake_export_dependencies-extras.cmake
+[14.024s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/cmake/nav2_behavior_treeConfig.cmake
+[14.024s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/cmake/nav2_behavior_treeConfig-version.cmake
+[14.025s] -- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/share/nav2_behavior_tree/package.xml
+[14.059s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/nav2_behavior_tree' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/nav2_behavior_tree

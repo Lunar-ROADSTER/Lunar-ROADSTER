@@ -1,0 +1,32 @@
+imu_node:
+  ros__parameters:
+    device_name: '/dev/cg_dev/tty_imu'
+    baud_rate: 115200
+    pub_freq: 20  # Publishing frequency in Hz
+    publish_viz: false
+    zero_offset: # Constant offset to be subtracted from raw measurements
+      linear_acc: # m/s^2
+        x: 0.0
+        y: 0.0
+        z: 0.3
+      angular_vel: # rad/s
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      orientation: # rad
+        x: 0.0 # roll
+        y: 0.010472 # pitch, offset 0.6deg
+        z: 0.0 # yaw
+    variance: # Measurement variance values (squared RMS)
+      linear_acc: # m/s^2
+        x: 0.00017424
+        y: 0.00019044
+        z: 0.0003294225
+      angular_vel: # rad/s
+        x: 1.1881e-06
+        y: 5.86756e-07
+        z: 5.29984e-07
+      orientation: # rad
+        x: 4.1822e-09
+        y: 5.2720e-09
+        z: 6.0e-9  # Arbitrary value, has not been measured

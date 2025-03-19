@@ -1,0 +1,3 @@
+lx_msgs/BermConfig berm
+geometry_msgs/PointStamped[] restricted_zone_coordinates
+geometry_msgs/PointStamped[] excavation_zone_coordinates

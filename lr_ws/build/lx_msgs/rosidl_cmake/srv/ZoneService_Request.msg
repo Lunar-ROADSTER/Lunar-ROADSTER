@@ -1,0 +1,2 @@
+string zone_type
+geometry_msgs/PointStamped[] zone_coordinates

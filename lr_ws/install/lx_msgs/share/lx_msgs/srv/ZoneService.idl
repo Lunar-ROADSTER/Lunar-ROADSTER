@@ -1,0 +1,18 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from lx_msgs/srv/ZoneService.srv
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/PointStamped.idl"
+
+module lx_msgs {
+  module srv {
+    struct ZoneService_Request {
+      string zone_type;
+
+      sequence<geometry_msgs::msg::PointStamped> zone_coordinates;
+    };
+    struct ZoneService_Response {
+      boolean success;
+    };
+  };
+};

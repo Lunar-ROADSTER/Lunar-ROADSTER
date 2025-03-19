@@ -1,0 +1,97 @@
+[0.496s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/costmap_queue': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_dwb_controller/costmap_queue -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/costmap_queue
+[1.296s] -- The C compiler identification is GNU 11.4.0
+[1.718s] -- The CXX compiler identification is GNU 11.4.0
+[1.795s] -- Detecting C compiler ABI info
+[2.430s] -- Detecting C compiler ABI info - done
+[2.546s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.561s] -- Detecting C compile features
+[2.562s] -- Detecting C compile features - done
+[2.611s] -- Detecting CXX compiler ABI info
+[3.240s] -- Detecting CXX compiler ABI info - done
+[3.343s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[3.343s] -- Detecting CXX compile features
+[3.359s] -- Detecting CXX compile features - done
+[3.423s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[4.544s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[5.447s] -- Found nav2_common: 1.1.18 (/root/Lunar_ROADSTER/lr_ws/install/nav2_common/share/nav2_common/cmake)
+[5.465s] -- Found nav2_costmap_2d: 1.1.18 (/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/share/nav2_costmap_2d/cmake)
+[6.124s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[6.204s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[6.330s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[6.482s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[6.651s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[7.650s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[7.680s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[8.666s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[8.859s] -- Found FastRTPS: /opt/ros/humble/include  
+[9.230s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[9.347s] -- Looking for pthread.h
+[10.011s] -- Looking for pthread.h - found
+[10.016s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[10.694s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[10.702s] -- Found Threads: TRUE  
+[12.909s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[12.909s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[13.924s] -- Setting build type to Release as none was specified.
+[13.973s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[14.783s] -- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+[15.176s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[15.179s] -- Configured cppcheck include dirs: /root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_dwb_controller/costmap_queue/include
+[15.180s] -- Configured cppcheck exclude dirs and/or files: 
+[15.212s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[15.212s] -- Configured cpplint exclude dirs and/or files: 
+[15.230s] -- Added test 'lint_cmake' to check CMake code style
+[15.281s] -- Added test 'uncrustify' to check C / C++ code style
+[15.282s] -- Configured uncrustify additional arguments: 
+[15.293s] -- Added test 'xmllint' to check XML markup files
+[15.328s] -- Configuring done
+[16.428s] -- Generating done
+[16.587s] -- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/costmap_queue
+[16.651s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/costmap_queue' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_dwb_controller/costmap_queue -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/costmap_queue
+[16.658s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/costmap_queue': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/costmap_queue -- -j4 -l4
+[16.841s] [  9%] [32mBuilding CXX object CMakeFiles/costmap_queue.dir/src/costmap_queue.cpp.o[0m
+[23.815s] [ 18%] [32mBuilding CXX object CMakeFiles/costmap_queue.dir/src/limited_costmap_queue.cpp.o[0m
+[28.897s] [ 27%] [32m[1mLinking CXX shared library libcostmap_queue.so[0m
+[29.634s] [ 27%] Built target costmap_queue
+[29.695s] [ 36%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[70.897s] [ 45%] [32m[1mLinking CXX static library libgtest.a[0m
+[71.177s] [ 45%] Built target gtest
+[71.236s] [ 54%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[76.068s] [ 63%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[76.485s] [ 63%] Built target gtest_main
+[76.629s] [ 72%] [32mBuilding CXX object CMakeFiles/mbq_test.dir/test/mbq_test.cpp.o[0m
+[84.792s] [ 81%] [32m[1mLinking CXX executable mbq_test[0m
+[86.144s] [ 81%] Built target mbq_test
+[86.220s] [ 90%] [32mBuilding CXX object CMakeFiles/utest.dir/test/utest.cpp.o[0m
+[108.091s] [100%] [32m[1mLinking CXX executable utest[0m
+[109.471s] [100%] Built target utest
+[109.505s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/costmap_queue' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/costmap_queue -- -j4 -l4
+[109.508s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/costmap_queue': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/costmap_queue
+[109.529s] -- Install configuration: "Release"
+[109.535s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/lib/libcostmap_queue.so
+[109.541s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/costmap_queue/lib/libcostmap_queue.so" to ""
+[109.543s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/include/
+[109.549s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/include//costmap_queue
+[109.554s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/include//costmap_queue/costmap_queue.hpp
+[109.557s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/include//costmap_queue/limited_costmap_queue.hpp
+[109.560s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/include//costmap_queue/map_based_queue.hpp
+[109.569s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/environment/library_path.sh
+[109.574s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/environment/library_path.dsv
+[109.582s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/ament_index/resource_index/package_run_dependencies/costmap_queue
+[109.589s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/ament_index/resource_index/parent_prefix_path/costmap_queue
+[109.599s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/environment/ament_prefix_path.sh
+[109.601s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/environment/ament_prefix_path.dsv
+[109.604s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/environment/path.sh
+[109.608s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/environment/path.dsv
+[109.610s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/local_setup.bash
+[109.614s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/local_setup.sh
+[109.616s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/local_setup.zsh
+[109.619s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/local_setup.dsv
+[109.621s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/package.dsv
+[109.625s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/ament_index/resource_index/packages/costmap_queue
+[109.630s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/cmake/ament_cmake_export_include_directories-extras.cmake
+[109.634s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/cmake/ament_cmake_export_libraries-extras.cmake
+[109.637s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/cmake/costmap_queueConfig.cmake
+[109.639s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/cmake/costmap_queueConfig-version.cmake
+[109.642s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/costmap_queue/share/costmap_queue/package.xml
+[109.660s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/costmap_queue' returned '0': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/costmap_queue

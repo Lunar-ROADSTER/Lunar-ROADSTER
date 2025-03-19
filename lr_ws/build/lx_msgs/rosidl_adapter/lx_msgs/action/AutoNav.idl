@@ -1,0 +1,21 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from lx_msgs/action/AutoNav.action
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/PoseStamped.idl"
+
+module lx_msgs {
+  module action {
+    struct AutoNav_Goal {
+      geometry_msgs::msg::PoseStamped goal;
+
+      int32 next;
+    };
+    struct AutoNav_Result {
+      boolean success;
+    };
+    struct AutoNav_Feedback {
+      string status;
+    };
+  };
+};
