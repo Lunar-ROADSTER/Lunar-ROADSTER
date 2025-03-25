@@ -22,15 +22,7 @@ WorldModel::WorldModel() : Node("global_mapping_node")
     // Setup Maps
     configureMaps();
 
-    // Initializing occupancy grid
-    this->global_map_.data.resize(global_map_.info.width*global_map_.info.height);
-    this->filtered_global_map_.data.resize(global_map_.info.width*global_map_.info.height);
-    for(size_t i = 0; i < this->global_map_.info.width*this->global_map_.info.height; i++){
-        this->global_map_.data[i] = 0;
-        this->filtered_global_map_.data[i] = 0;
-    }
-
-    RCLCPP_INFO(this->get_logger(), "World Model initialized");
+    RCLCPP_INFO(this->get_logger(), "Global mapping initialized");
 }
 
 // Setup
@@ -74,6 +66,14 @@ void WorldModel::configureMaps(){
     for(size_t i = 0; i < global_map_.info.width*global_map_.info.height; i++){
         BayesFilter bf;
         bayes_filter_.push_back(bf);
+    }
+
+    // Initialize occupancy grid
+    this->global_map_.data.resize(global_map_.info.width*global_map_.info.height);
+    this->filtered_global_map_.data.resize(global_map_.info.width*global_map_.info.height);
+    for(size_t i = 0; i < this->global_map_.info.width*this->global_map_.info.height; i++){
+        this->global_map_.data[i] = 0;
+        this->filtered_global_map_.data[i] = 0;
     }
 }
 
@@ -208,6 +208,6 @@ void WorldModel::filterMap(){
 
 // Map publishers
 void WorldModel::publishGlobalMap(){
-    global_map_publisher_->publish(global_map_);
+    // global_map_publisher_->publish(global_map_);
     filtered_global_map_publisher_->publish(filtered_global_map_);
 }

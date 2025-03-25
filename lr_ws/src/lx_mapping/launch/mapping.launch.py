@@ -22,17 +22,17 @@ def generate_launch_description():
             parameters=[{'use_sim_time': use_sim_time_param}]
         )
     
-    # world_model_node = Node(
-    #         package='lx_mapping',
-    #         executable='world_model_node',
-    #         name='world_model_node',
-    #         emulate_tty=True,
-    #         parameters=[{'use_sim_time': use_sim_time_param}]
-    #     )
+    local_mapping_node = Node(
+            package='lx_mapping',
+            executable='local_mapping_node',
+            name='local_mapping_node',
+            emulate_tty=True,
+            parameters=[{'use_sim_time': use_sim_time_param}]
+        )
 
     ld = LaunchDescription()
     ld.add_action(pc_handler_node)
     ld.add_action(global_mapping_node)
-    # ld.add_action(world_model_node)
+    ld.add_action(local_mapping_node)
 
     return ld
