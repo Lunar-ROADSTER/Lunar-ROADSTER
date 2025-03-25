@@ -14,34 +14,25 @@ def generate_launch_description():
             parameters=[{'use_sim_time': use_sim_time_param}]
         )
     
-    auto_dump_visual_servoing_node = Node(
-            package='lx_mapping',
-            executable='visual_servoing_node',
-            name='auto_dump_visual_servoing_node',
+    global_mapping_node = Node(
+            package='mapping',
+            executable='global_mapping_node',
+            name='global_mapping_node',
             emulate_tty=True,
             parameters=[{'use_sim_time': use_sim_time_param}]
         )
     
-    world_model_node = Node(
-            package='lx_mapping',
-            executable='world_model_node',
-            name='world_model_node',
-            emulate_tty=True,
-            parameters=[{'use_sim_time': use_sim_time_param}]
-        )
-    
-    berm_evaluation_node = Node(
-            package='lx_mapping',
-            executable='berm_evaluation_node',
-            name='berm_evaluation_node',
+    local_mapping_node = Node(
+            package='mapping',
+            executable='local_mapping_node',
+            name='local_mapping_node',
             emulate_tty=True,
             parameters=[{'use_sim_time': use_sim_time_param}]
         )
 
     ld = LaunchDescription()
     ld.add_action(pc_handler_node)
-    ld.add_action(world_model_node)
-    ld.add_action(auto_dump_visual_servoing_node)
-    ld.add_action(berm_evaluation_node)
+    ld.add_action(global_mapping_node)
+    ld.add_action(local_mapping_node)
 
     return ld

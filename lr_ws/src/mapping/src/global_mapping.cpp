@@ -9,7 +9,7 @@
  * */
 
 
-#include "lx_mapping/global_mapping.hpp"
+#include "mapping/global_mapping.hpp"
 
 #define GETMAXINDEX(x, y, width) ((y) * (width) + (x))
 
@@ -80,7 +80,8 @@ void WorldModel::configureMaps(){
 
 // Pointcloud callback
 void WorldModel::transformedPCLCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg){
-    fuse_map_thread_ = std::thread(std::bind(&WorldModel::fuseMap, this, msg));
+    auto msg_copy = std::make_shared<sensor_msgs::msg::PointCloud2>(*msg);
+    fuse_map_thread_ = std::thread(std::bind(&WorldModel::fuseMap, this, msg_copy));
 
     // Have to detach thread before it goes out of scope
     fuse_map_thread_.detach();

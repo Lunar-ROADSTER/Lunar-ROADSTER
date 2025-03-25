@@ -1,4 +1,4 @@
-#include "lx_mapping/local_mapping.hpp"
+#include "mapping/global_mapping.hpp"
 
 int main(int argc, char** argv){
 	rclcpp::init(argc, argv);

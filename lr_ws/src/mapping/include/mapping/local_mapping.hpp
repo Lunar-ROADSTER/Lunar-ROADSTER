@@ -5,7 +5,6 @@
 #include "bayes_filter.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
 #include "nav_msgs/msg/occupancy_grid.hpp"
-#include "lx_msgs/srv/switch.hpp"
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl_conversions/pcl_conversions.h>
@@ -16,8 +15,6 @@
 #include <tf2_sensor_msgs/tf2_sensor_msgs.hpp>
 #include <thread>
 #include <vector>
-#include "lx_msgs/srv/request_rover_service.hpp"
-#include "lx_library/lx_utils.hpp"
 
 class WorldModel : public rclcpp::Node
 {
@@ -63,6 +60,12 @@ class WorldModel : public rclcpp::Node
         *
         */
         void configureMaps();
+        
+
+        /*
+        *
+        */
+        void resetMaps();
 
         /*
         *

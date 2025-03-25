@@ -3,9 +3,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
-#include "lx_msgs/srv/switch.hpp"
 #include "std_msgs/msg/float64.hpp"
-
 #include <tf2_ros/transform_listener.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <tf2_ros/buffer.h>
@@ -20,8 +18,31 @@
 #include <pcl/common/transforms.h>
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <pcl/filters/passthrough.h>
-#include "lx_msgs/srv/pcl_ground_height.hpp"
-#include "lx_library/lx_utils.hpp"
+
+class ExpFilter{
+    public:
+        double DECAY_RATE;
+        double prev_output;
+        int itr = 0;
+        ExpFilter(double decay_rate = 0.9)
+        {
+            this->DECAY_RATE = decay_rate;
+            this->prev_output = 0.0;
+        }
+        double getValue(double input)
+        {
+            if(itr==0)
+            {
+                this->prev_output = input;
+                itr++;
+            }
+            else
+            {
+                this->prev_output = this->DECAY_RATE*this->prev_output + (1-this->DECAY_RATE)*input;
+            }
+            return this->prev_output;
+        }
+};
 
 class PointCloudHandler : public rclcpp::Node
 {
@@ -30,9 +51,7 @@ class PointCloudHandler : public rclcpp::Node
         const double MAP_DIMENSION = 8.0;
         const double MAP_RESOLUTION = 0.05;
         const bool debug_mode_ = false;
-        double tool_height_wrt_base_link_;
         bool need_ground_height_ = false;
-        const double CROP_DISTANCE_FROM_TOP_M = 0.24; //more value, more crop from top
         geometry_msgs::msg::TransformStamped cam2map_transform;
         // Transforms
         std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
@@ -40,15 +59,12 @@ class PointCloudHandler : public rclcpp::Node
         // Subscribers
         std::thread pointcloud_thread_;
         rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr pointcloud_subscriber_;
-        rclcpp::Subscription<std_msgs::msg::Float64>::SharedPtr tool_height_subscriber_;
         // Publishers
         rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr transformed_pointcloud_publisher_;
         rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr ground_height_publisher_;
         rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr ground_pointcloud_publisher_;
-        // Service
-        rclcpp::Service<lx_msgs::srv::PclGroundHeight>::SharedPtr pcl_ground_height_service_;
-        ExpFilter exp_height_filter_;
 
+        ExpFilter exp_height_filter_;
 
         //
         // --------------------------------------
@@ -67,16 +83,7 @@ class PointCloudHandler : public rclcpp::Node
         /*
         *
         * */
-        void toolHeightCallback(const std_msgs::msg::Float64::SharedPtr );
-
-        /*
-        *
-        * */
         void processPointCloud(const sensor_msgs::msg::PointCloud2::SharedPtr );
-
-        void pclGroundHeightCallback(const std::shared_ptr<lx_msgs::srv::PclGroundHeight::Request> ,
-                                    const std::shared_ptr<lx_msgs::srv::PclGroundHeight::Response> );
-
 
     public:
         // Functions

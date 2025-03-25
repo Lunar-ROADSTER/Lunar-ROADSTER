@@ -9,7 +9,7 @@
  * */
 
 
-#include "lx_mapping/local_mapping.hpp"
+#include "mapping/local_mapping.hpp"
 
 #define GETMAXINDEX(x, y, width) ((y) * (width) + (x))
 
@@ -18,6 +18,9 @@ WorldModel::WorldModel() : Node("local_mapping_node")
 
     // Setup Communications
     setupCommunications();
+
+    // Setup map
+    configureMaps();
 
     RCLCPP_INFO(this->get_logger(), "Local mapping initialized");
 }
@@ -74,10 +77,19 @@ void WorldModel::configureMaps(){
     }
 }
 
+void WorldModel::resetMaps(){
+
+    for(size_t i = 0; i < this->local_map_.info.width*this->local_map_.info.height; i++){
+        this->local_map_.data[i] = 0;
+        this->filtered_local_map_.data[i] = 0;
+    }
+}
+
 
 // Pointcloud callback
 void WorldModel::transformedPCLCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg){
-    fuse_map_thread_ = std::thread(std::bind(&WorldModel::fuseMap, this, msg));
+    auto msg_copy = std::make_shared<sensor_msgs::msg::PointCloud2>(*msg);
+    fuse_map_thread_ = std::thread(std::bind(&WorldModel::fuseMap, this, msg_copy));
 
     // Have to detach thread before it goes out of scope
     fuse_map_thread_.detach();

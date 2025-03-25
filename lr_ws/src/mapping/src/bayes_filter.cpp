@@ -1,12 +1,10 @@
-/* Author: Anish Senathi
+/* Author: TODO
  *
- * - Implements the Bayes Filter for localization
- * - Updates the elevation and variance of the cell
- * - Returns the elevation and variance of the cell
+ * - TODO
  * */
 
 
-#include "lx_mapping/bayes_filter.hpp"
+#include "mapping/bayes_filter.hpp"
 
 BayesFilter::BayesFilter(){
     this->cellElevation = 0.0;

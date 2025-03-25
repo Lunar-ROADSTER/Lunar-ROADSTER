@@ -2,7 +2,6 @@
 #define BAYES_FILTER_H
 
 #include "rclcpp/rclcpp.hpp"
-#include "lx_msgs/srv/switch.hpp"
 #include <thread>
 
 
