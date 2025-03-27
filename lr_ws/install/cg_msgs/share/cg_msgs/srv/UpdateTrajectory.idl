@@ -1,0 +1,20 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from cg_msgs/srv/UpdateTrajectory.srv
+// generated code does not contain a copyright notice
+
+#include "cg_msgs/msg/Trajectory.idl"
+
+module cg_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "request")
+    struct UpdateTrajectory_Request {
+      cg_msgs::msg::Trajectory trajectory;
+    };
+    @verbatim (language="comment", text=
+      "response")
+    struct UpdateTrajectory_Response {
+      boolean updated_trajectory;
+    };
+  };
+};

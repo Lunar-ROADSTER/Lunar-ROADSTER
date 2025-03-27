@@ -21,6 +21,7 @@ WorldModel::WorldModel() : Node("global_mapping_node")
 
     // Setup Maps
     configureMaps();
+    initFuse = true;
 
     RCLCPP_INFO(this->get_logger(), "Global mapping initialized");
 }
@@ -75,8 +76,18 @@ void WorldModel::configureMaps(){
         this->global_map_.data[i] = 0;
         this->filtered_global_map_.data[i] = 0;
     }
-}
 
+    // Preload saved map if it exists
+    RCLCPP_INFO(this->get_logger(), "Loading map...");
+    auto map_msg = lr::mapping::getMapFromPCD();
+    RCLCPP_INFO(this->get_logger(), "Map loaded");
+    if (map_msg) {
+        transformedPCLCallback(map_msg);
+        RCLCPP_INFO(this->get_logger(), "Map preload successful");
+    } else {
+        RCLCPP_ERROR(this->get_logger(), "Map preload failed");
+    }
+}
 
 // Pointcloud callback
 void WorldModel::transformedPCLCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg){
@@ -90,14 +101,19 @@ void WorldModel::transformedPCLCallback(const sensor_msgs::msg::PointCloud2::Sha
 void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {
 
     pcl::PointCloud<pcl::PointXYZ>::Ptr cropped_cloud_local_map(new pcl::PointCloud<pcl::PointXYZ>);
-    try
-    {
-        cropped_cloud_local_map = transformMap(msg);
+    if (initFuse) {
+        pcl::fromROSMsg(*msg, *cropped_cloud_local_map);
     }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-        return;
+    else {
+        try
+        {
+            cropped_cloud_local_map = transformMap(msg);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+            return;
+        }
     }
 
     std::vector<double> elevation_values(global_map_.info.width*global_map_.info.height, 0.0);
@@ -124,6 +140,34 @@ void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {
     }
     
     filterMap();
+
+    if (initFuse) {
+        initFuse = false;
+        RCLCPP_INFO(this->get_logger(), "Initial elevation map fuse successful");
+        saveGlobalMapCSV();
+    }
+}
+
+void WorldModel::saveGlobalMapCSV() {
+    std::string csv_filename = std::string(MAPPING_SOURCE_DIR) + "/mapping_util/filtered_global_map.csv";
+    std::ofstream csv_file(csv_filename);
+
+    if (csv_file.is_open()) {
+        for (size_t y = 0; y < filtered_global_map_.info.height; ++y) {
+            for (size_t x = 0; x < filtered_global_map_.info.width; ++x) {
+                size_t idx = x + y * filtered_global_map_.info.width;
+                csv_file << static_cast<int>(filtered_global_map_.data[idx]);
+                if (x < filtered_global_map_.info.width - 1) {
+                    csv_file << ",";
+                }
+            }
+            csv_file << "\n";
+        }
+        csv_file.close();
+        RCLCPP_INFO(this->get_logger(), "Filtered elevation map saved to %s", csv_filename.c_str());
+    } else {
+        RCLCPP_WARN(this->get_logger(), "Failed to open file for CSV export");
+    }
 }
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr WorldModel::transformMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {

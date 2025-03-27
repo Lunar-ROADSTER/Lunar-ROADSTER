@@ -3,6 +3,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "bayes_filter.hpp"
+#include "init_map.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
 #include "nav_msgs/msg/occupancy_grid.hpp"
 #include <pcl/point_cloud.h>
@@ -20,7 +21,8 @@ class WorldModel : public rclcpp::Node
 {
     private:
         // Variables & pointers -----------------
-        const double MAP_DIMENSION = 8.0;
+        bool initFuse;
+        const double MAP_DIMENSION = 7.0;
         const double MAP_RESOLUTION = 0.05;
         const double ELEVATION_SCALE = 400;
         nav_msgs::msg::OccupancyGrid global_map_, 
@@ -82,6 +84,11 @@ class WorldModel : public rclcpp::Node
         */
 
         void publishGlobalMap();
+        /*
+        *
+        */
+
+        void saveGlobalMapCSV();
 
     public:
         // Functions

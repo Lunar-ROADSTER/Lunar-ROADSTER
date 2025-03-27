@@ -15,6 +15,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# find saved map directory
+add_definitions(-DMAPPING_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -33,7 +36,7 @@ find_package(visualization_msgs REQUIRED)
 
 include_directories(include)
 
-add_executable(global_mapping_node src/global_mapping_node.cpp src/global_mapping.cpp src/bayes_filter.cpp include/mapping/bayes_filter.hpp)
+add_executable(global_mapping_node src/global_mapping_node.cpp src/global_mapping.cpp src/bayes_filter.cpp include/mapping/bayes_filter.hpp src/init_map.cpp include/mapping/init_map.hpp)
 ament_target_dependencies(global_mapping_node rclcpp tf2_geometry_msgs std_msgs sensor_msgs tf2_sensor_msgs geometry_msgs nav_msgs tf2_ros tf2_eigen tf2 pcl_ros pcl_conversions)
 
 add_executable(local_mapping_node src/local_mapping_node.cpp src/local_mapping.cpp src/bayes_filter.cpp include/mapping/bayes_filter.hpp)

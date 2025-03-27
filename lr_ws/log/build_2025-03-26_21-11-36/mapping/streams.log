@@ -1,0 +1,17 @@
+[0.020s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/mapping -- -j12 -l12
+[0.105s] [35m[1mConsolidate compiler generated dependencies of target global_mapping_node[0m
+[0.128s] [ 33%] Built target local_mapping_node
+[0.133s] [ 58%] Built target pc_handler_node
+[0.155s] [ 66%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o[0m
+[0.156s] [ 75%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/global_mapping_node.cpp.o[0m
+[0.156s] [ 83%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/init_map.cpp.o[0m
+[9.809s] [ 91%] [32m[1mLinking CXX executable global_mapping_node[0m
+[9.867s] /usr/bin/ld: CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o:(.bss+0x0): multiple definition of `lr::mapping::filename[abi:cxx11]'; CMakeFiles/global_mapping_node.dir/src/global_mapping_node.cpp.o:(.bss+0x0): first defined here
+[9.867s] /usr/bin/ld: CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o:(.bss+0x20): multiple definition of `lr::mapping::cloud_msg'; CMakeFiles/global_mapping_node.dir/src/global_mapping_node.cpp.o:(.bss+0x20): first defined here
+[9.874s] /usr/bin/ld: CMakeFiles/global_mapping_node.dir/src/init_map.cpp.o:(.bss+0x0): multiple definition of `lr::mapping::filename[abi:cxx11]'; CMakeFiles/global_mapping_node.dir/src/global_mapping_node.cpp.o:(.bss+0x0): first defined here
+[9.874s] /usr/bin/ld: CMakeFiles/global_mapping_node.dir/src/init_map.cpp.o:(.bss+0x20): multiple definition of `lr::mapping::cloud_msg'; CMakeFiles/global_mapping_node.dir/src/global_mapping_node.cpp.o:(.bss+0x20): first defined here
+[10.558s] collect2: error: ld returned 1 exit status
+[10.559s] gmake[2]: *** [CMakeFiles/global_mapping_node.dir/build.make:473: global_mapping_node] Error 1
+[10.560s] gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/global_mapping_node.dir/all] Error 2
+[10.560s] gmake: *** [Makefile:146: all] Error 2
+[10.562s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/mapping' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/mapping -- -j12 -l12
