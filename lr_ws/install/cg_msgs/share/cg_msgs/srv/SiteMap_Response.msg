@@ -1,0 +1,5 @@
+
+#response
+cg_msgs/SiteMap site_map
+bool map_fully_explored
+bool success

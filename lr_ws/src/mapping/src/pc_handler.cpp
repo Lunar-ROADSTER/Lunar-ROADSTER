@@ -1,29 +1,14 @@
-/* Author: Anish Senathi
- * Subscribers:
- *    - /tool_height: [StdMsgs/Float64] Height of the tool wrt base link
- *    - /camera/depth/color/points: [SensorMsgs/PointCloud2] Point cloud from the camera
- * Publishers:
- *    - /mapping/transformed_pointcloud: [SensorMsgs/PointCloud2] Transformed point cloud
- *    - /mapping/pcl_ground_height: [StdMsgs/Float64] Ground height
- *    - /mapping/ground_pointcloud: [SensorMsgs/PointCloud2] Ground point cloud
- * Services:
- *    - /mapping/pcl_ground_height_srv: [LxMsgs/PclGroundHeight] Service to get the ground height from the tool for AutoDig control
- *
- * - Summary
- * - Takes in the point cloud from the camera and transforms it to the base link frame
- * - Crops the point cloud to the desired region and publishes it
- * - Publishes the ground height and the ground point cloud if needed
+/* Author: Boxiang Fu
+ * TODO
  * */
 
 
-#include "lx_mapping/pc_handler.hpp"
+#include "mapping/pc_handler.hpp"
 
 PointCloudHandler::PointCloudHandler() : Node("pc_handler_node")
 {       
     // Setup Communications
     setupCommunications();
-
-    this->tool_height_wrt_base_link_ = 1000.0;
 
     RCLCPP_INFO(this->get_logger(), "Point Cloud Handler initialized");
 }
@@ -31,18 +16,12 @@ PointCloudHandler::PointCloudHandler() : Node("pc_handler_node")
 
 void PointCloudHandler::setupCommunications(){
     // Subscribers
-    tool_height_subscriber_ = this->create_subscription<std_msgs::msg::Float64>("tool_height", 10, 
-                                                                                        std::bind(&PointCloudHandler::toolHeightCallback, this, std::placeholders::_1));
-    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("camera/depth/color/points", 10, 
+    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("camera/camera/depth/color/points", 10, 
                                                                                         std::bind(&PointCloudHandler::processPointCloud, this, std::placeholders::_1));
     // Publishers
     transformed_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("mapping/transformed_pointcloud", 10);
     ground_height_publisher_ = this->create_publisher<std_msgs::msg::Float64>("mapping/pcl_ground_height", 10);
     ground_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("mapping/ground_pointcloud", 10);
-    
-    // Service
-    pcl_ground_height_service_ = this->create_service<lx_msgs::srv::PclGroundHeight>("mapping/pcl_ground_height_srv", 
-                                                                                        std::bind(&PointCloudHandler::pclGroundHeightCallback, this, std::placeholders::_1, std::placeholders::_2));
     
     // Transform Listener
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock(), tf2::durationFromSec(100000000));    
@@ -50,21 +29,10 @@ void PointCloudHandler::setupCommunications(){
 }
 
 
-void PointCloudHandler::toolHeightCallback(const std_msgs::msg::Float64::SharedPtr msg){
-   tool_height_wrt_base_link_ = msg->data;
-}
-
-
 void PointCloudHandler::pointCloudCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg){
     pointcloud_thread_ = std::thread(std::bind(&PointCloudHandler::processPointCloud, this, msg));
 
     pointcloud_thread_.detach();
-}
-
-void PointCloudHandler::pclGroundHeightCallback(const std::shared_ptr<lx_msgs::srv::PclGroundHeight::Request> req,
-                                                const std::shared_ptr<lx_msgs::srv::PclGroundHeight::Response> res){
-    this->need_ground_height_ = req->need_height;
-    res->success = true;
 }
 
 void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::SharedPtr msg){
@@ -124,54 +92,43 @@ void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::S
         RCLCPP_INFO(this->get_logger(), "Model coefficients: %f %f %f %f", coefficients->values[0], coefficients->values[1], coefficients->values[2], coefficients->values[3]);
     }
 
-    //crop the point cloud to the desired region
+    // crop the point cloud to the desired region
     pcl::PointCloud<pcl::PointXYZ>::Ptr result_cloud (new pcl::PointCloud<pcl::PointXYZ>);
     pcl::CropBox<pcl::PointXYZ> cropFilter;
     cropFilter.setInputCloud(transformed_cloud);
-    
-    // TODO: check for z direction
-    if(this->tool_height_wrt_base_link_ == 1000.0){
-        // When no tool height has been received, use a default value
-        cropFilter.setMax(Eigen::Vector4f(1000, 1000, 0.28, 1.0));
-    }
-    else{
-        // Crop region above the tool
-        cropFilter.setMax(Eigen::Vector4f(1000, 1000, tool_height_wrt_base_link_-CROP_DISTANCE_FROM_TOP_M, 1.0));
-    }
+    cropFilter.setMax(Eigen::Vector4f(1000, 1000, 20.0, 1.0));
     cropFilter.setMin(Eigen::Vector4f(-1000, -1000, -20.0, 1.0));
     cropFilter.filter(*result_cloud);
 
-    if(this->need_ground_height_){
-        // crop the point cloud to the desired region (x_min = 0.7, xmax=1.1, y_min=0, y_max=0.5)
+    // // determine the ground height of a cropped region
+    // // crop the point cloud to the desired region
+    // pcl::PointCloud<pcl::PointXYZ>::Ptr cropped_cloud_ground (new pcl::PointCloud<pcl::PointXYZ>);
+    // pcl::CropBox<pcl::PointXYZ> cropFilterGround;
+    // cropFilterGround.setInputCloud(result_cloud);
+    // cropFilterGround.setMax(Eigen::Vector4f(1.0, 0.2, 1000, 1.0));
+    // cropFilterGround.setMin(Eigen::Vector4f(0.7, -0.2, -1000, 1.0));
+    // cropFilterGround.filter(*cropped_cloud_ground);
 
-        pcl::PointCloud<pcl::PointXYZ>::Ptr cropped_cloud_ground (new pcl::PointCloud<pcl::PointXYZ>);
-        pcl::CropBox<pcl::PointXYZ> cropFilterGround;
-        cropFilterGround.setInputCloud(result_cloud);
-        cropFilterGround.setMax(Eigen::Vector4f(1.0, 0.2, 1000, 1.0));
-        cropFilterGround.setMin(Eigen::Vector4f(0.7, -0.2, -1000, 1.0));
-        cropFilterGround.filter(*cropped_cloud_ground);
-
-        // get average z value of cropped point cloud and publish it
-        double avg_z = 0.0;
-        if (cropped_cloud_ground->points.size() != 0)
-        {
-            for(size_t i=0; i<cropped_cloud_ground->points.size(); i++){
-                avg_z += cropped_cloud_ground->points[i].z;
-            }
-            avg_z /= cropped_cloud_ground->points.size();
-        }
-        std_msgs::msg::Float64 avg_z_msg;
-        avg_z_msg.data = exp_height_filter_.getValue(avg_z);
-        ground_height_publisher_->publish(avg_z_msg);
-        //publish the pointcloud if debug mode is on
-        if (debug_mode_)
-        {
-            sensor_msgs::msg::PointCloud2 cropped_cloud_msg;
-            pcl::toROSMsg(*cropped_cloud_ground, cropped_cloud_msg);
-            cropped_cloud_msg.header.frame_id = "base_link";
-            ground_pointcloud_publisher_->publish(cropped_cloud_msg);
-        }
-    }
+    // // get average z value of cropped point cloud and publish it
+    // double avg_z = 0.0;
+    // if (cropped_cloud_ground->points.size() != 0)
+    // {
+    //     for(size_t i=0; i<cropped_cloud_ground->points.size(); i++){
+    //         avg_z += cropped_cloud_ground->points[i].z;
+    //     }
+    //     avg_z /= cropped_cloud_ground->points.size();
+    // }
+    // std_msgs::msg::Float64 avg_z_msg;
+    // avg_z_msg.data = exp_height_filter_.getValue(avg_z);
+    // ground_height_publisher_->publish(avg_z_msg);
+    // // publish the pointcloud if debug mode is on
+    // if (debug_mode_)
+    // {
+    //     sensor_msgs::msg::PointCloud2 cropped_cloud_msg;
+    //     pcl::toROSMsg(*cropped_cloud_ground, cropped_cloud_msg);
+    //     cropped_cloud_msg.header.frame_id = "base_link";
+    //     ground_pointcloud_publisher_->publish(cropped_cloud_msg);
+    // }
 
     sensor_msgs::msg::PointCloud2 result_msg;
     pcl::toROSMsg(*result_cloud, result_msg);   

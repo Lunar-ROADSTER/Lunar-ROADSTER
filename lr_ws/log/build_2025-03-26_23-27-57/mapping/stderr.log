@@ -1,0 +1,12 @@
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/mapping/src/global_mapping.cpp:[m[K In member function ‘[01m[Kvoid WorldModel::fuseMap(sensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr)[m[K’:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/mapping/src/global_mapping.cpp:147:25:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KWorldModel::saveGlobalMapCSV(nav_msgs::msg::OccupancyGrid&)[m[K’
+  147 |         [01;31m[KsaveGlobalMapCSV(filtered_global_map_)[m[K;
+      |         [01;31m[K~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/mapping/src/global_mapping.cpp:12[m[K:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/mapping/include/mapping/global_mapping.hpp:91:14:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kvoid WorldModel::saveGlobalMapCSV()[m[K’
+   91 |         void [01;36m[KsaveGlobalMapCSV[m[K();
+      |              [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/mapping/include/mapping/global_mapping.hpp:91:14:[m[K [01;36m[Knote: [m[K  candidate expects 0 arguments, 1 provided
+gmake[2]: *** [CMakeFiles/global_mapping_node.dir/build.make:90: CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/global_mapping_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
