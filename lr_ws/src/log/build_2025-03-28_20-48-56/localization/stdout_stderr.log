@@ -1,0 +1,21 @@
+[  9%] [32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o[0m
+[ 18%] [32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o[0m
+[ 36%] Built target kalman_filter_linear
+[ 63%] Built target imu_tf_publisher
+[35m[1mConsolidate compiler generated dependencies of target slip_estimate_node[0m
+[ 90%] Built target slip_estimate_node
+In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1[m[K:
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13:10:[m[K [01;31m[Kfatal error: [m[Klx_msgs/action/calibrate_imu.hpp: No such file or directory
+   13 | #include [01;31m[K"lx_msgs/action/calibrate_imu.hpp"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:90: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3[m[K:
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13:10:[m[K [01;31m[Kfatal error: [m[Klx_msgs/action/calibrate_imu.hpp: No such file or directory
+   13 | #include [01;31m[K"lx_msgs/action/calibrate_imu.hpp"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:76: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/ts_prism_transformer.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

@@ -43,6 +43,66 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/global_mapping_node" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/global_mapping_node")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/global_mapping_node"
+         RPATH "")
+  endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mapping" TYPE EXECUTABLE FILES "/root/Lunar_ROADSTER/lr_ws/build/mapping/global_mapping_node")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/global_mapping_node" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/global_mapping_node")
+    file(RPATH_CHANGE
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/global_mapping_node"
+         OLD_RPATH "/root/microros_ws/install/nav_msgs/lib:/root/microros_ws/install/sensor_msgs/lib:/root/microros_ws/install/std_msgs/lib:/root/microros_ws/install/action_msgs/lib:/root/microros_ws/install/unique_identifier_msgs/lib:/root/microros_ws/install/geometry_msgs/lib:/root/microros_ws/install/rosgraph_msgs/lib:/root/microros_ws/install/statistics_msgs/lib:/root/microros_ws/install/composition_interfaces/lib:/root/microros_ws/install/rcl_interfaces/lib:/root/microros_ws/install/builtin_interfaces/lib:/opt/ros/humble/lib:"
+         NEW_RPATH "")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/global_mapping_node")
+    endif()
+  endif()
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/local_mapping_node" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/local_mapping_node")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/local_mapping_node"
+         RPATH "")
+  endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mapping" TYPE EXECUTABLE FILES "/root/Lunar_ROADSTER/lr_ws/build/mapping/local_mapping_node")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/local_mapping_node" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/local_mapping_node")
+    file(RPATH_CHANGE
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/local_mapping_node"
+         OLD_RPATH "/root/microros_ws/install/nav_msgs/lib:/root/microros_ws/install/sensor_msgs/lib:/root/microros_ws/install/std_msgs/lib:/root/microros_ws/install/action_msgs/lib:/root/microros_ws/install/unique_identifier_msgs/lib:/root/microros_ws/install/geometry_msgs/lib:/root/microros_ws/install/rosgraph_msgs/lib:/root/microros_ws/install/statistics_msgs/lib:/root/microros_ws/install/composition_interfaces/lib:/root/microros_ws/install/rcl_interfaces/lib:/root/microros_ws/install/builtin_interfaces/lib:/opt/ros/humble/lib:"
+         NEW_RPATH "")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/local_mapping_node")
+    endif()
+  endif()
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/pc_handler_node" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/pc_handler_node")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/pc_handler_node"
+         RPATH "")
+  endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mapping" TYPE EXECUTABLE FILES "/root/Lunar_ROADSTER/lr_ws/build/mapping/pc_handler_node")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/pc_handler_node" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/pc_handler_node")
+    file(RPATH_CHANGE
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/pc_handler_node"
+         OLD_RPATH "/root/microros_ws/install/nav_msgs/lib:/root/microros_ws/install/sensor_msgs/lib:/root/microros_ws/install/std_msgs/lib:/root/microros_ws/install/action_msgs/lib:/root/microros_ws/install/unique_identifier_msgs/lib:/root/microros_ws/install/geometry_msgs/lib:/root/microros_ws/install/rosgraph_msgs/lib:/root/microros_ws/install/statistics_msgs/lib:/root/microros_ws/install/composition_interfaces/lib:/root/microros_ws/install/rcl_interfaces/lib:/root/microros_ws/install/builtin_interfaces/lib:/opt/ros/humble/lib:"
+         NEW_RPATH "")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mapping/pc_handler_node")
+    endif()
+  endif()
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mapping" TYPE DIRECTORY FILES "/root/Lunar_ROADSTER/lr_ws/src/mapping/launch")
 endif()
 

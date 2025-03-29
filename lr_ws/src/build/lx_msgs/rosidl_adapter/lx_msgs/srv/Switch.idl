@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from lx_msgs/srv/Switch.srv
+// generated code does not contain a copyright notice
+
+#include "lx_msgs/msg/BermSection.idl"
+
+module lx_msgs {
+  module srv {
+    struct Switch_Request {
+      boolean switch_state;
+
+      lx_msgs::msg::BermSection current_berm_segment;
+
+      lx_msgs::msg::BermSection prev_berm_segment;
+
+      boolean first_seg_dump;
+    };
+    struct Switch_Response {
+      boolean success;
+    };
+  };
+};

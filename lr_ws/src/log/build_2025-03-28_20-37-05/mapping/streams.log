@@ -1,0 +1,131 @@
+[0.188s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/src/build/mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/mapping -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/src/install/mapping
+[1.534s] -- The C compiler identification is GNU 11.4.0
+[2.142s] -- The CXX compiler identification is GNU 11.4.0
+[2.213s] -- Detecting C compiler ABI info
+[2.662s] -- Detecting C compiler ABI info - done
+[2.704s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.708s] -- Detecting C compile features
+[2.712s] -- Detecting C compile features - done
+[2.733s] -- Detecting CXX compiler ABI info
+[3.181s] -- Detecting CXX compiler ABI info - done
+[3.233s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[3.234s] -- Detecting CXX compile features
+[3.236s] -- Detecting CXX compile features - done
+[3.409s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[4.373s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[6.850s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[8.694s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[9.005s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[9.318s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[9.675s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[10.179s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[11.743s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[11.895s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[13.504s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[13.795s] -- Found FastRTPS: /opt/ros/humble/include  
+[14.278s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[14.730s] -- Looking for pthread.h
+[15.172s] -- Looking for pthread.h - found
+[15.177s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[15.568s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[15.573s] -- Found Threads: TRUE  
+[16.577s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[17.039s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[17.271s] -- Found tf2_ros: 0.25.12 (/opt/ros/humble/share/tf2_ros/cmake)
+[19.380s] -- Found tf2_eigen: 0.25.12 (/opt/ros/humble/share/tf2_eigen/cmake)
+[19.695s] -- Found tf2_sensor_msgs: 0.25.12 (/opt/ros/humble/share/tf2_sensor_msgs/cmake)
+[19.987s] -- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)
+[20.591s] -- Checking for module 'eigen3'
+[20.700s] --   Found eigen3, version 3.4.0
+[21.001s] -- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+[21.001s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[22.287s] -- Checking for module 'flann'
+[22.400s] --   Found flann, version 1.9.1
+[22.712s] -- Found FLANN: /usr/lib/aarch64-linux-gnu/libflann_cpp.so  
+[22.712s] -- FLANN found (include: /usr/include, lib: /usr/lib/aarch64-linux-gnu/libflann_cpp.so)
+[28.988s] -- Checking for module 'libusb-1.0'
+[29.108s] --   Found libusb-1.0, version 1.0.25
+[29.396s] -- Found libusb: /usr/lib/aarch64-linux-gnu/libusb-1.0.so  
+[29.401s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[29.856s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/aarch64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[30.632s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[30.674s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[30.716s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/aarch64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[31.525s] -- Found Qhull version 8.0.2
+[32.204s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[32.897s] -- Found PCL_COMMON: /usr/lib/aarch64-linux-gnu/libpcl_common.so  
+[32.903s] -- Found PCL_KDTREE: /usr/lib/aarch64-linux-gnu/libpcl_kdtree.so  
+[32.908s] -- Found PCL_OCTREE: /usr/lib/aarch64-linux-gnu/libpcl_octree.so  
+[32.913s] -- Found PCL_SEARCH: /usr/lib/aarch64-linux-gnu/libpcl_search.so  
+[32.916s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/aarch64-linux-gnu/libpcl_sample_consensus.so  
+[32.919s] -- Found PCL_FILTERS: /usr/lib/aarch64-linux-gnu/libpcl_filters.so  
+[32.921s] -- Found PCL_2D: /usr/include/pcl-1.12  
+[32.922s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.12  
+[32.926s] -- Found PCL_IO: /usr/lib/aarch64-linux-gnu/libpcl_io.so  
+[32.931s] -- Found PCL_FEATURES: /usr/lib/aarch64-linux-gnu/libpcl_features.so  
+[32.935s] -- Found PCL_ML: /usr/lib/aarch64-linux-gnu/libpcl_ml.so  
+[32.939s] -- Found PCL_SEGMENTATION: /usr/lib/aarch64-linux-gnu/libpcl_segmentation.so  
+[32.945s] -- Found PCL_VISUALIZATION: /usr/lib/aarch64-linux-gnu/libpcl_visualization.so  
+[32.949s] -- Found PCL_SURFACE: /usr/lib/aarch64-linux-gnu/libpcl_surface.so  
+[32.953s] -- Found PCL_REGISTRATION: /usr/lib/aarch64-linux-gnu/libpcl_registration.so  
+[32.956s] -- Found PCL_KEYPOINTS: /usr/lib/aarch64-linux-gnu/libpcl_keypoints.so  
+[32.961s] -- Found PCL_TRACKING: /usr/lib/aarch64-linux-gnu/libpcl_tracking.so  
+[32.965s] -- Found PCL_RECOGNITION: /usr/lib/aarch64-linux-gnu/libpcl_recognition.so  
+[32.968s] -- Found PCL_STEREO: /usr/lib/aarch64-linux-gnu/libpcl_stereo.so  
+[32.971s] -- Found PCL_APPS: /usr/lib/aarch64-linux-gnu/libpcl_apps.so  
+[32.975s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.12  
+[32.977s] -- Found PCL_MODELER: /usr/include/pcl-1.12  
+[32.981s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.12  
+[32.986s] -- Found PCL_OUTOFCORE: /usr/lib/aarch64-linux-gnu/libpcl_outofcore.so  
+[32.989s] -- Found PCL_PEOPLE: /usr/lib/aarch64-linux-gnu/libpcl_people.so  
+[33.455s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[33.455s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[33.595s] -- Found visualization_msgs: 4.2.4 (/opt/ros/humble/share/visualization_msgs/cmake)
+[34.565s] -- Configuring done
+[35.647s] -- Generating done
+[35.831s] -- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/src/build/mapping
+[35.905s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/src/build/mapping' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/mapping -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/src/install/mapping
+[35.917s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/src/build/mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/src/build/mapping -- -j4 -l4
+[36.190s] [  8%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/local_mapping_node.cpp.o[0m
+[36.190s] [ 16%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/local_mapping.cpp.o[0m
+[36.192s] [ 25%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/global_mapping_node.cpp.o[0m
+[36.195s] [ 33%] [32mBuilding CXX object CMakeFiles/pc_handler_node.dir/src/pc_handler_node.cpp.o[0m
+[77.998s] [ 41%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/bayes_filter.cpp.o[0m
+[79.125s] [ 50%] [32mBuilding CXX object CMakeFiles/pc_handler_node.dir/src/pc_handler.cpp.o[0m
+[79.850s] [ 58%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o[0m
+[92.660s] [ 66%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/bayes_filter.cpp.o[0m
+[107.225s] [ 75%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/init_map.cpp.o[0m
+[108.391s] [ 83%] [32m[1mLinking CXX executable local_mapping_node[0m
+[114.713s] [ 83%] Built target local_mapping_node
+[148.847s] [ 91%] [32m[1mLinking CXX executable pc_handler_node[0m
+[150.666s] [100%] [32m[1mLinking CXX executable global_mapping_node[0m
+[154.386s] [100%] Built target pc_handler_node
+[154.669s] [100%] Built target global_mapping_node
+[154.709s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/src/build/mapping' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/src/build/mapping -- -j4 -l4
+[154.748s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/src/build/mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/src/build/mapping
+[154.770s] -- Install configuration: ""
+[154.777s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/lib/mapping/global_mapping_node
+[154.820s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/src/install/mapping/lib/mapping/global_mapping_node" to ""
+[154.821s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/lib/mapping/local_mapping_node
+[154.859s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/src/install/mapping/lib/mapping/local_mapping_node" to ""
+[154.859s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/lib/mapping/pc_handler_node
+[154.900s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/src/install/mapping/lib/mapping/pc_handler_node" to ""
+[154.904s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/launch
+[154.907s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/launch/mapping.launch.py
+[154.908s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/launch/rviz_config.rviz
+[154.914s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/ament_index/resource_index/package_run_dependencies/mapping
+[154.917s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/ament_index/resource_index/parent_prefix_path/mapping
+[154.920s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/environment/ament_prefix_path.sh
+[154.922s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/environment/ament_prefix_path.dsv
+[154.923s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/environment/path.sh
+[154.924s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/environment/path.dsv
+[154.925s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/local_setup.bash
+[154.926s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/local_setup.sh
+[154.927s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/local_setup.zsh
+[154.928s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/local_setup.dsv
+[154.929s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/package.dsv
+[154.932s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/ament_index/resource_index/packages/mapping
+[154.936s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/cmake/mappingConfig.cmake
+[154.937s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/cmake/mappingConfig-version.cmake
+[154.938s] -- Installing: /root/Lunar_ROADSTER/lr_ws/src/install/mapping/share/mapping/package.xml
+[154.946s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/src/build/mapping' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/src/build/mapping

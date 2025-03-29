@@ -1,0 +1,116 @@
+[33mCMake Warning at CMakeLists.txt:39 (add_executable):
+  Cannot generate a safe runtime search path for target global_mapping_node
+  because there is a cycle in the constraint graph:
+
+    dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+    dir 1 is [/opt/ros/humble/lib]
+      dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+      dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+    dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+      dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+    dir 3 is [/root/microros_ws/install/std_msgs/lib]
+      dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+    dir 4 is [/root/microros_ws/install/action_msgs/lib]
+    dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+    dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+      dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+    dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+      dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+    dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+      dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+    dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+    dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+    dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+      dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+
+  Some of these libraries may not be found correctly.
+
+[0m
+[33mCMake Warning at CMakeLists.txt:42 (add_executable):
+  Cannot generate a safe runtime search path for target local_mapping_node
+  because there is a cycle in the constraint graph:
+
+    dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+    dir 1 is [/opt/ros/humble/lib]
+      dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+      dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+    dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+      dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+    dir 3 is [/root/microros_ws/install/std_msgs/lib]
+      dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+    dir 4 is [/root/microros_ws/install/action_msgs/lib]
+    dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+    dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+      dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+    dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+      dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+    dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+      dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+    dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+    dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+    dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+      dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+
+  Some of these libraries may not be found correctly.
+
+[0m
+[33mCMake Warning at CMakeLists.txt:45 (add_executable):
+  Cannot generate a safe runtime search path for target pc_handler_node
+  because there is a cycle in the constraint graph:
+
+    dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+    dir 1 is [/opt/ros/humble/lib]
+      dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+      dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+    dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+      dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+    dir 3 is [/root/microros_ws/install/std_msgs/lib]
+      dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+    dir 4 is [/root/microros_ws/install/action_msgs/lib]
+    dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+    dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+      dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+    dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+      dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+    dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+      dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+    dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+    dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+    dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+      dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+
+  Some of these libraries may not be found correctly.
+
+[0m
+gmake[2]: *** [CMakeFiles/global_mapping_node.dir/build.make:90: CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o] Interrupt
+gmake[2]: *** [CMakeFiles/local_mapping_node.dir/build.make:104: CMakeFiles/local_mapping_node.dir/src/bayes_filter.cpp.o] Interrupt
+gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/global_mapping_node.dir/all] Interrupt
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/local_mapping_node.dir/all] Interrupt
+gmake: *** [Makefile:146: all] Interrupt

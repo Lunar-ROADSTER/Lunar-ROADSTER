@@ -94,9 +94,15 @@ def generate_launch_description():
         default_value='False',
         description='Whether run a SLAM')
 
+    # declare_map_yaml_cmd = DeclareLaunchArgument(
+    #     'map',
+    #     description='Full path to map yaml file to load')
+
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        description='Full path to map yaml file to load')
+        default_value=os.path.join(
+            bringup_dir, 'maps', 'map.yaml'),
+        description='Full path to map file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
@@ -129,6 +135,15 @@ def generate_launch_description():
         PushRosNamespace(
             condition=IfCondition(use_namespace),
             namespace=namespace),
+        
+        Node(
+            package='nav2_map_server',
+            executable='map_server',
+            name='map_server',
+            output='screen',
+            parameters=[{'yaml_filename': map_yaml_file}],
+            remappings=remappings
+        ),
 
         Node(
             condition=IfCondition(use_composition),
@@ -149,18 +164,18 @@ def generate_launch_description():
                               'use_respawn': use_respawn,
                               'params_file': params_file}.items()),
 
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(launch_dir,
-                                                       'localization_launch.py')),
-            condition=IfCondition(PythonExpression(['not ', slam])),
-            launch_arguments={'namespace': namespace,
-                              'map': map_yaml_file,
-                              'use_sim_time': use_sim_time,
-                              'autostart': autostart,
-                              'params_file': params_file,
-                              'use_composition': use_composition,
-                              'use_respawn': use_respawn,
-                              'container_name': 'nav2_container'}.items()),
+        # IncludeLaunchDescription(
+        #     PythonLaunchDescriptionSource(os.path.join(launch_dir,
+        #                                                'localization_launch.py')),
+        #     condition=IfCondition(PythonExpression(['not ', slam])),
+        #     launch_arguments={'namespace': namespace,
+        #                       'map': map_yaml_file,
+        #                       'use_sim_time': use_sim_time,
+        #                       'autostart': autostart,
+        #                       'params_file': params_file,
+        #                       'use_composition': use_composition,
+        #                       'use_respawn': use_respawn,
+        #                       'container_name': 'nav2_container'}.items()),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(launch_dir, 'navigation_launch.py')),

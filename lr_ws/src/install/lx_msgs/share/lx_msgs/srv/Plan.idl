@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from lx_msgs/srv/Plan.srv
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Point.idl"
+#include "lx_msgs/msg/PlannedTask.idl"
+
+module lx_msgs {
+  module srv {
+    struct Plan_Request {
+      sequence<geometry_msgs::msg::Point> berm_input;
+
+      float berm_height;
+
+      float section_length;
+
+      boolean new_plan;
+    };
+    struct Plan_Response {
+      sequence<lx_msgs::msg::PlannedTask> plan;
+    };
+  };
+};

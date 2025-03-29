@@ -111,11 +111,11 @@ def generate_launch_description():
         'use_respawn', default_value='False',
         description='Whether to respawn if a node crashes. Applied when composition is disabled.')
 
-    declare_rviz_config_file_cmd = DeclareLaunchArgument(
-        'rviz_config_file',
-        default_value=os.path.join(
-            bringup_dir, 'rviz', 'nav2_default_view.rviz'),
-        description='Full path to the RVIZ config file to use')
+    # declare_rviz_config_file_cmd = DeclareLaunchArgument(
+    #     'rviz_config_file',
+    #     default_value=os.path.join(
+    #         bringup_dir, 'rviz', 'nav2_default_view.rviz'),
+    #     description='Full path to the RVIZ config file to use')
 
     declare_use_simulator_cmd = DeclareLaunchArgument(
         'use_simulator',
@@ -137,24 +137,24 @@ def generate_launch_description():
         default_value='True',
         description='Whether to execute gzclient)')
 
-    declare_world_cmd = DeclareLaunchArgument(
-        'world',
-        # TODO(orduno) Switch back once ROS argument passing has been fixed upstream
-        #              https://github.com/ROBOTIS-GIT/turtlebot3_simulations/issues/91
-        # default_value=os.path.join(get_package_share_directory('turtlebot3_gazebo'),
-        # worlds/turtlebot3_worlds/waffle.model')
-        default_value=os.path.join(bringup_dir, 'worlds', 'world_only.model'),
-        description='Full path to world model file to load')
+    # declare_world_cmd = DeclareLaunchArgument(
+    #     'world',
+    #     # TODO(orduno) Switch back once ROS argument passing has been fixed upstream
+    #     #              https://github.com/ROBOTIS-GIT/turtlebot3_simulations/issues/91
+    #     # default_value=os.path.join(get_package_share_directory('turtlebot3_gazebo'),
+    #     # worlds/turtlebot3_worlds/waffle.model')
+    #     default_value=os.path.join(bringup_dir, 'worlds', 'world_only.model'),
+    #     description='Full path to world model file to load')
 
-    declare_robot_name_cmd = DeclareLaunchArgument(
-        'robot_name',
-        default_value='turtlebot3_waffle',
-        description='name of the robot')
+    # declare_robot_name_cmd = DeclareLaunchArgument(
+    #     'robot_name',
+    #     default_value='turtlebot3_waffle',
+    #     description='name of the robot')
 
-    declare_robot_sdf_cmd = DeclareLaunchArgument(
-        'robot_sdf',
-        default_value=os.path.join(bringup_dir, 'worlds', 'waffle.model'),
-        description='Full path to robot sdf file to spawn the robot in gazebo')
+    # declare_robot_sdf_cmd = DeclareLaunchArgument(
+    #     'robot_sdf',
+    #     default_value=os.path.join(bringup_dir, 'worlds', 'waffle.model'),
+    #     description='Full path to robot sdf file to spawn the robot in gazebo')
 
     # Specify the actions
     # start_gazebo_server_cmd = ExecuteProcess(
@@ -169,20 +169,20 @@ def generate_launch_description():
     #     cmd=['gzclient'],
     #     cwd=[launch_dir], output='screen')
 
-    urdf = os.path.join(bringup_dir, 'urdf', 'lr_rover.urdf')
-    with open(urdf, 'r') as infp:
-        robot_description = infp.read()
+    # urdf = os.path.join(bringup_dir, 'urdf', 'lr_rover.urdf')
+    # with open(urdf, 'r') as infp:
+    #     robot_description = infp.read()
 
-    start_robot_state_publisher_cmd = Node(
-        condition=IfCondition(use_robot_state_pub),
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        name='robot_state_publisher',
-        namespace=namespace,
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time,
-                     'robot_description': robot_description}],
-        remappings=remappings)
+    # start_robot_state_publisher_cmd = Node(
+    #     condition=IfCondition(use_robot_state_pub),
+    #     package='robot_state_publisher',
+    #     executable='robot_state_publisher',
+    #     name='robot_state_publisher',
+    #     namespace=namespace,
+    #     output='screen',
+    #     parameters=[{'use_sim_time': use_sim_time,
+    #                  'robot_description': robot_description}],
+    #     remappings=remappings)
 
     # start_gazebo_spawner_cmd = Node(
     #     package='gazebo_ros',

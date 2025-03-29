@@ -1,0 +1,28 @@
+[0.130s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/src/build/localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/src/build/localization -- -j4 -l4
+[0.310s] [35m[1mConsolidate compiler generated dependencies of target kalman_filter_linear[0m
+[0.329s] [35m[1mConsolidate compiler generated dependencies of target imu_tf_publisher[0m
+[0.363s] [  9%] [32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o[0m
+[0.390s] [ 18%] [32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o[0m
+[0.417s] [ 36%] Built target kalman_filter_linear
+[0.529s] [ 63%] Built target imu_tf_publisher
+[0.563s] [ 72%] [32mBuilding CXX object CMakeFiles/slip_estimate_node.dir/src/slip_estimate_main.cpp.o[0m
+[0.580s] [ 81%] [32mBuilding CXX object CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.o[0m
+[2.185s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3[m[K:
+[2.186s] [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13:10:[m[K [01;31m[Kfatal error: [m[Klx_msgs/action/calibrate_imu.hpp: No such file or directory
+[2.186s]    13 | #include [01;31m[K"lx_msgs/action/calibrate_imu.hpp"[m[K
+[2.186s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.187s] compilation terminated.
+[2.197s] gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:76: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o] Error 1
+[2.198s] gmake[2]: *** Waiting for unfinished jobs....
+[2.243s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1[m[K:
+[2.244s] [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13:10:[m[K [01;31m[Kfatal error: [m[Klx_msgs/action/calibrate_imu.hpp: No such file or directory
+[2.245s]    13 | #include [01;31m[K"lx_msgs/action/calibrate_imu.hpp"[m[K
+[2.246s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.246s] compilation terminated.
+[2.260s] gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:90: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o] Error 1
+[2.261s] gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/ts_prism_transformer.dir/all] Error 2
+[2.261s] gmake[1]: *** Waiting for unfinished jobs....
+[49.936s] [ 90%] [32m[1mLinking CXX executable slip_estimate_node[0m
+[55.743s] [ 90%] Built target slip_estimate_node
+[55.745s] gmake: *** [Makefile:146: all] Error 2
+[55.753s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/src/build/localization' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/src/build/localization -- -j4 -l4

@@ -1,0 +1,562 @@
+[0.000000] (-) TimerEvent: {}
+[0.001635] (-) JobUnselected: {'identifier': 'arduino'}
+[0.002532] (-) JobUnselected: {'identifier': 'cg_msgs'}
+[0.002703] (-) JobUnselected: {'identifier': 'costmap_queue'}
+[0.002797] (-) JobUnselected: {'identifier': 'dwb_core'}
+[0.002898] (-) JobUnselected: {'identifier': 'dwb_critics'}
+[0.003005] (-) JobUnselected: {'identifier': 'dwb_msgs'}
+[0.003089] (-) JobUnselected: {'identifier': 'dwb_plugins'}
+[0.003163] (-) JobUnselected: {'identifier': 'imu'}
+[0.003239] (-) JobUnselected: {'identifier': 'lx_msgs'}
+[0.003318] (-) JobUnselected: {'identifier': 'mapping'}
+[0.003394] (-) JobUnselected: {'identifier': 'motion_control'}
+[0.003470] (-) JobUnselected: {'identifier': 'nav2_amcl'}
+[0.003543] (-) JobUnselected: {'identifier': 'nav2_behavior_tree'}
+[0.003618] (-) JobUnselected: {'identifier': 'nav2_behaviors'}
+[0.003730] (-) JobUnselected: {'identifier': 'nav2_bringup'}
+[0.003992] (-) JobUnselected: {'identifier': 'nav2_bt_navigator'}
+[0.004091] (-) JobUnselected: {'identifier': 'nav2_collision_monitor'}
+[0.004289] (-) JobUnselected: {'identifier': 'nav2_common'}
+[0.004374] (-) JobUnselected: {'identifier': 'nav2_constrained_smoother'}
+[0.004460] (-) JobUnselected: {'identifier': 'nav2_controller'}
+[0.004541] (-) JobUnselected: {'identifier': 'nav2_core'}
+[0.004619] (-) JobUnselected: {'identifier': 'nav2_costmap_2d'}
+[0.004692] (-) JobUnselected: {'identifier': 'nav2_dwb_controller'}
+[0.004767] (-) JobUnselected: {'identifier': 'nav2_graceful_controller'}
+[0.004840] (-) JobUnselected: {'identifier': 'nav2_lifecycle_manager'}
+[0.004917] (-) JobUnselected: {'identifier': 'nav2_map_server'}
+[0.005012] (-) JobUnselected: {'identifier': 'nav2_mppi_controller'}
+[0.005105] (-) JobUnselected: {'identifier': 'nav2_msgs'}
+[0.005361] (-) JobUnselected: {'identifier': 'nav2_navfn_planner'}
+[0.005448] (-) JobUnselected: {'identifier': 'nav2_planner'}
+[0.005520] (-) JobUnselected: {'identifier': 'nav2_regulated_pure_pursuit_controller'}
+[0.005589] (-) JobUnselected: {'identifier': 'nav2_rotation_shim_controller'}
+[0.005660] (-) JobUnselected: {'identifier': 'nav2_rviz_plugins'}
+[0.005726] (-) JobUnselected: {'identifier': 'nav2_simple_commander'}
+[0.005792] (-) JobUnselected: {'identifier': 'nav2_smac_planner'}
+[0.005859] (-) JobUnselected: {'identifier': 'nav2_smoother'}
+[0.005925] (-) JobUnselected: {'identifier': 'nav2_system_tests'}
+[0.006009] (-) JobUnselected: {'identifier': 'nav2_theta_star_planner'}
+[0.006091] (-) JobUnselected: {'identifier': 'nav2_util'}
+[0.006243] (-) JobUnselected: {'identifier': 'nav2_velocity_smoother'}
+[0.006402] (-) JobUnselected: {'identifier': 'nav2_voxel_grid'}
+[0.006479] (-) JobUnselected: {'identifier': 'nav2_waypoint_follower'}
+[0.006561] (-) JobUnselected: {'identifier': 'nav_2d_msgs'}
+[0.006640] (-) JobUnselected: {'identifier': 'nav_2d_utils'}
+[0.006714] (-) JobUnselected: {'identifier': 'navigation2'}
+[0.006787] (-) JobUnselected: {'identifier': 'realsense'}
+[0.006861] (-) JobUnselected: {'identifier': 'realsense2_camera'}
+[0.006934] (-) JobUnselected: {'identifier': 'realsense2_camera_msgs'}
+[0.007011] (-) JobUnselected: {'identifier': 'realsense2_description'}
+[0.007088] (-) JobUnselected: {'identifier': 'sensing'}
+[0.007171] (-) JobUnselected: {'identifier': 'teleop'}
+[0.007259] (-) JobUnselected: {'identifier': 'vectornav'}
+[0.007333] (-) JobUnselected: {'identifier': 'vectornav_msgs'}
+[0.007434] (localization) JobQueued: {'identifier': 'localization', 'dependencies': OrderedDict([('cg_msgs', '/root/Lunar_ROADSTER/lr_ws/install/cg_msgs'), ('lx_msgs', '/root/Lunar_ROADSTER/lr_ws/install/lx_msgs')])}
+[0.007675] (localization) JobStarted: {'identifier': 'localization'}
+[0.096776] (-) TimerEvent: {}
+[0.198591] (-) TimerEvent: {}
+[0.220682] (localization) JobProgress: {'identifier': 'localization', 'progress': 'cmake'}
+[0.223800] (localization) JobProgress: {'identifier': 'localization', 'progress': 'build'}
+[0.226909] (localization) Command: {'cmd': ['/usr/local/bin/cmake', '--build', '/root/Lunar_ROADSTER/lr_ws/build/localization', '--', '-j4', '-l4'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/localization', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', 'ubuntu'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera/lib:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_core/lib:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor/lib:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/lx_library/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':10'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/teleop:/root/Lunar_ROADSTER/lr_ws/install/sensing:/root/Lunar_ROADSTER/lr_ws/install/realsense2_description:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs:/root/Lunar_ROADSTER/lr_ws/install/realsense:/root/Lunar_ROADSTER/lr_ws/install/nav2_system_tests:/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup:/root/Lunar_ROADSTER/lr_ws/install/navigation2:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics:/root/Lunar_ROADSTER/lr_ws/install/dwb_core:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors:/root/Lunar_ROADSTER/lr_ws/install/nav2_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/root/Lunar_ROADSTER/lr_ws/install/motion_control:/root/Lunar_ROADSTER/lr_ws/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_library:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/imu:/root/Lunar_ROADSTER/lr_ws/install/arduino:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/localization'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander/lib/python3.10/site-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/teleop:/root/Lunar_ROADSTER/lr_ws/install/sensing:/root/Lunar_ROADSTER/lr_ws/install/realsense2_description:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs:/root/Lunar_ROADSTER/lr_ws/install/realsense:/root/Lunar_ROADSTER/lr_ws/install/nav2_system_tests:/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup:/root/Lunar_ROADSTER/lr_ws/install/navigation2:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics:/root/Lunar_ROADSTER/lr_ws/install/dwb_core:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors:/root/Lunar_ROADSTER/lr_ws/install/nav2_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/root/Lunar_ROADSTER/lr_ws/install/motion_control:/root/Lunar_ROADSTER/lr_ws/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_library:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/imu:/root/Lunar_ROADSTER/lr_ws/install/arduino:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble')]), 'shell': False}
+[0.299307] (-) TimerEvent: {}
+[0.400496] (-) TimerEvent: {}
+[0.501472] (-) TimerEvent: {}
+[0.602448] (-) TimerEvent: {}
+[0.703462] (-) TimerEvent: {}
+[0.776677] (localization) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.803712] (-) TimerEvent: {}
+[0.904755] (-) TimerEvent: {}
+[1.005771] (-) TimerEvent: {}
+[1.106698] (-) TimerEvent: {}
+[1.207605] (-) TimerEvent: {}
+[1.309055] (-) TimerEvent: {}
+[1.405361] (localization) StdoutLine: {'line': b'-- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.409112] (-) TimerEvent: {}
+[1.510002] (-) TimerEvent: {}
+[1.611076] (-) TimerEvent: {}
+[1.711997] (-) TimerEvent: {}
+[1.763749] (localization) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.783655] (localization) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.812277] (-) TimerEvent: {}
+[1.829294] (localization) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.912526] (-) TimerEvent: {}
+[1.920153] (localization) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.012804] (-) TimerEvent: {}
+[2.022556] (localization) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.113158] (-) TimerEvent: {}
+[2.214290] (-) TimerEvent: {}
+[2.272433] (localization) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[2.293315] (localization) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[2.314453] (-) TimerEvent: {}
+[2.415299] (-) TimerEvent: {}
+[2.516459] (-) TimerEvent: {}
+[2.617502] (-) TimerEvent: {}
+[2.718604] (-) TimerEvent: {}
+[2.819938] (-) TimerEvent: {}
+[2.921006] (-) TimerEvent: {}
+[3.022663] (-) TimerEvent: {}
+[3.123809] (-) TimerEvent: {}
+[3.225162] (-) TimerEvent: {}
+[3.326856] (-) TimerEvent: {}
+[3.427861] (-) TimerEvent: {}
+[3.528882] (-) TimerEvent: {}
+[3.629885] (-) TimerEvent: {}
+[3.678072] (localization) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[3.730119] (-) TimerEvent: {}
+[3.831055] (-) TimerEvent: {}
+[3.932035] (-) TimerEvent: {}
+[3.994786] (localization) StdoutLine: {'line': b'-- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[4.032327] (-) TimerEvent: {}
+[4.133278] (-) TimerEvent: {}
+[4.149438] (localization) StdoutLine: {'line': b'-- Found cg_msgs: 0.0.0 (/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake)\n'}
+[4.216360] (localization) StdoutLine: {'line': b'-- Found lx_msgs: 0.0.0 (/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/share/lx_msgs/cmake)\n'}
+[4.233389] (-) TimerEvent: {}
+[4.334199] (-) TimerEvent: {}
+[4.428933] (localization) StdoutLine: {'line': b'-- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[4.434327] (-) TimerEvent: {}
+[4.518429] (localization) StdoutLine: {'line': b'-- Found visualization_msgs: 4.2.4 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[4.534565] (-) TimerEvent: {}
+[4.613807] (localization) StdoutLine: {'line': b'-- Found tf2: 0.25.12 (/opt/ros/humble/share/tf2/cmake)\n'}
+[4.634810] (-) TimerEvent: {}
+[4.639256] (localization) StdoutLine: {'line': b'-- Found tf2_ros: 0.25.12 (/opt/ros/humble/share/tf2_ros/cmake)\n'}
+[4.735078] (-) TimerEvent: {}
+[4.835923] (-) TimerEvent: {}
+[4.937000] (-) TimerEvent: {}
+[4.943431] (localization) StdoutLine: {'line': b'-- Found tf2_geometry_msgs: 0.25.12 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)\n'}
+[4.972824] (localization) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[4.981255] (localization) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[5.037256] (-) TimerEvent: {}
+[5.114544] (localization) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[5.137626] (-) TimerEvent: {}
+[5.238555] (-) TimerEvent: {}
+[5.339399] (-) TimerEvent: {}
+[5.440413] (-) TimerEvent: {}
+[5.498214] (localization) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[5.540829] (-) TimerEvent: {}
+[5.548247] (localization) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[5.549933] (localization) StdoutLine: {'line': b'-- Configured cppcheck include dirs: /root/Lunar_ROADSTER/lr_ws/src/localization/include\n'}
+[5.550370] (localization) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[5.597216] (localization) StdoutLine: {'line': b"-- Added test 'cpplint' to check C / C++ code against the Google style\n"}
+[5.598019] (localization) StdoutLine: {'line': b'-- Configured cpplint exclude dirs and/or files: \n'}
+[5.606687] (localization) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[5.621643] (localization) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[5.631180] (localization) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[5.640934] (-) TimerEvent: {}
+[5.670965] (localization) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[5.671717] (localization) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[5.683577] (localization) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[5.689719] (localization) StdoutLine: {'line': b'-- Configuring done\n'}
+[5.741237] (-) TimerEvent: {}
+[5.842213] (-) TimerEvent: {}
+[5.880278] (localization) StdoutLine: {'line': b'-- Generating done\n'}
+[5.934679] (localization) StdoutLine: {'line': b'-- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/localization\n'}
+[5.942500] (-) TimerEvent: {}
+[6.043488] (-) TimerEvent: {}
+[6.073962] (localization) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target kalman_filter_linear\x1b[0m\n'}
+[6.143719] (-) TimerEvent: {}
+[6.226983] (localization) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target imu_tf_publisher\x1b[0m\n'}
+[6.227674] (localization) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target ts_prism_transformer\x1b[0m\n'}
+[6.232693] (localization) StdoutLine: {'line': b'[ 18%] Built target kalman_filter_linear\n'}
+[6.243946] (-) TimerEvent: {}
+[6.348583] (-) TimerEvent: {}
+[6.451020] (-) TimerEvent: {}
+[6.469760] (localization) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target slip_estimate_node\x1b[0m\n'}
+[6.511690] (localization) StdoutLine: {'line': b'[ 45%] Built target imu_tf_publisher\n'}
+[6.544904] (localization) StdoutLine: {'line': b'[ 54%] \x1b[32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o\x1b[0m\n'}
+[6.548756] (localization) StdoutLine: {'line': b'[ 63%] \x1b[32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o\x1b[0m\n'}
+[6.551213] (-) TimerEvent: {}
+[6.623364] (localization) StdoutLine: {'line': b'[ 90%] Built target slip_estimate_node\n'}
+[6.651493] (-) TimerEvent: {}
+[6.752447] (-) TimerEvent: {}
+[6.853306] (-) TimerEvent: {}
+[6.954480] (-) TimerEvent: {}
+[7.056997] (-) TimerEvent: {}
+[7.159103] (-) TimerEvent: {}
+[7.260442] (-) TimerEvent: {}
+[7.362473] (-) TimerEvent: {}
+[7.464439] (-) TimerEvent: {}
+[7.565392] (-) TimerEvent: {}
+[7.666394] (-) TimerEvent: {}
+[7.767365] (-) TimerEvent: {}
+[7.868469] (-) TimerEvent: {}
+[7.971176] (-) TimerEvent: {}
+[8.072244] (-) TimerEvent: {}
+[8.173157] (-) TimerEvent: {}
+[8.276088] (-) TimerEvent: {}
+[8.377084] (-) TimerEvent: {}
+[8.479771] (-) TimerEvent: {}
+[8.581749] (-) TimerEvent: {}
+[8.683943] (-) TimerEvent: {}
+[8.787095] (-) TimerEvent: {}
+[8.888826] (-) TimerEvent: {}
+[8.989932] (-) TimerEvent: {}
+[9.091457] (-) TimerEvent: {}
+[9.193348] (-) TimerEvent: {}
+[9.294274] (-) TimerEvent: {}
+[9.395864] (-) TimerEvent: {}
+[9.497919] (-) TimerEvent: {}
+[9.599514] (-) TimerEvent: {}
+[9.700975] (-) TimerEvent: {}
+[9.802009] (-) TimerEvent: {}
+[9.903774] (-) TimerEvent: {}
+[10.004851] (-) TimerEvent: {}
+[10.105838] (-) TimerEvent: {}
+[10.206825] (-) TimerEvent: {}
+[10.307840] (-) TimerEvent: {}
+[10.408780] (-) TimerEvent: {}
+[10.509806] (-) TimerEvent: {}
+[10.610813] (-) TimerEvent: {}
+[10.711829] (-) TimerEvent: {}
+[10.813655] (-) TimerEvent: {}
+[10.916918] (-) TimerEvent: {}
+[11.017916] (-) TimerEvent: {}
+[11.119207] (-) TimerEvent: {}
+[11.220438] (-) TimerEvent: {}
+[11.321417] (-) TimerEvent: {}
+[11.422624] (-) TimerEvent: {}
+[11.523645] (-) TimerEvent: {}
+[11.625317] (-) TimerEvent: {}
+[11.726308] (-) TimerEvent: {}
+[11.827325] (-) TimerEvent: {}
+[11.928422] (-) TimerEvent: {}
+[12.030417] (-) TimerEvent: {}
+[12.132531] (-) TimerEvent: {}
+[12.235243] (-) TimerEvent: {}
+[12.336913] (-) TimerEvent: {}
+[12.439965] (-) TimerEvent: {}
+[12.541034] (-) TimerEvent: {}
+[12.642077] (-) TimerEvent: {}
+[12.743075] (-) TimerEvent: {}
+[12.844146] (-) TimerEvent: {}
+[12.945283] (-) TimerEvent: {}
+[13.046270] (-) TimerEvent: {}
+[13.148008] (-) TimerEvent: {}
+[13.249804] (-) TimerEvent: {}
+[13.353198] (-) TimerEvent: {}
+[13.454198] (-) TimerEvent: {}
+[13.555574] (-) TimerEvent: {}
+[13.657337] (-) TimerEvent: {}
+[13.758986] (-) TimerEvent: {}
+[13.860488] (-) TimerEvent: {}
+[13.961434] (-) TimerEvent: {}
+[14.062500] (-) TimerEvent: {}
+[14.163469] (-) TimerEvent: {}
+[14.264648] (-) TimerEvent: {}
+[14.365676] (-) TimerEvent: {}
+[14.467254] (-) TimerEvent: {}
+[14.569084] (-) TimerEvent: {}
+[14.671138] (-) TimerEvent: {}
+[14.772178] (-) TimerEvent: {}
+[14.873358] (-) TimerEvent: {}
+[14.974336] (-) TimerEvent: {}
+[15.075984] (-) TimerEvent: {}
+[15.180514] (-) TimerEvent: {}
+[15.284524] (-) TimerEvent: {}
+[15.388497] (-) TimerEvent: {}
+[15.490796] (-) TimerEvent: {}
+[15.592730] (-) TimerEvent: {}
+[15.694751] (-) TimerEvent: {}
+[15.796381] (-) TimerEvent: {}
+[15.898741] (-) TimerEvent: {}
+[16.000425] (-) TimerEvent: {}
+[16.102722] (-) TimerEvent: {}
+[16.204496] (-) TimerEvent: {}
+[16.306429] (-) TimerEvent: {}
+[16.408964] (-) TimerEvent: {}
+[16.512501] (-) TimerEvent: {}
+[16.614352] (-) TimerEvent: {}
+[16.715943] (-) TimerEvent: {}
+[16.817751] (-) TimerEvent: {}
+[16.918806] (-) TimerEvent: {}
+[17.019908] (-) TimerEvent: {}
+[17.121035] (-) TimerEvent: {}
+[17.222022] (-) TimerEvent: {}
+[17.323012] (-) TimerEvent: {}
+[17.424020] (-) TimerEvent: {}
+[17.526380] (-) TimerEvent: {}
+[17.627520] (-) TimerEvent: {}
+[17.728703] (-) TimerEvent: {}
+[17.830233] (-) TimerEvent: {}
+[17.931688] (-) TimerEvent: {}
+[18.033230] (-) TimerEvent: {}
+[18.135623] (-) TimerEvent: {}
+[18.237732] (-) TimerEvent: {}
+[18.338700] (-) TimerEvent: {}
+[18.439737] (-) TimerEvent: {}
+[18.541941] (-) TimerEvent: {}
+[18.643316] (-) TimerEvent: {}
+[18.744472] (-) TimerEvent: {}
+[18.846324] (-) TimerEvent: {}
+[18.947315] (-) TimerEvent: {}
+[19.048398] (-) TimerEvent: {}
+[19.149371] (-) TimerEvent: {}
+[19.250324] (-) TimerEvent: {}
+[19.351220] (-) TimerEvent: {}
+[19.452278] (-) TimerEvent: {}
+[19.553272] (-) TimerEvent: {}
+[19.654244] (-) TimerEvent: {}
+[19.755919] (-) TimerEvent: {}
+[19.857678] (-) TimerEvent: {}
+[19.959436] (-) TimerEvent: {}
+[20.061387] (-) TimerEvent: {}
+[20.163724] (-) TimerEvent: {}
+[20.265255] (-) TimerEvent: {}
+[20.367923] (-) TimerEvent: {}
+[20.470053] (-) TimerEvent: {}
+[20.571571] (-) TimerEvent: {}
+[20.673406] (-) TimerEvent: {}
+[20.775408] (-) TimerEvent: {}
+[20.877104] (-) TimerEvent: {}
+[20.978548] (-) TimerEvent: {}
+[21.081134] (-) TimerEvent: {}
+[21.183532] (-) TimerEvent: {}
+[21.285366] (-) TimerEvent: {}
+[21.386555] (-) TimerEvent: {}
+[21.488309] (-) TimerEvent: {}
+[21.590320] (-) TimerEvent: {}
+[21.692684] (-) TimerEvent: {}
+[21.793792] (-) TimerEvent: {}
+[21.894842] (-) TimerEvent: {}
+[21.995860] (-) TimerEvent: {}
+[22.096888] (-) TimerEvent: {}
+[22.198700] (-) TimerEvent: {}
+[22.300766] (-) TimerEvent: {}
+[22.403879] (-) TimerEvent: {}
+[22.506682] (-) TimerEvent: {}
+[22.607781] (-) TimerEvent: {}
+[22.710740] (-) TimerEvent: {}
+[22.812678] (-) TimerEvent: {}
+[22.913851] (-) TimerEvent: {}
+[23.014907] (-) TimerEvent: {}
+[23.115841] (-) TimerEvent: {}
+[23.217655] (-) TimerEvent: {}
+[23.319294] (-) TimerEvent: {}
+[23.421072] (-) TimerEvent: {}
+[23.522745] (-) TimerEvent: {}
+[23.624766] (-) TimerEvent: {}
+[23.726691] (-) TimerEvent: {}
+[23.827777] (-) TimerEvent: {}
+[23.928897] (-) TimerEvent: {}
+[24.029926] (-) TimerEvent: {}
+[24.130959] (-) TimerEvent: {}
+[24.232928] (-) TimerEvent: {}
+[24.334674] (-) TimerEvent: {}
+[24.436666] (-) TimerEvent: {}
+[24.537874] (-) TimerEvent: {}
+[24.639885] (-) TimerEvent: {}
+[24.742301] (-) TimerEvent: {}
+[24.844891] (-) TimerEvent: {}
+[24.945905] (-) TimerEvent: {}
+[25.047395] (-) TimerEvent: {}
+[25.148625] (-) TimerEvent: {}
+[25.250168] (-) TimerEvent: {}
+[25.352161] (-) TimerEvent: {}
+[25.453554] (-) TimerEvent: {}
+[25.554683] (-) TimerEvent: {}
+[25.655787] (-) TimerEvent: {}
+[25.757691] (-) TimerEvent: {}
+[25.858945] (-) TimerEvent: {}
+[25.959982] (-) TimerEvent: {}
+[26.063217] (-) TimerEvent: {}
+[26.165299] (-) TimerEvent: {}
+[26.266333] (-) TimerEvent: {}
+[26.367332] (-) TimerEvent: {}
+[26.468379] (-) TimerEvent: {}
+[26.570714] (-) TimerEvent: {}
+[26.671710] (-) TimerEvent: {}
+[26.772764] (-) TimerEvent: {}
+[26.873826] (-) TimerEvent: {}
+[26.974846] (-) TimerEvent: {}
+[27.076321] (-) TimerEvent: {}
+[27.177651] (-) TimerEvent: {}
+[27.279347] (-) TimerEvent: {}
+[27.337107] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[Kcg::total_station_rtls::TSPrismTransformer::TSPrismTransformer()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[27.340792] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:41:65:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K_2\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Kstd::placeholders::_2\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[27.341375] (localization) StderrLine: {'line': b'   41 |           std::bind(&TSPrismTransformer::handle_goal, this, _1, \x1b[01;31m\x1b[K_2\x1b[m\x1b[K),\n'}
+[27.341702] (localization) StderrLine: {'line': b'      |                                                                 \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[27.342039] (localization) StderrLine: {'line': b'      |                                                                 \x1b[32m\x1b[Kstd::placeholders::_2\x1b[m\x1b[K\n'}
+[27.342345] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/c++/11/pstl/glue_algorithm_defs.h:13\x1b[m\x1b[K,\n'}
+[27.342669] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/algorithm:74\x1b[m\x1b[K,\n'}
+[27.343079] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:18\x1b[m\x1b[K,\n'}
+[27.343396] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[27.343739] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[27.344013] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[27.345736] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:4\x1b[m\x1b[K,\n'}
+[27.346117] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[27.346508] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/functional:226:34:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstd::placeholders::_2\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[27.346799] (localization) StderrLine: {'line': b'  226 |     extern const _Placeholder<2> \x1b[01;36m\x1b[K_2\x1b[m\x1b[K;\n'}
+[27.347163] (localization) StderrLine: {'line': b'      |                                  \x1b[01;36m\x1b[K^~\x1b[m\x1b[K\n'}
+[27.365953] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid cg::total_station_rtls::TSPrismTransformer::append_TS_IMU_Data(std::vector<std::pair<geometry_msgs::msg::Point_<std::allocator<void> >, double> >&, int)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[27.366772] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:79:29:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KgetYaw\x1b[m\x1b[K\xe2\x80\x99 is not a member of \xe2\x80\x98\x1b[01m\x1b[Ktf2\x1b[m\x1b[K\xe2\x80\x99\n'}
+[27.367243] (localization) StderrLine: {'line': b'   79 |       double imu_yaw = tf2::\x1b[01;31m\x1b[KgetYaw\x1b[m\x1b[K(imu_q);\n'}
+[27.367655] (localization) StderrLine: {'line': b'      |                             \x1b[01;31m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[27.379738] (-) TimerEvent: {}
+[27.384461] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:71:126:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kitr\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K-Wunused-parameter\x1b[m\x1b[K]\n'}
+[27.385128] (localization) StderrLine: {'line': b'   71 |     void TSPrismTransformer::append_TS_IMU_Data(std::vector<std::pair<geometry_msgs::msg::Point, double>> & TS_IMU_Data, \x1b[01;35m\x1b[Kint itr\x1b[m\x1b[K)\n'}
+[27.385536] (localization) StderrLine: {'line': b'      |                                                                                                                          \x1b[01;35m\x1b[K~~~~^~~\x1b[m\x1b[K\n'}
+[27.480064] (-) TimerEvent: {}
+[27.581681] (-) TimerEvent: {}
+[27.684469] (-) TimerEvent: {}
+[27.786956] (-) TimerEvent: {}
+[27.888061] (-) TimerEvent: {}
+[27.989199] (-) TimerEvent: {}
+[28.091187] (-) TimerEvent: {}
+[28.193188] (-) TimerEvent: {}
+[28.245398] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/c++/11/bits/stl_algobase.h:64\x1b[m\x1b[K,\n'}
+[28.246053] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/memory:63\x1b[m\x1b[K,\n'}
+[28.246515] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:153\x1b[m\x1b[K,\n'}
+[28.246901] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:4\x1b[m\x1b[K,\n'}
+[28.247274] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[28.247608] (localization) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_pair.h: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kconstexpr std::pair<typename std::__strip_reference_wrapper<typename std::decay<_Tp>::type>::__type, typename std::__strip_reference_wrapper<typename std::decay<_Tp2>::type>::__type> std::make_pair(_T1&&, _T2&&) [with _T1 = geometry_msgs::msg::Point_<std::allocator<void> >&; _T2 = double&; typename std::__strip_reference_wrapper<typename std::decay<_Tp2>::type>::__type = double; typename std::decay<_Tp2>::type = double; typename std::__strip_reference_wrapper<typename std::decay<_Tp>::type>::__type = geometry_msgs::msg::Point_<std::allocator<void> >; typename std::decay<_Tp>::type = std::decay<geometry_msgs::msg::Point_<std::allocator<void> >&>::type]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[28.247954] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:80:43:\x1b[m\x1b[K   required from here\n'}
+[28.249643] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/stl_pair.h:567:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kparameter passing for argument of type \xe2\x80\x98\x1b[01m\x1b[Kstd::pair<geometry_msgs::msg::Point_<std::allocator<void> >, double>\x1b[m\x1b[K\xe2\x80\x99 when C++17 is enabled changed to match C++14 in GCC 10.1\n'}
+[28.250097] (localization) StderrLine: {'line': b'  567 |     \x1b[01;36m\x1b[Kmake_pair\x1b[m\x1b[K(_T1&& __x, _T2&& __y)\n'}
+[28.250394] (localization) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[28.293527] (-) TimerEvent: {}
+[28.394963] (-) TimerEvent: {}
+[28.497081] (-) TimerEvent: {}
+[28.598836] (-) TimerEvent: {}
+[28.699894] (-) TimerEvent: {}
+[28.802725] (-) TimerEvent: {}
+[28.904688] (-) TimerEvent: {}
+[29.006862] (-) TimerEvent: {}
+[29.107896] (-) TimerEvent: {}
+[29.209150] (-) TimerEvent: {}
+[29.310651] (-) TimerEvent: {}
+[29.412489] (-) TimerEvent: {}
+[29.514396] (-) TimerEvent: {}
+[29.615674] (-) TimerEvent: {}
+[29.718717] (-) TimerEvent: {}
+[29.820887] (-) TimerEvent: {}
+[29.923548] (-) TimerEvent: {}
+[30.024547] (-) TimerEvent: {}
+[30.126470] (-) TimerEvent: {}
+[30.229119] (-) TimerEvent: {}
+[30.331219] (-) TimerEvent: {}
+[30.432273] (-) TimerEvent: {}
+[30.534022] (-) TimerEvent: {}
+[30.634901] (-) TimerEvent: {}
+[30.735786] (-) TimerEvent: {}
+[30.836857] (-) TimerEvent: {}
+[30.937896] (-) TimerEvent: {}
+[31.039010] (-) TimerEvent: {}
+[31.140096] (-) TimerEvent: {}
+[31.241236] (-) TimerEvent: {}
+[31.342401] (-) TimerEvent: {}
+[31.444618] (-) TimerEvent: {}
+[31.546988] (-) TimerEvent: {}
+[31.647922] (-) TimerEvent: {}
+[31.748931] (-) TimerEvent: {}
+[31.849902] (-) TimerEvent: {}
+[31.950770] (-) TimerEvent: {}
+[32.051708] (-) TimerEvent: {}
+[32.152783] (-) TimerEvent: {}
+[32.253863] (-) TimerEvent: {}
+[32.354942] (-) TimerEvent: {}
+[32.456351] (-) TimerEvent: {}
+[32.558230] (-) TimerEvent: {}
+[32.659093] (-) TimerEvent: {}
+[32.760017] (-) TimerEvent: {}
+[32.860983] (-) TimerEvent: {}
+[32.961870] (-) TimerEvent: {}
+[33.062748] (-) TimerEvent: {}
+[33.163556] (-) TimerEvent: {}
+[33.265211] (-) TimerEvent: {}
+[33.366082] (-) TimerEvent: {}
+[33.466948] (-) TimerEvent: {}
+[33.567870] (-) TimerEvent: {}
+[33.668909] (-) TimerEvent: {}
+[33.769812] (-) TimerEvent: {}
+[33.870693] (-) TimerEvent: {}
+[33.971592] (-) TimerEvent: {}
+[34.072670] (-) TimerEvent: {}
+[34.173712] (-) TimerEvent: {}
+[34.274692] (-) TimerEvent: {}
+[34.375543] (-) TimerEvent: {}
+[34.476462] (-) TimerEvent: {}
+[34.577362] (-) TimerEvent: {}
+[34.678256] (-) TimerEvent: {}
+[34.779163] (-) TimerEvent: {}
+[34.880127] (-) TimerEvent: {}
+[34.981594] (-) TimerEvent: {}
+[35.082515] (-) TimerEvent: {}
+[35.183602] (-) TimerEvent: {}
+[35.284457] (-) TimerEvent: {}
+[35.385368] (-) TimerEvent: {}
+[35.486245] (-) TimerEvent: {}
+[35.587188] (-) TimerEvent: {}
+[35.688129] (-) TimerEvent: {}
+[35.789063] (-) TimerEvent: {}
+[35.890015] (-) TimerEvent: {}
+[35.990943] (-) TimerEvent: {}
+[36.092131] (-) TimerEvent: {}
+[36.193059] (-) TimerEvent: {}
+[36.293999] (-) TimerEvent: {}
+[36.395030] (-) TimerEvent: {}
+[36.496250] (-) TimerEvent: {}
+[36.597278] (-) TimerEvent: {}
+[36.698293] (-) TimerEvent: {}
+[36.799178] (-) TimerEvent: {}
+[36.900153] (-) TimerEvent: {}
+[37.001200] (-) TimerEvent: {}
+[37.102127] (-) TimerEvent: {}
+[37.203081] (-) TimerEvent: {}
+[37.304113] (-) TimerEvent: {}
+[37.404983] (-) TimerEvent: {}
+[37.505816] (-) TimerEvent: {}
+[37.606659] (-) TimerEvent: {}
+[37.707611] (-) TimerEvent: {}
+[37.808551] (-) TimerEvent: {}
+[37.909464] (-) TimerEvent: {}
+[38.010526] (-) TimerEvent: {}
+[38.111505] (-) TimerEvent: {}
+[38.212413] (-) TimerEvent: {}
+[38.313357] (-) TimerEvent: {}
+[38.414697] (-) TimerEvent: {}
+[38.516686] (-) TimerEvent: {}
+[38.617865] (-) TimerEvent: {}
+[38.718871] (-) TimerEvent: {}
+[38.819732] (-) TimerEvent: {}
+[38.921507] (-) TimerEvent: {}
+[39.022453] (-) TimerEvent: {}
+[39.123955] (-) TimerEvent: {}
+[39.225140] (-) TimerEvent: {}
+[39.326094] (-) TimerEvent: {}
+[39.427761] (-) TimerEvent: {}
+[39.529770] (-) TimerEvent: {}
+[39.630819] (-) TimerEvent: {}
+[39.731947] (-) TimerEvent: {}
+[39.833089] (-) TimerEvent: {}
+[39.934118] (-) TimerEvent: {}
+[40.035154] (-) TimerEvent: {}
+[40.136334] (-) TimerEvent: {}
+[40.237316] (-) TimerEvent: {}
+[40.338663] (-) TimerEvent: {}
+[40.440061] (-) TimerEvent: {}
+[40.541680] (-) TimerEvent: {}
+[40.644177] (-) TimerEvent: {}
+[40.745602] (-) TimerEvent: {}
+[40.846593] (-) TimerEvent: {}
+[40.947613] (-) TimerEvent: {}
+[41.048761] (-) TimerEvent: {}
+[41.149799] (-) TimerEvent: {}
+[41.250802] (-) TimerEvent: {}
+[41.351764] (-) TimerEvent: {}
+[41.452876] (-) TimerEvent: {}
+[41.554043] (-) TimerEvent: {}
+[41.655219] (-) TimerEvent: {}
+[41.756297] (-) TimerEvent: {}
+[41.858020] (-) TimerEvent: {}
+[41.959089] (-) TimerEvent: {}
+[42.060144] (-) TimerEvent: {}
+[42.161195] (-) TimerEvent: {}
+[42.262141] (-) TimerEvent: {}
+[42.351015] (localization) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:90: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o] Error 1\n'}
+[42.352747] (localization) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/ts_prism_transformer.dir/all] Error 2\n'}
+[42.353833] (localization) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[42.363778] (localization) CommandEnded: {'returncode': 2}
+[42.367056] (-) TimerEvent: {}
+[42.468762] (-) TimerEvent: {}
+[42.499847] (localization) JobEnded: {'identifier': 'localization', 'rc': 2}
+[42.512262] (-) EventReactorShutdown: {}

@@ -1,0 +1,92 @@
+[0.109s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/imu': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/imu -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/imu
+[0.618s] -- The C compiler identification is GNU 11.4.0
+[1.305s] -- The CXX compiler identification is GNU 11.4.0
+[1.446s] -- Detecting C compiler ABI info
+[2.078s] -- Detecting C compiler ABI info - done
+[2.133s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.136s] -- Detecting C compile features
+[2.141s] -- Detecting C compile features - done
+[2.159s] -- Detecting CXX compiler ABI info
+[2.758s] -- Detecting CXX compiler ABI info - done
+[2.814s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.820s] -- Detecting CXX compile features
+[2.825s] -- Detecting CXX compile features - done
+[2.851s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[3.944s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[4.607s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[4.923s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[4.975s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[5.062s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[5.173s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[5.377s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[5.836s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[5.853s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[6.679s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[6.926s] -- Found FastRTPS: /opt/ros/humble/include  
+[7.305s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[7.368s] -- Looking for pthread.h
+[8.019s] -- Looking for pthread.h - found
+[8.024s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[8.649s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[8.656s] -- Found Threads: TRUE  
+[9.019s] -- Found rclcpp_components: 16.0.11 (/opt/ros/humble/share/rclcpp_components/cmake)
+[9.296s] -- Found geometry_msgs: 4.2.4 (/opt/ros/humble/share/geometry_msgs/cmake)
+[9.383s] -- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)
+[9.525s] -- Found tf2: 0.25.12 (/opt/ros/humble/share/tf2/cmake)
+[9.568s] -- Found tf2_ros: 0.25.12 (/opt/ros/humble/share/tf2_ros/cmake)
+[10.176s] -- Found tf2_geometry_msgs: 0.25.12 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[10.411s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[10.433s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[10.435s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[10.478s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[11.009s] -- Added test 'copyright' to check source files copyright and LICENSE
+[11.030s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[11.031s] -- Configured cppcheck include dirs: /root/Lunar_ROADSTER/lr_ws/src/imu/include
+[11.033s] -- Configured cppcheck exclude dirs and/or files: 
+[11.050s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[11.052s] -- Configured cpplint exclude dirs and/or files: 
+[11.060s] -- Added test 'flake8' to check Python code syntax and style conventions
+[11.071s] -- Added test 'lint_cmake' to check CMake code style
+[11.079s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[11.097s] -- Added test 'uncrustify' to check C / C++ code style
+[11.100s] -- Configured uncrustify additional arguments: 
+[11.105s] -- Added test 'xmllint' to check XML markup files
+[11.115s] -- Configuring done
+[11.242s] -- Generating done
+[11.291s] -- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/imu
+[11.358s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/imu' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/local/bin/cmake /root/Lunar_ROADSTER/lr_ws/src/imu -DCMAKE_INSTALL_PREFIX=/root/Lunar_ROADSTER/lr_ws/install/imu
+[11.362s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/imu': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/imu -- -j4 -l4
+[11.699s] [ 33%] [32mBuilding CXX object CMakeFiles/imu_base_link_conversion_node.dir/src/imu_base_link_conversion_main.cpp.o[0m
+[50.231s] [ 66%] [32mBuilding CXX object CMakeFiles/imu_base_link_conversion_node.dir/src/imu_base_link_conversion_node.cpp.o[0m
+[134.942s] [100%] [32m[1mLinking CXX executable imu_base_link_conversion_node[0m
+[138.687s] [100%] Built target imu_base_link_conversion_node
+[138.757s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/imu' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/imu -- -j4 -l4
+[138.763s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/imu': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/imu
+[138.804s] -- Install configuration: ""
+[138.810s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/lib/imu/imu_base_link_conversion_node
+[138.862s] -- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/imu/lib/imu/imu_base_link_conversion_node" to ""
+[138.863s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/include/imu
+[138.868s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/include/imu/imu_base_link_conversion_node.hpp
+[138.870s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/launch
+[138.876s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/launch/imu_launch.py
+[138.878s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/launch/__pycache__
+[138.880s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/launch/__pycache__/imu_launch.cpython-310.pyc
+[138.882s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu//config
+[138.886s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu//config/imu_node_params.yaml
+[138.888s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu//config/imu_static_tf_params.yaml
+[138.902s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/ament_index/resource_index/package_run_dependencies/imu
+[138.911s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/ament_index/resource_index/parent_prefix_path/imu
+[138.918s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/environment/ament_prefix_path.sh
+[138.921s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/environment/ament_prefix_path.dsv
+[138.924s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/environment/path.sh
+[138.926s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/environment/path.dsv
+[138.929s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/local_setup.bash
+[138.932s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/local_setup.sh
+[138.934s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/local_setup.zsh
+[138.937s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/local_setup.dsv
+[138.940s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/package.dsv
+[138.945s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/ament_index/resource_index/packages/imu
+[138.951s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/cmake/imuConfig.cmake
+[138.955s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/cmake/imuConfig-version.cmake
+[138.962s] -- Installing: /root/Lunar_ROADSTER/lr_ws/install/imu/share/imu/package.xml
+[139.010s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/imu' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/local/bin/cmake --install /root/Lunar_ROADSTER/lr_ws/build/imu

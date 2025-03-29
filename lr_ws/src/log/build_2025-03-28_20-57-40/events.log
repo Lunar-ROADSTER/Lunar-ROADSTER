@@ -1,0 +1,629 @@
+[0.000000] (-) TimerEvent: {}
+[0.002557] (-) JobUnselected: {'identifier': 'arduino'}
+[0.002745] (-) JobUnselected: {'identifier': 'cg_msgs'}
+[0.002839] (-) JobUnselected: {'identifier': 'costmap_queue'}
+[0.002935] (-) JobUnselected: {'identifier': 'dwb_core'}
+[0.003050] (-) JobUnselected: {'identifier': 'dwb_critics'}
+[0.003129] (-) JobUnselected: {'identifier': 'dwb_msgs'}
+[0.003205] (-) JobUnselected: {'identifier': 'dwb_plugins'}
+[0.003278] (-) JobUnselected: {'identifier': 'imu'}
+[0.003365] (-) JobUnselected: {'identifier': 'lx_msgs'}
+[0.003484] (-) JobUnselected: {'identifier': 'mapping'}
+[0.003624] (-) JobUnselected: {'identifier': 'motion_control'}
+[0.003702] (-) JobUnselected: {'identifier': 'nav2_amcl'}
+[0.003770] (-) JobUnselected: {'identifier': 'nav2_behavior_tree'}
+[0.003836] (-) JobUnselected: {'identifier': 'nav2_behaviors'}
+[0.003928] (-) JobUnselected: {'identifier': 'nav2_bringup'}
+[0.004039] (-) JobUnselected: {'identifier': 'nav2_bt_navigator'}
+[0.004140] (-) JobUnselected: {'identifier': 'nav2_collision_monitor'}
+[0.004222] (-) JobUnselected: {'identifier': 'nav2_common'}
+[0.004295] (-) JobUnselected: {'identifier': 'nav2_constrained_smoother'}
+[0.004372] (-) JobUnselected: {'identifier': 'nav2_controller'}
+[0.004467] (-) JobUnselected: {'identifier': 'nav2_core'}
+[0.004559] (-) JobUnselected: {'identifier': 'nav2_costmap_2d'}
+[0.004650] (-) JobUnselected: {'identifier': 'nav2_dwb_controller'}
+[0.004724] (-) JobUnselected: {'identifier': 'nav2_graceful_controller'}
+[0.004803] (-) JobUnselected: {'identifier': 'nav2_lifecycle_manager'}
+[0.006633] (-) JobUnselected: {'identifier': 'nav2_map_server'}
+[0.006855] (-) JobUnselected: {'identifier': 'nav2_mppi_controller'}
+[0.007053] (-) JobUnselected: {'identifier': 'nav2_msgs'}
+[0.007202] (-) JobUnselected: {'identifier': 'nav2_navfn_planner'}
+[0.008425] (-) JobUnselected: {'identifier': 'nav2_planner'}
+[0.008550] (-) JobUnselected: {'identifier': 'nav2_regulated_pure_pursuit_controller'}
+[0.008645] (-) JobUnselected: {'identifier': 'nav2_rotation_shim_controller'}
+[0.009439] (-) JobUnselected: {'identifier': 'nav2_rviz_plugins'}
+[0.010083] (-) JobUnselected: {'identifier': 'nav2_simple_commander'}
+[0.010247] (-) JobUnselected: {'identifier': 'nav2_smac_planner'}
+[0.010393] (-) JobUnselected: {'identifier': 'nav2_smoother'}
+[0.010574] (-) JobUnselected: {'identifier': 'nav2_system_tests'}
+[0.011418] (-) JobUnselected: {'identifier': 'nav2_theta_star_planner'}
+[0.011690] (-) JobUnselected: {'identifier': 'nav2_util'}
+[0.012012] (-) JobUnselected: {'identifier': 'nav2_velocity_smoother'}
+[0.012187] (-) JobUnselected: {'identifier': 'nav2_voxel_grid'}
+[0.012343] (-) JobUnselected: {'identifier': 'nav2_waypoint_follower'}
+[0.012674] (-) JobUnselected: {'identifier': 'nav_2d_msgs'}
+[0.012953] (-) JobUnselected: {'identifier': 'nav_2d_utils'}
+[0.013102] (-) JobUnselected: {'identifier': 'navigation2'}
+[0.013253] (-) JobUnselected: {'identifier': 'realsense'}
+[0.013493] (-) JobUnselected: {'identifier': 'realsense2_camera'}
+[0.014089] (-) JobUnselected: {'identifier': 'realsense2_camera_msgs'}
+[0.014257] (-) JobUnselected: {'identifier': 'realsense2_description'}
+[0.014658] (-) JobUnselected: {'identifier': 'sensing'}
+[0.014917] (-) JobUnselected: {'identifier': 'teleop'}
+[0.015032] (-) JobUnselected: {'identifier': 'vectornav'}
+[0.015106] (-) JobUnselected: {'identifier': 'vectornav_msgs'}
+[0.015188] (localization) JobQueued: {'identifier': 'localization', 'dependencies': OrderedDict([('cg_msgs', '/root/Lunar_ROADSTER/lr_ws/src/install/cg_msgs'), ('lx_msgs', '/root/Lunar_ROADSTER/lr_ws/src/install/lx_msgs')])}
+[0.015425] (localization) JobStarted: {'identifier': 'localization'}
+[0.098648] (-) TimerEvent: {}
+[0.193862] (localization) JobProgress: {'identifier': 'localization', 'progress': 'cmake'}
+[0.199110] (localization) JobProgress: {'identifier': 'localization', 'progress': 'build'}
+[0.199329] (-) TimerEvent: {}
+[0.205048] (localization) Command: {'cmd': ['/usr/local/bin/cmake', '--build', '/root/Lunar_ROADSTER/lr_ws/src/build/localization', '--', '-j4', '-l4'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/src/build/localization', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', 'ubuntu'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/src/install/lx_msgs/lib:/root/Lunar_ROADSTER/lr_ws/src/install/cg_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera/lib:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_core/lib:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor/lib:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/lx_library/lib:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws/src/mapping'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/src/install:/root/Lunar_ROADSTER/lr_ws/install'), ('LOGNAME', 'root'), ('_', '/usr/bin/colcon'), ('_P9K_SSH_TTY', '/dev/pts/1'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':10'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/src/install/sensing:/root/Lunar_ROADSTER/lr_ws/src/install/mapping:/root/Lunar_ROADSTER/lr_ws/src/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/src/install/cg_msgs:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/teleop:/root/Lunar_ROADSTER/lr_ws/install/sensing:/root/Lunar_ROADSTER/lr_ws/install/realsense2_description:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs:/root/Lunar_ROADSTER/lr_ws/install/realsense:/root/Lunar_ROADSTER/lr_ws/install/nav2_system_tests:/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup:/root/Lunar_ROADSTER/lr_ws/install/navigation2:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics:/root/Lunar_ROADSTER/lr_ws/install/dwb_core:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors:/root/Lunar_ROADSTER/lr_ws/install/nav2_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/root/Lunar_ROADSTER/lr_ws/install/motion_control:/root/Lunar_ROADSTER/lr_ws/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_library:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/imu:/root/Lunar_ROADSTER/lr_ws/install/arduino:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/src/build/localization'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/1'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/src/install/lx_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/src/install/cg_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander/lib/python3.10/site-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/src/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/src/install/cg_msgs:/root/Lunar_ROADSTER/lr_ws/src/install/sensing:/root/Lunar_ROADSTER/lr_ws/src/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/teleop:/root/Lunar_ROADSTER/lr_ws/install/sensing:/root/Lunar_ROADSTER/lr_ws/install/realsense2_description:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs:/root/Lunar_ROADSTER/lr_ws/install/realsense:/root/Lunar_ROADSTER/lr_ws/install/nav2_system_tests:/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup:/root/Lunar_ROADSTER/lr_ws/install/navigation2:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics:/root/Lunar_ROADSTER/lr_ws/install/dwb_core:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors:/root/Lunar_ROADSTER/lr_ws/install/nav2_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/root/Lunar_ROADSTER/lr_ws/install/motion_control:/root/Lunar_ROADSTER/lr_ws/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_library:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/imu:/root/Lunar_ROADSTER/lr_ws/install/arduino:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/opt/ros/humble')]), 'shell': False}
+[0.299629] (-) TimerEvent: {}
+[0.407346] (-) TimerEvent: {}
+[0.489180] (localization) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target ts_prism_transformer\x1b[0m\n'}
+[0.508794] (-) TimerEvent: {}
+[0.527432] (localization) StdoutLine: {'line': b'[ 18%] Built target kalman_filter_linear\n'}
+[0.544604] (localization) StdoutLine: {'line': b'[ 45%] Built target imu_tf_publisher\n'}
+[0.609464] (-) TimerEvent: {}
+[0.682163] (localization) StdoutLine: {'line': b'[ 54%] \x1b[32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o\x1b[0m\n'}
+[0.690210] (localization) StdoutLine: {'line': b'[ 81%] Built target slip_estimate_node\n'}
+[0.709897] (-) TimerEvent: {}
+[0.723668] (localization) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o\x1b[0m\n'}
+[0.810160] (-) TimerEvent: {}
+[0.911096] (-) TimerEvent: {}
+[1.012059] (-) TimerEvent: {}
+[1.113181] (-) TimerEvent: {}
+[1.214273] (-) TimerEvent: {}
+[1.315320] (-) TimerEvent: {}
+[1.416500] (-) TimerEvent: {}
+[1.518168] (-) TimerEvent: {}
+[1.619599] (-) TimerEvent: {}
+[1.720573] (-) TimerEvent: {}
+[1.822356] (-) TimerEvent: {}
+[1.923948] (-) TimerEvent: {}
+[2.025066] (-) TimerEvent: {}
+[2.126166] (-) TimerEvent: {}
+[2.227196] (-) TimerEvent: {}
+[2.329526] (-) TimerEvent: {}
+[2.430798] (-) TimerEvent: {}
+[2.532738] (-) TimerEvent: {}
+[2.634105] (-) TimerEvent: {}
+[2.735048] (-) TimerEvent: {}
+[2.837292] (-) TimerEvent: {}
+[2.940867] (-) TimerEvent: {}
+[3.041969] (-) TimerEvent: {}
+[3.144659] (-) TimerEvent: {}
+[3.246414] (-) TimerEvent: {}
+[3.347468] (-) TimerEvent: {}
+[3.448496] (-) TimerEvent: {}
+[3.549624] (-) TimerEvent: {}
+[3.650774] (-) TimerEvent: {}
+[3.751760] (-) TimerEvent: {}
+[3.852732] (-) TimerEvent: {}
+[3.953984] (-) TimerEvent: {}
+[4.057474] (-) TimerEvent: {}
+[4.158648] (-) TimerEvent: {}
+[4.260221] (-) TimerEvent: {}
+[4.361626] (-) TimerEvent: {}
+[4.462877] (-) TimerEvent: {}
+[4.564774] (-) TimerEvent: {}
+[4.666215] (-) TimerEvent: {}
+[4.767466] (-) TimerEvent: {}
+[4.870306] (-) TimerEvent: {}
+[4.971732] (-) TimerEvent: {}
+[5.073181] (-) TimerEvent: {}
+[5.174761] (-) TimerEvent: {}
+[5.276862] (-) TimerEvent: {}
+[5.378852] (-) TimerEvent: {}
+[5.481486] (-) TimerEvent: {}
+[5.582687] (-) TimerEvent: {}
+[5.683935] (-) TimerEvent: {}
+[5.784997] (-) TimerEvent: {}
+[5.886143] (-) TimerEvent: {}
+[5.987916] (-) TimerEvent: {}
+[6.089036] (-) TimerEvent: {}
+[6.190190] (-) TimerEvent: {}
+[6.291585] (-) TimerEvent: {}
+[6.392858] (-) TimerEvent: {}
+[6.494413] (-) TimerEvent: {}
+[6.595640] (-) TimerEvent: {}
+[6.698321] (-) TimerEvent: {}
+[6.799813] (-) TimerEvent: {}
+[6.900862] (-) TimerEvent: {}
+[7.002310] (-) TimerEvent: {}
+[7.103837] (-) TimerEvent: {}
+[7.204877] (-) TimerEvent: {}
+[7.305953] (-) TimerEvent: {}
+[7.407280] (-) TimerEvent: {}
+[7.508876] (-) TimerEvent: {}
+[7.609944] (-) TimerEvent: {}
+[7.710857] (-) TimerEvent: {}
+[7.812165] (-) TimerEvent: {}
+[7.913441] (-) TimerEvent: {}
+[8.014797] (-) TimerEvent: {}
+[8.116800] (-) TimerEvent: {}
+[8.219341] (-) TimerEvent: {}
+[8.320289] (-) TimerEvent: {}
+[8.421392] (-) TimerEvent: {}
+[8.522567] (-) TimerEvent: {}
+[8.623701] (-) TimerEvent: {}
+[8.724803] (-) TimerEvent: {}
+[8.827310] (-) TimerEvent: {}
+[8.930423] (-) TimerEvent: {}
+[9.032401] (-) TimerEvent: {}
+[9.133522] (-) TimerEvent: {}
+[9.234659] (-) TimerEvent: {}
+[9.335677] (-) TimerEvent: {}
+[9.437314] (-) TimerEvent: {}
+[9.539116] (-) TimerEvent: {}
+[9.641217] (-) TimerEvent: {}
+[9.742861] (-) TimerEvent: {}
+[9.843938] (-) TimerEvent: {}
+[9.945059] (-) TimerEvent: {}
+[10.046210] (-) TimerEvent: {}
+[10.147299] (-) TimerEvent: {}
+[10.249215] (-) TimerEvent: {}
+[10.351649] (-) TimerEvent: {}
+[10.452755] (-) TimerEvent: {}
+[10.555246] (-) TimerEvent: {}
+[10.657056] (-) TimerEvent: {}
+[10.758222] (-) TimerEvent: {}
+[10.859864] (-) TimerEvent: {}
+[10.961399] (-) TimerEvent: {}
+[11.062545] (-) TimerEvent: {}
+[11.164598] (-) TimerEvent: {}
+[11.266630] (-) TimerEvent: {}
+[11.369151] (-) TimerEvent: {}
+[11.471669] (-) TimerEvent: {}
+[11.573567] (-) TimerEvent: {}
+[11.675576] (-) TimerEvent: {}
+[11.776589] (-) TimerEvent: {}
+[11.879263] (-) TimerEvent: {}
+[11.980351] (-) TimerEvent: {}
+[12.082122] (-) TimerEvent: {}
+[12.183247] (-) TimerEvent: {}
+[12.284373] (-) TimerEvent: {}
+[12.386527] (-) TimerEvent: {}
+[12.487632] (-) TimerEvent: {}
+[12.588789] (-) TimerEvent: {}
+[12.689911] (-) TimerEvent: {}
+[12.791002] (-) TimerEvent: {}
+[12.892103] (-) TimerEvent: {}
+[12.993417] (-) TimerEvent: {}
+[13.094469] (-) TimerEvent: {}
+[13.195467] (-) TimerEvent: {}
+[13.296483] (-) TimerEvent: {}
+[13.399090] (-) TimerEvent: {}
+[13.500980] (-) TimerEvent: {}
+[13.602826] (-) TimerEvent: {}
+[13.704513] (-) TimerEvent: {}
+[13.806562] (-) TimerEvent: {}
+[13.907861] (-) TimerEvent: {}
+[14.012811] (-) TimerEvent: {}
+[14.116309] (-) TimerEvent: {}
+[14.219541] (-) TimerEvent: {}
+[14.324041] (-) TimerEvent: {}
+[14.427832] (-) TimerEvent: {}
+[14.530982] (-) TimerEvent: {}
+[14.633103] (-) TimerEvent: {}
+[14.734899] (-) TimerEvent: {}
+[14.836057] (-) TimerEvent: {}
+[14.937195] (-) TimerEvent: {}
+[15.038729] (-) TimerEvent: {}
+[15.140960] (-) TimerEvent: {}
+[15.242161] (-) TimerEvent: {}
+[15.344017] (-) TimerEvent: {}
+[15.446829] (-) TimerEvent: {}
+[15.549294] (-) TimerEvent: {}
+[15.651597] (-) TimerEvent: {}
+[15.753556] (-) TimerEvent: {}
+[15.855277] (-) TimerEvent: {}
+[15.958077] (-) TimerEvent: {}
+[16.060941] (-) TimerEvent: {}
+[16.165944] (-) TimerEvent: {}
+[16.266951] (-) TimerEvent: {}
+[16.369911] (-) TimerEvent: {}
+[16.472571] (-) TimerEvent: {}
+[16.577724] (-) TimerEvent: {}
+[16.680175] (-) TimerEvent: {}
+[16.784470] (-) TimerEvent: {}
+[16.886719] (-) TimerEvent: {}
+[16.987745] (-) TimerEvent: {}
+[17.089627] (-) TimerEvent: {}
+[17.191480] (-) TimerEvent: {}
+[17.292581] (-) TimerEvent: {}
+[17.394132] (-) TimerEvent: {}
+[17.495194] (-) TimerEvent: {}
+[17.598020] (-) TimerEvent: {}
+[17.701094] (-) TimerEvent: {}
+[17.803857] (-) TimerEvent: {}
+[17.905155] (-) TimerEvent: {}
+[18.006688] (-) TimerEvent: {}
+[18.108086] (-) TimerEvent: {}
+[18.210674] (-) TimerEvent: {}
+[18.312595] (-) TimerEvent: {}
+[18.352184] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.352935] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:63:27:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KCalibrateImu\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[18.353845] (localization) StderrLine: {'line': b'   63 |     rclcpp_action::Server<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>::SharedPtr calibrate_imu_action_server_;\n'}
+[18.354195] (localization) StderrLine: {'line': b'      |                           \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.354463] (localization) StderrLine: {'line': b'      |                           \x1b[32m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\n'}
+[18.354764] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/calibrate_imu.hpp:7\x1b[m\x1b[K,\n'}
+[18.355034] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13\x1b[m\x1b[K,\n'}
+[18.355260] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.355483] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/detail/calibrate_imu__struct.hpp:1071:29:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[18.355750] (localization) StderrLine: {'line': b' 1071 | typedef struct CalibrateImu \x1b[01;36m\x1b[KCalibrateImu\x1b[m\x1b[K;\n'}
+[18.356039] (localization) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.356273] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.356512] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:63:39:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[18.356790] (localization) StderrLine: {'line': b'   63 |     rclcpp_action::Server<CalibrateImu\x1b[01;31m\x1b[K>\x1b[m\x1b[K::SharedPtr calibrate_imu_action_server_;\n'}
+[18.357018] (localization) StderrLine: {'line': b'      |                                       \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[18.357238] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:63:42:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 at end of member declaration\n'}
+[18.357554] (localization) StderrLine: {'line': b'   63 |     rclcpp_action::Server<CalibrateImu>::\x1b[01;31m\x1b[KSharedPtr\x1b[m\x1b[K calibrate_imu_action_server_;\n'}
+[18.357922] (localization) StderrLine: {'line': b'      |                                          \x1b[01;31m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[18.358160] (localization) StderrLine: {'line': b'      |                                                   \x1b[32m\x1b[K;\x1b[m\x1b[K\n'}
+[18.369869] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:63:52:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kcalibrate_imu_action_server_\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[18.371574] (localization) StderrLine: {'line': b'   63 |     rclcpp_action::Server<CalibrateImu>::SharedPtr \x1b[01;31m\x1b[Kcalibrate_imu_action_server_\x1b[m\x1b[K;\n'}
+[18.372826] (localization) StderrLine: {'line': b'      |                                                    \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.375065] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:103:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KCalibrateImu\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[18.376331] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse handle_cancel(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[18.377476] (localization) StderrLine: {'line': b'      |                                                                                                       \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.378664] (localization) StderrLine: {'line': b'      |                                                                                                       \x1b[32m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\n'}
+[18.380483] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/calibrate_imu.hpp:7\x1b[m\x1b[K,\n'}
+[18.381610] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13\x1b[m\x1b[K,\n'}
+[18.382776] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.383995] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/detail/calibrate_imu__struct.hpp:1071:29:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[18.385592] (localization) StderrLine: {'line': b' 1071 | typedef struct CalibrateImu \x1b[01;36m\x1b[KCalibrateImu\x1b[m\x1b[K;\n'}
+[18.386930] (localization) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.388119] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.389333] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:103:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[18.390674] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse handle_cancel(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[18.391912] (localization) StderrLine: {'line': b'      |                                                                                                       \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.393222] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:115:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[18.394585] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse handle_cancel(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu\x1b[01;31m\x1b[K>>\x1b[m\x1b[K goal_handle);\n'}
+[18.395851] (localization) StderrLine: {'line': b'      |                                                                                                                   \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[18.397084] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:60:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K<expression error>\x1b[m\x1b[K\xe2\x80\x99 in namespace \xe2\x80\x98\x1b[01m\x1b[Kstd\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[18.398543] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse handle_cancel(const std::\x1b[01;31m\x1b[Kshared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>>\x1b[m\x1b[K goal_handle);\n'}
+[18.399792] (localization) StderrLine: {'line': b'      |                                                            \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.401023] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:80:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KCalibrateImu\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[18.402380] (localization) StderrLine: {'line': b'   72 |     void handle_accepted(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[18.403585] (localization) StderrLine: {'line': b'      |                                                                                \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.404809] (localization) StderrLine: {'line': b'      |                                                                                \x1b[32m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\n'}
+[18.406101] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/calibrate_imu.hpp:7\x1b[m\x1b[K,\n'}
+[18.407279] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13\x1b[m\x1b[K,\n'}
+[18.408594] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.409890] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/detail/calibrate_imu__struct.hpp:1071:29:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[18.411151] (localization) StderrLine: {'line': b' 1071 | typedef struct CalibrateImu \x1b[01;36m\x1b[KCalibrateImu\x1b[m\x1b[K;\n'}
+[18.412397] (localization) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.414654] (-) TimerEvent: {}
+[18.415411] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.420692] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:80:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[18.423061] (localization) StderrLine: {'line': b'   72 |     void handle_accepted(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[18.425017] (localization) StderrLine: {'line': b'      |                                                                                \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.426814] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:92:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[18.428082] (localization) StderrLine: {'line': b'   72 |     void handle_accepted(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu\x1b[01;31m\x1b[K>>\x1b[m\x1b[K goal_handle);\n'}
+[18.429866] (localization) StderrLine: {'line': b'      |                                                                                            \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[18.431227] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:37:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K<expression error>\x1b[m\x1b[K\xe2\x80\x99 in namespace \xe2\x80\x98\x1b[01m\x1b[Kstd\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[18.432591] (localization) StderrLine: {'line': b'   72 |     void handle_accepted(const std::\x1b[01;31m\x1b[Kshared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>>\x1b[m\x1b[K goal_handle);\n'}
+[18.433872] (localization) StderrLine: {'line': b'      |                                     \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.435163] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:84:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KCalibrateImu\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[18.436406] (localization) StderrLine: {'line': b'   73 |     void executeCalibrateIMU(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[18.437608] (localization) StderrLine: {'line': b'      |                                                                                    \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.438864] (localization) StderrLine: {'line': b'      |                                                                                    \x1b[32m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\n'}
+[18.440015] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/calibrate_imu.hpp:7\x1b[m\x1b[K,\n'}
+[18.441279] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13\x1b[m\x1b[K,\n'}
+[18.442533] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.443709] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/detail/calibrate_imu__struct.hpp:1071:29:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[18.445217] (localization) StderrLine: {'line': b' 1071 | typedef struct CalibrateImu \x1b[01;36m\x1b[KCalibrateImu\x1b[m\x1b[K;\n'}
+[18.446505] (localization) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.447739] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.448890] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:84:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[18.450167] (localization) StderrLine: {'line': b'   73 |     void executeCalibrateIMU(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[18.451471] (localization) StderrLine: {'line': b'      |                                                                                    \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.453110] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:96:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[18.454805] (localization) StderrLine: {'line': b'   73 |     void executeCalibrateIMU(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu\x1b[01;31m\x1b[K>>\x1b[m\x1b[K goal_handle);\n'}
+[18.457281] (localization) StderrLine: {'line': b'      |                                                                                                \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[18.459445] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:41:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K<expression error>\x1b[m\x1b[K\xe2\x80\x99 in namespace \xe2\x80\x98\x1b[01m\x1b[Kstd\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[18.460770] (localization) StderrLine: {'line': b'   73 |     void executeCalibrateIMU(const std::\x1b[01;31m\x1b[Kshared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>>\x1b[m\x1b[K goal_handle);\n'}
+[18.462362] (localization) StderrLine: {'line': b'      |                                         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.514931] (-) TimerEvent: {}
+[18.547180] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[Kcg::total_station_rtls::TSPrismTransformer::TSPrismTransformer()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[18.548830] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:38:7:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kcalibrate_imu_action_server_\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[18.550118] (localization) StderrLine: {'line': b'   38 |       \x1b[01;31m\x1b[Kcalibrate_imu_action_server_\x1b[m\x1b[K = rclcpp_action::create_server<lx_msgs::action::CalibrateImu>(\n'}
+[18.551359] (localization) StderrLine: {'line': b'      |       \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.554519] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:41:65:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K_2\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Kstd::placeholders::_2\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[18.557864] (localization) StderrLine: {'line': b'   41 |           std::bind(&TSPrismTransformer::handle_goal, this, _1, \x1b[01;31m\x1b[K_2\x1b[m\x1b[K),\n'}
+[18.560512] (localization) StderrLine: {'line': b'      |                                                                 \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[18.562031] (localization) StderrLine: {'line': b'      |                                                                 \x1b[32m\x1b[Kstd::placeholders::_2\x1b[m\x1b[K\n'}
+[18.563744] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/c++/11/pstl/glue_algorithm_defs.h:13\x1b[m\x1b[K,\n'}
+[18.567961] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/algorithm:74\x1b[m\x1b[K,\n'}
+[18.570845] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:18\x1b[m\x1b[K,\n'}
+[18.572247] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[18.573604] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[18.575243] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[18.576476] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:4\x1b[m\x1b[K,\n'}
+[18.577626] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.578857] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/functional:226:34:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstd::placeholders::_2\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[18.579962] (localization) StderrLine: {'line': b'  226 |     extern const _Placeholder<2> \x1b[01;36m\x1b[K_2\x1b[m\x1b[K;\n'}
+[18.581444] (localization) StderrLine: {'line': b'      |                                  \x1b[01;36m\x1b[K^~\x1b[m\x1b[K\n'}
+[18.582793] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid cg::total_station_rtls::TSPrismTransformer::append_TS_IMU_Data(std::vector<std::pair<geometry_msgs::msg::Point_<std::allocator<void> >, double> >&, int)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[18.584067] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:79:29:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KgetYaw\x1b[m\x1b[K\xe2\x80\x99 is not a member of \xe2\x80\x98\x1b[01m\x1b[Ktf2\x1b[m\x1b[K\xe2\x80\x99\n'}
+[18.585272] (localization) StderrLine: {'line': b'   79 |       double imu_yaw = tf2::\x1b[01;31m\x1b[KgetYaw\x1b[m\x1b[K(imu_q);\n'}
+[18.587929] (localization) StderrLine: {'line': b'      |                             \x1b[01;31m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[18.598036] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:71:126:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kitr\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K-Wunused-parameter\x1b[m\x1b[K]\n'}
+[18.598883] (localization) StderrLine: {'line': b'   71 |     void TSPrismTransformer::append_TS_IMU_Data(std::vector<std::pair<geometry_msgs::msg::Point, double>> & TS_IMU_Data, \x1b[01;35m\x1b[Kint itr\x1b[m\x1b[K)\n'}
+[18.599296] (localization) StderrLine: {'line': b'      |                                                                                                                          \x1b[01;35m\x1b[K~~~~^~~\x1b[m\x1b[K\n'}
+[18.615235] (-) TimerEvent: {}
+[18.716994] (-) TimerEvent: {}
+[18.722463] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:\x1b[m\x1b[K At global scope:\n'}
+[18.724502] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:201:35:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno declaration matches \xe2\x80\x98\x1b[01m\x1b[Krclcpp_action::CancelResponse cg::total_station_rtls::TSPrismTransformer::handle_cancel(std::shared_ptr<rclcpp_action::ServerGoalHandle<lx_msgs::action::CalibrateImu> >)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[18.724858] (localization) StderrLine: {'line': b'  201 |     rclcpp_action::CancelResponse \x1b[01;31m\x1b[KTSPrismTransformer\x1b[m\x1b[K::handle_cancel(\n'}
+[18.725123] (localization) StderrLine: {'line': b'      |                                   \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.725433] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.725771] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:35:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate is: \xe2\x80\x98\x1b[01m\x1b[Krclcpp_action::CancelResponse cg::total_station_rtls::TSPrismTransformer::handle_cancel(int)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[18.726051] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse \x1b[01;36m\x1b[Khandle_cancel\x1b[m\x1b[K(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>> goal_handle);\n'}
+[18.727503] (localization) StderrLine: {'line': b'      |                                   \x1b[01;36m\x1b[K^~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.727770] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.728034] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:23:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kclass cg::total_station_rtls::TSPrismTransformer\x1b[m\x1b[K\xe2\x80\x99 defined here\n'}
+[18.728349] (localization) StderrLine: {'line': b'   23 | class \x1b[01;36m\x1b[KTSPrismTransformer\x1b[m\x1b[K : public rclcpp::Node {\n'}
+[18.728629] (localization) StderrLine: {'line': b'      |       \x1b[01;36m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.728861] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:209:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno declaration matches \xe2\x80\x98\x1b[01m\x1b[Kvoid cg::total_station_rtls::TSPrismTransformer::handle_accepted(std::shared_ptr<rclcpp_action::ServerGoalHandle<lx_msgs::action::CalibrateImu> >)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[18.731446] (localization) StderrLine: {'line': b'  209 |     void \x1b[01;31m\x1b[KTSPrismTransformer\x1b[m\x1b[K::handle_accepted(\n'}
+[18.731756] (localization) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.731999] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.732260] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:10:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate is: \xe2\x80\x98\x1b[01m\x1b[Kvoid cg::total_station_rtls::TSPrismTransformer::handle_accepted(int)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[18.732545] (localization) StderrLine: {'line': b'   72 |     void \x1b[01;36m\x1b[Khandle_accepted\x1b[m\x1b[K(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>> goal_handle);\n'}
+[18.732781] (localization) StderrLine: {'line': b'      |          \x1b[01;36m\x1b[K^~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.733016] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.733293] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:23:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kclass cg::total_station_rtls::TSPrismTransformer\x1b[m\x1b[K\xe2\x80\x99 defined here\n'}
+[18.733546] (localization) StderrLine: {'line': b'   23 | class \x1b[01;36m\x1b[KTSPrismTransformer\x1b[m\x1b[K : public rclcpp::Node {\n'}
+[18.733867] (localization) StderrLine: {'line': b'      |       \x1b[01;36m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.734100] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:215:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno declaration matches \xe2\x80\x98\x1b[01m\x1b[Kvoid cg::total_station_rtls::TSPrismTransformer::executeCalibrateIMU(std::shared_ptr<rclcpp_action::ServerGoalHandle<lx_msgs::action::CalibrateImu> >)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[18.734350] (localization) StderrLine: {'line': b'  215 |     void \x1b[01;31m\x1b[KTSPrismTransformer\x1b[m\x1b[K::executeCalibrateIMU(\n'}
+[18.734572] (localization) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.734803] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.735022] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:10:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate is: \xe2\x80\x98\x1b[01m\x1b[Kvoid cg::total_station_rtls::TSPrismTransformer::executeCalibrateIMU(int)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[18.735249] (localization) StderrLine: {'line': b'   73 |     void \x1b[01;36m\x1b[KexecuteCalibrateIMU\x1b[m\x1b[K(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>> goal_handle);\n'}
+[18.735479] (localization) StderrLine: {'line': b'      |          \x1b[01;36m\x1b[K^~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.735695] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[18.735927] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:23:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kclass cg::total_station_rtls::TSPrismTransformer\x1b[m\x1b[K\xe2\x80\x99 defined here\n'}
+[18.736154] (localization) StderrLine: {'line': b'   23 | class \x1b[01;36m\x1b[KTSPrismTransformer\x1b[m\x1b[K : public rclcpp::Node {\n'}
+[18.736370] (localization) StderrLine: {'line': b'      |       \x1b[01;36m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[18.817338] (-) TimerEvent: {}
+[18.919880] (-) TimerEvent: {}
+[19.022406] (-) TimerEvent: {}
+[19.124806] (-) TimerEvent: {}
+[19.172357] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.173017] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:63:27:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KCalibrateImu\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[19.173398] (localization) StderrLine: {'line': b'   63 |     rclcpp_action::Server<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>::SharedPtr calibrate_imu_action_server_;\n'}
+[19.173712] (localization) StderrLine: {'line': b'      |                           \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.173980] (localization) StderrLine: {'line': b'      |                           \x1b[32m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\n'}
+[19.174954] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/calibrate_imu.hpp:7\x1b[m\x1b[K,\n'}
+[19.175313] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13\x1b[m\x1b[K,\n'}
+[19.175562] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.175845] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/detail/calibrate_imu__struct.hpp:1071:29:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[19.176109] (localization) StderrLine: {'line': b' 1071 | typedef struct CalibrateImu \x1b[01;36m\x1b[KCalibrateImu\x1b[m\x1b[K;\n'}
+[19.176711] (localization) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.176942] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.177221] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:63:39:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[19.177484] (localization) StderrLine: {'line': b'   63 |     rclcpp_action::Server<CalibrateImu\x1b[01;31m\x1b[K>\x1b[m\x1b[K::SharedPtr calibrate_imu_action_server_;\n'}
+[19.177985] (localization) StderrLine: {'line': b'      |                                       \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[19.178212] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:63:42:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 at end of member declaration\n'}
+[19.178476] (localization) StderrLine: {'line': b'   63 |     rclcpp_action::Server<CalibrateImu>::\x1b[01;31m\x1b[KSharedPtr\x1b[m\x1b[K calibrate_imu_action_server_;\n'}
+[19.178736] (localization) StderrLine: {'line': b'      |                                          \x1b[01;31m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[19.178996] (localization) StderrLine: {'line': b'      |                                                   \x1b[32m\x1b[K;\x1b[m\x1b[K\n'}
+[19.192927] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:63:52:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kcalibrate_imu_action_server_\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[19.193742] (localization) StderrLine: {'line': b'   63 |     rclcpp_action::Server<CalibrateImu>::SharedPtr \x1b[01;31m\x1b[Kcalibrate_imu_action_server_\x1b[m\x1b[K;\n'}
+[19.194062] (localization) StderrLine: {'line': b'      |                                                    \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.198809] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:103:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KCalibrateImu\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[19.199750] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse handle_cancel(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[19.200069] (localization) StderrLine: {'line': b'      |                                                                                                       \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.200315] (localization) StderrLine: {'line': b'      |                                                                                                       \x1b[32m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\n'}
+[19.200540] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/calibrate_imu.hpp:7\x1b[m\x1b[K,\n'}
+[19.201868] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13\x1b[m\x1b[K,\n'}
+[19.202208] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.202460] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/detail/calibrate_imu__struct.hpp:1071:29:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[19.202710] (localization) StderrLine: {'line': b' 1071 | typedef struct CalibrateImu \x1b[01;36m\x1b[KCalibrateImu\x1b[m\x1b[K;\n'}
+[19.202935] (localization) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.203184] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.203423] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:103:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[19.203890] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse handle_cancel(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[19.204128] (localization) StderrLine: {'line': b'      |                                                                                                       \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.204348] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:115:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[19.204617] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse handle_cancel(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu\x1b[01;31m\x1b[K>>\x1b[m\x1b[K goal_handle);\n'}
+[19.204877] (localization) StderrLine: {'line': b'      |                                                                                                                   \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[19.205157] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:70:60:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K<expression error>\x1b[m\x1b[K\xe2\x80\x99 in namespace \xe2\x80\x98\x1b[01m\x1b[Kstd\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[19.205398] (localization) StderrLine: {'line': b'   70 |     rclcpp_action::CancelResponse handle_cancel(const std::\x1b[01;31m\x1b[Kshared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>>\x1b[m\x1b[K goal_handle);\n'}
+[19.205892] (localization) StderrLine: {'line': b'      |                                                            \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.206678] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:80:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KCalibrateImu\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[19.207066] (localization) StderrLine: {'line': b'   72 |     void handle_accepted(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[19.207306] (localization) StderrLine: {'line': b'      |                                                                                \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.207537] (localization) StderrLine: {'line': b'      |                                                                                \x1b[32m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\n'}
+[19.207766] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/calibrate_imu.hpp:7\x1b[m\x1b[K,\n'}
+[19.208019] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13\x1b[m\x1b[K,\n'}
+[19.208274] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.208493] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/detail/calibrate_imu__struct.hpp:1071:29:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[19.208711] (localization) StderrLine: {'line': b' 1071 | typedef struct CalibrateImu \x1b[01;36m\x1b[KCalibrateImu\x1b[m\x1b[K;\n'}
+[19.208925] (localization) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.209165] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.210156] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:80:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[19.210412] (localization) StderrLine: {'line': b'   72 |     void handle_accepted(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[19.210663] (localization) StderrLine: {'line': b'      |                                                                                \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.210883] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:92:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[19.211114] (localization) StderrLine: {'line': b'   72 |     void handle_accepted(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu\x1b[01;31m\x1b[K>>\x1b[m\x1b[K goal_handle);\n'}
+[19.211332] (localization) StderrLine: {'line': b'      |                                                                                            \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[19.211589] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:72:37:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K<expression error>\x1b[m\x1b[K\xe2\x80\x99 in namespace \xe2\x80\x98\x1b[01m\x1b[Kstd\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[19.211875] (localization) StderrLine: {'line': b'   72 |     void handle_accepted(const std::\x1b[01;31m\x1b[Kshared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>>\x1b[m\x1b[K goal_handle);\n'}
+[19.212091] (localization) StderrLine: {'line': b'      |                                     \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.212313] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:84:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KCalibrateImu\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[19.212544] (localization) StderrLine: {'line': b'   73 |     void executeCalibrateIMU(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[19.212778] (localization) StderrLine: {'line': b'      |                                                                                    \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.213001] (localization) StderrLine: {'line': b'      |                                                                                    \x1b[32m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\n'}
+[19.213230] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/calibrate_imu.hpp:7\x1b[m\x1b[K,\n'}
+[19.213483] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:13\x1b[m\x1b[K,\n'}
+[19.213772] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.213995] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/include/lx_msgs/lx_msgs/action/detail/calibrate_imu__struct.hpp:1071:29:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Klx_msgs::action::CalibrateImu\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[19.214288] (localization) StderrLine: {'line': b' 1071 | typedef struct CalibrateImu \x1b[01;36m\x1b[KCalibrateImu\x1b[m\x1b[K;\n'}
+[19.214519] (localization) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.214750] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[19.214997] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:84:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[19.215222] (localization) StderrLine: {'line': b'   73 |     void executeCalibrateIMU(const std::shared_ptr<rclcpp_action::ServerGoalHandle<\x1b[01;31m\x1b[KCalibrateImu\x1b[m\x1b[K>> goal_handle);\n'}
+[19.215451] (localization) StderrLine: {'line': b'      |                                                                                    \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.215664] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:96:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[19.215880] (localization) StderrLine: {'line': b'   73 |     void executeCalibrateIMU(const std::shared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu\x1b[01;31m\x1b[K>>\x1b[m\x1b[K goal_handle);\n'}
+[19.216103] (localization) StderrLine: {'line': b'      |                                                                                                \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[19.216321] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:73:41:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[K<expression error>\x1b[m\x1b[K\xe2\x80\x99 in namespace \xe2\x80\x98\x1b[01m\x1b[Kstd\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[19.216594] (localization) StderrLine: {'line': b'   73 |     void executeCalibrateIMU(const std::\x1b[01;31m\x1b[Kshared_ptr<rclcpp_action::ServerGoalHandle<CalibrateImu>>\x1b[m\x1b[K goal_handle);\n'}
+[19.216814] (localization) StderrLine: {'line': b'      |                                         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[19.225063] (-) TimerEvent: {}
+[19.318004] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/c++/11/bits/stl_algobase.h:64\x1b[m\x1b[K,\n'}
+[19.319038] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/memory:63\x1b[m\x1b[K,\n'}
+[19.319451] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:153\x1b[m\x1b[K,\n'}
+[19.319745] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:4\x1b[m\x1b[K,\n'}
+[19.320057] (localization) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:1\x1b[m\x1b[K:\n'}
+[19.320300] (localization) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_pair.h: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kconstexpr std::pair<typename std::__strip_reference_wrapper<typename std::decay<_Tp>::type>::__type, typename std::__strip_reference_wrapper<typename std::decay<_Tp2>::type>::__type> std::make_pair(_T1&&, _T2&&) [with _T1 = geometry_msgs::msg::Point_<std::allocator<void> >&; _T2 = double&; typename std::__strip_reference_wrapper<typename std::decay<_Tp2>::type>::__type = double; typename std::decay<_Tp2>::type = double; typename std::__strip_reference_wrapper<typename std::decay<_Tp>::type>::__type = geometry_msgs::msg::Point_<std::allocator<void> >; typename std::decay<_Tp>::type = std::decay<geometry_msgs::msg::Point_<std::allocator<void> >&>::type]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[19.320622] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:80:43:\x1b[m\x1b[K   required from here\n'}
+[19.320921] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/stl_pair.h:567:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kparameter passing for argument of type \xe2\x80\x98\x1b[01m\x1b[Kstd::pair<geometry_msgs::msg::Point_<std::allocator<void> >, double>\x1b[m\x1b[K\xe2\x80\x99 when C++17 is enabled changed to match C++14 in GCC 10.1\n'}
+[19.321206] (localization) StderrLine: {'line': b'  567 |     \x1b[01;36m\x1b[Kmake_pair\x1b[m\x1b[K(_T1&& __x, _T2&& __y)\n'}
+[19.321484] (localization) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[19.325280] (-) TimerEvent: {}
+[19.426456] (-) TimerEvent: {}
+[19.527592] (-) TimerEvent: {}
+[19.628705] (-) TimerEvent: {}
+[19.729858] (-) TimerEvent: {}
+[19.830964] (-) TimerEvent: {}
+[19.932762] (-) TimerEvent: {}
+[20.034150] (-) TimerEvent: {}
+[20.135789] (-) TimerEvent: {}
+[20.237082] (-) TimerEvent: {}
+[20.338442] (-) TimerEvent: {}
+[20.439741] (-) TimerEvent: {}
+[20.545962] (-) TimerEvent: {}
+[20.647112] (-) TimerEvent: {}
+[20.749742] (-) TimerEvent: {}
+[20.851724] (-) TimerEvent: {}
+[20.952841] (-) TimerEvent: {}
+[21.054858] (-) TimerEvent: {}
+[21.157466] (-) TimerEvent: {}
+[21.259879] (-) TimerEvent: {}
+[21.362306] (-) TimerEvent: {}
+[21.464484] (-) TimerEvent: {}
+[21.567095] (-) TimerEvent: {}
+[21.669579] (-) TimerEvent: {}
+[21.773128] (-) TimerEvent: {}
+[21.874901] (-) TimerEvent: {}
+[21.975831] (-) TimerEvent: {}
+[21.997266] (localization) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:76: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o] Error 1\n'}
+[21.998090] (localization) StderrLine: {'line': b'gmake[2]: *** Waiting for unfinished jobs....\n'}
+[22.076089] (-) TimerEvent: {}
+[22.177024] (-) TimerEvent: {}
+[22.277902] (-) TimerEvent: {}
+[22.378849] (-) TimerEvent: {}
+[22.479792] (-) TimerEvent: {}
+[22.580726] (-) TimerEvent: {}
+[22.681759] (-) TimerEvent: {}
+[22.782743] (-) TimerEvent: {}
+[22.883706] (-) TimerEvent: {}
+[22.984697] (-) TimerEvent: {}
+[23.085708] (-) TimerEvent: {}
+[23.186673] (-) TimerEvent: {}
+[23.287685] (-) TimerEvent: {}
+[23.388697] (-) TimerEvent: {}
+[23.489772] (-) TimerEvent: {}
+[23.590810] (-) TimerEvent: {}
+[23.691792] (-) TimerEvent: {}
+[23.792838] (-) TimerEvent: {}
+[23.893859] (-) TimerEvent: {}
+[23.994912] (-) TimerEvent: {}
+[24.095904] (-) TimerEvent: {}
+[24.196946] (-) TimerEvent: {}
+[24.298079] (-) TimerEvent: {}
+[24.399189] (-) TimerEvent: {}
+[24.500316] (-) TimerEvent: {}
+[24.601326] (-) TimerEvent: {}
+[24.702458] (-) TimerEvent: {}
+[24.803438] (-) TimerEvent: {}
+[24.904411] (-) TimerEvent: {}
+[25.005400] (-) TimerEvent: {}
+[25.106705] (-) TimerEvent: {}
+[25.207724] (-) TimerEvent: {}
+[25.308684] (-) TimerEvent: {}
+[25.409724] (-) TimerEvent: {}
+[25.510698] (-) TimerEvent: {}
+[25.611674] (-) TimerEvent: {}
+[25.712688] (-) TimerEvent: {}
+[25.813725] (-) TimerEvent: {}
+[25.914686] (-) TimerEvent: {}
+[26.015720] (-) TimerEvent: {}
+[26.116730] (-) TimerEvent: {}
+[26.217929] (-) TimerEvent: {}
+[26.319065] (-) TimerEvent: {}
+[26.420051] (-) TimerEvent: {}
+[26.521718] (-) TimerEvent: {}
+[26.622724] (-) TimerEvent: {}
+[26.723698] (-) TimerEvent: {}
+[26.824736] (-) TimerEvent: {}
+[26.925770] (-) TimerEvent: {}
+[27.026783] (-) TimerEvent: {}
+[27.127842] (-) TimerEvent: {}
+[27.228823] (-) TimerEvent: {}
+[27.329802] (-) TimerEvent: {}
+[27.430836] (-) TimerEvent: {}
+[27.531852] (-) TimerEvent: {}
+[27.632862] (-) TimerEvent: {}
+[27.734561] (-) TimerEvent: {}
+[27.835525] (-) TimerEvent: {}
+[27.936544] (-) TimerEvent: {}
+[28.037720] (-) TimerEvent: {}
+[28.138768] (-) TimerEvent: {}
+[28.239826] (-) TimerEvent: {}
+[28.340788] (-) TimerEvent: {}
+[28.441808] (-) TimerEvent: {}
+[28.542708] (-) TimerEvent: {}
+[28.643717] (-) TimerEvent: {}
+[28.744781] (-) TimerEvent: {}
+[28.845850] (-) TimerEvent: {}
+[28.946850] (-) TimerEvent: {}
+[29.047892] (-) TimerEvent: {}
+[29.148943] (-) TimerEvent: {}
+[29.250024] (-) TimerEvent: {}
+[29.351462] (-) TimerEvent: {}
+[29.452532] (-) TimerEvent: {}
+[29.553532] (-) TimerEvent: {}
+[29.654731] (-) TimerEvent: {}
+[29.755670] (-) TimerEvent: {}
+[29.856723] (-) TimerEvent: {}
+[29.957895] (-) TimerEvent: {}
+[30.061974] (-) TimerEvent: {}
+[30.162934] (-) TimerEvent: {}
+[30.263953] (-) TimerEvent: {}
+[30.364910] (-) TimerEvent: {}
+[30.465925] (-) TimerEvent: {}
+[30.566924] (-) TimerEvent: {}
+[30.667920] (-) TimerEvent: {}
+[30.768855] (-) TimerEvent: {}
+[30.871891] (-) TimerEvent: {}
+[30.972838] (-) TimerEvent: {}
+[31.073832] (-) TimerEvent: {}
+[31.174823] (-) TimerEvent: {}
+[31.275836] (-) TimerEvent: {}
+[31.376875] (-) TimerEvent: {}
+[31.477910] (-) TimerEvent: {}
+[31.578994] (-) TimerEvent: {}
+[31.680053] (-) TimerEvent: {}
+[31.781118] (-) TimerEvent: {}
+[31.882446] (-) TimerEvent: {}
+[31.983639] (-) TimerEvent: {}
+[32.084979] (-) TimerEvent: {}
+[32.186254] (-) TimerEvent: {}
+[32.287320] (-) TimerEvent: {}
+[32.388288] (-) TimerEvent: {}
+[32.489339] (-) TimerEvent: {}
+[32.590377] (-) TimerEvent: {}
+[32.663884] (localization) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:90: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o] Error 1\n'}
+[32.665539] (localization) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/ts_prism_transformer.dir/all] Error 2\n'}
+[32.666092] (localization) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[32.675311] (localization) CommandEnded: {'returncode': 2}
+[32.691125] (-) TimerEvent: {}
+[32.729189] (localization) JobEnded: {'identifier': 'localization', 'rc': 2}
+[32.741860] (-) EventReactorShutdown: {}

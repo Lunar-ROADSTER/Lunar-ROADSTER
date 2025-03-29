@@ -1,6 +1,7 @@
 #include "localization/ts_prism_transformer.hpp"
 
 using std::placeholders::_1;
+using std::placeholders::_2;
 
 namespace cg
 {
@@ -31,6 +32,54 @@ namespace cg
 
       // Tf broadcaster
       transform_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
+
+      // Setup IMU calibration action server
+      yaw_offset_ = 0.0;
+      calibration_complete_ = false;
+      calibrate_imu_action_server_ = rclcpp_action::create_server<CalibrateImu>(
+          this,
+          "ts_prism_transformer/calibrate_imu",
+          std::bind(&TSPrismTransformer::handle_goal, this, _1, _2),
+          std::bind(&TSPrismTransformer::handle_cancel, this, _1),
+          std::bind(&TSPrismTransformer::handle_accepted, this, _1));
+
+    }
+
+    double TSPrismTransformer::addAngles(double a1, double a2)
+    {
+      double sum = a1 + a2;
+
+      if(sum > M_PI)
+        sum -= 2.0 * M_PI;
+      else if(sum < -M_PI)
+        sum += 2.0 * M_PI;
+      
+      return sum;
+    }
+
+    double TSPrismTransformer::calculateAverageAngle(const std::vector<double>& angles)
+    {
+      double sumX = 0.0, sumY = 0.0;
+      for (const auto& angle : angles) {
+        sumX += cos(angle);
+        sumY += sin(angle);
+      }
+      double averageRadians = atan2(sumY, sumX);
+
+      return addAngles(averageRadians, 0);
+    }
+
+    void TSPrismTransformer::append_TS_IMU_Data(std::vector<std::pair<geometry_msgs::msg::Point, double>> & TS_IMU_Data, int itr)
+    {
+      (void) itr;
+      // Use the latest TS prism position and current IMU yaw
+      tf2::Quaternion imu_q(
+        imu_last.orientation.x,
+        imu_last.orientation.y,
+        imu_last.orientation.z,
+        imu_last.orientation.w);
+      double imu_yaw = tf2::getYaw(imu_q);
+      TS_IMU_Data.push_back(std::make_pair(updated_pose_.pose.pose.position, imu_yaw));
     }
 
     void TSPrismTransformer::ts_prism_callback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr prism_msg)
@@ -53,6 +102,13 @@ namespace cg
         // Compute 3DOF orientation from map to base_link, based on raw IMU and bearing measurements
         tf2::Quaternion map_to_base_link_q;
         map_to_base_link_q.setRPY(imu_roll, imu_pitch, imu_yaw);
+
+        if(calibration_complete_)
+        {
+          double calibrated_yaw = addAngles(imu_yaw, yaw_offset_);
+          map_to_base_link_q.setRPY(imu_roll, imu_pitch, calibrated_yaw);
+        }
+
         Eigen::Quaternion<double> map_to_base_link_rotation(
           map_to_base_link_q.w(),
           map_to_base_link_q.x(),
@@ -132,6 +188,102 @@ namespace cg
             toFrameRel.c_str(), fromFrameRel.c_str(), ex.what());
         return false;
       }
+    }
+
+    rclcpp_action::GoalResponse TSPrismTransformer::handle_goal(
+        const rclcpp_action::GoalUUID & uuid,
+        std::shared_ptr<const CalibrateImu::Goal> goal)
+    {
+      RCLCPP_INFO(this->get_logger(), "Received calibrate IMU request");
+      (void)uuid;
+      (void)goal;
+      return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
+    }
+
+    rclcpp_action::CancelResponse TSPrismTransformer::handle_cancel(
+        const std::shared_ptr<GoalHandleCalibrateImu> goal_handle)
+    {
+      RCLCPP_INFO(this->get_logger(), "Received request to cancel calibrate IMU action");
+      (void)goal_handle;
+      return rclcpp_action::CancelResponse::ACCEPT;
+    }
+
+    void TSPrismTransformer::handle_accepted(
+        const std::shared_ptr<GoalHandleCalibrateImu> goal_handle)
+    {
+      std::thread{std::bind(&TSPrismTransformer::executeCalibrateIMU, this, std::placeholders::_1), goal_handle}.detach();
+    }
+
+    void TSPrismTransformer::executeCalibrateIMU(
+        const std::shared_ptr<GoalHandleCalibrateImu> goal_handle)
+    {
+      RCLCPP_INFO(this->get_logger(), "Executing calibrate IMU action");
+      const auto goal = goal_handle->get_goal();
+      auto feedback = std::make_shared<CalibrateImu::Feedback>();
+      auto result = std::make_shared<CalibrateImu::Result>();
+
+      double calibrate_duration = (goal->time > 0) ? goal->time : 6.5;
+      std::vector<std::pair<geometry_msgs::msg::Point, double>> TS_IMU_Data;
+      auto start_time = this->get_clock()->now();
+      rclcpp::Rate loop_rate(1);
+
+      while(rclcpp::ok() && !goal_handle->is_canceling())
+      {
+        auto current_time = this->get_clock()->now();
+        if((current_time - start_time).seconds() >= calibrate_duration)
+        {
+          RCLCPP_INFO(this->get_logger(), "Calibration period complete");
+          break;
+        }
+        append_TS_IMU_Data(TS_IMU_Data, 0);
+        loop_rate.sleep();
+      }
+
+      if(goal_handle->is_canceling() || !rclcpp::ok())
+      {
+        RCLCPP_INFO(this->get_logger(), "Calibrate IMU action cancelled");
+        result->success = false;
+        goal_handle->abort(result);
+        return;
+      }
+
+      if(TS_IMU_Data.size() < 2)
+      {
+        RCLCPP_INFO(this->get_logger(), "Not enough data recorded, aborting calibration");
+        result->success = false;
+        goal_handle->abort(result);
+        return;
+      }
+
+      std::vector<double> yaw_offsets;
+      for(size_t i = 0; i < TS_IMU_Data.size() - 1; i++)
+      {
+        double angle_diff = addAngles(TS_IMU_Data[i+1].second, -TS_IMU_Data[i].second);
+        if (fabs(angle_diff) > 20.0 * M_PI / 180.0)
+        {
+          continue;
+        }
+        double avg_imu_yaw = addAngles((TS_IMU_Data[i].second + TS_IMU_Data[i+1].second) / 2.0, 0);
+        double ts_bearing = atan2(TS_IMU_Data[i+1].first.y - TS_IMU_Data[i].first.y,
+                                  TS_IMU_Data[i+1].first.x - TS_IMU_Data[i].first.x);
+        double yaw_offset = addAngles(ts_bearing, -avg_imu_yaw);
+        yaw_offsets.push_back(yaw_offset);
+      }
+
+      if(yaw_offsets.empty())
+      {
+        RCLCPP_INFO(this->get_logger(), "No valid yaw offsets calculated, calibration failed");
+        result->success = false;
+        goal_handle->abort(result);
+        return;
+      }
+
+      double new_yaw_offset = calculateAverageAngle(yaw_offsets);
+      yaw_offset_ = new_yaw_offset;
+      calibration_complete_ = true;
+      RCLCPP_INFO(this->get_logger(), "Calibration complete, new yaw offset: %f", yaw_offset_);
+      result->success = true;
+      goal_handle->succeed(result);
     }
 
   } // namespace total_station_rtls

@@ -15,6 +15,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(cg_msgs)
+find_package(lx_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
@@ -64,6 +65,7 @@ ament_target_dependencies(ts_prism_transformer
   tf2_ros
   tf2_geometry_msgs
   Eigen3
+  lx_msgs
 )
 target_link_libraries(ts_prism_transformer tf2_ros::tf2_ros)  
 
