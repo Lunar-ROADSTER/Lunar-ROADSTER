@@ -1,0 +1,23 @@
+[ 16%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/ready.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/update_map.cpp.o[0m
+In file included from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_main.cpp:2[m[K:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/behavior_executive_node.hpp:101:17:[m[K [01;31m[Kerror: [m[K‘[01m[KSiteWorkDone[m[K’ in namespace ‘[01m[Kcg::planning[m[K’ does not name a type
+  101 |   cg::planning::[01;31m[KSiteWorkDone[m[K site_work_done_;
+      |                 [01;31m[K^~~~~~~~~~~~[m[K
+In file included from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:1[m[K:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/behavior_executive_node.hpp:101:17:[m[K [01;31m[Kerror: [m[K‘[01m[KSiteWorkDone[m[K’ in namespace ‘[01m[Kcg::planning[m[K’ does not name a type
+  101 |   cg::planning::[01;31m[KSiteWorkDone[m[K site_work_done_;
+      |                 [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:147:2:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K}[m[K’ at end of input
+  147 | }[01;31m[K [m[K// namespace cg
+      |  [01;31m[K^[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:3:14:[m[K [01;36m[Knote: [m[Kto match this ‘[01m[K{[m[K’
+    3 | namespace cg [01;36m[K{[m[K
+      |              [01;36m[K^[m[K
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:76: CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:90: CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

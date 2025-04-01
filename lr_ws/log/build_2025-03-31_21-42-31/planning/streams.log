@@ -1,0 +1,52 @@
+[0.034s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning': CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/mapping:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/teleop:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_description:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/planning:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/localization:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/imu:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/arduino:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning -- -j12 -l12
+[0.058s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.187s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[0.206s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.207s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.211s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.217s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.225s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.246s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.247s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.329s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.360s] -- Found cg_msgs: 0.0.0 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/share/cg_msgs/cmake)
+[0.368s] -- Found mapping: 0.0.0 (/home/williamfbx/Lunar-ROADSTER/lr_ws/install/mapping/share/mapping/cmake)
+[0.369s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[0.387s] -- Found tf2_ros: 0.25.12 (/opt/ros/humble/share/tf2_ros/cmake)
+[0.484s] -- Configuring done
+[0.492s] -- Generating done
+[0.495s] -- Build files have been written to: /home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning
+[0.519s] [35m[1mConsolidate compiler generated dependencies of target behavior_executive_node[0m
+[0.536s] [  7%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/get_worksystem_trajectory.cpp.o[0m
+[0.539s] [ 14%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o[0m
+[0.539s] [ 21%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o[0m
+[2.474s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:[m[K In member function ‘[01m[Kvoid cg::planning::BehaviorExecutive::fsmTimerCallback()[m[K’:
+[2.474s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:168:49:[m[K [01;31m[Kerror: [m[Kqualified-id in declaration before ‘[01m[K([m[K’ token
+[2.474s]   168 | void BehaviorExecutive::globalRobotStateCallback[01;31m[K([m[Kconst nav_msgs::msg::Odometry::SharedPtr msg) {
+[2.475s]       |                                                 [01;31m[K^[m[K
+[2.475s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:189:47:[m[K [01;31m[Kerror: [m[Kqualified-id in declaration before ‘[01m[K([m[K’ token
+[2.475s]   189 | void BehaviorExecutive::odomRobotStateCallback[01;31m[K([m[Kconst nav_msgs::msg::Odometry::SharedPtr msg) {
+[2.475s]       |                                               [01;31m[K^[m[K
+[2.475s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:193:41:[m[K [01;31m[Kerror: [m[Kqualified-id in declaration before ‘[01m[K([m[K’ token
+[2.475s]   193 | void BehaviorExecutive::vizTimerCallback[01;31m[K([m[K) {
+[2.475s]       |                                         [01;31m[K^[m[K
+[2.475s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:198:45:[m[K [01;31m[Kerror: [m[Kqualified-id in declaration before ‘[01m[K([m[K’ token
+[2.475s]   198 | void BehaviorExecutive::debugTriggerCallback[01;31m[K([m[Kconst std_msgs::msg::Bool::SharedPtr msg) {
+[2.475s]       |                                             [01;31m[K^[m[K
+[2.475s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:205:45:[m[K [01;31m[Kerror: [m[Kqualified-id in declaration before ‘[01m[K([m[K’ token
+[2.475s]   205 | bool BehaviorExecutive::updateMapFromService[01;31m[K([m[Kbool verbose = false) {
+[2.475s]       |                                             [01;31m[K^[m[K
+[2.475s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:210:48:[m[K [01;31m[Kerror: [m[Kqualified-id in declaration before ‘[01m[K([m[K’ token
+[2.476s]   210 | bool BehaviorExecutive::enableWorksystemService[01;31m[K([m[Kconst bool enable_worksystem, bool verbose = false) {
+[2.476s]       |                                                [01;31m[K^[m[K
+[2.476s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:[m[K At global scope:
+[2.476s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:219:2:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K}[m[K’ at end of input
+[2.476s]   219 | }[01;31m[K [m[K// namespace cg
+[2.476s]       |  [01;31m[K^[m[K
+[2.476s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:3:14:[m[K [01;36m[Knote: [m[Kto match this ‘[01m[K{[m[K’
+[2.476s]     3 | namespace cg [01;36m[K{[m[K
+[2.476s]       |              [01;36m[K^[m[K
+[4.948s] gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:90: CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o] Error 1
+[4.948s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+[4.948s] gmake: *** [Makefile:146: all] Error 2
+[4.950s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning' returned '2': CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/mapping:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/teleop:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_description:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/planning:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/localization:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/imu:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/arduino:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning -- -j12 -l12
