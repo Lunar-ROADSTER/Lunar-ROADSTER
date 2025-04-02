@@ -24,7 +24,7 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
     viz_timer_ = this->create_wall_timer(std::chrono::milliseconds(viz_timer_callback_ms_), std::bind(&BehaviorExecutive::vizTimerCallback, this), viz_timer_cb_group_);
   }
 
-  site_map_client_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+  // site_map_client_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
   update_trajectory_client_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
   enable_worksystem_client_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
 
@@ -41,7 +41,7 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
 
 
   // Create the service client, joined to the callback group
-  site_map_client_ = this->create_client<cg_msgs::srv::SiteMap>("site_map_server", rmw_qos_profile_services_default, site_map_client_group_);
+  // site_map_client_ = this->create_client<cg_msgs::srv::SiteMap>("site_map_server", rmw_qos_profile_services_default, site_map_client_group_);
   update_trajectory_client_ = this->create_client<cg_msgs::srv::UpdateTrajectory>("update_trajectory_server", rmw_qos_profile_services_default, update_trajectory_client_group_);
   enable_worksystem_client_ = this->create_client<cg_msgs::srv::EnableWorksystem>("enable_worksystem_server", rmw_qos_profile_services_default, enable_worksystem_client_group_);
 
@@ -54,37 +54,14 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
   this->get_parameter("viz_timer_callback_ms", viz_timer_callback_ms_);
   fsm_timer_ = this->create_wall_timer(std::chrono::milliseconds(fsm_timer_callback_ms_), std::bind(&BehaviorExecutive::fsmTimerCallback, this), fsm_timer_cb_group_);
 
-  // /* Load parameters */
-  // // Map parameters
-  // size_t map_height;
-  // size_t map_width;
-  // float map_resolution;
-  // float xTransform;
-  // float yTransform;
-  // std::string design_topo_filepath;
-  // this->declare_parameter<int>("height", 50);
-  // this->get_parameter("height", map_height);
-  // this->declare_parameter<int>("width", 50);
-  // this->get_parameter("width", map_width);
-  // this->declare_parameter<float>("resolution", 0.1);
-  // this->get_parameter("resolution", map_resolution);
-  // this->declare_parameter<float>("xTransform", 1.0);
-  // this->get_parameter("xTransform", xTransform);
-  // this->declare_parameter<float>("yTransform", 1.0);
-  // this->get_parameter("yTransform", yTransform);
-  // this->declare_parameter<std::string>("design_topo_filepath", "/root/CRATER_GRADER/cg_ws/src/planning/config/50x50_zeros_height_map.csv");
-  // this->get_parameter("design_topo_filepath", design_topo_filepath);
-  
-  // // Thresholds for reaching following goal
-  // double thresh_pos_ = 0.0;
-  // double thresh_head_ = 0.0;
-  // float thresh_euclidean_replan_ = 0.0;
-  // this->declare_parameter<double>("thresh_pos", 1.0);
-  // this->get_parameter("thresh_pos", thresh_pos_);
-  // this->declare_parameter<double>("thresh_head", 1.0);
-  // this->get_parameter("thresh_head", thresh_head_);
-  // this->declare_parameter<double>("thresh_euclidean_replan", 1.0);
-  // this->get_parameter("thresh_euclidean_replan", thresh_euclidean_replan_);
+  /* Load parameters */
+  // Map parameters
+  this->declare_parameter<int>("height", 50);
+  this->get_parameter("height", map_height);
+  this->declare_parameter<int>("width", 50);
+  this->get_parameter("width", map_width);
+  this->declare_parameter<float>("resolution", 0.1);
+  this->get_parameter("resolution", map_resolution);
 }
 
 void BehaviorExecutive::fsmTimerCallback()
@@ -102,9 +79,8 @@ void BehaviorExecutive::fsmTimerCallback()
     break;
 
   case cg::planning::FSM::StateL0::UPDATE_MAP:
-    map_updated_ = updateMapFromService(false);
+    map_updated_ = updateMap(false);
     // Check that map was updated correctly
-    map_updated_ = true; // DEBUG
     update_map_.runState(map_updated_, traj_debug_);
     break;
 
@@ -130,6 +106,7 @@ void BehaviorExecutive::fsmTimerCallback()
     // TODO: Ankit & Deepam
     // Implement transport stack
     // Uses the cg::Planning::TransportPlanner object handler from PLAN_TRANSPORT to extract a list of transport goals
+    // Need to update object handler to have new method that nav_transport_ = false if only nav, nav_transport_ = true when nav + tool planner
     get_transport_goals_.runState();
     break;
 
@@ -149,6 +126,7 @@ void BehaviorExecutive::fsmTimerCallback()
     // TODO: Bhaswanth & Simson
     // Implement nav stack
     // Follow the generated path from the previous stack
+    // nav_transport_ = false if only nav, nav_transport_ = true when nav + tool planner. Feed this as a parameter into .runState()
     following_trajectory_.runState();
 
 
@@ -221,10 +199,16 @@ void BehaviorExecutive::debugTriggerCallback(const std_msgs::msg::Bool::SharedPt
 
 
 // Services
-bool BehaviorExecutive::updateMapFromService(bool verbose = false) {
-  // TODO: William
-  return verbose;
+bool BehaviorExecutive::updateMap(bool verbose = false) {
+  
+  (void)verbose;
+  // Both maps will be saved as CSV files in the /saved_maps directory
+  cg::planning::generateZeroMapCsv(map_height, map_width, map_resolution);
+  cg::planning::generateElevationMapCsv(map_height, map_width, map_resolution);
+
+  return true;
 }
+
 
 bool BehaviorExecutive::enableWorksystemService(const bool enable_worksystem, bool verbose = false) {
   // TODO: Bhaswanth & Simson

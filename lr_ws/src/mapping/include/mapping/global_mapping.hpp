@@ -23,8 +23,8 @@ class WorldModel : public rclcpp::Node
         // Variables & pointers -----------------
         bool initFuse;
         const double MAP_DIMENSION = 7.0;
-        const double MAP_RESOLUTION = 0.05;
-        const double ELEVATION_SCALE = 400;
+        const double MAP_RESOLUTION = 0.1;
+        const double ELEVATION_SCALE = 10000;
         nav_msgs::msg::OccupancyGrid global_map_, 
                                      filtered_global_map_;
 

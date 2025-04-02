@@ -86,7 +86,8 @@ private:
   void debugTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
 
   /* Services */
-  bool updateMapFromService(bool verbose);
+  bool updateMap(bool verbose);
+  void generateZeroMapCsv();
   bool enableWorksystemService(const bool enable_worksystem, bool verbose);
 
   /* Poses */
@@ -96,7 +97,7 @@ private:
 
   /* Debug */
   bool traj_debug_ = false;
-  bool debug_trigger_{false};
+  bool debug_trigger_ = false;
 
   /* FSM parameters */
   bool map_updated_ = false;
@@ -104,7 +105,14 @@ private:
   std::vector<cg_msgs::msg::Pose2D> current_goal_poses_;
   cg_msgs::msg::Pose2D current_goal_pose_;
 
+  bool nav_transport_ = false;
   bool enable_worksystem_ = false;
+
+  /* Map parameters */
+  size_t map_height;
+  size_t map_width;
+  float map_resolution;
+  std::string design_topo_filepath;
 
   /* FSM */
   cg::planning::FSM fsm_;

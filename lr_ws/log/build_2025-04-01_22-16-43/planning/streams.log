@@ -1,0 +1,110 @@
+[0.033s] Invoking command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning': CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/mapping:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/teleop:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_description:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/planning:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/localization:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/imu:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/arduino:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning -- -j12 -l12
+[0.094s] [35m[1mConsolidate compiler generated dependencies of target behavior_executive_node[0m
+[0.126s] [  6%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/planning_util.cpp.o[0m
+[3.570s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[3.570s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[3.570s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/pcl_conversions/pcl_conversions/pcl_conversions.h:43[m[K,
+[3.571s]                  from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/planning_util.hpp:21[m[K,
+[3.571s]                  from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:1[m[K:
+[3.571s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:[m[K In function ‘[01m[Kvoid cg::planning::generateElevationMapCsv(size_t, size_t, float)[m[K’:
+[3.571s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:52:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[3.571s]    52 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Loading map...");
+[3.571s]       |               [01;31m[K^~~~[m[K
+[3.571s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:52:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[3.571s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:52:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[3.571s]    52 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Loading map...");
+[3.571s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[3.571s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:52:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[3.571s]    52 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Loading map...");
+[3.571s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[3.571s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:52:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[3.571s]    52 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Loading map...");
+[3.571s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[3.571s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[3.571s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/pcl_conversions/pcl_conversions/pcl_conversions.h:43[m[K,
+[3.572s]                  from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/planning_util.hpp:21[m[K,
+[3.572s]                  from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:1[m[K:
+[3.572s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:52:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[3.572s]    52 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Loading map...");
+[3.572s]       |               [01;31m[K^~~~[m[K
+[3.572s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:52:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[3.572s]    52 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Loading map...");
+[3.572s]       |               [01;31m[K^~~~[m[K
+[3.572s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[3.572s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/pcl_conversions/pcl_conversions/pcl_conversions.h:43[m[K,
+[3.573s]                  from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/planning_util.hpp:21[m[K,
+[3.573s]                  from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:1[m[K:
+[3.573s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:54:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[3.573s]    54 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Map loaded");
+[3.573s]       |               [01;31m[K^~~~[m[K
+[3.573s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:54:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[3.573s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:54:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[3.573s]    54 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Map loaded");
+[3.573s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[3.573s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:54:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[3.573s]    54 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Map loaded");
+[3.573s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[3.573s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:54:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[3.573s]    54 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Map loaded");
+[3.573s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[3.573s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[3.573s]                  from [01m[K/opt/ros/humble/include/pcl_conversions/pcl_conversions/pcl_conversions.h:43[m[K,
+[3.573s]                  from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/planning_util.hpp:21[m[K,
+[3.573s]                  from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:1[m[K:
+[3.573s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:54:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[3.573s]    54 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Map loaded");
+[3.573s]       |               [01;31m[K^~~~[m[K
+[3.573s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:54:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[3.573s]    54 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Map loaded");
+[3.573s]       |               [01;31m[K^~~~[m[K
+[3.574s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:50:37:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kheight[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[3.574s]    50 | void generateElevationMapCsv([01;35m[Ksize_t height[m[K, size_t width, float resolution) {
+[3.574s]       |                              [01;35m[K~~~~~~~^~~~~~[m[K
+[3.574s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:50:52:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kwidth[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[3.574s]    50 | void generateElevationMapCsv(size_t height, [01;35m[Ksize_t width[m[K, float resolution) {
+[3.574s]       |                                             [01;35m[K~~~~~~~^~~~~[m[K
+[3.574s] [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:50:65:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kresolution[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[3.574s]    50 |  generateElevationMapCsv(size_t height, size_t width, [01;35m[Kfloat resolution[m[K) {
+[3.574s]       |                                                       [01;35m[K~~~~~~^~~~~~~~~~[m[K
+[3.574s] 
+[4.132s] gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:104: CMakeFiles/behavior_executive_node.dir/src/planning_util.cpp.o] Error 1
+[4.133s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+[4.133s] gmake: *** [Makefile:146: all] Error 2
+[4.135s] Invoked command in '/home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning' returned '2': CMAKE_PREFIX_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/mapping:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/teleop:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/sensing:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_description:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera_msgs:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/planning:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/motion_control:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/localization:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/imu:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/arduino:/opt/ros/humble LD_LIBRARY_PATH=/home/williamfbx/Lunar-ROADSTER/lr_ws/install/cg_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/vectornav_msgs/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera/lib:/home/williamfbx/Lunar-ROADSTER/lr_ws/install/realsense2_camera_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/williamfbx/Lunar-ROADSTER/lr_ws/build/planning -- -j12 -l12

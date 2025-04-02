@@ -10,6 +10,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# find saved map directory
+add_definitions(-DPLANNING_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -20,6 +23,8 @@ find_package(Eigen3 REQUIRED)
 find_package(nav_msgs REQUIRED) # viz
 find_package(geometry_msgs REQUIRED) # viz
 find_package(tf2_ros REQUIRED) # viz
+find_package(pcl_ros REQUIRED)
+find_package(pcl_conversions REQUIRED)
 
 # Add Eigen3 Library
 INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIRS})
@@ -50,6 +55,8 @@ ament_target_dependencies(behavior_executive_node
   nav_msgs # viz
   geometry_msgs # viz
   tf2_ros # viz
+  pcl_ros
+  pcl_conversions
 )
 # target_link_libraries(behavior_executive_node ortools::ortools)
 
