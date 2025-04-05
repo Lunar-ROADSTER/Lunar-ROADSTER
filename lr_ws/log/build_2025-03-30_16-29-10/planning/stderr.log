@@ -1,0 +1,10 @@
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:[m[K In constructor ‘[01m[Kcg::planning::BehaviorExecutive::BehaviorExecutive()[m[K’:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:15:80:[m[K [01;31m[Kerror: [m[K‘[01m[KglobalRobotStateCallback[m[K’ is not a member of ‘[01m[Kcg::planning::BehaviorExecutive[m[K’
+   15 |         "/odometry/filtered/ekf_global_node", 1, std::bind(&BehaviorExecutive::[01;31m[KglobalRobotStateCallback[m[K, this, std::placeholders::_1));
+      |                                                                                [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:17:78:[m[K [01;31m[Kerror: [m[K‘[01m[KodomRobotStateCallback[m[K’ is not a member of ‘[01m[Kcg::planning::BehaviorExecutive[m[K’
+   17 |         "/odometry/filtered/ekf_odom_node", 1, std::bind(&BehaviorExecutive::[01;31m[KodomRobotStateCallback[m[K, this, std::placeholders::_1));
+      |                                                                              [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:90: CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

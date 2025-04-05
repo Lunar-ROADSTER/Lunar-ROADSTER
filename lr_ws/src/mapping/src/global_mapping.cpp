@@ -120,15 +120,15 @@ void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {
     std::vector<double> density_values(global_map_.info.width*global_map_.info.height, 0.0);
 
     for(size_t i = 0; i < cropped_cloud_local_map->points.size(); i++){
-        int col_x =  int(cropped_cloud_local_map->points[i].x / global_map_.info.resolution );
-        int row_y =  int(cropped_cloud_local_map->points[i].y / global_map_.info.resolution );
+        int col_x = int(cropped_cloud_local_map->points[i].x / global_map_.info.resolution );
+        int row_y = int(cropped_cloud_local_map->points[i].y / global_map_.info.resolution );
 
         col_x = std::min(std::max(col_x, 0), int(global_map_.info.width-1));
         row_y = std::min(std::max(row_y, 0), int(global_map_.info.height-1));
 
         int global_idx = col_x + row_y*global_map_.info.width;
         double elev = cropped_cloud_local_map->points[i].z;
-        elevation_values[global_idx] += ELEVATION_SCALE*(elev-0.05);
+        elevation_values[global_idx] += ELEVATION_SCALE*(elev);
         density_values[global_idx] += 1.0;
     }
 
@@ -149,20 +149,34 @@ void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {
 }
 
 void WorldModel::saveGlobalMapCSV() {
-    std::string csv_filename = std::string(MAPPING_SOURCE_DIR) + "/mapping_util/filtered_global_map.csv";
+    std::string csv_filename = std::string(MAPPING_SOURCE_DIR) + "/saved_maps/filtered_global_map.csv";
     std::ofstream csv_file(csv_filename);
 
     if (csv_file.is_open()) {
-        for (size_t y = 0; y < filtered_global_map_.info.height; ++y) {
-            for (size_t x = 0; x < filtered_global_map_.info.width; ++x) {
-                size_t idx = x + y * filtered_global_map_.info.width;
-                csv_file << static_cast<int>(filtered_global_map_.data[idx]);
-                if (x < filtered_global_map_.info.width - 1) {
+        // Save the filtered global map
+        // for (size_t y = 0; y < filtered_global_map_.info.height; ++y) {
+        //     for (size_t x = 0; x < filtered_global_map_.info.width; ++x) {
+        //         size_t idx = x + y * filtered_global_map_.info.width;
+        //         csv_file << static_cast<int>(filtered_global_map_.data[idx]);
+        //         if (x < filtered_global_map_.info.width - 1) {
+        //             csv_file << ",";
+        //         }
+        //     }
+        //     csv_file << "\n";
+        // }
+
+        // Save the unfiltered global map
+        for (size_t y = 0; y < global_map_.info.height; ++y) {
+            for (size_t x = 0; x < global_map_.info.width; ++x) {
+                size_t idx = x + y * global_map_.info.width;
+                csv_file << static_cast<int>(global_map_.data[idx]);
+                if (x < global_map_.info.width - 1) {
                     csv_file << ",";
                 }
             }
             csv_file << "\n";
         }
+
         csv_file.close();
         RCLCPP_INFO(this->get_logger(), "Filtered elevation map saved to %s", csv_filename.c_str());
     } else {
@@ -214,7 +228,7 @@ void WorldModel::filterMap(){
         if(global_map_.data[i] == 0){
             continue;
         }
-        // RCLCPP_INFO(this->get_logger(), "Bayes Filter initialized5");
+        // RCLCPP_INFO(this->get_logger(), "Bayes Filter initialized");
         if(abs(filtered_global_map_.data[i] - global_map_.data[i]) > gradient){
             bayes_filter_[i].updateCell(global_map_.data[i], 10.0);
             filtered_global_map_.data[i] = int(bayes_filter_[i].getCellElevation());

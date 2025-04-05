@@ -1,0 +1,14 @@
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:[m[K In member function ‘[01m[Kbool cg::planning::BehaviorExecutive::updateMapFromService(bool)[m[K’:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:225:51:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kverbose[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  225 | bool BehaviorExecutive::updateMapFromService([01;35m[Kbool verbose = false[m[K) {
+      |                                              [01;35m[K~~~~~^~~~~~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:[m[K In member function ‘[01m[Kvoid cg::planning::BehaviorExecutive::generateZeroMapCsv()[m[K’:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:239:43:[m[K [01;31m[Kerror: [m[Kvariable ‘[01m[Kstd::ofstream file[m[K’ has initializer but incomplete type
+  239 |   std::ofstream file(design_topo_filepath_[01;31m[K)[m[K;
+      |                                           [01;31m[K^[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/behavior_executive_node.cpp:239:22:[m[K [01;31m[Kerror: [m[K‘[01m[Kdesign_topo_filepath_[m[K’ was not declared in this scope
+  239 |   std::ofstream file([01;31m[Kdesign_topo_filepath_[m[K);
+      |                      [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:90: CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

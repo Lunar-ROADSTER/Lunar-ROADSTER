@@ -1,0 +1,15 @@
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:[m[K In function ‘[01m[Kvoid cg::planning::generateZeroMapCsv()[m[K’:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:36:10:[m[K [01;31m[Kerror: [m[K‘[01m[Kcout[m[K’ is not a member of ‘[01m[Kstd[m[K’
+   36 |     std::[01;31m[Kcout[m[K << "[generateZeroMapCsv] Failed to create file: %s", full_filepath.c_str() << std::endl;
+      |          [01;31m[K^~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:2:1:[m[K [01;36m[Knote: [m[K‘[01m[Kstd::cout[m[K’ is defined in header ‘[01m[K<iostream>[m[K’; did you forget to ‘[01m[K#include <iostream>[m[K’?
+    1 | #include "planning/planning_util.hpp"
+  +++ |+[32m[K#include <iostream>[m[K
+    2 | 
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:36:90:[m[K [01;31m[Kerror: [m[Kinvalid operands of types ‘[01m[Kconst char*[m[K’ and ‘[01m[K<unresolved overloaded function type>[m[K’ to binary ‘[01m[Koperator<<[m[K’
+   36 | roMapCsv] Failed to create file: %s", [01;31m[Kfull_filepath.c_str() << std::endl[m[K;
+      |                                       [01;31m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:104: CMakeFiles/behavior_executive_node.dir/src/planning_util.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

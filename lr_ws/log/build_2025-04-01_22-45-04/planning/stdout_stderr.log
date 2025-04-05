@@ -1,0 +1,11 @@
+[35m[1mConsolidate compiler generated dependencies of target behavior_executive_node[0m
+[  6%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/planning_util.cpp.o[0m
+[ 12%] [32m[1mLinking CXX executable behavior_executive_node[0m
+/usr/bin/ld: CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o:(.bss+0x0): multiple definition of `cg::planning::global_map_'; CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o:(.bss+0x0): first defined here
+/usr/bin/ld: CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o:(.bss+0xa0): multiple definition of `cg::planning::filtered_global_map_'; CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o:(.bss+0xa0): first defined here
+/usr/bin/ld: CMakeFiles/behavior_executive_node.dir/src/planning_util.cpp.o:(.bss+0x0): multiple definition of `cg::planning::global_map_'; CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o:(.bss+0x0): first defined here
+/usr/bin/ld: CMakeFiles/behavior_executive_node.dir/src/planning_util.cpp.o:(.bss+0xa0): multiple definition of `cg::planning::filtered_global_map_'; CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o:(.bss+0xa0): first defined here
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:658: behavior_executive_node] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

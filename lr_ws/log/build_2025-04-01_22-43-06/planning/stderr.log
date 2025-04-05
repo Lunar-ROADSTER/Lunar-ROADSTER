@@ -1,0 +1,97 @@
+In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+                 from [01m[K/opt/ros/humble/include/pcl_conversions/pcl_conversions/pcl_conversions.h:43[m[K,
+                 from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/planning_util.hpp:21[m[K,
+                 from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:1[m[K:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:[m[K In function ‘[01m[Kvoid cg::planning::generateElevationMapCsv(size_t, size_t, float)[m[K’:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:58:19:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+   58 |       RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Map preload successful");
+      |                   [01;31m[K^~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:58:19:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:58:7:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   58 |       [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Map preload successful");
+      |       [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:58:7:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   58 |       [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Map preload successful");
+      |       [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:58:7:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   58 |       [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Map preload successful");
+      |       [01;31m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+                 from [01m[K/opt/ros/humble/include/pcl_conversions/pcl_conversions/pcl_conversions.h:43[m[K,
+                 from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/planning_util.hpp:21[m[K,
+                 from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:1[m[K:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:58:19:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+   58 |       RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Map preload successful");
+      |                   [01;31m[K^~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:58:19:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+   58 |       RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Map preload successful");
+      |                   [01;31m[K^~~~[m[K
+In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+                 from [01m[K/opt/ros/humble/include/pcl_conversions/pcl_conversions/pcl_conversions.h:43[m[K,
+                 from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/planning_util.hpp:21[m[K,
+                 from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:1[m[K:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:60:20:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+   60 |       RCLCPP_ERROR([01;31m[Kthis[m[K->get_logger(), "Map preload failed");
+      |                    [01;31m[K^~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:60:20:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:60:7:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   60 |       [01;31m[KRCLCPP_ERROR[m[K(this->get_logger(), "Map preload failed");
+      |       [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:60:7:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   60 |       [01;31m[KRCLCPP_ERROR[m[K(this->get_logger(), "Map preload failed");
+      |       [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:60:7:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   60 |       [01;31m[KRCLCPP_ERROR[m[K(this->get_logger(), "Map preload failed");
+      |       [01;31m[K^~~~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+                 from [01m[K/opt/ros/humble/include/pcl_conversions/pcl_conversions/pcl_conversions.h:43[m[K,
+                 from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/include/planning/planning_util.hpp:21[m[K,
+                 from [01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:1[m[K:
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:60:20:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+   60 |       RCLCPP_ERROR([01;31m[Kthis[m[K->get_logger(), "Map preload failed");
+      |                    [01;31m[K^~~~[m[K
+[01m[K/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/src/planning_util.cpp:60:20:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+   60 |       RCLCPP_ERROR([01;31m[Kthis[m[K->get_logger(), "Map preload failed");
+      |                    [01;31m[K^~~~[m[K
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:104: CMakeFiles/behavior_executive_node.dir/src/planning_util.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
