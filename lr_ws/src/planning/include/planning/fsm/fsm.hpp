@@ -2,6 +2,7 @@
 #define PLANNING__FSM_HPP
 
 #include <string> // for converting enums to string
+#include <planning/common.hpp>
 
 namespace cg {
 namespace planning {

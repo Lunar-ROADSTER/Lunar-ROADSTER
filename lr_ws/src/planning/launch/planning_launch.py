@@ -23,6 +23,6 @@ def generate_launch_description():
             executable='behavior_executive_node',
             name='behavior_executive_node',
             output='screen',
-            parameters=[site_map_params, behavior_executive_params]
+            parameters=[behavior_executive_params]
         )
     ])

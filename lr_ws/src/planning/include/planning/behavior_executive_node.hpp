@@ -9,6 +9,7 @@
 #include <nav_msgs/msg/odometry.hpp> // Callback for pose
 #include <tf2/LinearMath/Matrix3x3.h> // For converting from nav_msgs quaternions to rpy
 #include <limits> // used for infinity values
+#include <mapping/map.hpp>
 
 // Finite state machine and states
 #include <planning/fsm/fsm.hpp>
@@ -104,6 +105,7 @@ private:
 
   std::vector<cg_msgs::msg::Pose2D> current_goal_poses_;
   cg_msgs::msg::Pose2D current_goal_pose_;
+  std::vector<cg_msgs::msg::Pose2D> viz_state_l1_goal_poses_;
 
   bool nav_transport_ = false;
   bool enable_worksystem_ = false;
@@ -113,6 +115,26 @@ private:
   size_t map_width;
   float map_resolution;
   std::string design_topo_filepath;
+  std::string site_topo_filepath;
+
+  /* Variables */
+  cg::mapping::Map<float> current_height_map_;
+  cg::mapping::Map<float> design_height_map_;
+  cg::mapping::Map<float> seen_map_;
+
+  float current_map_coverage_ratio_;
+  std::vector<int> current_seen_map_;
+  cg_msgs::msg::Pose2D local_map_relative_to_global_frame_;
+  cg_msgs::msg::Pose2D global_map_relative_to_local_frame_;
+  float topology_equality_threshold_ = 0.0;
+  float thresh_max_assignment_distance_ = 0.0;
+  int transport_plan_max_calls_ = INT_MAX;
+  double viz_planning_height_ = 0.0;
+  geometry_msgs::msg::PoseArray viz_state_l1_goals_;
+
+  /* Transport planner */
+  std::unique_ptr<cg::planning::TransportPlanner> transport_planner_;
+  size_t num_poses_before_ = 0;
 
   /* FSM */
   cg::planning::FSM fsm_;
@@ -129,6 +151,7 @@ private:
   cg::planning::FollowingTrajectory following_trajectory_;
   cg::planning::EndMission end_mission_;
   cg::planning::Stopped stopped_;
+
 
 }; // class BehaviorExecutive
 

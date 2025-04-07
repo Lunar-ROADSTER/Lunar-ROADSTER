@@ -18,7 +18,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(cg_msgs REQUIRED)
 find_package(mapping REQUIRED)
-# find_package(ortools CONFIG REQUIRED)
+find_package(ortools CONFIG REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(nav_msgs REQUIRED) # viz
 find_package(geometry_msgs REQUIRED) # viz
@@ -29,7 +29,10 @@ find_package(pcl_conversions REQUIRED)
 # Add Eigen3 Library
 INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIRS})
 
+
 include_directories(include)
+
+include_directories(../mapping/include)
 
 add_executable(behavior_executive_node src/behavior_executive_main.cpp
   src/behavior_executive_node.cpp
@@ -47,6 +50,9 @@ add_executable(behavior_executive_node src/behavior_executive_main.cpp
   src/fsm/following_trajectory.cpp
   src/fsm/end_mission.cpp
   src/fsm/stopped.cpp
+  # Planner Modules 
+  src/transport_planner.cpp
+  src/common.cpp
 )
 ament_target_dependencies(behavior_executive_node
   rclcpp
@@ -58,7 +64,7 @@ ament_target_dependencies(behavior_executive_node
   pcl_ros
   pcl_conversions
 )
-# target_link_libraries(behavior_executive_node ortools::ortools)
+target_link_libraries(behavior_executive_node ortools::ortools)
 
 # Install targets
 install(TARGETS behavior_executive_node
@@ -75,6 +81,7 @@ install(DIRECTORY launch
 install(DIRECTORY config
   DESTINATION share/${PROJECT_NAME}/
 )
+
 
 # Export library files so other packages can link
 ament_export_include_directories(include)
