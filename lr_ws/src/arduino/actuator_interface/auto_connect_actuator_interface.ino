@@ -20,6 +20,7 @@
 
 #define LED_PIN 13
 #define CONN_PIN 12
+#define LAC_PIN 9
 #define RCCHECK(fn)              \
   {                              \
     rcl_ret_t temp_rc = fn;      \
@@ -130,7 +131,7 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 
       int tool_cmd_raw = (cmd_msg.data >> 16) & 0xFF; // Third byte indicates tool height command in range [0, 255]
       if (abs(tool_cmd_raw) <= 1) tool_cmd_raw = 0;  // Fix to zero when close to zero
-      int tool_cmd = byte_to_qpps(tool_cmd_raw, BYTE_TO_QP_TOOL_SCALE, BYTE_TO_QP_TOOL_OFFSET);
+      // int tool_cmd = byte_to_qpps(tool_cmd_raw, BYTE_TO_QP_TOOL_SCALE, BYTE_TO_QP_TOOL_OFFSET);
 
       // Send Mobility Commands
       for (int i = 0; i < NUM_ROBOCLAWS_MOBILITY; ++i) {
@@ -139,11 +140,15 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
       }
 
       // Send Tool Commands
-      if (NUM_ROBOCLAWS_TOOL > 0){
-        for (int i = 0; i < NUM_ROBOCLAWS_TOOL; ++i) {
-        roboclaws_tool[i].SpeedAccelDeccelPositionM1(ROBOCLAW_ADDRESS, TOOL_CTRL_ACCEL_QPPS, TOOL_CTRL_SPD_QPPS, TOOL_CTRL_DECCEL_QPPS, tool_cmd, 1);
-        }
-      }
+      // if (NUM_ROBOCLAWS_TOOL > 0){
+      //   for (int i = 0; i < NUM_ROBOCLAWS_TOOL; ++i) {
+      //   roboclaws_tool[i].SpeedAccelDeccelPositionM1(ROBOCLAW_ADDRESS, TOOL_CTRL_ACCEL_QPPS, TOOL_CTRL_SPD_QPPS, TOOL_CTRL_DECCEL_QPPS, tool_cmd, 1);
+      //   }
+      // }
+
+      analogWrite(LAC_PIN, tool_cmd_raw);
+
+
 
     } // if (cmd_msg_received)
 
