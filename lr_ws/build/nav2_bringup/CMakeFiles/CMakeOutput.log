@@ -435,3 +435,55 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c302e/fast && gmake[1]: Entering directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_c302e.dir/build.make CMakeFiles/cmTC_c302e.dir/build
+gmake[2]: Entering directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c302e.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_c302e.dir/CheckIncludeFile.c.o -c /root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_c302e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c302e.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_c302e.dir/CheckIncludeFile.c.o -o cmTC_c302e 
+gmake[2]: Leaving directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp'
+gmake[1]: Leaving directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp'
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD succeeded with the following output:
+Change Dir: /root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0481a/fast && gmake[1]: Entering directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_0481a.dir/build.make CMakeFiles/cmTC_0481a.dir/build
+gmake[2]: Entering directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0481a.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_0481a.dir/src.c.o -c /root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_0481a
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0481a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_0481a.dir/src.c.o -o cmTC_0481a 
+gmake[2]: Leaving directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp'
+gmake[1]: Leaving directory '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+

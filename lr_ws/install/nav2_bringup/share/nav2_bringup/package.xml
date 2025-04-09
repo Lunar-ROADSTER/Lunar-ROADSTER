@@ -15,10 +15,22 @@
   <build_depend>navigation2</build_depend>
   <build_depend>launch_ros</build_depend>
 
+  <!-- Added dependencies for autonomy_command.cpp -->
+  <build_depend>rclcpp</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>cg_msgs</build_depend>
+  <!-- Added dependencies for autonomy_command.cpp -->
+
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>navigation2</exec_depend>
   <exec_depend>nav2_common</exec_depend>
   <exec_depend>slam_toolbox</exec_depend>
+
+  <!-- Added execution dependencies for autonomy_command.cpp -->
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>cg_msgs</exec_depend>
+  <!-- Added execution dependencies for autonomy_command.cpp -->
 
   <test_depend>ament_lint_common</test_depend>
   <test_depend>ament_lint_auto</test_depend>

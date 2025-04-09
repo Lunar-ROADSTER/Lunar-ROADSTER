@@ -197,6 +197,43 @@ nav2_bringup_uninstall/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nav2_bringup_uninstall.dir/build.make CMakeFiles/nav2_bringup_uninstall.dir/build
 .PHONY : nav2_bringup_uninstall/fast
 
+#=============================================================================
+# Target rules for targets named autonomy_command
+
+# Build rule for target.
+autonomy_command: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 autonomy_command
+.PHONY : autonomy_command
+
+# fast build rule for target.
+autonomy_command/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomy_command.dir/build.make CMakeFiles/autonomy_command.dir/build
+.PHONY : autonomy_command/fast
+
+scripts/autonomy_command.o: scripts/autonomy_command.cpp.o
+.PHONY : scripts/autonomy_command.o
+
+# target to build an object file
+scripts/autonomy_command.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomy_command.dir/build.make CMakeFiles/autonomy_command.dir/scripts/autonomy_command.cpp.o
+.PHONY : scripts/autonomy_command.cpp.o
+
+scripts/autonomy_command.i: scripts/autonomy_command.cpp.i
+.PHONY : scripts/autonomy_command.i
+
+# target to preprocess a source file
+scripts/autonomy_command.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomy_command.dir/build.make CMakeFiles/autonomy_command.dir/scripts/autonomy_command.cpp.i
+.PHONY : scripts/autonomy_command.cpp.i
+
+scripts/autonomy_command.s: scripts/autonomy_command.cpp.s
+.PHONY : scripts/autonomy_command.s
+
+# target to generate assembly for a file
+scripts/autonomy_command.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomy_command.dir/build.make CMakeFiles/autonomy_command.dir/scripts/autonomy_command.cpp.s
+.PHONY : scripts/autonomy_command.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +249,10 @@ help:
 	@echo "... test"
 	@echo "... nav2_bringup_uninstall"
 	@echo "... uninstall"
+	@echo "... autonomy_command"
+	@echo "... scripts/autonomy_command.o"
+	@echo "... scripts/autonomy_command.i"
+	@echo "... scripts/autonomy_command.s"
 .PHONY : help
 
 
