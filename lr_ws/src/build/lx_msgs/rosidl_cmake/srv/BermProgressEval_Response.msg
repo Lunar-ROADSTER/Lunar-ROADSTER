@@ -1,2 +1,0 @@
-
-lx_msgs/BermProgress progress

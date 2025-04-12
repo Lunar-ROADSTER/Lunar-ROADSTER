@@ -1,0 +1,43 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from grid_map_msgs/msg/GridMap.msg
+// generated code does not contain a copyright notice
+
+#include "grid_map_msgs/msg/GridMapInfo.idl"
+#include "std_msgs/msg/Float32MultiArray.idl"
+#include "std_msgs/msg/Header.idl"
+
+module grid_map_msgs {
+  module msg {
+    @verbatim (language="comment", text=
+      "Header (time and frame)")
+    struct GridMap {
+      std_msgs::msg::Header header;
+
+      @verbatim (language="comment", text=
+        "Grid map header")
+      grid_map_msgs::msg::GridMapInfo info;
+
+      @verbatim (language="comment", text=
+        "Grid map layer names.")
+      sequence<string> layers;
+
+      @verbatim (language="comment", text=
+        "Grid map basic layer names (optional). The basic layers" "\n"
+        "determine which layers from `layers` need to be valid" "\n"
+        "in order for a cell of the grid map to be valid.")
+      sequence<string> basic_layers;
+
+      @verbatim (language="comment", text=
+        "Grid map data.")
+      sequence<std_msgs::msg::Float32MultiArray> data;
+
+      @verbatim (language="comment", text=
+        "Row start index (default 0).")
+      uint16 outer_start_index;
+
+      @verbatim (language="comment", text=
+        "Column start index (default 0).")
+      uint16 inner_start_index;
+    };
+  };
+};

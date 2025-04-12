@@ -33,6 +33,6 @@ def generate_launch_description():
     ld = LaunchDescription()
     ld.add_action(pc_handler_node)
     ld.add_action(global_mapping_node)
-    ld.add_action(local_mapping_node)
+    # ld.add_action(local_mapping_node)
 
     return ld

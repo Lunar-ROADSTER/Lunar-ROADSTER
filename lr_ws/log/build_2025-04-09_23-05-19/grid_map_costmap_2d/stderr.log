@@ -1,0 +1,106 @@
+[33mCMake Warning at /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest_executable.cmake:50 (add_executable):
+  Cannot generate a safe runtime search path for target
+  grid_map_costmap_2d-test because there is a cycle in the constraint graph:
+
+    dir 0 is [/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib]
+    dir 1 is [/opt/ros/humble/lib]
+      dir 2 must precede it due to runtime library [libnav2_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 3 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 4 must precede it due to runtime library [libstd_srvs__rosidl_typesupport_fastrtps_c.so]
+      dir 5 must precede it due to runtime library [libvisualization_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 6 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 7 must precede it due to runtime library [libnav2_util_core.so]
+      dir 8 must precede it due to runtime library [liblifecycle_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 10 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 11 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 12 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 13 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 14 must precede it due to runtime library [libstd_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 15 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 16 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 17 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+    dir 2 is [/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib]
+    dir 3 is [/root/microros_ws/install/nav_msgs/lib]
+      dir 1 must precede it due to runtime library [libnav_msgs__rosidl_generator_c.so]
+    dir 4 is [/root/microros_ws/install/std_srvs/lib]
+    dir 5 is [/root/microros_ws/install/visualization_msgs/lib]
+    dir 6 is [/root/microros_ws/install/sensor_msgs/lib]
+      dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+    dir 7 is [/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib]
+    dir 8 is [/root/microros_ws/install/lifecycle_msgs/lib]
+      dir 1 must precede it due to runtime library [liblifecycle_msgs__rosidl_generator_c.so]
+    dir 9 is [/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib]
+    dir 10 is [/root/microros_ws/install/rosgraph_msgs/lib]
+    dir 11 is [/root/microros_ws/install/statistics_msgs/lib]
+    dir 12 is [/root/microros_ws/install/rcl_interfaces/lib]
+      dir 1 must precede it due to runtime library [librcl_interfaces__rosidl_generator_c.so]
+    dir 13 is [/root/microros_ws/install/geometry_msgs/lib]
+      dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+    dir 14 is [/root/microros_ws/install/std_msgs/lib]
+      dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+    dir 15 is [/root/microros_ws/install/action_msgs/lib]
+      dir 1 must precede it due to runtime library [libaction_msgs__rosidl_generator_c.so]
+    dir 16 is [/root/microros_ws/install/builtin_interfaces/lib]
+      dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+    dir 17 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+
+  Some of these libraries may not be found correctly.
+Call Stack (most recent call first):
+  /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest_executable.cmake:37 (_ament_add_gtest_executable)
+  /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest.cmake:68 (ament_add_gtest_executable)
+  test/CMakeLists.txt:1 (ament_add_gtest)
+
+[0m
+[33mCMake Warning at /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest_executable.cmake:50 (add_executable):
+  Cannot generate a safe runtime search path for target costmap-2d-ros-test
+  because there is a cycle in the constraint graph:
+
+    dir 0 is [/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib]
+    dir 1 is [/opt/ros/humble/lib]
+      dir 2 must precede it due to runtime library [libnav2_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 3 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 4 must precede it due to runtime library [libstd_srvs__rosidl_typesupport_fastrtps_c.so]
+      dir 5 must precede it due to runtime library [libvisualization_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 6 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 7 must precede it due to runtime library [libnav2_util_core.so]
+      dir 8 must precede it due to runtime library [liblifecycle_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 10 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 11 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 12 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 13 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 14 must precede it due to runtime library [libstd_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 15 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 16 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 17 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+    dir 2 is [/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib]
+    dir 3 is [/root/microros_ws/install/nav_msgs/lib]
+      dir 1 must precede it due to runtime library [libnav_msgs__rosidl_generator_c.so]
+    dir 4 is [/root/microros_ws/install/std_srvs/lib]
+    dir 5 is [/root/microros_ws/install/visualization_msgs/lib]
+    dir 6 is [/root/microros_ws/install/sensor_msgs/lib]
+      dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+    dir 7 is [/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib]
+    dir 8 is [/root/microros_ws/install/lifecycle_msgs/lib]
+      dir 1 must precede it due to runtime library [liblifecycle_msgs__rosidl_generator_c.so]
+    dir 9 is [/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib]
+    dir 10 is [/root/microros_ws/install/rosgraph_msgs/lib]
+    dir 11 is [/root/microros_ws/install/statistics_msgs/lib]
+    dir 12 is [/root/microros_ws/install/rcl_interfaces/lib]
+      dir 1 must precede it due to runtime library [librcl_interfaces__rosidl_generator_c.so]
+    dir 13 is [/root/microros_ws/install/geometry_msgs/lib]
+      dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+    dir 14 is [/root/microros_ws/install/std_msgs/lib]
+      dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+    dir 15 is [/root/microros_ws/install/action_msgs/lib]
+      dir 1 must precede it due to runtime library [libaction_msgs__rosidl_generator_c.so]
+    dir 16 is [/root/microros_ws/install/builtin_interfaces/lib]
+      dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+    dir 17 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+
+  Some of these libraries may not be found correctly.
+Call Stack (most recent call first):
+  /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest_executable.cmake:37 (_ament_add_gtest_executable)
+  /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest.cmake:68 (ament_add_gtest_executable)
+  test/CMakeLists.txt:10 (ament_add_gtest)
+
+[0m

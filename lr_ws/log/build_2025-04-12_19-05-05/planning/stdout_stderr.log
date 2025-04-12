@@ -1,0 +1,65 @@
+[35m[1mConsolidate compiler generated dependencies of target behavior_executive_node[0m
+[  5%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o[0m
+[ 11%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/site_work_done.cpp.o[0m
+[ 16%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o[0m
+[ 22%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/map_explored.cpp.o[0m
+[ 27%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/plan_transport.cpp.o[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/get_transport_goals.cpp.o[0m
+[ 38%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/goals_remaining.cpp.o[0m
+[ 44%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/get_worksystem_trajectory.cpp.o[0m
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/fsm/goals_remaining.cpp:[m[K In member function ‘[01m[Kvoid cg::planning::GoalsRemaining::runState(std::vector<cg_msgs::msg::Pose2D_<std::allocator<void> >, std::allocator<cg_msgs::msg::Pose2D_<std::allocator<void> > > >&, cg_msgs::msg::Pose2D&)[m[K’:
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/fsm/goals_remaining.cpp:7:66:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_goal_poses[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+    7 | void GoalsRemaining::runState([01;35m[Kstd::vector<cg_msgs::msg::Pose2D> &current_goal_poses[m[K, cg_msgs::msg::Pose2D &current_goal_pose) {
+      |                               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/fsm/goals_remaining.cpp:7:108:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_goal_pose[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+    7 | void GoalsRemaining::runState(std::vector<cg_msgs::msg::Pose2D> &current_goal_poses, [01;35m[Kcg_msgs::msg::Pose2D &current_goal_pose[m[K) {
+      |                                                                                      [01;35m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~[m[K
+[ 50%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/following_trajectory.cpp.o[0m
+[ 55%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/end_mission.cpp.o[0m
+[ 61%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/fsm/stopped.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/common.cpp.o[0m
+[ 72%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/transport_planner.cpp.o[0m
+[ 77%] [32m[1mLinking CXX executable behavior_executive_node[0m
+[100%] Built target behavior_executive_node
+-- Install configuration: ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/lib/planning/behavior_executive_node
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/planning/lib/planning/behavior_executive_node" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/transport_planner.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/goal_planner.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/common.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/planning_util.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/behavior_executive_node.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/update_map.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/stopped.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/site_work_done.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/ready.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/plan_transport.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/map_explored.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/goals_remaining.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/get_worksystem_trajectory.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/get_transport_goals.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/fsm.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/following_trajectory.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/include/planning/fsm/end_mission.hpp
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/launch
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/launch/planning_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning//config
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning//config/behavior_executive_params.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/ament_index/resource_index/package_run_dependencies/planning
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/ament_index/resource_index/parent_prefix_path/planning
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/environment/ament_prefix_path.sh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/environment/ament_prefix_path.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/environment/path.sh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/environment/path.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/local_setup.bash
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/local_setup.sh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/local_setup.zsh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/local_setup.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/package.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/ament_index/resource_index/packages/planning
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/cmake/planningConfig.cmake
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/cmake/planningConfig-version.cmake
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/planning/share/planning/package.xml

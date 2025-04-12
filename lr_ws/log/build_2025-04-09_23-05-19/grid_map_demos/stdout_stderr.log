@@ -1,0 +1,203 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_microxrcedds_c;rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_microxrcedds_cpp;rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found filters: 2.1.0 (/opt/ros/humble/share/filters/cmake)
+-- Found grid_map_cmake_helpers: 2.0.1 (/root/Lunar_ROADSTER/lr_ws/install/grid_map_cmake_helpers/share/grid_map_cmake_helpers/cmake)
+-- Found grid_map_core: 2.0.1 (/root/Lunar_ROADSTER/lr_ws/install/grid_map_core/share/grid_map_core/cmake)
+-- Found grid_map_cv: 2.0.1 (/root/Lunar_ROADSTER/lr_ws/install/grid_map_cv/share/grid_map_cv/cmake)
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+-- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+-- Found FastRTPS: /opt/ros/humble/include  
+-- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+-- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found grid_map_msgs: 2.0.1 (/root/Lunar_ROADSTER/lr_ws/install/grid_map_msgs/share/grid_map_msgs/cmake)
+-- Found grid_map_octomap: 2.0.1 (/root/Lunar_ROADSTER/lr_ws/install/grid_map_octomap/share/grid_map_octomap/cmake)
+-- Found grid_map_ros: 2.0.1 (/root/Lunar_ROADSTER/lr_ws/install/grid_map_ros/share/grid_map_ros/cmake)
+-- Found octomap_msgs: 2.0.1 (/opt/ros/humble/share/octomap_msgs/cmake)
+-- Found OpenCV: /usr (found version "4.8.0") found components: opencv_highgui 
+-- Setting build type to Release as none was specified.
+-- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: /root/Lunar_ROADSTER/lr_ws/src/drivers/grid_map/grid_map_demos/include
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/grid_map_demos
+[  3%] [32mBuilding CXX object CMakeFiles/tutorial_demo.dir/src/tutorial_demo_node.cpp.o[0m
+[  6%] [32mBuilding CXX object CMakeFiles/simple_demo.dir/src/simple_demo_node.cpp.o[0m
+[ 10%] [32mBuilding CXX object CMakeFiles/iterators_demo.dir/src/iterators_demo_node.cpp.o[0m
+[ 13%] [32mBuilding CXX object CMakeFiles/image_to_gridmap_demo.dir/src/image_to_gridmap_demo_node.cpp.o[0m
+[ 16%] [32mBuilding CXX object CMakeFiles/iterators_demo.dir/src/IteratorsDemo.cpp.o[0m
+[ 20%] [32mBuilding CXX object CMakeFiles/image_to_gridmap_demo.dir/src/ImageToGridmapDemo.cpp.o[0m
+[ 23%] [32m[1mLinking CXX executable simple_demo[0m
+[ 23%] Built target simple_demo
+[ 26%] [32m[1mLinking CXX executable tutorial_demo[0m
+[ 26%] Built target tutorial_demo
+[ 30%] [32m[1mLinking CXX executable iterators_demo[0m
+[ 30%] Built target iterators_demo
+[ 33%] [32mBuilding CXX object CMakeFiles/iterator_benchmark.dir/src/iterator_benchmark.cpp.o[0m
+[ 36%] [32mBuilding CXX object CMakeFiles/move_demo.dir/src/move_demo_node.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/octomap_to_gridmap_demo.dir/src/octomap_to_gridmap_demo_node.cpp.o[0m
+[ 43%] [32m[1mLinking CXX executable image_to_gridmap_demo[0m
+[ 43%] Built target image_to_gridmap_demo
+[ 46%] [32m[1mLinking CXX executable iterator_benchmark[0m
+[ 46%] Built target iterator_benchmark
+[ 50%] [32mBuilding CXX object CMakeFiles/octomap_to_gridmap_demo.dir/src/OctomapToGridmapDemo.cpp.o[0m
+[ 53%] [32m[1mLinking CXX executable move_demo[0m
+[ 53%] Built target move_demo
+[ 56%] [32m[1mLinking CXX executable octomap_to_gridmap_demo[0m
+[ 56%] Built target octomap_to_gridmap_demo
+[ 60%] [32mBuilding CXX object CMakeFiles/filters_demo_lib.dir/src/FiltersDemo.cpp.o[0m
+[ 63%] [32m[1mLinking CXX shared library libfilters_demo_lib.so[0m
+[ 63%] Built target filters_demo_lib
+[ 66%] [32mBuilding CXX object CMakeFiles/normal_filter_comparison_demo.dir/src/normal_filter_comparison_node.cpp.o[0m
+[ 70%] [32m[1mLinking CXX executable normal_filter_comparison_demo[0m
+[ 70%] Built target normal_filter_comparison_demo
+[ 73%] [32mBuilding CXX object CMakeFiles/resolution_change_demo.dir/src/resolution_change_demo_node.cpp.o[0m
+[ 76%] [32mBuilding CXX object CMakeFiles/interpolation_demo.dir/src/interpolation_demo_node.cpp.o[0m
+[ 80%] [32mBuilding CXX object CMakeFiles/filters_demo.dir/src/filters_demo_node.cpp.o[0m
+[ 83%] [32mBuilding CXX object CMakeFiles/opencv_demo.dir/src/opencv_demo_node.cpp.o[0m
+[ 86%] [32mBuilding CXX object CMakeFiles/interpolation_demo.dir/src/InterpolationDemo.cpp.o[0m
+[ 90%] [32m[1mLinking CXX executable filters_demo[0m
+[ 90%] Built target filters_demo
+[ 93%] [32m[1mLinking CXX executable resolution_change_demo[0m
+[ 93%] Built target resolution_change_demo
+[ 96%] [32m[1mLinking CXX executable opencv_demo[0m
+/usr/bin/ld: warning: libopencv_imgproc.so.4.5d, needed by /opt/ros/humble/lib/libcv_bridge.so, may conflict with libopencv_imgproc.so.408
+/usr/bin/ld: warning: libopencv_core.so.4.5d, needed by /opt/ros/humble/lib/libcv_bridge.so, may conflict with libopencv_core.so.408
+[ 96%] Built target opencv_demo
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/drivers/grid_map/grid_map_demos/src/InterpolationDemo.cpp:[m[K In member function ‘[01m[Kgrid_map_demos::InterpolationDemo::ErrorAndDuration grid_map_demos::InterpolationDemo::interpolateAndComputeError(std::string, const string&) const[m[K’:
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/drivers/grid_map/grid_map_demos/src/InterpolationDemo.cpp:315:56:[m[K [01;36m[Knote: [m[Kparameter passing for argument of type ‘[01m[Kstd::pair<grid_map_demos::Error, double>[m[K’ when C++17 is enabled changed to match C++14 in GCC 10.1
+  315 |   const std::string world, const std::string & method) [01;36m[Kconst[m[K
+      |                                                        [01;36m[K^~~~~[m[K
+[100%] [32m[1mLinking CXX executable interpolation_demo[0m
+[100%] Built target interpolation_demo
+-- Install configuration: "Release"
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/filters_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/filters_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/libfilters_demo_lib.so
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/libfilters_demo_lib.so" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/image_to_gridmap_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/image_to_gridmap_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/interpolation_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/interpolation_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/iterator_benchmark
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/iterators_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/iterators_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/move_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/move_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/normal_filter_comparison_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/normal_filter_comparison_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/octomap_to_gridmap_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/octomap_to_gridmap_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/opencv_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/opencv_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/resolution_change_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/resolution_change_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/simple_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/simple_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/tutorial_demo
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/tutorial_demo" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/filters_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/filters_demo_filter_chain.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/grid_map_loader_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/image_to_gridmap_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/interpolation_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/iterators_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/move_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/normal_filter_comparison.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/normal_filter_comparison_visualization.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/octomap_to_gridmap_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/opencv_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/resolution_change_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/simple_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/config/tutorial_demo.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/eth_logo.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/freiburg1_360.bt
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/grid_map_bag
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/grid_map_bag/grid_map_bag.db3
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/grid_map_bag/metadata.yaml
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/linearGradient_horizontal.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/linearGradient_oblique_and_flat.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/linearGradient_oblique_only.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/linearGradient_vertical.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/radialGradient_circle.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/radialGradient_ellipse.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/radialGradient_horizontal.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/data/terrain.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/doc
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/doc/filters_demo.gif
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/doc/filters_demo_preview.gif
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/doc/image_to_grid_map_demo_result.png
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/doc/opencv_demo_result.gif
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/filters_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/grid_map_loader_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/image_to_gridmap_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/interpolation_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/iterators_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/move_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/normal_filter_comparison_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/octomap_to_gridmap_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/opencv_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/resolution_change_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/simple_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/launch/tutorial_demo_launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/rviz
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/rviz/filters_demo.rviz
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/rviz/grid_map_demo.rviz
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/rviz/grid_map_iterators_demo.rviz
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/rviz/interpolation_demo.rviz
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/rviz/normal_filter_comparison_demo.rviz
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/rviz/octomap_to_gridmap_demo.rviz
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/lib/grid_map_demos/image_publisher.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/ament_index/resource_index/package_run_dependencies/grid_map_demos
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/ament_index/resource_index/parent_prefix_path/grid_map_demos
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/environment/ament_prefix_path.sh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/environment/ament_prefix_path.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/environment/path.sh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/environment/path.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/local_setup.bash
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/local_setup.sh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/local_setup.zsh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/local_setup.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/package.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/ament_index/resource_index/packages/grid_map_demos
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/cmake/grid_map_demosConfig.cmake
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/cmake/grid_map_demosConfig-version.cmake
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/grid_map_demos/share/grid_map_demos/package.xml

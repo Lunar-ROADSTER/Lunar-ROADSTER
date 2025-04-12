@@ -116,7 +116,7 @@ void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {
 
         int local_idx = col_x + row_y*local_map_.info.width;
         double elev = cropped_cloud_local_map->points[i].z;
-        elevation_values[local_idx] += ELEVATION_SCALE*(elev-0.05);
+        elevation_values[local_idx] += ELEVATION_SCALE*(elev);
         density_values[local_idx] += 1.0;
     }
 

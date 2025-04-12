@@ -1,0 +1,44 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from grid_map_msgs/srv/GetGridMap.srv
+// generated code does not contain a copyright notice
+
+#include "grid_map_msgs/msg/GridMap.idl"
+
+module grid_map_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "Frame id of the submap position request.")
+    struct GetGridMap_Request {
+      string frame_id;
+
+      @verbatim (language="comment", text=
+        "Requested submap position in x-direction.")
+      @unit (value="m")
+      double position_x;
+
+      @verbatim (language="comment", text=
+        "Requested submap position in y-direction.")
+      @unit (value="m")
+      double position_y;
+
+      @verbatim (language="comment", text=
+        "Requested submap length in x-direction.")
+      @unit (value="m")
+      double length_x;
+
+      @verbatim (language="comment", text=
+        "Requested submap width in y-direction.")
+      @unit (value="m")
+      double length_y;
+
+      @verbatim (language="comment", text=
+        "Requested layers. If empty, get all layers.")
+      sequence<string> layers;
+    };
+    struct GetGridMap_Response {
+      @verbatim (language="comment", text=
+        "Submap")
+      grid_map_msgs::msg::GridMap map;
+    };
+  };
+};

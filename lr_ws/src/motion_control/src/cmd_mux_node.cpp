@@ -124,6 +124,8 @@ void CmdMuxNode::teleopCallback(const cg_msgs::msg::ActuatorCommand::SharedPtr m
   {
     // Update the command message directly
     cmd_msg_ = *msg;
+
+    // cmd_msg_.wheel_velocity = -msg->wheel_velocity;
   }
 }
 

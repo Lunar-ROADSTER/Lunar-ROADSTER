@@ -1,0 +1,18 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from grid_map_msgs/srv/GetGridMapInfo.srv
+// generated code does not contain a copyright notice
+
+#include "grid_map_msgs/msg/GridMapInfo.idl"
+
+module grid_map_msgs {
+  module srv {
+    struct GetGridMapInfo_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    struct GetGridMapInfo_Response {
+      @verbatim (language="comment", text=
+        "Grid map info")
+      grid_map_msgs::msg::GridMapInfo info;
+    };
+  };
+};

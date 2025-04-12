@@ -1,0 +1,10 @@
+[35m[1mConsolidate compiler generated dependencies of target behavior_executive_node[0m
+[  5%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/behavior_executive_main.cpp.o[0m
+[ 11%] [32mBuilding CXX object CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o[0m
+[ 16%] [32m[1mLinking CXX executable behavior_executive_node[0m
+/usr/bin/ld: CMakeFiles/behavior_executive_node.dir/src/behavior_executive_node.cpp.o: in function `cg::planning::BehaviorExecutive::fsmTimerCallback()':
+behavior_executive_node.cpp:(.text+0x380c): undefined reference to `cg::planning::FollowingTrajectory::runState(cg_msgs::msg::Pose2D_<std::allocator<void> >&)'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:760: behavior_executive_node] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
