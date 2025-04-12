@@ -1,4 +1,0 @@
-geometry_msgs/Point[] berm_input
-float32 berm_height
-float32 section_length
-bool new_plan
