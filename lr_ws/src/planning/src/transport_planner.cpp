@@ -16,7 +16,7 @@ size_t TransportPlanner::ij_to_index(size_t i, size_t j, size_t width) const {
     return (j + (i * width));
 }
 
-void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssignment> &transport_assignments, const size_t assignment_idx, std::vector<cg_msgs::msg::Pose2D> &goalPoses)
+void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssignment> &transport_assignments, const size_t assignment_idx, std::vector<cg_msgs::msg::Pose2D> &goalPoses, std::vector<std::string> &goalPose_types)
 {
 
   // find desired heading of arg_min poses, equal to the arctan2 of the x & y delta distances
@@ -28,8 +28,17 @@ void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssign
   // Set up source pose
   cg_msgs::msg::Pose2D source_pose = cg::planning::create_pose2d(transport_assignments[assignment_idx].source_node.x, transport_assignments[assignment_idx].source_node.y, yaw);
 
+  //Calculate distance between source and sink 
+  double manipulation_distance = cg::planning::euclidean_distance(source_pose.pt, sink_pose.pt);
+
+  // Set up source offset pose
   double source_offset_pose_x = source_pose.pt.x - source_pose_offset_ * std::cos(yaw);
   double source_offset_pose_y = source_pose.pt.y - source_pose_offset_ * std::sin(yaw);
+
+  // Set up source backblading pose 
+  double backblading_pose_x = sink_pose.pt.x + manipulation_distance * std::cos(yaw);
+  double backblading_pose_y = sink_pose.pt.y + manipulation_distance * std::sin(yaw);
+  cg_msgs::msg::Pose2D source_pose_backblading = cg::planning::create_pose2d(backblading_pose_x, backblading_pose_y, yaw);
 
   // Set up last offset pose
   double offset_pose_x = source_pose.pt.x - last_pose_offset_ * std::cos(yaw);
@@ -63,9 +72,24 @@ void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssign
   source_pose = cg::planning::create_pose2d(source_offset_pose_x, source_offset_pose_y, yaw);
 
   // Push back the goal poses
+  // goalPoses.push_back(offset_pose);
+  // goalPoses.push_back(source_pose);
+  // goalPoses.push_back(sink_pose);
+
+  // TODO: offset, source, sink, source(other), sink, offset poses to be published onto a topic
   goalPoses.push_back(offset_pose);
   goalPoses.push_back(source_pose);
   goalPoses.push_back(sink_pose);
+  goalPoses.push_back(source_pose_backblading);
+  goalPoses.push_back(sink_pose); 
+  goalPoses.push_back(offset_pose);
+  goalPose_types.push_back("offset");
+  goalPose_types.push_back("source");
+  goalPose_types.push_back("sink");
+  goalPose_types.push_back("source");
+  goalPose_types.push_back("sink");
+  goalPose_types.push_back("offset");
+
 }
 
 /**
@@ -75,7 +99,7 @@ void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssign
  * @param map The current map
  * @return cg_msgs::msg::Pose2D The pose to navigate to 
  */
-std::vector<cg_msgs::msg::Pose2D> TransportPlanner::getGoalPose(const cg_msgs::msg::Pose2D &agent_pose, const cg::mapping::Map<float> &map){
+std::vector<cg_msgs::msg::Pose2D> TransportPlanner::getGoalPose(const cg_msgs::msg::Pose2D &agent_pose, const cg::mapping::Map<float> &map, std::vector<std::string> &goalPose_types){
   (void)map; // map remains unused, legacy of interface
 
   std::vector<cg_msgs::msg::Pose2D> goalPoses;
@@ -108,18 +132,18 @@ std::vector<cg_msgs::msg::Pose2D> TransportPlanner::getGoalPose(const cg_msgs::m
   unvisited_assignments_.at(arg_min) = false;
 
   // Get goal poses
-  makeGoalsFromAssignment(transport_assignments_, arg_min, goalPoses);
+  makeGoalsFromAssignment(transport_assignments_, arg_min, goalPoses, goalPose_types);
 
   return goalPoses;
 }
 
-std::vector<cg_msgs::msg::Pose2D> TransportPlanner::getUnvisitedGoalPoses() {
+std::vector<cg_msgs::msg::Pose2D> TransportPlanner::getUnvisitedGoalPoses(std::vector<std::string> &goalPose_types){
   std::vector<cg_msgs::msg::Pose2D> unvisitedGoalPoses;
   // Loop through all assignments
   for (size_t i = 0; i < transport_assignments_.size(); ++i){
     // If unvisited, push back the set of goal poses
     if (unvisited_assignments_[i]) {
-      makeGoalsFromAssignment(transport_assignments_, i, unvisitedGoalPoses);
+      makeGoalsFromAssignment(transport_assignments_, i, unvisitedGoalPoses, goalPose_types);
     }
   }
   return unvisitedGoalPoses;
@@ -213,7 +237,7 @@ void TransportPlanner::calculate_distances(std::vector<float> &distances_between
  * @return float Optimization objective value
  */
 using namespace operations_research;
-float TransportPlanner::solveForTransportAssignments(std::vector<TransportAssignment> &new_transport_assignments, const std::vector<TransportNode> &source_nodes, const std::vector<TransportNode> &sink_nodes, const std::vector<float> &distances_between_nodes, const float vol_source, const float vol_sink, const float thresh_max_assignment_distance, bool verbose = false)
+float TransportPlanner::solveForTransportAssignments(std::vector<TransportAssignment> &new_transport_assignments, const std::vector<TransportNode> &source_nodes, const std::vector<TransportNode> &sink_nodes, const std::vector<float> &distances_between_nodes, const float vol_source, const float vol_sink, const float thresh_max_assignment_distance, std::vector<std::string> &goalPose_types ,bool verbose = false)
 {
   // Declare the solver.
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -341,7 +365,7 @@ float TransportPlanner::solveForTransportAssignments(std::vector<TransportAssign
   }
   
   // Filter assignments to final set for planner to use
-  filterAssignments(new_transport_assignments);
+  filterAssignments(new_transport_assignments, goalPose_types);
 
   // update unvisited assignments, set all to true
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -364,7 +388,7 @@ float TransportPlanner::solveForTransportAssignments(std::vector<TransportAssign
   return objective->Value();
 }
 
-void TransportPlanner::filterAssignments(std::vector<TransportAssignment> &new_transport_assignments) {
+void TransportPlanner::filterAssignments(std::vector<TransportAssignment> &new_transport_assignments, std::vector<std::string> &goalPose_types) {
 
   std::vector<TransportAssignment> filtered_transport_assignments;
 
@@ -375,13 +399,13 @@ void TransportPlanner::filterAssignments(std::vector<TransportAssignment> &new_t
 
     // bool keep_assignment = true;
     std::vector<cg_msgs::msg::Pose2D> assignment_goal_poses;
-    makeGoalsFromAssignment(new_transport_assignments, i, assignment_goal_poses);
+    makeGoalsFromAssignment(new_transport_assignments, i, assignment_goal_poses, goalPose_types);
     cg_msgs::msg::Pose2D assignment_source_pose = assignment_goal_poses[0];
     bool no_similar_poses = true;
     for (size_t j=0; j < i; ++j) {
       
       std::vector<cg_msgs::msg::Pose2D> check_assignment_goal_poses;
-      makeGoalsFromAssignment(new_transport_assignments, j, check_assignment_goal_poses);
+      makeGoalsFromAssignment(new_transport_assignments, j, check_assignment_goal_poses, goalPose_types);
       cg_msgs::msg::Pose2D check_assignment_source_pose = check_assignment_goal_poses[0];
 
       // Skip transport that is too close
@@ -417,7 +441,7 @@ void TransportPlanner::filterAssignments(std::vector<TransportAssignment> &new_t
  * @param design_height_map The desired final height map
  * @return float The optimization objective value
  */
-float TransportPlanner::planTransport(const cg::mapping::Map<float> &current_height_map, const cg::mapping::Map<float> &design_height_map, const std::vector<int> &seen_map, const float thresh_max_assignment_distance)
+float TransportPlanner::planTransport(const cg::mapping::Map<float> &current_height_map, const cg::mapping::Map<float> &design_height_map, const std::vector<int> &seen_map, const float thresh_max_assignment_distance, std::vector<std::string> &goalPoses_types)
 {
   // ---------------------------------------------------
   // Initialize nodes and volume sums
@@ -435,7 +459,7 @@ float TransportPlanner::planTransport(const cg::mapping::Map<float> &current_hei
   // ---------------------------------------------------
   // Solve the transport optimization problem
   std::vector<TransportAssignment> new_transport_assignments;
-  float objective_value = solveForTransportAssignments(new_transport_assignments, source_nodes, sink_nodes, distances_between_nodes, vol_source, vol_sink, thresh_max_assignment_distance);
+  float objective_value = solveForTransportAssignments(new_transport_assignments, source_nodes, sink_nodes, distances_between_nodes, vol_source, vol_sink, thresh_max_assignment_distance, goalPoses_types);
 
   // Update current transport assignments
   transport_assignments_ = new_transport_assignments;
@@ -488,7 +512,9 @@ float TransportPlanner::solveToyProblem() {
   // Solve the transport optimization problem
   std::vector<TransportAssignment> new_transport_assignments;
   bool verbose = false;
-  float objective_value = solveForTransportAssignments(new_transport_assignments, source_nodes, sink_nodes, distances_between_nodes, vol_source, vol_sink, verbose);
+  std::vector<std::string> goalPose_type;
+  float thresh_max_assignment_distance = 5.0f;
+  float objective_value = solveForTransportAssignments(new_transport_assignments, source_nodes, sink_nodes, distances_between_nodes, vol_source, vol_sink, thresh_max_assignment_distance ,goalPose_type);
 
   return objective_value;
 }

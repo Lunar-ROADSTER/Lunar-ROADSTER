@@ -11,7 +11,7 @@ class GoalPlanner {
 
 public:
   virtual std::vector<cg_msgs::msg::Pose2D> getGoalPose(
-    const cg_msgs::msg::Pose2D& agent_pose, const cg::mapping::Map<float>& map) = 0;
+    const cg_msgs::msg::Pose2D& agent_pose, const cg::mapping::Map<float>& map, std::vector<std::string> &goalPose_types) = 0;
 };
 
 } // namespace planning

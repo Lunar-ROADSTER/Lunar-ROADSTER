@@ -10,6 +10,7 @@
 #include <tf2/LinearMath/Matrix3x3.h> // For converting from nav_msgs quaternions to rpy
 #include <limits> // used for infinity values
 #include <mapping/map.hpp>
+#include <string>
 
 // Finite state machine and states
 #include <planning/fsm/fsm.hpp>
@@ -129,6 +130,7 @@ private:
   float topology_equality_threshold_ = 0.0;
   float thresh_max_assignment_distance_ = 0.0;
   int transport_plan_max_calls_ = INT_MAX;
+  std::vector<std::string> goalPose_types;
 
   /* Visualization */
   bool init_robot_pose_ = false;

@@ -9,6 +9,7 @@
 #include <limits> // used for distance, infinity values
 #include <algorithm> // checking number of values in vector (i.e. std::count), shuffling vector (std::shuffle)
 #include <random> // random number generator
+#include <string>
 
 
 
@@ -35,10 +36,10 @@ public:
   TransportPlanner(){};
 
   // Computations()
-  float planTransport(const cg::mapping::Map<float> &current_height_map, const cg::mapping::Map<float> &design_height_map, const std::vector<int> &seen_map, const float thresh_max_assignment_distance);
-  std::vector<cg_msgs::msg::Pose2D> getGoalPose(const cg_msgs::msg::Pose2D &agent_pose, const cg::mapping::Map<float> &map);
-  std::vector<cg_msgs::msg::Pose2D> getUnvisitedGoalPoses();
-  void makeGoalsFromAssignment(const std::vector<TransportAssignment> &transport_assignments, const size_t assignment_idx, std::vector<cg_msgs::msg::Pose2D> &goalPoses);
+  float planTransport(const cg::mapping::Map<float> &current_height_map, const cg::mapping::Map<float> &design_height_map, const std::vector<int> &seen_map, const float thresh_max_assignment_distance, std::vector<std::string> &goalPoses_types);
+  std::vector<cg_msgs::msg::Pose2D> getGoalPose(const cg_msgs::msg::Pose2D &agent_pose, const cg::mapping::Map<float> &map, std::vector<std::string> &goalPose_types);
+  std::vector<cg_msgs::msg::Pose2D> getUnvisitedGoalPoses(std::vector<std::string> &goalPose_types);
+  void makeGoalsFromAssignment(const std::vector<TransportAssignment> &transport_assignments, const size_t assignment_idx, std::vector<cg_msgs::msg::Pose2D> &goalPoses, std::vector<std::string> &goalPose_types);
 
   float solveToyProblem(); // For implementation verification purposes only
 
@@ -46,8 +47,8 @@ public:
   size_t ij_to_index(size_t x, size_t y, size_t width) const;
   void init_nodes(std::vector<TransportNode> &source_nodes, std::vector<TransportNode> &sink_nodes, float &vol_source, float &vol_sink, const cg::mapping::Map<float> &current_height_map, const cg::mapping::Map<float> &design_height_map, const std::vector<int> &seen_map);
   void calculate_distances(std::vector<float> &distances_between_nodes, const std::vector<TransportNode> &source_nodes, const std::vector<TransportNode> &sink_nodes);
-  float solveForTransportAssignments(std::vector<TransportAssignment> &new_transport_assignments, const std::vector<TransportNode> &source_nodes, const std::vector<TransportNode> &sink_nodes, const std::vector<float> &distances_between_nodes, const float vol_source, const float vol_sink, const float thresh_max_assignment_distance, bool verbose);
-  void filterAssignments(std::vector<TransportAssignment> &new_transport_assignments);
+  float solveForTransportAssignments(std::vector<TransportAssignment> &new_transport_assignments, const std::vector<TransportNode> &source_nodes, const std::vector<TransportNode> &sink_nodes, const std::vector<float> &distances_between_nodes, const float vol_source, const float vol_sink, const float thresh_max_assignment_distance, std::vector<std::string> &goalPose_types , bool verbose);
+  void filterAssignments(std::vector<TransportAssignment> &new_transport_assignments, std::vector<std::string> &goalPose_types);
 
   // Getters()
   std::vector<TransportAssignment> getTransportAssignments() const {return transport_assignments_;};

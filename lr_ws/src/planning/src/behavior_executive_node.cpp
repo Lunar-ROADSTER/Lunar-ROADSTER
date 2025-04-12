@@ -190,7 +190,7 @@ void BehaviorExecutive::fsmTimerCallback()
     break;
 
   case cg::planning::FSM::StateL0::PLAN_TRANSPORT:
-    plan_transport_.runState(*transport_planner_, current_height_map_, design_height_map_, current_seen_map_, thresh_max_assignment_distance_);
+    plan_transport_.runState(*transport_planner_, current_height_map_, design_height_map_, current_seen_map_, thresh_max_assignment_distance_, goalPose_types);
     break;
 
   case cg::planning::FSM::StateL0::GET_TRANSPORT_GOALS:
@@ -199,7 +199,7 @@ void BehaviorExecutive::fsmTimerCallback()
     // Uses the cg::Planning::TransportPlanner object handler from PLAN_TRANSPORT to extract a list of transport goals
     // Need to update object handler to have new method that nav_transport_ = false if only nav, nav_transport_ = true when nav + tool planner
     num_poses_before_ = current_goal_poses_.size(); // DEBUG
-    get_transport_goals_.runState(current_goal_poses_, viz_state_l1_goal_poses_, *transport_planner_, current_agent_pose_, current_height_map_);
+    get_transport_goals_.runState(current_goal_poses_, viz_state_l1_goal_poses_, *transport_planner_, current_agent_pose_, current_height_map_, goalPose_types);
     break;
 
   case cg::planning::FSM::StateL0::GOALS_REMAINING:
