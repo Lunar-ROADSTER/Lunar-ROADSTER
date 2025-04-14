@@ -11,7 +11,7 @@ namespace planning {
 class FollowingTrajectory : public FSM {
 
 public:
-  bool runState(cg_msgs::msg::Pose2D &current_goal_pose);
+  bool runState(cg_msgs::msg::Pose2D &current_goal_pose, const bool goal_reached, std::string &current_goalPose_type);
 
 private:
 

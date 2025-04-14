@@ -39,6 +39,7 @@ public:
   float planTransport(const cg::mapping::Map<float> &current_height_map, const cg::mapping::Map<float> &design_height_map, const std::vector<int> &seen_map, const float thresh_max_assignment_distance, std::vector<std::string> &goalPoses_types);
   std::vector<cg_msgs::msg::Pose2D> getGoalPose(const cg_msgs::msg::Pose2D &agent_pose, const cg::mapping::Map<float> &map, std::vector<std::string> &goalPose_types);
   std::vector<cg_msgs::msg::Pose2D> getUnvisitedGoalPoses(std::vector<std::string> &goalPose_types);
+  void getGoalPoseType(std::vector<std::string> &goalPose_types);
   void makeGoalsFromAssignment(const std::vector<TransportAssignment> &transport_assignments, const size_t assignment_idx, std::vector<cg_msgs::msg::Pose2D> &goalPoses, std::vector<std::string> &goalPose_types);
 
   float solveToyProblem(); // For implementation verification purposes only

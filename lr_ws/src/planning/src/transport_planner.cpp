@@ -28,12 +28,22 @@ void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssign
   // Set up source pose
   cg_msgs::msg::Pose2D source_pose = cg::planning::create_pose2d(transport_assignments[assignment_idx].source_node.x, transport_assignments[assignment_idx].source_node.y, yaw);
 
-  //Calculate distance between source and sink 
-  double manipulation_distance = cg::planning::euclidean_distance(source_pose.pt, sink_pose.pt);
+ 
 
   // Set up source offset pose
   double source_offset_pose_x = source_pose.pt.x - source_pose_offset_ * std::cos(yaw);
   double source_offset_pose_y = source_pose.pt.y - source_pose_offset_ * std::sin(yaw);
+  source_pose = cg::planning::create_pose2d(source_offset_pose_x, source_offset_pose_y, yaw);
+
+
+  // Set up sink offset pose
+  float sink_pose_offset = 0.4;
+  double sink_offset_pose_x = sink_pose.pt.x - sink_pose_offset * std::cos(yaw);
+  double sink_offset_pose_y = sink_pose.pt.y - sink_pose_offset * std::sin(yaw);
+  sink_pose = cg::planning::create_pose2d(sink_offset_pose_x, sink_offset_pose_y, yaw);
+
+   //Calculate distance between source and sink 
+  double manipulation_distance = cg::planning::euclidean_distance(source_pose.pt, sink_pose.pt);
 
   // Set up source backblading pose 
   double backblading_pose_x = sink_pose.pt.x + manipulation_distance * std::cos(yaw);
@@ -69,7 +79,6 @@ void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssign
 
   // Create final poses
   cg_msgs::msg::Pose2D offset_pose = cg::planning::create_pose2d(offset_pose_x, offset_pose_y, yaw);
-  source_pose = cg::planning::create_pose2d(source_offset_pose_x, source_offset_pose_y, yaw);
 
   // Push back the goal poses
   // goalPoses.push_back(offset_pose);
@@ -147,6 +156,18 @@ std::vector<cg_msgs::msg::Pose2D> TransportPlanner::getUnvisitedGoalPoses(std::v
     }
   }
   return unvisitedGoalPoses;
+}
+
+// TODO: Do not hard code this, make this into a function
+void TransportPlanner::getGoalPoseType(std::vector<std::string> &goalPose_types) {
+  goalPose_types = {
+    "offset",   // Pose 0
+    "source",   // Pose 1
+    "sink",     // Pose 2
+    "source",   // Pose 3 (backblading)
+    "sink",     // Pose 4
+    "offset"    // Pose 5 (exit)
+  };
 }
 
 /**
@@ -402,6 +423,7 @@ void TransportPlanner::filterAssignments(std::vector<TransportAssignment> &new_t
     makeGoalsFromAssignment(new_transport_assignments, i, assignment_goal_poses, goalPose_types);
     cg_msgs::msg::Pose2D assignment_source_pose = assignment_goal_poses[0];
     bool no_similar_poses = true;
+
     for (size_t j=0; j < i; ++j) {
       
       std::vector<cg_msgs::msg::Pose2D> check_assignment_goal_poses;
@@ -427,7 +449,34 @@ void TransportPlanner::filterAssignments(std::vector<TransportAssignment> &new_t
       filtered_transport_assignments.push_back(new_transport_assignments[i]);
     }
   }
+
+  // cg_msgs::msg::Point2D crater_center = cg::planning::create_point2d(4.066517f, 3.01634f);
+  // // cg_msgs::msg::Point2D crater_center = cg::planning::create_point2d(4.3f, 2.8f);
+
+
+  // // Check for the one that is closest to crater center 
+  // for(size_t j = 1; j < filtered_transport_assignments.size(); ++j) {
+  //   cg_msgs::msg::Point2D sink_pt = create_point2d(filtered_transport_assignments[j].source_node.x, filtered_transport_assignments[j].source_node.y);
+    
+  //   // double yaw = static_cast<double>(atan2((filtered_transport_assignments[j].sink_node.y - filtered_transport_assignments[j].source_node.y), (filtered_transport_assignments[j].sink_node.x - filtered_transport_assignments[j].source_node.x)));
+  //   // float sink_pose_offset = 0.4;
+  //   // double sink_offset_pose_x = sink_pt.x + sink_pose_offset * std::cos(yaw);
+  //   // double sink_offset_pose_y = sink_pt.y + sink_pose_offset * std::sin(yaw);
+  //   // sink_pt = cg::planning::create_point2d(sink_offset_pose_x, sink_offset_pose_y);
+
+  //   float best_distance = std::numeric_limits<float>::max();
+  //   if (cg::planning::euclidean_distance(sink_pt, crater_center) < best_distance) {
+  //     best_distance = cg::planning::euclidean_distance(sink_pt, crater_center);
+  //     filtered_transport_assignments[0] = filtered_transport_assignments[j];
+  //   }
+  // }
+  TransportAssignment temp = filtered_transport_assignments[1];
+  filtered_transport_assignments.clear();
+  filtered_transport_assignments.push_back(temp);
+
+  // filtered_transport_assignments.push_back(new_transport_assignments[0]);
   new_transport_assignments = filtered_transport_assignments;
+
 }
 
 /**
@@ -450,6 +499,11 @@ float TransportPlanner::planTransport(const cg::mapping::Map<float> &current_hei
   float vol_source = 0.0f;
   float vol_sink = 0.0f;
   init_nodes(source_nodes, sink_nodes, vol_source, vol_sink, current_height_map, design_height_map, seen_map);
+  // DEBUG
+  std::cout << "Number of source nodes: " << source_nodes.size() << std::endl;
+  std::cout << "Number of sink nodes: " << sink_nodes.size() << std::endl;
+  std::cout << "Source volume: " << vol_source << std::endl;
+  std::cout << "Sink volume: " << vol_sink << std::endl;
 
   // ---------------------------------------------------
   // Calculate distances between nodes

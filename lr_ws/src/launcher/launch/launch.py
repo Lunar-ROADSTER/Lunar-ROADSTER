@@ -73,6 +73,6 @@ def generate_launch_description():
         # vectornav_launch,
         # imu_launch,
         # localization_launch,
-        planning_launch,
+        # planning_launch,
         # rviz_node,
     ])

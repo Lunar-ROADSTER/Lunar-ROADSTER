@@ -25,7 +25,7 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
   }
 
   // site_map_client_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
-  update_trajectory_client_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+  nav_client_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
   enable_worksystem_client_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
 
   // Commented out for now - may be used to avoid memory collisions by putting subs into same callback group as FSM
@@ -41,8 +41,11 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
 
   // Create the service client, joined to the callback group
   // site_map_client_ = this->create_client<cg_msgs::srv::SiteMap>("site_map_server", rmw_qos_profile_services_default, site_map_client_group_);
-  update_trajectory_client_ = this->create_client<cg_msgs::srv::UpdateTrajectory>("update_trajectory_server", rmw_qos_profile_services_default, update_trajectory_client_group_);
+  // update_trajectory_client_ = this->create_client<cg_msgs::srv::UpdateTrajectory>("update_trajectory_server", rmw_qos_profile_services_default, update_trajectory_client_group_);
   enable_worksystem_client_ = this->create_client<cg_msgs::srv::EnableWorksystem>("enable_worksystem_server", rmw_qos_profile_services_default, enable_worksystem_client_group_);
+
+  // Create the action client, joined to the callback group
+  nav_action_client_ = rclcpp_action::create_client<nav2_msgs::action::NavigateToPose>(this, "navigate_to_pose", nav_client_group_);
 
   // Timer callback, joined to the callback group
   this->declare_parameter<int>("fsm_timer_callback_ms", 2000);
@@ -194,52 +197,45 @@ void BehaviorExecutive::fsmTimerCallback()
     break;
 
   case cg::planning::FSM::StateL0::GET_TRANSPORT_GOALS:
-    // TODO: Ankit & Deepam
-    // Implement transport stack
-    // Uses the cg::Planning::TransportPlanner object handler from PLAN_TRANSPORT to extract a list of transport goals
-    // Need to update object handler to have new method that nav_transport_ = false if only nav, nav_transport_ = true when nav + tool planner
     num_poses_before_ = current_goal_poses_.size(); // DEBUG
-    get_transport_goals_.runState(current_goal_poses_, viz_state_l1_goal_poses_, *transport_planner_, current_agent_pose_, current_height_map_, goalPose_types);
+    get_transport_goals_.runState(current_goal_poses_, viz_state_l1_goal_poses_, *transport_planner_, current_agent_pose_, current_height_map_, goalPose_types, current_goalPose_types);
+
+    // DEBUG
+    // for (size_t i = 0; i < current_goalPose_types.size(); ++i) {
+    //   std::cout << "current_goalPose_types[" << i << "] = " << current_goalPose_types[i] << std::endl;
+    // }
     break;
 
   case cg::planning::FSM::StateL0::GOALS_REMAINING:
-    goals_remaining_.runState(current_goal_poses_, current_goal_pose_);
+    goals_remaining_.runState(current_goal_poses_, current_goal_pose_, current_goalPose_types, current_goalPose_type);
+
+    // DEBUG
+    // std::cout << "current_goalPose_type = " << current_goalPose_type << std::endl;
     break;
 
   case cg::planning::FSM::StateL0::GET_WORKSYSTEM_TRAJECTORY:
-    // TODO: Bhaswanth & Simson
-    // Implement nav stack
-    // Use current_goal_pose_ to generate a path from current pose to the goal pose. Refer to CG code for what expected input and return shall be
-    // To enable the nav worksystem, use worksystem_enabled_ = enableWorksystemService(enable_worksystem_, true);
+    // WARNING: CURRENTLY NOT IN USE
     get_worksystem_trajectory_.runState();
     break;
 
   case cg::planning::FSM::StateL0::FOLLOWING_TRAJECTORY:
-    // TODO: Bhaswanth & Simson
-    // Implement nav stack
-    // Follow the generated path from the previous stack
-    // nav_transport_ = false if only nav, nav_transport_ = true when nav + tool planner. Feed this as a parameter into .runState()
-    following_trajectory_.runState(current_goal_pose_);
+  {
+    bool goal_reached = nav_goal_succeeded_.exchange(false);
 
-
-    // bool keep_following = following_trajectory_.runState();
-
-    // // Disable worksystem if goal is reached
-    // if (!keep_following) {
-    //   enable_worksystem_ = false;
-    //   worksystem_enabled_ = enableWorksystemService(enable_worksystem_, true);
-    // }
+    if (!nav_goal_active_ && !goal_reached) {
+      nav_goal_active_ = true;
+      std::thread(&BehaviorExecutive::sendNavigationGoal, this, current_goal_pose_).detach();
+    }
+    
+    following_trajectory_.runState(current_goal_pose_, goal_reached, current_goalPose_type);
     break;
+  }
 
   case cg::planning::FSM::StateL0::END_MISSION:
     end_mission_.runState();
     break;
 
   case cg::planning::FSM::StateL0::STOPPED:
-    // Stop the worksystem
-    enable_worksystem_ = false;
-    enableWorksystemService(enable_worksystem_, true);
-
     stopped_.runState();
     break;
 
@@ -391,16 +387,93 @@ bool BehaviorExecutive::updateMap(bool verbose = false) {
   cg::planning::generateZeroMapCsv(map_height, map_width, map_resolution);
   cg::planning::generateElevationMapCsv(map_height, map_width, map_resolution);
 
-  std::vector<int> temp_current_seen_map(4900, 1);
+  std::vector<int> temp_current_seen_map(map_height * map_width, 1);
   current_seen_map_ = temp_current_seen_map;
   return true;
 }
 
-bool BehaviorExecutive::enableWorksystemService(const bool enable_worksystem, bool verbose = false) {
-  // TODO: Bhaswanth & Simson
-  // Start or stop navigation stack
-  (void)enable_worksystem;
-  return verbose;
+
+// Action
+void BehaviorExecutive::sendNavigationGoal(const cg_msgs::msg::Pose2D & goal_pose_2d)
+{
+  if (!nav_action_client_->wait_for_action_server(std::chrono::seconds(5))) {
+    RCLCPP_ERROR(this->get_logger(), "[Nav] Action server not available.");
+    nav_goal_active_ = false;
+    return;
+  }
+
+  // Convert to PoseStamped
+  geometry_msgs::msg::PoseStamped goal_pose_stamped;
+  goal_pose_stamped.header.frame_id = "map";
+  goal_pose_stamped.header.stamp = this->now();
+  goal_pose_stamped.pose.position.x = goal_pose_2d.pt.x;
+  goal_pose_stamped.pose.position.y = goal_pose_2d.pt.y;
+  goal_pose_stamped.pose.position.z = 0.0;
+
+  tf2::Quaternion q;
+  q.setRPY(0, 0, goal_pose_2d.yaw);
+  goal_pose_stamped.pose.orientation.x = q.x();
+  goal_pose_stamped.pose.orientation.y = q.y();
+  goal_pose_stamped.pose.orientation.z = q.z();
+  goal_pose_stamped.pose.orientation.w = q.w();
+
+  // Log the goal for debug
+  RCLCPP_INFO(this->get_logger(), "[Nav] Sending goal: x = %.5f, y = %.5f, yaw = %.5f",
+              goal_pose_2d.pt.x, goal_pose_2d.pt.y, goal_pose_2d.yaw);
+
+  // Package into NavigateToPose action goal
+  nav2_msgs::action::NavigateToPose::Goal goal_msg;
+  goal_msg.pose = goal_pose_stamped;
+
+  rclcpp_action::Client<nav2_msgs::action::NavigateToPose>::SendGoalOptions options;
+  options.goal_response_callback = std::bind(&BehaviorExecutive::handleNavigationResponse, this, std::placeholders::_1);
+  options.feedback_callback = std::bind(&BehaviorExecutive::handleNavigationFeedback, this, std::placeholders::_1, std::placeholders::_2);
+  options.result_callback = std::bind(&BehaviorExecutive::handleNavigationResult, this, std::placeholders::_1);
+
+  nav_action_client_->async_send_goal(goal_msg, options);
+}
+
+void BehaviorExecutive::handleNavigationResponse(
+  rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr goal_handle)
+{
+  if (!goal_handle) {
+    RCLCPP_ERROR(this->get_logger(), "[Nav] Goal rejected.");
+    nav_goal_active_ = false;
+    // nav_goal_succeeded_ = true; // DEBUG
+  } else {
+    current_goal_handle_ = goal_handle;
+    RCLCPP_INFO(this->get_logger(), "[Nav] Goal accepted.");
+  }
+}
+
+void BehaviorExecutive::handleNavigationFeedback(
+  rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr,
+  const std::shared_ptr<const nav2_msgs::action::NavigateToPose::Feedback> feedback)
+{
+  (void)feedback;
+  // RCLCPP_INFO(this->get_logger(), "[Feedback] Distance remaining: %.2f", feedback->distance_remaining);
+}
+
+void BehaviorExecutive::handleNavigationResult(
+  const rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::WrappedResult & result)
+{
+  nav_goal_active_ = false;
+
+  switch (result.code) {
+    case rclcpp_action::ResultCode::SUCCEEDED:
+      RCLCPP_INFO(this->get_logger(), "[Nav] Goal reached.");
+      nav_goal_succeeded_ = true;
+      break;
+    case rclcpp_action::ResultCode::ABORTED:
+      RCLCPP_ERROR(this->get_logger(), "[Nav] Goal aborted.");
+      break;
+    case rclcpp_action::ResultCode::CANCELED:
+      RCLCPP_WARN(this->get_logger(), "[Nav] Goal canceled.");
+      break;
+    default:
+      RCLCPP_ERROR(this->get_logger(), "[Nav] Unknown result code.");
+      break;
+  }
 }
 
 

@@ -12,6 +12,16 @@
 #include <mapping/map.hpp>
 #include <string>
 
+// Nav2
+#include <memory>
+#include <chrono>
+#include <thread>
+#include <atomic>
+#include <mutex>
+#include "rclcpp_action/rclcpp_action.hpp"
+#include "nav2_msgs/action/navigate_to_pose.hpp"
+#include "rclcpp/time.hpp"
+
 // Finite state machine and states
 #include <planning/fsm/fsm.hpp>
 #include <planning/fsm/ready.hpp>
@@ -60,7 +70,7 @@ private:
   /* Services */
   // Create callback groups for service call in timer: https://docs.ros.org/en/galactic/How-To-Guides/Using-callback-groups.html
   rclcpp::CallbackGroup::SharedPtr site_map_client_group_;
-  rclcpp::CallbackGroup::SharedPtr update_trajectory_client_group_;
+  rclcpp::CallbackGroup::SharedPtr nav_client_group_;
   rclcpp::CallbackGroup::SharedPtr enable_worksystem_client_group_;
 
   rclcpp::CallbackGroup::SharedPtr fsm_timer_cb_group_;
@@ -73,12 +83,28 @@ private:
   rclcpp::Client<cg_msgs::srv::UpdateTrajectory>::SharedPtr update_trajectory_client_;
   rclcpp::Client<cg_msgs::srv::EnableWorksystem>::SharedPtr enable_worksystem_client_;
 
+  /* Nav */
+  std::atomic_bool nav_goal_active_ = false;
+  std::atomic_bool nav_goal_succeeded_ = false;
+  std::mutex nav_mutex_;
+  rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr current_goal_handle_;
+  rclcpp_action::Client<nav2_msgs::action::NavigateToPose>::SharedPtr nav_action_client_;
+
+  void sendNavigationGoal(const cg_msgs::msg::Pose2D & goal_pose_2d);
+  void handleNavigationFeedback(
+    rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr,
+    const std::shared_ptr<const nav2_msgs::action::NavigateToPose::Feedback> feedback);
+  void handleNavigationResult(
+    const rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::WrappedResult &result);
+  void handleNavigationResponse(
+    rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr);
+
+  /* Callbacks */
   int fsm_timer_callback_ms_;
   long int viz_timer_callback_ms_;
   long int service_response_timeout_ms_;
   bool sync_callback_groups_{true};
 
-  /* Callbacks */
   void fsmTimerCallback(); // For looping publish
   void vizTimerCallback(); // For looping publish
 
@@ -106,7 +132,9 @@ private:
   bool map_updated_ = false;
 
   std::vector<cg_msgs::msg::Pose2D> current_goal_poses_;
+  std::vector<std::string> current_goalPose_types;
   cg_msgs::msg::Pose2D current_goal_pose_;
+  std::string current_goalPose_type;
 
   bool nav_transport_ = false;
   bool enable_worksystem_ = false;

@@ -87,7 +87,7 @@ void CmdMuxNode::timerCallback()
 
   // Clamp commands
   cmd_msg_.wheel_velocity = std::max(-100.0, std::min(cmd_msg_.wheel_velocity, 100.0)); // [-100.0, 100.0]
-  cmd_msg_.steer_position = std::max(-100.0, std::min(cmd_msg_.steer_position, 100.0)); // [-100.0, 100.0]
+  cmd_msg_.steer_position = std::max(-50.0, std::min(cmd_msg_.steer_position, 50.0)); // [-100.0, 100.0]
   cmd_msg_.tool_position = std::max(0.0, std::min(cmd_msg_.tool_position, 100.0)); // [0.0, 100.0]
 
   // Publish the message
