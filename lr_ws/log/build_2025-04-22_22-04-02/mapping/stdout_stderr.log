@@ -1,0 +1,184 @@
+-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_microxrcedds_c;rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_microxrcedds_cpp;rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found sensor_msgs: 4.2.4 (/root/microros_ws/install/sensor_msgs/share/sensor_msgs/cmake)
+-- Found nav_msgs: 4.2.4 (/root/microros_ws/install/nav_msgs/share/nav_msgs/cmake)
+-- Found tf2_ros: 0.25.12 (/opt/ros/humble/share/tf2_ros/cmake)
+-- Found tf2_eigen: 0.25.12 (/opt/ros/humble/share/tf2_eigen/cmake)
+-- Found tf2_sensor_msgs: 0.25.12 (/opt/ros/humble/share/tf2_sensor_msgs/cmake)
+-- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- FLANN found (include: /usr/include, lib: /usr/lib/aarch64-linux-gnu/libflann_cpp.so)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/aarch64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/aarch64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Found Qhull version 8.0.2
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found visualization_msgs: 4.2.4 (/root/microros_ws/install/visualization_msgs/share/visualization_msgs/cmake)
+-- Configuring done
+[33mCMake Warning at CMakeLists.txt:39 (add_executable):
+  Cannot generate a safe runtime search path for target global_mapping_node
+  because there is a cycle in the constraint graph:
+
+    dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+    dir 1 is [/opt/ros/humble/lib]
+      dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+      dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+    dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+      dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+    dir 3 is [/root/microros_ws/install/std_msgs/lib]
+      dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+    dir 4 is [/root/microros_ws/install/action_msgs/lib]
+    dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+    dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+      dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+    dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+      dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+    dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+      dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+    dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+    dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+    dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+      dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+
+  Some of these libraries may not be found correctly.
+
+[0m
+[33mCMake Warning at CMakeLists.txt:42 (add_executable):
+  Cannot generate a safe runtime search path for target local_mapping_node
+  because there is a cycle in the constraint graph:
+
+    dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+    dir 1 is [/opt/ros/humble/lib]
+      dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+      dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+    dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+      dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+    dir 3 is [/root/microros_ws/install/std_msgs/lib]
+      dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+    dir 4 is [/root/microros_ws/install/action_msgs/lib]
+    dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+    dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+      dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+    dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+      dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+    dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+      dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+    dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+    dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+    dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+      dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+
+  Some of these libraries may not be found correctly.
+
+[0m
+[33mCMake Warning at CMakeLists.txt:45 (add_executable):
+  Cannot generate a safe runtime search path for target pc_handler_node
+  because there is a cycle in the constraint graph:
+
+    dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+    dir 1 is [/opt/ros/humble/lib]
+      dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+      dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+      dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+      dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+    dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+      dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+    dir 3 is [/root/microros_ws/install/std_msgs/lib]
+      dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+    dir 4 is [/root/microros_ws/install/action_msgs/lib]
+    dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+    dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+      dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+    dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+      dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+    dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+      dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+    dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+    dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+    dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+      dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+
+  Some of these libraries may not be found correctly.
+
+[0m
+-- Generating done
+-- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/mapping
+[35m[1mConsolidate compiler generated dependencies of target pc_handler_node[0m
+[35m[1mConsolidate compiler generated dependencies of target local_mapping_node[0m
+[35m[1mConsolidate compiler generated dependencies of target global_mapping_node[0m
+[  8%] [32mBuilding CXX object CMakeFiles/pc_handler_node.dir/src/pc_handler_node.cpp.o[0m
+[ 16%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/local_mapping_node.cpp.o[0m
+[ 25%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/local_mapping.cpp.o[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/global_mapping_node.cpp.o[0m
+[ 41%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/pc_handler_node.dir/src/pc_handler.cpp.o[0m
+[ 58%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/bayes_filter.cpp.o[0m
+[ 66%] [32m[1mLinking CXX executable local_mapping_node[0m
+[ 66%] Built target local_mapping_node
+[ 75%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/init_map.cpp.o[0m
+[ 83%] [32m[1mLinking CXX executable pc_handler_node[0m
+[ 83%] Built target pc_handler_node
+[ 91%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/bayes_filter.cpp.o[0m
+[100%] [32m[1mLinking CXX executable global_mapping_node[0m
+[100%] Built target global_mapping_node
+-- Install configuration: ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/lib/mapping/global_mapping_node
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/mapping/lib/mapping/global_mapping_node" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/lib/mapping/local_mapping_node
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/mapping/lib/mapping/local_mapping_node" to ""
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/lib/mapping/pc_handler_node
+-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/mapping/lib/mapping/pc_handler_node" to ""
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/launch
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/launch/mapping.launch.py
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/launch/rviz_config.rviz
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/ament_index/resource_index/package_run_dependencies/mapping
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/ament_index/resource_index/parent_prefix_path/mapping
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/environment/ament_prefix_path.sh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/environment/ament_prefix_path.dsv
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/environment/path.sh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/environment/path.dsv
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/local_setup.bash
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/local_setup.sh
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/local_setup.zsh
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/local_setup.dsv
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/package.dsv
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/ament_index/resource_index/packages/mapping
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/cmake/mappingConfig.cmake
+-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/cmake/mappingConfig-version.cmake
+-- Installing: /root/Lunar_ROADSTER/lr_ws/install/mapping/share/mapping/package.xml

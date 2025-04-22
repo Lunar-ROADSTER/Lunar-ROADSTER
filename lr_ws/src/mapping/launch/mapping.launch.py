@@ -14,13 +14,13 @@ def generate_launch_description():
             parameters=[{'use_sim_time': use_sim_time_param}]
         )
     
-    global_mapping_node = Node(
-            package='mapping',
-            executable='global_mapping_node',
-            name='global_mapping_node',
-            emulate_tty=True,
-            parameters=[{'use_sim_time': use_sim_time_param}]
-        )
+    # global_mapping_node = Node(
+    #         package='mapping',
+    #         executable='global_mapping_node',
+    #         name='global_mapping_node',
+    #         emulate_tty=True,
+    #         parameters=[{'use_sim_time': use_sim_time_param}]
+    #     )
     
     local_mapping_node = Node(
             package='mapping',
@@ -32,7 +32,7 @@ def generate_launch_description():
 
     ld = LaunchDescription()
     ld.add_action(pc_handler_node)
-    ld.add_action(global_mapping_node)
-    # ld.add_action(local_mapping_node)
+    # ld.add_action(global_mapping_node)
+    ld.add_action(local_mapping_node)
 
     return ld

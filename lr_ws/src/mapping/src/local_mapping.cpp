@@ -97,6 +97,9 @@ void WorldModel::transformedPCLCallback(const sensor_msgs::msg::PointCloud2::Sha
 
 void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {
 
+    // Mutex guard
+    std::lock_guard<std::mutex> lock(map_mutex_);
+
     // Reset map
     configureMaps();
 
@@ -176,6 +179,10 @@ void WorldModel::filterMap(){
 
 // Map publishers
 void WorldModel::publishLocalMap(){
+
+    // Mutex guard
+    std::lock_guard<std::mutex> lock(map_mutex_);
+    
     // local_map_publisher_->publish(local_map_);
     filtered_local_map_publisher_->publish(filtered_local_map_);
 }

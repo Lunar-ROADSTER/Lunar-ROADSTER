@@ -66,6 +66,7 @@ private:
 
   rclcpp::Publisher<cg_msgs::msg::ActuatorCommand>::SharedPtr cmd_pub_;
   rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr tool_height_pub_;
+  rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr local_map_pub_;
 
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr global_robot_state_sub_;
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_robot_state_sub_;
@@ -106,6 +107,9 @@ private:
 
   /* Tool */
   void handleToolTrajectory(std::string &current_goalPose_type);
+
+  /* Mapping */
+  void handleLocalMap(bool verbose);
 
   /* Callbacks */
   int fsm_timer_callback_ms_;

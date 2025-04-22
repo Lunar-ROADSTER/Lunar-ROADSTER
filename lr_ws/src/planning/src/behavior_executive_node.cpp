@@ -15,6 +15,7 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
 
   cmd_pub_ = this->create_publisher<cg_msgs::msg::ActuatorCommand>("/autonomy_cmd", 1);
   tool_height_pub_ = this->create_publisher<std_msgs::msg::Float64>("/tool_height", 1);
+  local_map_pub_ = this->create_publisher<std_msgs::msg::Bool>("/publish_local_map", 1);
 
   /* Initialize services */
   // Create reentrant callback group for service call in timer: https://docs.ros.org/en/galactic/How-To-Guides/Using-callback-groups.html
@@ -67,14 +68,14 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
   this->get_parameter("width", map_width);
   this->declare_parameter<float>("resolution", 0.1);
   this->get_parameter("resolution", map_resolution);
-  this->declare_parameter<std::string>("design_topo_filepath", "/root/Lunar_ROADSTER/lr_ws/src/planning/saved_maps/zeros_height_map.csv");
-  this->get_parameter("design_topo_filepath", design_topo_filepath);
-  this->declare_parameter<std::string>("site_topo_filepath", "/root/Lunar_ROADSTER/lr_ws/src/planning/saved_maps/elevation_map_1d.csv");
-  this->get_parameter("site_topo_filepath", site_topo_filepath);
-  // this->declare_parameter<std::string>("design_topo_filepath", "/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/saved_maps/zeros_height_map.csv");
+  // this->declare_parameter<std::string>("design_topo_filepath", "/root/Lunar_ROADSTER/lr_ws/src/planning/saved_maps/zeros_height_map.csv");
   // this->get_parameter("design_topo_filepath", design_topo_filepath);
-  // this->declare_parameter<std::string>("site_topo_filepath", "/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/saved_maps/elevation_map_1d.csv");
+  // this->declare_parameter<std::string>("site_topo_filepath", "/root/Lunar_ROADSTER/lr_ws/src/planning/saved_maps/elevation_map_1d.csv");
   // this->get_parameter("site_topo_filepath", site_topo_filepath);
+  this->declare_parameter<std::string>("design_topo_filepath", "/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/saved_maps/zeros_height_map.csv");
+  this->get_parameter("design_topo_filepath", design_topo_filepath);
+  this->declare_parameter<std::string>("site_topo_filepath", "/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/saved_maps/elevation_map_1d.csv");
+  this->get_parameter("site_topo_filepath", site_topo_filepath);
   float xTransform;
   float yTransform;
   this->declare_parameter<float>("xTransform", 0.0);
@@ -167,6 +168,7 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
 
 void BehaviorExecutive::fsmTimerCallback()
 {
+  
   // Run machine
   std::cout << "~~~~~~~ Machine iteration" << std::endl;
   std::cout << "    Pre-Signal: " << fsm_.preSignalToString() << std::endl;
@@ -417,8 +419,10 @@ void BehaviorExecutive::handleToolTrajectory(std::string &current_goalPose_type)
     tool_height_ = 100.0;
   } else if (current_goalPose_type == "sink") {
     tool_height_ = 10.0;
+    handleLocalMap(false);
   } else if (current_goalPose_type == "sink_backblade") {
     tool_height_ = 5.0;
+    handleLocalMap(false);
   } else {
     RCLCPP_WARN(this->get_logger(), "[Tool] Unknown goalPose_type: %s. Defaulting tool position to 100.0", current_goalPose_type.c_str());
     tool_height_ = 100.0;
@@ -441,6 +445,16 @@ void BehaviorExecutive::handleToolTrajectory(std::string &current_goalPose_type)
     wait_for_tool_ = false;
     RCLCPP_INFO(this->get_logger(), "[Tool] Completed 30 iterations. Resetting.");
   }
+}
+
+void BehaviorExecutive::handleLocalMap(bool verbose = false)
+{
+
+  (void)verbose;
+
+  std_msgs::msg::Bool msg;
+  msg.data = true;
+  local_map_pub_->publish(msg);
 }
 
 

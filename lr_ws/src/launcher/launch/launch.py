@@ -13,6 +13,12 @@ def generate_launch_description():
         )
     )
 
+    mapping_launch = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource(
+        os.path.join(get_package_share_directory('mapping'), 'launch/mapping.launch.py')
+        )
+    )
+
     mapping_static_launch = IncludeLaunchDescription(
       PythonLaunchDescriptionSource(
         os.path.join(get_package_share_directory('mapping_static'), 'launch/mapping.launch.py')
@@ -55,18 +61,29 @@ def generate_launch_description():
         )
     )
 
-    rviz_config_path = os.path.join(get_package_share_directory('launcher'), 'launch/svd_viz.rviz')
+    rviz_static_map_config_path = os.path.join(get_package_share_directory('launcher'), 'launch/svd_viz.rviz')
 
-    rviz_node = Node(
+    rviz_static_map_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        arguments=['-d', rviz_config_path],
+        arguments=['-d', rviz_static_map_config_path],
+        output='screen'
+    )
+
+    rviz_local_map_config_path = os.path.join(get_package_share_directory('launcher'), 'launch/svd_local_map_viz.rviz')
+
+    rviz_local_map_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        arguments=['-d', rviz_local_map_config_path],
         output='screen'
     )
 
     return LaunchDescription([
-        # sensing_launch,
+        sensing_launch,
+        mapping_launch,
         mapping_static_launch,
         visualization_launch,
         # motion_control_launch,
@@ -74,5 +91,6 @@ def generate_launch_description():
         # imu_launch,
         # localization_launch,
         # planning_launch,
-        # rviz_node,
+        # rviz_static_map_node,
+        rviz_local_map_node,
     ])

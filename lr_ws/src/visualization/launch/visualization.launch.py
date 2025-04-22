@@ -7,5 +7,10 @@ def generate_launch_description():
             package='visualization',
             executable='visualization_node',
             name='visualization_node'
+        ),
+        Node(
+            package='visualization',
+            executable='local_visualization_node',
+            name='local_visualization_node'
         )
     ])

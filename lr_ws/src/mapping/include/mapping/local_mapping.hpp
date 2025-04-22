@@ -25,6 +25,7 @@ class WorldModel : public rclcpp::Node
         const double ELEVATION_SCALE = 100;
         nav_msgs::msg::OccupancyGrid local_map_, 
                                      filtered_local_map_;
+        std::mutex map_mutex_;                            
 
         // Bayes Filter
         std::vector<BayesFilter> bayes_filter_;
