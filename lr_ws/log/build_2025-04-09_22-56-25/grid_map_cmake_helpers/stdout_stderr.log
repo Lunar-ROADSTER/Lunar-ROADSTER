@@ -1,0 +1,15 @@
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /root/Lunar_ROADSTER/lr_ws/install/grid_map_cmake_helpers/share/ament_index/resource_index/package_run_dependencies/grid_map_cmake_helpers
+CMake Error: failed to create symbolic link '/root/Lunar_ROADSTER/lr_ws/install/grid_map_cmake_helpers/share/ament_index/resource_index/package_run_dependencies/grid_map_cmake_helpers': Operation not permitted
+[31mCMake Error at ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:302 (message):
+  Could not create symlink
+  '/root/Lunar_ROADSTER/lr_ws/install/grid_map_cmake_helpers/share/ament_index/resource_index/package_run_dependencies/grid_map_cmake_helpers'
+  pointing to
+  '/root/Lunar_ROADSTER/lr_ws/build/grid_map_cmake_helpers/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/grid_map_cmake_helpers'
+Call Stack (most recent call first):
+  ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:155 (_ament_cmake_symlink_install_create_symlink)
+  ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:314 (ament_cmake_symlink_install_files)
+  cmake_install.cmake:41 (include)
+
+[0m

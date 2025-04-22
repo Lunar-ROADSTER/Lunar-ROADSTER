@@ -10,9 +10,13 @@
 #include <tf2_ros/transform_listener.h>
 #include <tf2_ros/transform_broadcaster.h>
 #include <tf2_ros/buffer.h>
+#include "lx_msgs/action/calibrate_imu.hpp"
+#include "rclcpp_action/rclcpp_action.hpp"
+#include "lx_msgs/msg/rover_command.hpp"
 #include <Eigen/Eigen>
 #include <Eigen/Geometry>
 #include <math.h>
+#include <tf2/utils.h>
 
 namespace cg {
 namespace total_station_rtls {
@@ -21,6 +25,8 @@ class TSPrismTransformer : public rclcpp::Node {
 
 public:
     TSPrismTransformer();
+    using CalibrateImu = lx_msgs::action::CalibrateImu;
+    using GoalHandleCalibrateImu = rclcpp_action::ServerGoalHandle<CalibrateImu>;
 
 private:
 
@@ -28,12 +34,10 @@ private:
     rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr transformed_ts_prism_pub_;
     rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr ts_prism_subscription_;
     rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_subscription_;
-    rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr bearing_subscription_;
     rclcpp::TimerBase::SharedPtr tf_timer_{nullptr};
 
     /* Callbacks */
     void ts_prism_callback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr prism_msg);
-    void bearing_callback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr bearing_msg);
     void imu_callback(const sensor_msgs::msg::Imu::SharedPtr imu_msg);
     bool tf_update(std::string toFrameRel, std::string fromFrameRel, geometry_msgs::msg::TransformStamped &transform);
     void tf_Callback();
@@ -50,13 +54,26 @@ private:
     std::string map_frame = "map";
 
     geometry_msgs::msg::PoseWithCovarianceStamped updated_pose_;
-    geometry_msgs::msg::PoseWithCovarianceStamped latest_bearing_;
     sensor_msgs::msg::Imu imu_last;
     geometry_msgs::msg::TransformStamped ts_prism_transformStamped;
     geometry_msgs::msg::TransformStamped local_ts_prism_transform;
     geometry_msgs::msg::TransformStamped base_link_transform;
     bool got_imu{false};
     bool got_bearing_{false};
+
+    double yaw_offset_;
+    bool calibration_complete_;
+    rclcpp_action::Server<CalibrateImu>::SharedPtr calibrate_imu_action_server_;
+
+    double addAngles(double a1, double a2);
+    double calculateAverageAngle(const std::vector<double>& angles);
+    void append_TS_IMU_Data(std::vector<std::pair<geometry_msgs::msg::Point, double>> & TS_IMU_Data, int itr);
+
+    rclcpp_action::GoalResponse handle_goal(const rclcpp_action::GoalUUID & uuid, std::shared_ptr<const CalibrateImu::Goal> goal);
+    rclcpp_action::CancelResponse handle_cancel(const std::shared_ptr<GoalHandleCalibrateImu> goal_handle);
+
+    void handle_accepted(const std::shared_ptr<GoalHandleCalibrateImu> goal_handle);
+    void executeCalibrateIMU(const std::shared_ptr<GoalHandleCalibrateImu> goal_handle);    
 
 };
 

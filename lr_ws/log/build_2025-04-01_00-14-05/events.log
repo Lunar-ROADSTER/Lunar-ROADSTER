@@ -1,0 +1,647 @@
+[0.000000] (-) TimerEvent: {}
+[0.001513] (-) JobUnselected: {'identifier': 'arduino'}
+[0.002646] (-) JobUnselected: {'identifier': 'cg_msgs'}
+[0.006241] (-) JobUnselected: {'identifier': 'costmap_queue'}
+[0.006758] (-) JobUnselected: {'identifier': 'dwb_core'}
+[0.007299] (-) JobUnselected: {'identifier': 'dwb_critics'}
+[0.007844] (-) JobUnselected: {'identifier': 'dwb_msgs'}
+[0.008271] (-) JobUnselected: {'identifier': 'dwb_plugins'}
+[0.008718] (-) JobUnselected: {'identifier': 'imu'}
+[0.009074] (-) JobUnselected: {'identifier': 'localization'}
+[0.009580] (-) JobUnselected: {'identifier': 'lx_msgs'}
+[0.009879] (-) JobUnselected: {'identifier': 'mapping'}
+[0.010220] (-) JobUnselected: {'identifier': 'motion_control'}
+[0.010791] (-) JobUnselected: {'identifier': 'nav2_amcl'}
+[0.011302] (-) JobUnselected: {'identifier': 'nav2_behavior_tree'}
+[0.011906] (-) JobUnselected: {'identifier': 'nav2_behaviors'}
+[0.012323] (-) JobUnselected: {'identifier': 'nav2_bt_navigator'}
+[0.013094] (-) JobUnselected: {'identifier': 'nav2_collision_monitor'}
+[0.013511] (-) JobUnselected: {'identifier': 'nav2_common'}
+[0.013960] (-) JobUnselected: {'identifier': 'nav2_constrained_smoother'}
+[0.014284] (-) JobUnselected: {'identifier': 'nav2_controller'}
+[0.014597] (-) JobUnselected: {'identifier': 'nav2_core'}
+[0.014889] (-) JobUnselected: {'identifier': 'nav2_costmap_2d'}
+[0.015238] (-) JobUnselected: {'identifier': 'nav2_dwb_controller'}
+[0.015547] (-) JobUnselected: {'identifier': 'nav2_graceful_controller'}
+[0.015848] (-) JobUnselected: {'identifier': 'nav2_lifecycle_manager'}
+[0.016196] (-) JobUnselected: {'identifier': 'nav2_map_server'}
+[0.016500] (-) JobUnselected: {'identifier': 'nav2_mppi_controller'}
+[0.016825] (-) JobUnselected: {'identifier': 'nav2_msgs'}
+[0.017123] (-) JobUnselected: {'identifier': 'nav2_navfn_planner'}
+[0.017549] (-) JobUnselected: {'identifier': 'nav2_planner'}
+[0.017944] (-) JobUnselected: {'identifier': 'nav2_regulated_pure_pursuit_controller'}
+[0.018588] (-) JobUnselected: {'identifier': 'nav2_rotation_shim_controller'}
+[0.019162] (-) JobUnselected: {'identifier': 'nav2_rviz_plugins'}
+[0.019722] (-) JobUnselected: {'identifier': 'nav2_simple_commander'}
+[0.020262] (-) JobUnselected: {'identifier': 'nav2_smac_planner'}
+[0.022470] (-) JobUnselected: {'identifier': 'nav2_smoother'}
+[0.024737] (-) JobUnselected: {'identifier': 'nav2_system_tests'}
+[0.025111] (-) JobUnselected: {'identifier': 'nav2_theta_star_planner'}
+[0.026054] (-) JobUnselected: {'identifier': 'nav2_util'}
+[0.026545] (-) JobUnselected: {'identifier': 'nav2_velocity_smoother'}
+[0.027009] (-) JobUnselected: {'identifier': 'nav2_voxel_grid'}
+[0.027310] (-) JobUnselected: {'identifier': 'nav2_waypoint_follower'}
+[0.028144] (-) JobUnselected: {'identifier': 'nav_2d_msgs'}
+[0.029382] (-) JobUnselected: {'identifier': 'nav_2d_utils'}
+[0.029795] (-) JobUnselected: {'identifier': 'navigation2'}
+[0.030588] (-) JobUnselected: {'identifier': 'realsense'}
+[0.030896] (-) JobUnselected: {'identifier': 'realsense2_camera'}
+[0.037777] (-) JobUnselected: {'identifier': 'realsense2_camera_msgs'}
+[0.039019] (-) JobUnselected: {'identifier': 'realsense2_description'}
+[0.039180] (-) JobUnselected: {'identifier': 'sensing'}
+[0.039263] (-) JobUnselected: {'identifier': 'teleop'}
+[0.039336] (-) JobUnselected: {'identifier': 'vectornav'}
+[0.039403] (-) JobUnselected: {'identifier': 'vectornav_msgs'}
+[0.039844] (nav2_bringup) JobQueued: {'identifier': 'nav2_bringup', 'dependencies': OrderedDict([('cg_msgs', '/root/Lunar_ROADSTER/lr_ws/install/cg_msgs'), ('nav2_common', '/root/Lunar_ROADSTER/lr_ws/install/nav2_common'), ('nav_2d_msgs', '/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs'), ('dwb_msgs', '/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs'), ('nav2_msgs', '/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs'), ('nav2_voxel_grid', '/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid'), ('nav2_simple_commander', '/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander'), ('nav2_util', '/root/Lunar_ROADSTER/lr_ws/install/nav2_util'), ('nav2_amcl', '/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl'), ('nav2_behavior_tree', '/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree'), ('nav2_lifecycle_manager', '/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager'), ('nav2_map_server', '/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server'), ('nav2_velocity_smoother', '/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother'), ('nav_2d_utils', '/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils'), ('nav2_costmap_2d', '/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d'), ('nav2_rviz_plugins', '/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins'), ('costmap_queue', '/root/Lunar_ROADSTER/lr_ws/install/costmap_queue'), ('nav2_collision_monitor', '/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor'), ('nav2_core', '/root/Lunar_ROADSTER/lr_ws/install/nav2_core'), ('dwb_core', '/root/Lunar_ROADSTER/lr_ws/install/dwb_core'), ('nav2_behaviors', '/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors'), ('nav2_bt_navigator', '/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator'), ('nav2_constrained_smoother', '/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother'), ('nav2_controller', '/root/Lunar_ROADSTER/lr_ws/install/nav2_controller'), ('nav2_mppi_controller', '/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller'), ('nav2_navfn_planner', '/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner'), ('nav2_planner', '/root/Lunar_ROADSTER/lr_ws/install/nav2_planner'), ('nav2_regulated_pure_pursuit_controller', '/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller'), ('nav2_smac_planner', '/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner'), ('nav2_smoother', '/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother'), ('nav2_theta_star_planner', '/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner'), ('nav2_waypoint_follower', '/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower'), ('dwb_critics', '/root/Lunar_ROADSTER/lr_ws/install/dwb_critics'), ('dwb_plugins', '/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins'), ('nav2_rotation_shim_controller', '/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller'), ('nav2_dwb_controller', '/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller'), ('navigation2', '/root/Lunar_ROADSTER/lr_ws/install/navigation2')])}
+[0.040541] (nav2_bringup) JobStarted: {'identifier': 'nav2_bringup'}
+[0.097292] (-) TimerEvent: {}
+[0.198578] (-) TimerEvent: {}
+[0.299758] (-) TimerEvent: {}
+[0.400491] (-) TimerEvent: {}
+[0.501359] (-) TimerEvent: {}
+[0.602238] (-) TimerEvent: {}
+[0.706315] (-) TimerEvent: {}
+[0.807255] (-) TimerEvent: {}
+[0.908169] (-) TimerEvent: {}
+[1.009026] (-) TimerEvent: {}
+[1.111382] (-) TimerEvent: {}
+[1.213016] (-) TimerEvent: {}
+[1.220314] (nav2_bringup) JobProgress: {'identifier': 'nav2_bringup', 'progress': 'cmake'}
+[1.225964] (nav2_bringup) JobProgress: {'identifier': 'nav2_bringup', 'progress': 'build'}
+[1.230059] (nav2_bringup) Command: {'cmd': ['/usr/local/bin/cmake', '--build', '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup', '--', '-j4', '-l4'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', 'ubuntu'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_core/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor/lib:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera/lib:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/lx_library/lib:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/root/microros_ws/install/visualization_msgs/lib:/root/microros_ws/install/test_msgs/lib:/root/microros_ws/install/example_interfaces/lib:/root/microros_ws/install/action_msgs/lib:/root/microros_ws/install/unique_identifier_msgs/lib:/root/microros_ws/install/trajectory_msgs/lib:/root/microros_ws/install/stereo_msgs/lib:/root/microros_ws/install/std_srvs/lib:/root/microros_ws/install/shape_msgs/lib:/root/microros_ws/install/sensor_msgs/lib:/root/microros_ws/install/nav_msgs/lib:/root/microros_ws/install/diagnostic_msgs/lib:/root/microros_ws/install/geometry_msgs/lib:/root/microros_ws/install/actionlib_msgs/lib:/root/microros_ws/install/std_msgs/lib:/root/microros_ws/install/statistics_msgs/lib:/root/microros_ws/install/rmw_microxrcedds/lib:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp/lib:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c/lib:/root/microros_ws/install/rosgraph_msgs/lib:/root/microros_ws/install/rclc_parameter/lib:/root/microros_ws/install/rclc/lib:/root/microros_ws/install/composition_interfaces/lib:/root/microros_ws/install/rcl_interfaces/lib:/root/microros_ws/install/microxrcedds_client/lib:/root/microros_ws/install/microcdr/lib:/root/microros_ws/install/micro_ros_utilities/lib:/root/microros_ws/install/micro_ros_agent/lib:/root/microros_ws/install/micro_ros_msgs/lib:/root/microros_ws/install/lifecycle_msgs/lib:/root/microros_ws/install/complex_msgs/lib:/root/microros_ws/install/builtin_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install:/root/microros_ws/install'), ('LOGNAME', 'root'), ('_P9K_SSH_TTY', '/dev/pts/17'), ('_', '/usr/bin/colcon'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':10'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/teleop:/root/Lunar_ROADSTER/lr_ws/install/sensing:/root/Lunar_ROADSTER/lr_ws/install/realsense2_description:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs:/root/Lunar_ROADSTER/lr_ws/install/realsense:/root/Lunar_ROADSTER/lr_ws/install/nav2_system_tests:/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup:/root/Lunar_ROADSTER/lr_ws/install/navigation2:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics:/root/Lunar_ROADSTER/lr_ws/install/dwb_core:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors:/root/Lunar_ROADSTER/lr_ws/install/nav2_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/root/Lunar_ROADSTER/lr_ws/install/motion_control:/root/Lunar_ROADSTER/lr_ws/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_library:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/install/imu:/root/Lunar_ROADSTER/lr_ws/install/arduino:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/root/microros_ws/install/micro_ros_demos_rclc:/root/microros_ws/install/common_interfaces:/root/microros_ws/install/visualization_msgs:/root/microros_ws/install/test_msgs:/root/microros_ws/install/example_interfaces:/root/microros_ws/install/action_msgs:/root/microros_ws/install/unique_identifier_msgs:/root/microros_ws/install/trajectory_msgs:/root/microros_ws/install/stereo_msgs:/root/microros_ws/install/std_srvs:/root/microros_ws/install/shape_msgs:/root/microros_ws/install/sensor_msgs_py:/root/microros_ws/install/sensor_msgs:/root/microros_ws/install/nav_msgs:/root/microros_ws/install/diagnostic_msgs:/root/microros_ws/install/geometry_msgs:/root/microros_ws/install/actionlib_msgs:/root/microros_ws/install/std_msgs:/root/microros_ws/install/statistics_msgs:/root/microros_ws/install/rosidl_typesupport_microxrcedds_test_msg:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp_tests:/root/microros_ws/install/rmw_microxrcedds:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c_tests:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c:/root/microros_ws/install/rosgraph_msgs:/root/microros_ws/install/rclc_parameter:/root/microros_ws/install/rclc:/root/microros_ws/install/composition_interfaces:/root/microros_ws/install/rcl_interfaces:/root/microros_ws/install/micro_ros_utilities:/root/microros_ws/install/micro_ros_setup:/root/microros_ws/install/micro_ros_agent:/root/microros_ws/install/micro_ros_msgs:/root/microros_ws/install/lifecycle_msgs:/root/microros_ws/install/complex_msgs:/root/microros_ws/install/builtin_interfaces:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/17'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander/lib/python3.10/site-packages:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/visualization_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/test_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/example_interfaces/local/lib/python3.10/dist-packages:/root/microros_ws/install/action_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/unique_identifier_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/trajectory_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/stereo_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/std_srvs/local/lib/python3.10/dist-packages:/root/microros_ws/install/shape_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/sensor_msgs_py/lib/python3.10/site-packages:/root/microros_ws/install/sensor_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/nav_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/diagnostic_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/geometry_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/actionlib_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/std_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/statistics_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp/local/lib/python3.10/dist-packages:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c/local/lib/python3.10/dist-packages:/root/microros_ws/install/rosgraph_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/composition_interfaces/local/lib/python3.10/dist-packages:/root/microros_ws/install/rcl_interfaces/local/lib/python3.10/dist-packages:/root/microros_ws/install/micro_ros_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/lifecycle_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/complex_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/builtin_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/navigation2:/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors:/root/Lunar_ROADSTER/lr_ws/install/dwb_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/teleop:/root/Lunar_ROADSTER/lr_ws/install/sensing:/root/Lunar_ROADSTER/lr_ws/install/realsense2_description:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs:/root/Lunar_ROADSTER/lr_ws/install/realsense:/root/Lunar_ROADSTER/lr_ws/install/nav2_system_tests:/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller:/root/Lunar_ROADSTER/lr_ws/install/motion_control:/root/Lunar_ROADSTER/lr_ws/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_library:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/install/imu:/root/Lunar_ROADSTER/lr_ws/install/arduino:/root/microros_ws/install/micro_ros_demos_rclc:/root/microros_ws/install/common_interfaces:/root/microros_ws/install/visualization_msgs:/root/microros_ws/install/test_msgs:/root/microros_ws/install/example_interfaces:/root/microros_ws/install/action_msgs:/root/microros_ws/install/unique_identifier_msgs:/root/microros_ws/install/trajectory_msgs:/root/microros_ws/install/stereo_msgs:/root/microros_ws/install/std_srvs:/root/microros_ws/install/shape_msgs:/root/microros_ws/install/sensor_msgs:/root/microros_ws/install/nav_msgs:/root/microros_ws/install/diagnostic_msgs:/root/microros_ws/install/geometry_msgs:/root/microros_ws/install/actionlib_msgs:/root/microros_ws/install/std_msgs:/root/microros_ws/install/statistics_msgs:/root/microros_ws/install/rosidl_typesupport_microxrcedds_test_msg:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp_tests:/root/microros_ws/install/rmw_microxrcedds:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c_tests:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c:/root/microros_ws/install/rosgraph_msgs:/root/microros_ws/install/rclc_parameter:/root/microros_ws/install/rclc:/root/microros_ws/install/composition_interfaces:/root/microros_ws/install/rcl_interfaces:/root/microros_ws/install/microxrcedds_client:/root/microros_ws/install/microcdr:/root/microros_ws/install/micro_ros_utilities:/root/microros_ws/install/micro_ros_setup:/root/microros_ws/install/micro_ros_agent:/root/microros_ws/install/micro_ros_msgs:/root/microros_ws/install/lifecycle_msgs:/root/microros_ws/install/complex_msgs:/root/microros_ws/install/builtin_interfaces:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/root/microros_ws/install/sensor_msgs_py:/opt/ros/humble')]), 'shell': False}
+[1.313236] (-) TimerEvent: {}
+[1.414227] (-) TimerEvent: {}
+[1.490293] (nav2_bringup) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target autonomy_command\x1b[0m\n'}
+[1.514378] (-) TimerEvent: {}
+[1.616339] (-) TimerEvent: {}
+[1.622007] (nav2_bringup) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/autonomy_command.dir/scripts/autonomy_command.cpp.o\x1b[0m\n'}
+[1.715806] (-) TimerEvent: {}
+[1.817029] (-) TimerEvent: {}
+[1.918352] (-) TimerEvent: {}
+[2.019621] (-) TimerEvent: {}
+[2.122556] (-) TimerEvent: {}
+[2.225210] (-) TimerEvent: {}
+[2.328559] (-) TimerEvent: {}
+[2.430451] (-) TimerEvent: {}
+[2.531371] (-) TimerEvent: {}
+[2.632167] (-) TimerEvent: {}
+[2.733032] (-) TimerEvent: {}
+[2.833889] (-) TimerEvent: {}
+[2.934767] (-) TimerEvent: {}
+[3.036438] (-) TimerEvent: {}
+[3.137361] (-) TimerEvent: {}
+[3.238780] (-) TimerEvent: {}
+[3.340603] (-) TimerEvent: {}
+[3.441552] (-) TimerEvent: {}
+[3.543986] (-) TimerEvent: {}
+[3.644864] (-) TimerEvent: {}
+[3.746143] (-) TimerEvent: {}
+[3.847046] (-) TimerEvent: {}
+[3.948103] (-) TimerEvent: {}
+[4.048901] (-) TimerEvent: {}
+[4.149696] (-) TimerEvent: {}
+[4.250629] (-) TimerEvent: {}
+[4.351533] (-) TimerEvent: {}
+[4.452483] (-) TimerEvent: {}
+[4.553319] (-) TimerEvent: {}
+[4.654646] (-) TimerEvent: {}
+[4.755425] (-) TimerEvent: {}
+[4.856397] (-) TimerEvent: {}
+[4.957208] (-) TimerEvent: {}
+[5.058044] (-) TimerEvent: {}
+[5.159143] (-) TimerEvent: {}
+[5.259976] (-) TimerEvent: {}
+[5.360904] (-) TimerEvent: {}
+[5.461790] (-) TimerEvent: {}
+[5.563762] (-) TimerEvent: {}
+[5.664700] (-) TimerEvent: {}
+[5.765524] (-) TimerEvent: {}
+[5.866311] (-) TimerEvent: {}
+[5.967853] (-) TimerEvent: {}
+[6.068667] (-) TimerEvent: {}
+[6.170464] (-) TimerEvent: {}
+[6.271400] (-) TimerEvent: {}
+[6.372230] (-) TimerEvent: {}
+[6.473197] (-) TimerEvent: {}
+[6.574085] (-) TimerEvent: {}
+[6.674895] (-) TimerEvent: {}
+[6.775981] (-) TimerEvent: {}
+[6.877266] (-) TimerEvent: {}
+[6.978039] (-) TimerEvent: {}
+[7.079811] (-) TimerEvent: {}
+[7.180747] (-) TimerEvent: {}
+[7.282511] (-) TimerEvent: {}
+[7.383411] (-) TimerEvent: {}
+[7.484723] (-) TimerEvent: {}
+[7.585501] (-) TimerEvent: {}
+[7.686339] (-) TimerEvent: {}
+[7.787108] (-) TimerEvent: {}
+[7.888243] (-) TimerEvent: {}
+[7.989152] (-) TimerEvent: {}
+[8.089937] (-) TimerEvent: {}
+[8.193308] (-) TimerEvent: {}
+[8.294333] (-) TimerEvent: {}
+[8.398819] (-) TimerEvent: {}
+[8.500468] (-) TimerEvent: {}
+[8.601417] (-) TimerEvent: {}
+[8.703551] (-) TimerEvent: {}
+[8.804439] (-) TimerEvent: {}
+[8.906318] (-) TimerEvent: {}
+[9.007168] (-) TimerEvent: {}
+[9.108196] (-) TimerEvent: {}
+[9.209134] (-) TimerEvent: {}
+[9.310109] (-) TimerEvent: {}
+[9.411112] (-) TimerEvent: {}
+[9.512160] (-) TimerEvent: {}
+[9.613069] (-) TimerEvent: {}
+[9.713989] (-) TimerEvent: {}
+[9.814866] (-) TimerEvent: {}
+[9.915882] (-) TimerEvent: {}
+[10.017248] (-) TimerEvent: {}
+[10.118058] (-) TimerEvent: {}
+[10.219849] (-) TimerEvent: {}
+[10.322644] (-) TimerEvent: {}
+[10.423643] (-) TimerEvent: {}
+[10.524467] (-) TimerEvent: {}
+[10.625502] (-) TimerEvent: {}
+[10.726416] (-) TimerEvent: {}
+[10.827392] (-) TimerEvent: {}
+[10.930151] (-) TimerEvent: {}
+[11.031148] (-) TimerEvent: {}
+[11.132343] (-) TimerEvent: {}
+[11.233565] (-) TimerEvent: {}
+[11.334709] (-) TimerEvent: {}
+[11.435950] (-) TimerEvent: {}
+[11.536919] (-) TimerEvent: {}
+[11.638037] (-) TimerEvent: {}
+[11.739049] (-) TimerEvent: {}
+[11.840527] (-) TimerEvent: {}
+[11.941994] (-) TimerEvent: {}
+[12.043965] (-) TimerEvent: {}
+[12.144996] (-) TimerEvent: {}
+[12.247531] (-) TimerEvent: {}
+[12.349698] (-) TimerEvent: {}
+[12.450691] (-) TimerEvent: {}
+[12.552792] (-) TimerEvent: {}
+[12.653789] (-) TimerEvent: {}
+[12.754714] (-) TimerEvent: {}
+[12.855684] (-) TimerEvent: {}
+[12.956978] (-) TimerEvent: {}
+[13.057925] (-) TimerEvent: {}
+[13.159025] (-) TimerEvent: {}
+[13.260977] (-) TimerEvent: {}
+[13.361866] (-) TimerEvent: {}
+[13.462645] (-) TimerEvent: {}
+[13.563692] (-) TimerEvent: {}
+[13.664652] (-) TimerEvent: {}
+[13.765871] (-) TimerEvent: {}
+[13.866900] (-) TimerEvent: {}
+[13.968132] (-) TimerEvent: {}
+[14.068966] (-) TimerEvent: {}
+[14.169976] (-) TimerEvent: {}
+[14.271342] (-) TimerEvent: {}
+[14.372246] (-) TimerEvent: {}
+[14.473027] (-) TimerEvent: {}
+[14.573959] (-) TimerEvent: {}
+[14.674832] (-) TimerEvent: {}
+[14.775796] (-) TimerEvent: {}
+[14.876638] (-) TimerEvent: {}
+[14.978242] (-) TimerEvent: {}
+[15.079020] (-) TimerEvent: {}
+[15.180346] (-) TimerEvent: {}
+[15.281233] (-) TimerEvent: {}
+[15.382194] (-) TimerEvent: {}
+[15.483109] (-) TimerEvent: {}
+[15.584121] (-) TimerEvent: {}
+[15.684981] (-) TimerEvent: {}
+[15.786039] (-) TimerEvent: {}
+[15.887027] (-) TimerEvent: {}
+[15.987952] (-) TimerEvent: {}
+[16.089998] (-) TimerEvent: {}
+[16.190987] (-) TimerEvent: {}
+[16.296501] (-) TimerEvent: {}
+[16.399018] (-) TimerEvent: {}
+[16.500237] (-) TimerEvent: {}
+[16.601543] (-) TimerEvent: {}
+[16.702737] (-) TimerEvent: {}
+[16.803990] (-) TimerEvent: {}
+[16.905023] (-) TimerEvent: {}
+[17.006149] (-) TimerEvent: {}
+[17.107089] (-) TimerEvent: {}
+[17.208610] (-) TimerEvent: {}
+[17.309605] (-) TimerEvent: {}
+[17.410589] (-) TimerEvent: {}
+[17.511654] (-) TimerEvent: {}
+[17.612575] (-) TimerEvent: {}
+[17.713592] (-) TimerEvent: {}
+[17.814758] (-) TimerEvent: {}
+[17.915893] (-) TimerEvent: {}
+[18.017240] (-) TimerEvent: {}
+[18.118117] (-) TimerEvent: {}
+[18.219099] (-) TimerEvent: {}
+[18.320205] (-) TimerEvent: {}
+[18.421330] (-) TimerEvent: {}
+[18.522317] (-) TimerEvent: {}
+[18.623291] (-) TimerEvent: {}
+[18.724219] (-) TimerEvent: {}
+[18.825455] (-) TimerEvent: {}
+[18.926472] (-) TimerEvent: {}
+[19.028169] (-) TimerEvent: {}
+[19.129153] (-) TimerEvent: {}
+[19.230208] (-) TimerEvent: {}
+[19.331781] (-) TimerEvent: {}
+[19.433253] (-) TimerEvent: {}
+[19.534221] (-) TimerEvent: {}
+[19.635147] (-) TimerEvent: {}
+[19.736301] (-) TimerEvent: {}
+[19.837277] (-) TimerEvent: {}
+[19.938217] (-) TimerEvent: {}
+[20.039331] (-) TimerEvent: {}
+[20.140651] (-) TimerEvent: {}
+[20.241574] (-) TimerEvent: {}
+[20.342775] (-) TimerEvent: {}
+[20.444055] (-) TimerEvent: {}
+[20.544955] (-) TimerEvent: {}
+[20.645909] (-) TimerEvent: {}
+[20.749425] (-) TimerEvent: {}
+[20.851083] (-) TimerEvent: {}
+[20.952061] (-) TimerEvent: {}
+[21.053940] (-) TimerEvent: {}
+[21.154817] (-) TimerEvent: {}
+[21.255631] (-) TimerEvent: {}
+[21.356518] (-) TimerEvent: {}
+[21.457578] (-) TimerEvent: {}
+[21.558738] (-) TimerEvent: {}
+[21.659769] (-) TimerEvent: {}
+[21.760642] (-) TimerEvent: {}
+[21.862997] (-) TimerEvent: {}
+[21.964108] (-) TimerEvent: {}
+[22.065793] (-) TimerEvent: {}
+[22.166750] (-) TimerEvent: {}
+[22.267660] (-) TimerEvent: {}
+[22.368485] (-) TimerEvent: {}
+[22.469388] (-) TimerEvent: {}
+[22.570652] (-) TimerEvent: {}
+[22.671643] (-) TimerEvent: {}
+[22.772469] (-) TimerEvent: {}
+[22.873410] (-) TimerEvent: {}
+[22.974362] (-) TimerEvent: {}
+[23.075501] (-) TimerEvent: {}
+[23.178439] (-) TimerEvent: {}
+[23.280055] (-) TimerEvent: {}
+[23.381529] (-) TimerEvent: {}
+[23.482986] (-) TimerEvent: {}
+[23.584593] (-) TimerEvent: {}
+[23.685934] (-) TimerEvent: {}
+[23.787554] (-) TimerEvent: {}
+[23.889238] (-) TimerEvent: {}
+[23.990516] (-) TimerEvent: {}
+[24.094310] (-) TimerEvent: {}
+[24.201275] (-) TimerEvent: {}
+[24.302669] (-) TimerEvent: {}
+[24.404301] (-) TimerEvent: {}
+[24.506694] (-) TimerEvent: {}
+[24.609610] (-) TimerEvent: {}
+[24.710913] (-) TimerEvent: {}
+[24.812297] (-) TimerEvent: {}
+[24.913693] (-) TimerEvent: {}
+[25.014648] (-) TimerEvent: {}
+[25.116882] (-) TimerEvent: {}
+[25.220206] (-) TimerEvent: {}
+[25.321847] (-) TimerEvent: {}
+[25.422838] (-) TimerEvent: {}
+[25.524919] (-) TimerEvent: {}
+[25.625806] (-) TimerEvent: {}
+[25.726817] (-) TimerEvent: {}
+[25.827932] (-) TimerEvent: {}
+[25.928949] (-) TimerEvent: {}
+[26.029961] (-) TimerEvent: {}
+[26.130960] (-) TimerEvent: {}
+[26.231940] (-) TimerEvent: {}
+[26.332816] (-) TimerEvent: {}
+[26.433655] (-) TimerEvent: {}
+[26.534681] (-) TimerEvent: {}
+[26.635567] (-) TimerEvent: {}
+[26.736696] (-) TimerEvent: {}
+[26.837537] (-) TimerEvent: {}
+[26.939252] (-) TimerEvent: {}
+[27.043095] (-) TimerEvent: {}
+[27.144166] (-) TimerEvent: {}
+[27.245282] (-) TimerEvent: {}
+[27.346372] (-) TimerEvent: {}
+[27.447416] (-) TimerEvent: {}
+[27.548739] (-) TimerEvent: {}
+[27.649811] (-) TimerEvent: {}
+[27.750786] (-) TimerEvent: {}
+[27.852785] (-) TimerEvent: {}
+[27.953911] (-) TimerEvent: {}
+[28.054724] (-) TimerEvent: {}
+[28.155736] (-) TimerEvent: {}
+[28.257454] (-) TimerEvent: {}
+[28.358656] (-) TimerEvent: {}
+[28.460054] (-) TimerEvent: {}
+[28.561143] (-) TimerEvent: {}
+[28.662136] (-) TimerEvent: {}
+[28.762987] (-) TimerEvent: {}
+[28.863973] (-) TimerEvent: {}
+[28.964808] (-) TimerEvent: {}
+[29.065763] (-) TimerEvent: {}
+[29.166736] (-) TimerEvent: {}
+[29.267646] (-) TimerEvent: {}
+[29.368603] (-) TimerEvent: {}
+[29.469514] (-) TimerEvent: {}
+[29.570408] (-) TimerEvent: {}
+[29.671404] (-) TimerEvent: {}
+[29.772397] (-) TimerEvent: {}
+[29.873474] (-) TimerEvent: {}
+[29.975768] (-) TimerEvent: {}
+[30.079706] (-) TimerEvent: {}
+[30.180463] (-) TimerEvent: {}
+[30.281329] (-) TimerEvent: {}
+[30.382160] (-) TimerEvent: {}
+[30.483040] (-) TimerEvent: {}
+[30.584003] (-) TimerEvent: {}
+[30.687124] (-) TimerEvent: {}
+[30.788102] (-) TimerEvent: {}
+[30.889364] (-) TimerEvent: {}
+[30.990204] (-) TimerEvent: {}
+[31.097341] (-) TimerEvent: {}
+[31.199712] (-) TimerEvent: {}
+[31.300634] (-) TimerEvent: {}
+[31.401520] (-) TimerEvent: {}
+[31.502306] (-) TimerEvent: {}
+[31.603618] (-) TimerEvent: {}
+[31.704732] (-) TimerEvent: {}
+[31.807741] (-) TimerEvent: {}
+[31.908636] (-) TimerEvent: {}
+[32.011086] (-) TimerEvent: {}
+[32.113153] (-) TimerEvent: {}
+[32.214512] (-) TimerEvent: {}
+[32.315408] (-) TimerEvent: {}
+[32.416800] (-) TimerEvent: {}
+[32.517742] (-) TimerEvent: {}
+[32.623408] (-) TimerEvent: {}
+[32.724336] (-) TimerEvent: {}
+[32.825662] (-) TimerEvent: {}
+[32.927657] (-) TimerEvent: {}
+[33.030746] (-) TimerEvent: {}
+[33.131776] (-) TimerEvent: {}
+[33.232620] (-) TimerEvent: {}
+[33.336490] (-) TimerEvent: {}
+[33.437761] (-) TimerEvent: {}
+[33.538655] (-) TimerEvent: {}
+[33.639793] (-) TimerEvent: {}
+[33.741246] (-) TimerEvent: {}
+[33.842340] (-) TimerEvent: {}
+[33.943753] (-) TimerEvent: {}
+[34.045313] (-) TimerEvent: {}
+[34.146422] (-) TimerEvent: {}
+[34.247883] (-) TimerEvent: {}
+[34.348798] (-) TimerEvent: {}
+[34.449928] (-) TimerEvent: {}
+[34.550708] (-) TimerEvent: {}
+[34.651704] (-) TimerEvent: {}
+[34.752676] (-) TimerEvent: {}
+[34.853750] (-) TimerEvent: {}
+[34.954600] (-) TimerEvent: {}
+[35.055404] (-) TimerEvent: {}
+[35.156455] (-) TimerEvent: {}
+[35.257617] (-) TimerEvent: {}
+[35.358478] (-) TimerEvent: {}
+[35.459195] (-) TimerEvent: {}
+[35.560330] (-) TimerEvent: {}
+[35.661183] (-) TimerEvent: {}
+[35.762074] (-) TimerEvent: {}
+[35.862904] (-) TimerEvent: {}
+[35.963748] (-) TimerEvent: {}
+[36.065734] (-) TimerEvent: {}
+[36.166596] (-) TimerEvent: {}
+[36.267545] (-) TimerEvent: {}
+[36.368500] (-) TimerEvent: {}
+[36.469432] (-) TimerEvent: {}
+[36.571973] (-) TimerEvent: {}
+[36.673439] (-) TimerEvent: {}
+[36.774405] (-) TimerEvent: {}
+[36.876853] (-) TimerEvent: {}
+[36.978729] (-) TimerEvent: {}
+[37.079788] (-) TimerEvent: {}
+[37.180852] (-) TimerEvent: {}
+[37.281869] (-) TimerEvent: {}
+[37.383006] (-) TimerEvent: {}
+[37.484027] (-) TimerEvent: {}
+[37.585040] (-) TimerEvent: {}
+[37.685956] (-) TimerEvent: {}
+[37.786935] (-) TimerEvent: {}
+[37.887907] (-) TimerEvent: {}
+[37.990208] (-) TimerEvent: {}
+[38.091339] (-) TimerEvent: {}
+[38.199122] (-) TimerEvent: {}
+[38.300447] (-) TimerEvent: {}
+[38.401689] (-) TimerEvent: {}
+[38.503320] (-) TimerEvent: {}
+[38.604253] (-) TimerEvent: {}
+[38.705062] (-) TimerEvent: {}
+[38.806265] (-) TimerEvent: {}
+[38.907696] (-) TimerEvent: {}
+[39.008754] (-) TimerEvent: {}
+[39.110030] (-) TimerEvent: {}
+[39.211932] (-) TimerEvent: {}
+[39.313505] (-) TimerEvent: {}
+[39.414367] (-) TimerEvent: {}
+[39.515337] (-) TimerEvent: {}
+[39.616597] (-) TimerEvent: {}
+[39.717597] (-) TimerEvent: {}
+[39.818728] (-) TimerEvent: {}
+[39.919852] (-) TimerEvent: {}
+[40.021063] (-) TimerEvent: {}
+[40.122065] (-) TimerEvent: {}
+[40.223309] (-) TimerEvent: {}
+[40.324394] (-) TimerEvent: {}
+[40.425357] (-) TimerEvent: {}
+[40.526285] (-) TimerEvent: {}
+[40.627785] (-) TimerEvent: {}
+[40.728831] (-) TimerEvent: {}
+[40.830662] (-) TimerEvent: {}
+[40.931607] (-) TimerEvent: {}
+[41.032719] (-) TimerEvent: {}
+[41.133719] (-) TimerEvent: {}
+[41.234623] (-) TimerEvent: {}
+[41.335730] (-) TimerEvent: {}
+[41.436755] (-) TimerEvent: {}
+[41.537759] (-) TimerEvent: {}
+[41.639731] (-) TimerEvent: {}
+[41.741606] (-) TimerEvent: {}
+[41.844272] (-) TimerEvent: {}
+[41.945148] (-) TimerEvent: {}
+[42.046622] (-) TimerEvent: {}
+[42.147603] (-) TimerEvent: {}
+[42.248447] (-) TimerEvent: {}
+[42.349200] (-) TimerEvent: {}
+[42.450084] (-) TimerEvent: {}
+[42.551670] (-) TimerEvent: {}
+[42.652693] (-) TimerEvent: {}
+[42.753500] (-) TimerEvent: {}
+[42.855039] (-) TimerEvent: {}
+[42.956019] (-) TimerEvent: {}
+[43.057533] (-) TimerEvent: {}
+[43.159147] (-) TimerEvent: {}
+[43.260139] (-) TimerEvent: {}
+[43.362088] (-) TimerEvent: {}
+[43.462973] (-) TimerEvent: {}
+[43.564469] (-) TimerEvent: {}
+[43.665353] (-) TimerEvent: {}
+[43.766347] (-) TimerEvent: {}
+[43.869493] (-) TimerEvent: {}
+[43.970355] (-) TimerEvent: {}
+[44.072512] (-) TimerEvent: {}
+[44.173423] (-) TimerEvent: {}
+[44.274357] (-) TimerEvent: {}
+[44.375226] (-) TimerEvent: {}
+[44.476194] (-) TimerEvent: {}
+[44.577876] (-) TimerEvent: {}
+[44.678876] (-) TimerEvent: {}
+[44.780413] (-) TimerEvent: {}
+[44.881489] (-) TimerEvent: {}
+[44.983655] (-) TimerEvent: {}
+[45.084573] (-) TimerEvent: {}
+[45.185498] (-) TimerEvent: {}
+[45.286585] (-) TimerEvent: {}
+[45.388021] (-) TimerEvent: {}
+[45.489641] (-) TimerEvent: {}
+[45.591117] (-) TimerEvent: {}
+[45.692084] (-) TimerEvent: {}
+[45.795163] (-) TimerEvent: {}
+[45.896144] (-) TimerEvent: {}
+[45.997583] (-) TimerEvent: {}
+[46.100602] (-) TimerEvent: {}
+[46.201966] (-) TimerEvent: {}
+[46.302721] (-) TimerEvent: {}
+[46.403677] (-) TimerEvent: {}
+[46.504532] (-) TimerEvent: {}
+[46.605558] (-) TimerEvent: {}
+[46.707877] (-) TimerEvent: {}
+[46.811679] (-) TimerEvent: {}
+[46.912532] (-) TimerEvent: {}
+[47.013418] (-) TimerEvent: {}
+[47.114272] (-) TimerEvent: {}
+[47.215936] (-) TimerEvent: {}
+[47.317238] (-) TimerEvent: {}
+[47.419278] (-) TimerEvent: {}
+[47.522298] (-) TimerEvent: {}
+[47.623807] (-) TimerEvent: {}
+[47.725118] (-) TimerEvent: {}
+[47.827739] (-) TimerEvent: {}
+[47.929715] (-) TimerEvent: {}
+[48.030652] (-) TimerEvent: {}
+[48.131604] (-) TimerEvent: {}
+[48.233034] (-) TimerEvent: {}
+[48.334173] (-) TimerEvent: {}
+[48.435093] (-) TimerEvent: {}
+[48.536222] (-) TimerEvent: {}
+[48.637753] (-) TimerEvent: {}
+[48.739577] (-) TimerEvent: {}
+[48.841035] (-) TimerEvent: {}
+[48.941947] (-) TimerEvent: {}
+[49.044041] (-) TimerEvent: {}
+[49.145286] (-) TimerEvent: {}
+[49.246728] (-) TimerEvent: {}
+[49.348082] (-) TimerEvent: {}
+[49.449072] (-) TimerEvent: {}
+[49.549926] (-) TimerEvent: {}
+[49.650739] (-) TimerEvent: {}
+[49.751621] (-) TimerEvent: {}
+[49.852631] (-) TimerEvent: {}
+[49.953456] (-) TimerEvent: {}
+[50.054261] (-) TimerEvent: {}
+[50.155266] (-) TimerEvent: {}
+[50.257051] (-) TimerEvent: {}
+[50.357999] (-) TimerEvent: {}
+[50.460317] (-) TimerEvent: {}
+[50.563820] (-) TimerEvent: {}
+[50.664786] (-) TimerEvent: {}
+[50.765887] (-) TimerEvent: {}
+[50.867575] (-) TimerEvent: {}
+[50.970462] (-) TimerEvent: {}
+[51.072292] (-) TimerEvent: {}
+[51.173115] (-) TimerEvent: {}
+[51.273997] (-) TimerEvent: {}
+[51.374848] (-) TimerEvent: {}
+[51.475628] (-) TimerEvent: {}
+[51.576678] (-) TimerEvent: {}
+[51.678341] (-) TimerEvent: {}
+[51.779635] (-) TimerEvent: {}
+[51.880532] (-) TimerEvent: {}
+[51.982114] (-) TimerEvent: {}
+[52.036266] (nav2_bringup) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable autonomy_command\x1b[0m\n'}
+[52.082157] (-) TimerEvent: {}
+[52.184553] (-) TimerEvent: {}
+[52.285905] (-) TimerEvent: {}
+[52.387597] (-) TimerEvent: {}
+[52.489001] (-) TimerEvent: {}
+[52.589826] (-) TimerEvent: {}
+[52.691184] (-) TimerEvent: {}
+[52.769163] (nav2_bringup) StdoutLine: {'line': b'[100%] Built target autonomy_command\n'}
+[52.791564] (-) TimerEvent: {}
+[52.814115] (nav2_bringup) CommandEnded: {'returncode': 0}
+[52.817992] (nav2_bringup) JobProgress: {'identifier': 'nav2_bringup', 'progress': 'install'}
+[52.857413] (nav2_bringup) Command: {'cmd': ['/usr/local/bin/cmake', '--install', '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup', 'env': OrderedDict([('LANGUAGE', 'en_US:en'), ('HOSTNAME', 'ubuntu'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_core/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor/lib:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d/lib:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_util/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav/lib:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera/lib:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs/lib:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller/lib:/root/Lunar_ROADSTER/lr_ws/install/lx_library/lib:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/lib:/root/microros_ws/install/visualization_msgs/lib:/root/microros_ws/install/test_msgs/lib:/root/microros_ws/install/example_interfaces/lib:/root/microros_ws/install/action_msgs/lib:/root/microros_ws/install/unique_identifier_msgs/lib:/root/microros_ws/install/trajectory_msgs/lib:/root/microros_ws/install/stereo_msgs/lib:/root/microros_ws/install/std_srvs/lib:/root/microros_ws/install/shape_msgs/lib:/root/microros_ws/install/sensor_msgs/lib:/root/microros_ws/install/nav_msgs/lib:/root/microros_ws/install/diagnostic_msgs/lib:/root/microros_ws/install/geometry_msgs/lib:/root/microros_ws/install/actionlib_msgs/lib:/root/microros_ws/install/std_msgs/lib:/root/microros_ws/install/statistics_msgs/lib:/root/microros_ws/install/rmw_microxrcedds/lib:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp/lib:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c/lib:/root/microros_ws/install/rosgraph_msgs/lib:/root/microros_ws/install/rclc_parameter/lib:/root/microros_ws/install/rclc/lib:/root/microros_ws/install/composition_interfaces/lib:/root/microros_ws/install/rcl_interfaces/lib:/root/microros_ws/install/microxrcedds_client/lib:/root/microros_ws/install/microcdr/lib:/root/microros_ws/install/micro_ros_utilities/lib:/root/microros_ws/install/micro_ros_agent/lib:/root/microros_ws/install/micro_ros_msgs/lib:/root/microros_ws/install/lifecycle_msgs/lib:/root/microros_ws/install/complex_msgs/lib:/root/microros_ws/install/builtin_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda/lib64'), ('SHLVL', '1'), ('HOME', '/root'), ('OLDPWD', '/root/Lunar_ROADSTER/lr_ws'), ('LESS', '-R'), ('ZSH', '/root/.oh-my-zsh'), ('LSCOLORS', 'Gxfxcxdxbxegedabagacad'), ('PAGER', 'less'), ('ROS_PYTHON_VERSION', '3'), ('P9K_TTY', 'old'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('COLCON_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install:/root/microros_ws/install'), ('LOGNAME', 'root'), ('_P9K_SSH_TTY', '/dev/pts/17'), ('_', '/usr/bin/colcon'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':10'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('DEBIAN_FRONTEND', 'noninteractive'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/teleop:/root/Lunar_ROADSTER/lr_ws/install/sensing:/root/Lunar_ROADSTER/lr_ws/install/realsense2_description:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs:/root/Lunar_ROADSTER/lr_ws/install/realsense:/root/Lunar_ROADSTER/lr_ws/install/nav2_system_tests:/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup:/root/Lunar_ROADSTER/lr_ws/install/navigation2:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics:/root/Lunar_ROADSTER/lr_ws/install/dwb_core:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors:/root/Lunar_ROADSTER/lr_ws/install/nav2_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/root/Lunar_ROADSTER/lr_ws/install/motion_control:/root/Lunar_ROADSTER/lr_ws/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_library:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/install/imu:/root/Lunar_ROADSTER/lr_ws/install/arduino:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/root/microros_ws/install/micro_ros_demos_rclc:/root/microros_ws/install/common_interfaces:/root/microros_ws/install/visualization_msgs:/root/microros_ws/install/test_msgs:/root/microros_ws/install/example_interfaces:/root/microros_ws/install/action_msgs:/root/microros_ws/install/unique_identifier_msgs:/root/microros_ws/install/trajectory_msgs:/root/microros_ws/install/stereo_msgs:/root/microros_ws/install/std_srvs:/root/microros_ws/install/shape_msgs:/root/microros_ws/install/sensor_msgs_py:/root/microros_ws/install/sensor_msgs:/root/microros_ws/install/nav_msgs:/root/microros_ws/install/diagnostic_msgs:/root/microros_ws/install/geometry_msgs:/root/microros_ws/install/actionlib_msgs:/root/microros_ws/install/std_msgs:/root/microros_ws/install/statistics_msgs:/root/microros_ws/install/rosidl_typesupport_microxrcedds_test_msg:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp_tests:/root/microros_ws/install/rmw_microxrcedds:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c_tests:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c:/root/microros_ws/install/rosgraph_msgs:/root/microros_ws/install/rclc_parameter:/root/microros_ws/install/rclc:/root/microros_ws/install/composition_interfaces:/root/microros_ws/install/rcl_interfaces:/root/microros_ws/install/micro_ros_utilities:/root/microros_ws/install/micro_ros_setup:/root/microros_ws/install/micro_ros_agent:/root/microros_ws/install/micro_ros_msgs:/root/microros_ws/install/lifecycle_msgs:/root/microros_ws/install/complex_msgs:/root/microros_ws/install/builtin_interfaces:/opt/ros/humble'), ('P9K_SSH', '0'), ('CUDA_HOME', '/usr/local/cuda'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/nav2_bringup'), ('LC_ALL', 'en_US.UTF-8'), ('_P9K_TTY', '/dev/pts/17'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander/lib/python3.10/site-packages:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/nav2_common/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs/local/lib/python3.10/dist-packages:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/visualization_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/test_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/example_interfaces/local/lib/python3.10/dist-packages:/root/microros_ws/install/action_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/unique_identifier_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/trajectory_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/stereo_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/std_srvs/local/lib/python3.10/dist-packages:/root/microros_ws/install/shape_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/sensor_msgs_py/lib/python3.10/site-packages:/root/microros_ws/install/sensor_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/nav_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/diagnostic_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/geometry_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/actionlib_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/std_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/statistics_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp/local/lib/python3.10/dist-packages:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c/local/lib/python3.10/dist-packages:/root/microros_ws/install/rosgraph_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/composition_interfaces/local/lib/python3.10/dist-packages:/root/microros_ws/install/rcl_interfaces/local/lib/python3.10/dist-packages:/root/microros_ws/install/micro_ros_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/lifecycle_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/complex_msgs/local/lib/python3.10/dist-packages:/root/microros_ws/install/builtin_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/navigation2:/root/Lunar_ROADSTER/lr_ws/install/nav2_dwb_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_rotation_shim_controller:/root/Lunar_ROADSTER/lr_ws/install/dwb_plugins:/root/Lunar_ROADSTER/lr_ws/install/dwb_critics:/root/Lunar_ROADSTER/lr_ws/install/nav2_waypoint_follower:/root/Lunar_ROADSTER/lr_ws/install/nav2_theta_star_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_smac_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_regulated_pure_pursuit_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_navfn_planner:/root/Lunar_ROADSTER/lr_ws/install/nav2_mppi_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_controller:/root/Lunar_ROADSTER/lr_ws/install/nav2_constrained_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_bt_navigator:/root/Lunar_ROADSTER/lr_ws/install/nav2_behaviors:/root/Lunar_ROADSTER/lr_ws/install/dwb_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_core:/root/Lunar_ROADSTER/lr_ws/install/nav2_collision_monitor:/root/Lunar_ROADSTER/lr_ws/install/costmap_queue:/root/Lunar_ROADSTER/lr_ws/install/nav2_rviz_plugins:/root/Lunar_ROADSTER/lr_ws/install/nav2_costmap_2d:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_utils:/root/Lunar_ROADSTER/lr_ws/install/nav2_velocity_smoother:/root/Lunar_ROADSTER/lr_ws/install/nav2_map_server:/root/Lunar_ROADSTER/lr_ws/install/nav2_lifecycle_manager:/root/Lunar_ROADSTER/lr_ws/install/nav2_behavior_tree:/root/Lunar_ROADSTER/lr_ws/install/nav2_amcl:/root/Lunar_ROADSTER/lr_ws/install/nav2_util:/root/Lunar_ROADSTER/lr_ws/install/nav2_voxel_grid:/root/Lunar_ROADSTER/lr_ws/install/nav2_msgs:/root/Lunar_ROADSTER/lr_ws/install/dwb_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav_2d_msgs:/root/Lunar_ROADSTER/lr_ws/install/nav2_common:/root/Lunar_ROADSTER/lr_ws/install/cg_msgs:/root/Lunar_ROADSTER/lr_ws/install/vectornav:/root/Lunar_ROADSTER/lr_ws/install/vectornav_msgs:/root/Lunar_ROADSTER/lr_ws/install/teleop:/root/Lunar_ROADSTER/lr_ws/install/sensing:/root/Lunar_ROADSTER/lr_ws/install/realsense2_description:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera:/root/Lunar_ROADSTER/lr_ws/install/realsense2_camera_msgs:/root/Lunar_ROADSTER/lr_ws/install/realsense:/root/Lunar_ROADSTER/lr_ws/install/nav2_system_tests:/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup:/root/Lunar_ROADSTER/lr_ws/install/nav2_graceful_controller:/root/Lunar_ROADSTER/lr_ws/install/motion_control:/root/Lunar_ROADSTER/lr_ws/install/mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_mapping:/root/Lunar_ROADSTER/lr_ws/install/lx_library:/root/Lunar_ROADSTER/lr_ws/install/localization:/root/Lunar_ROADSTER/lr_ws/install/lx_msgs:/root/Lunar_ROADSTER/lr_ws/install/imu:/root/Lunar_ROADSTER/lr_ws/install/arduino:/root/microros_ws/install/micro_ros_demos_rclc:/root/microros_ws/install/common_interfaces:/root/microros_ws/install/visualization_msgs:/root/microros_ws/install/test_msgs:/root/microros_ws/install/example_interfaces:/root/microros_ws/install/action_msgs:/root/microros_ws/install/unique_identifier_msgs:/root/microros_ws/install/trajectory_msgs:/root/microros_ws/install/stereo_msgs:/root/microros_ws/install/std_srvs:/root/microros_ws/install/shape_msgs:/root/microros_ws/install/sensor_msgs:/root/microros_ws/install/nav_msgs:/root/microros_ws/install/diagnostic_msgs:/root/microros_ws/install/geometry_msgs:/root/microros_ws/install/actionlib_msgs:/root/microros_ws/install/std_msgs:/root/microros_ws/install/statistics_msgs:/root/microros_ws/install/rosidl_typesupport_microxrcedds_test_msg:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp_tests:/root/microros_ws/install/rmw_microxrcedds:/root/microros_ws/install/rosidl_typesupport_microxrcedds_cpp:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c_tests:/root/microros_ws/install/rosidl_typesupport_microxrcedds_c:/root/microros_ws/install/rosgraph_msgs:/root/microros_ws/install/rclc_parameter:/root/microros_ws/install/rclc:/root/microros_ws/install/composition_interfaces:/root/microros_ws/install/rcl_interfaces:/root/microros_ws/install/microxrcedds_client:/root/microros_ws/install/microcdr:/root/microros_ws/install/micro_ros_utilities:/root/microros_ws/install/micro_ros_setup:/root/microros_ws/install/micro_ros_agent:/root/microros_ws/install/micro_ros_msgs:/root/microros_ws/install/lifecycle_msgs:/root/microros_ws/install/complex_msgs:/root/microros_ws/install/builtin_interfaces:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/root/microros_ws/install/sensor_msgs_py:/opt/ros/humble')]), 'shell': False}
+[52.889131] (nav2_bringup) StdoutLine: {'line': b'-- Install configuration: "Release"\n'}
+[52.889884] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch\n'}
+[52.891682] (-) TimerEvent: {}
+[52.897344] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/localization_launch.py\n'}
+[52.898612] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/navigation_launch.py\n'}
+[52.900327] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/rviz_launch.py\n'}
+[52.901581] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/slam_launch.py\n'}
+[52.902985] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/tb3_simulation_launch.py\n'}
+[52.904918] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/unique_multi_tb3_simulation_launch.py\n'}
+[52.905571] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/__pycache__\n'}
+[52.905865] (nav2_bringup) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/__pycache__/bringup_launch.cpython-310.pyc\n'}
+[52.906166] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/__pycache__/tb3_simulation_launch.cpython-310.pyc\n'}
+[52.906939] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/bringup_launch.py\n'}
+[52.907634] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/launch/cloned_multi_tb3_simulation_launch.py\n'}
+[52.907984] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/maps\n'}
+[52.908797] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/maps/turtlebot3_world.yaml\n'}
+[52.910462] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/maps/turtlebot3_world.pgm\n'}
+[52.911388] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/maps/map_old.pgm\n'}
+[52.911834] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/maps/map.pgm\n'}
+[52.912129] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/maps/map.yaml\n'}
+[52.912392] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/maps/map_old.yaml\n'}
+[52.916705] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/rviz\n'}
+[52.917088] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/rviz/nav2_namespaced_view.rviz\n'}
+[52.917401] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/rviz/nav2_default_view.rviz\n'}
+[52.917675] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/worlds\n'}
+[52.917949] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/worlds/waffle.model\n'}
+[52.918276] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/worlds/world_only.model\n'}
+[52.918582] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/params\n'}
+[52.919009] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/params/nav2_multirobot_params_2.yaml\n'}
+[52.919574] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/params/nav2_params.yaml\n'}
+[52.919877] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/params/nav2_multirobot_params_1.yaml\n'}
+[52.922535] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/params/nav2_multirobot_params_all.yaml\n'}
+[52.922841] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/urdf\n'}
+[52.923208] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/urdf/lr_rover.urdf\n'}
+[52.923803] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/urdf/turtlebot3_waffle.urdf\n'}
+[52.924166] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/meshes\n'}
+[52.924489] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/meshes/600220.STL\n'}
+[52.924888] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/scripts\n'}
+[52.925243] (nav2_bringup) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/scripts/autonomy_command.cpp\n'}
+[52.925540] (nav2_bringup) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/lib/nav2_bringup/autonomy_command\n'}
+[52.925816] (nav2_bringup) StdoutLine: {'line': b'-- Set runtime path of "/root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/lib/nav2_bringup/autonomy_command" to ""\n'}
+[52.926099] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/ament_index/resource_index/package_run_dependencies/nav2_bringup\n'}
+[52.926422] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/ament_index/resource_index/parent_prefix_path/nav2_bringup\n'}
+[52.926713] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/environment/ament_prefix_path.sh\n'}
+[52.926990] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/environment/ament_prefix_path.dsv\n'}
+[52.927252] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/environment/path.sh\n'}
+[52.928101] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/environment/path.dsv\n'}
+[52.928588] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/local_setup.bash\n'}
+[52.929340] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/local_setup.sh\n'}
+[52.929784] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/local_setup.zsh\n'}
+[52.930706] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/local_setup.dsv\n'}
+[52.934054] (nav2_bringup) StdoutLine: {'line': b'-- Installing: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/package.dsv\n'}
+[52.936275] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/ament_index/resource_index/packages/nav2_bringup\n'}
+[52.937028] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/cmake/nav2_bringupConfig.cmake\n'}
+[52.937517] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/cmake/nav2_bringupConfig-version.cmake\n'}
+[52.938279] (nav2_bringup) StdoutLine: {'line': b'-- Up-to-date: /root/Lunar_ROADSTER/lr_ws/install/nav2_bringup/share/nav2_bringup/package.xml\n'}
+[52.939674] (nav2_bringup) CommandEnded: {'returncode': 0}
+[52.996655] (-) TimerEvent: {}
+[53.056471] (nav2_bringup) JobEnded: {'identifier': 'nav2_bringup', 'rc': 0}
+[53.059784] (-) EventReactorShutdown: {}

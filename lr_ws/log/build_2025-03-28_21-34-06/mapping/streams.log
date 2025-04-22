@@ -1,0 +1,195 @@
+[0.350s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/root/microros_ws/install/sensor_msgs_py:/opt/ros/humble /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/mapping -- -j4 -l4
+[0.710s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.806s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[5.782s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[6.472s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[7.174s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[7.941s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_microxrcedds_c;rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[9.714s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_microxrcedds_cpp;rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[13.244s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[13.529s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[16.210s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[16.701s] -- Found FastRTPS: /opt/ros/humble/include  
+[17.621s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[18.465s] -- Looking for pthread.h
+[19.274s] -- Looking for pthread.h - found
+[19.275s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[19.874s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[19.882s] -- Found Threads: TRUE  
+[21.556s] -- Found sensor_msgs: 4.2.4 (/root/microros_ws/install/sensor_msgs/share/sensor_msgs/cmake)
+[22.281s] -- Found nav_msgs: 4.2.4 (/root/microros_ws/install/nav_msgs/share/nav_msgs/cmake)
+[22.763s] -- Found tf2_ros: 0.25.12 (/opt/ros/humble/share/tf2_ros/cmake)
+[26.715s] -- Found tf2_eigen: 0.25.12 (/opt/ros/humble/share/tf2_eigen/cmake)
+[27.284s] -- Found tf2_sensor_msgs: 0.25.12 (/opt/ros/humble/share/tf2_sensor_msgs/cmake)
+[27.864s] -- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)
+[29.473s] -- Checking for module 'eigen3'
+[29.670s] --   Found eigen3, version 3.4.0
+[30.098s] -- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+[30.102s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[34.131s] -- Checking for module 'flann'
+[34.324s] --   Found flann, version 1.9.1
+[34.811s] -- Found FLANN: /usr/lib/aarch64-linux-gnu/libflann_cpp.so  
+[34.812s] -- FLANN found (include: /usr/include, lib: /usr/lib/aarch64-linux-gnu/libflann_cpp.so)
+[43.755s] -- Checking for module 'libusb-1.0'
+[43.958s] --   Found libusb-1.0, version 1.0.25
+[44.403s] -- Found libusb: /usr/lib/aarch64-linux-gnu/libusb-1.0.so  
+[44.411s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[45.121s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/aarch64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[46.126s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[46.180s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[46.231s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/aarch64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[47.698s] -- Found Qhull version 8.0.2
+[48.742s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[49.711s] -- Found PCL_COMMON: /usr/lib/aarch64-linux-gnu/libpcl_common.so  
+[49.721s] -- Found PCL_KDTREE: /usr/lib/aarch64-linux-gnu/libpcl_kdtree.so  
+[49.725s] -- Found PCL_OCTREE: /usr/lib/aarch64-linux-gnu/libpcl_octree.so  
+[49.730s] -- Found PCL_SEARCH: /usr/lib/aarch64-linux-gnu/libpcl_search.so  
+[49.738s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/aarch64-linux-gnu/libpcl_sample_consensus.so  
+[49.743s] -- Found PCL_FILTERS: /usr/lib/aarch64-linux-gnu/libpcl_filters.so  
+[49.749s] -- Found PCL_2D: /usr/include/pcl-1.12  
+[49.750s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.12  
+[49.755s] -- Found PCL_IO: /usr/lib/aarch64-linux-gnu/libpcl_io.so  
+[49.761s] -- Found PCL_FEATURES: /usr/lib/aarch64-linux-gnu/libpcl_features.so  
+[49.766s] -- Found PCL_ML: /usr/lib/aarch64-linux-gnu/libpcl_ml.so  
+[49.770s] -- Found PCL_SEGMENTATION: /usr/lib/aarch64-linux-gnu/libpcl_segmentation.so  
+[49.775s] -- Found PCL_VISUALIZATION: /usr/lib/aarch64-linux-gnu/libpcl_visualization.so  
+[49.782s] -- Found PCL_SURFACE: /usr/lib/aarch64-linux-gnu/libpcl_surface.so  
+[49.789s] -- Found PCL_REGISTRATION: /usr/lib/aarch64-linux-gnu/libpcl_registration.so  
+[49.794s] -- Found PCL_KEYPOINTS: /usr/lib/aarch64-linux-gnu/libpcl_keypoints.so  
+[49.800s] -- Found PCL_TRACKING: /usr/lib/aarch64-linux-gnu/libpcl_tracking.so  
+[49.805s] -- Found PCL_RECOGNITION: /usr/lib/aarch64-linux-gnu/libpcl_recognition.so  
+[49.812s] -- Found PCL_STEREO: /usr/lib/aarch64-linux-gnu/libpcl_stereo.so  
+[49.818s] -- Found PCL_APPS: /usr/lib/aarch64-linux-gnu/libpcl_apps.so  
+[49.822s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.12  
+[49.824s] -- Found PCL_MODELER: /usr/include/pcl-1.12  
+[49.829s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.12  
+[49.835s] -- Found PCL_OUTOFCORE: /usr/lib/aarch64-linux-gnu/libpcl_outofcore.so  
+[49.840s] -- Found PCL_PEOPLE: /usr/lib/aarch64-linux-gnu/libpcl_people.so  
+[50.714s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[50.715s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[50.934s] -- Found visualization_msgs: 4.2.4 (/root/microros_ws/install/visualization_msgs/share/visualization_msgs/cmake)
+[53.035s] -- Configuring done
+[53.881s] [33mCMake Warning at CMakeLists.txt:39 (add_executable):
+[53.883s]   Cannot generate a safe runtime search path for target global_mapping_node
+[53.884s]   because there is a cycle in the constraint graph:
+[53.884s] 
+[53.884s]     dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+[53.884s]     dir 1 is [/opt/ros/humble/lib]
+[53.886s]       dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+[53.886s]       dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+[53.886s]       dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+[53.887s]       dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+[53.887s]       dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+[53.889s]       dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+[53.890s]       dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+[53.891s]       dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+[53.891s]       dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+[53.892s]       dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+[53.892s]       dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+[53.894s]     dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+[53.900s]       dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+[53.905s]     dir 3 is [/root/microros_ws/install/std_msgs/lib]
+[53.907s]       dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+[53.909s]     dir 4 is [/root/microros_ws/install/action_msgs/lib]
+[53.913s]     dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+[53.914s]     dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+[53.915s]       dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+[53.915s]     dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+[53.916s]       dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+[53.919s]     dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+[53.921s]       dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+[53.922s]     dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+[53.923s]     dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+[53.924s]     dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+[53.928s]       dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+[53.929s] 
+[53.929s]   Some of these libraries may not be found correctly.
+[53.930s] 
+[53.930s] [0m
+[54.335s] [33mCMake Warning at CMakeLists.txt:42 (add_executable):
+[54.338s]   Cannot generate a safe runtime search path for target local_mapping_node
+[54.339s]   because there is a cycle in the constraint graph:
+[54.341s] 
+[54.342s]     dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+[54.344s]     dir 1 is [/opt/ros/humble/lib]
+[54.345s]       dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.345s]       dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.345s]       dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+[54.346s]       dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.346s]       dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.347s]       dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.349s]       dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.349s]       dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.350s]       dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+[54.351s]       dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+[54.352s]       dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+[54.352s]     dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+[54.353s]       dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+[54.357s]     dir 3 is [/root/microros_ws/install/std_msgs/lib]
+[54.363s]       dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+[54.370s]     dir 4 is [/root/microros_ws/install/action_msgs/lib]
+[54.373s]     dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+[54.374s]     dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+[54.377s]       dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+[54.378s]     dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+[54.382s]       dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+[54.389s]     dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+[54.392s]       dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+[54.397s]     dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+[54.402s]     dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+[54.406s]     dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+[54.408s]       dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+[54.410s] 
+[54.412s]   Some of these libraries may not be found correctly.
+[54.417s] 
+[54.421s] [0m
+[54.776s] [33mCMake Warning at CMakeLists.txt:45 (add_executable):
+[54.776s]   Cannot generate a safe runtime search path for target pc_handler_node
+[54.777s]   because there is a cycle in the constraint graph:
+[54.777s] 
+[54.778s]     dir 0 is [/root/microros_ws/install/nav_msgs/lib]
+[54.781s]     dir 1 is [/opt/ros/humble/lib]
+[54.782s]       dir 0 must precede it due to runtime library [libnav_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.814s]       dir 2 must precede it due to runtime library [libsensor_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.815s]       dir 3 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+[54.816s]       dir 4 must precede it due to runtime library [libaction_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.817s]       dir 5 must precede it due to runtime library [libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.818s]       dir 6 must precede it due to runtime library [libgeometry_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.819s]       dir 7 must precede it due to runtime library [librosgraph_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.821s]       dir 8 must precede it due to runtime library [libstatistics_msgs__rosidl_typesupport_fastrtps_c.so]
+[54.822s]       dir 9 must precede it due to runtime library [libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so]
+[54.822s]       dir 10 must precede it due to runtime library [librcl_interfaces__rosidl_typesupport_fastrtps_c.so]
+[54.823s]       dir 11 must precede it due to runtime library [libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so]
+[54.824s]     dir 2 is [/root/microros_ws/install/sensor_msgs/lib]
+[54.824s]       dir 1 must precede it due to runtime library [libsensor_msgs__rosidl_generator_c.so]
+[54.826s]     dir 3 is [/root/microros_ws/install/std_msgs/lib]
+[54.828s]       dir 1 must precede it due to runtime library [libstd_msgs__rosidl_generator_c.so]
+[54.829s]     dir 4 is [/root/microros_ws/install/action_msgs/lib]
+[54.830s]     dir 5 is [/root/microros_ws/install/unique_identifier_msgs/lib]
+[54.831s]     dir 6 is [/root/microros_ws/install/geometry_msgs/lib]
+[54.831s]       dir 1 must precede it due to runtime library [libgeometry_msgs__rosidl_generator_c.so]
+[54.832s]     dir 7 is [/root/microros_ws/install/rosgraph_msgs/lib]
+[54.832s]       dir 1 must precede it due to runtime library [librosgraph_msgs__rosidl_generator_c.so]
+[54.833s]     dir 8 is [/root/microros_ws/install/statistics_msgs/lib]
+[54.833s]       dir 1 must precede it due to runtime library [libstatistics_msgs__rosidl_generator_c.so]
+[54.834s]     dir 9 is [/root/microros_ws/install/composition_interfaces/lib]
+[54.834s]     dir 10 is [/root/microros_ws/install/rcl_interfaces/lib]
+[54.834s]     dir 11 is [/root/microros_ws/install/builtin_interfaces/lib]
+[54.835s]       dir 1 must precede it due to runtime library [libbuiltin_interfaces__rosidl_generator_c.so]
+[54.835s] 
+[54.835s]   Some of these libraries may not be found correctly.
+[54.835s] 
+[54.836s] [0m
+[54.836s] -- Generating done
+[55.071s] -- Build files have been written to: /root/Lunar_ROADSTER/lr_ws/build/mapping
+[55.420s] [  8%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/local_mapping.cpp.o[0m
+[55.424s] [ 16%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/global_mapping_node.cpp.o[0m
+[55.437s] [ 25%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/local_mapping_node.cpp.o[0m
+[121.972s] [ 33%] [32mBuilding CXX object CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o[0m
+[159.353s] [ 41%] [32mBuilding CXX object CMakeFiles/local_mapping_node.dir/src/bayes_filter.cpp.o[0m
+[164.989s] gmake[2]: *** [CMakeFiles/global_mapping_node.dir/build.make:90: CMakeFiles/global_mapping_node.dir/src/global_mapping.cpp.o] Interrupt
+[164.991s] gmake[2]: *** [CMakeFiles/local_mapping_node.dir/build.make:104: CMakeFiles/local_mapping_node.dir/src/bayes_filter.cpp.o] Interrupt
+[164.999s] gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/global_mapping_node.dir/all] Interrupt
+[165.004s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/local_mapping_node.dir/all] Interrupt
+[165.006s] gmake: *** [Makefile:146: all] Interrupt
+[165.216s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/mapping' returned '-2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/Lunar_ROADSTER/lr_ws/install/nav2_simple_commander:/root/microros_ws/install/sensor_msgs_py:/opt/ros/humble /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/mapping -- -j4 -l4

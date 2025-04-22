@@ -1,0 +1,15 @@
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/transport_planner.cpp:[m[K In member function ‘[01m[Kvoid cg::planning::TransportPlanner::makeGoalsFromAssignment(const std::vector<cg::planning::TransportAssignment>&, size_t, std::vector<cg_msgs::msg::Pose2D_<std::allocator<void> >, std::allocator<cg_msgs::msg::Pose2D_<std::allocator<void> > > >&, std::vector<std::__cxx11::basic_string<char> >&)[m[K’:
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/transport_planner.cpp:82:3:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K;[m[K’ before ‘[01m[Kdouble[m[K’
+   82 |   [01;31m[Kdouble[m[K new_sink_x = source_pose.pt.x - new_sink_offset * std::cos(yaw);
+      |   [01;31m[K^~~~~~[m[K
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/transport_planner.cpp:84:71:[m[K [01;31m[Kerror: [m[K‘[01m[Knew_sink_x[m[K’ was not declared in this scope; did you mean ‘[01m[Knew_sink_y[m[K’?
+   84 |   cg_msgs::msg::Pose2D sink_backblading = cg::planning::create_pose2d([01;31m[Knew_sink_x[m[K, new_sink_y, yaw);
+      |                                                                       [01;31m[K^~~~~~~~~~[m[K
+      |                                                                       [32m[Knew_sink_y[m[K
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/transport_planner.cpp:[m[K In member function ‘[01m[Kfloat cg::planning::TransportPlanner::solveToyProblem()[m[K’:
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/transport_planner.cpp:576:8:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kverbose[m[K’ [[01;35m[K-Wunused-variable[m[K]
+  576 |   bool [01;35m[Kverbose[m[K = false;
+      |        [01;35m[K^~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:272: CMakeFiles/behavior_executive_node.dir/src/transport_planner.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

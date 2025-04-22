@@ -6,7 +6,7 @@ ekf_global_node:
     # The frequency, in Hz, at which the filter will output a position estimate. Note that the filter will not begin
     # computation until it receives at least one message from one of the inputs. It will then run continuously at the
     # frequency specified here, regardless of whether it receives more measurements. Defaults to 30 if unspecified.
-    frequency: 10.0
+    frequency: 20.0
 
     # The period, in seconds, after which we consider a sensor to have timed out. In this event, we carry out a predict
     # cycle on the EKF without correcting it. This parameter can be thought of as the minimum frequency with which the
@@ -129,7 +129,7 @@ ekf_global_node:
     ##########################################################
 
     # For use with bag data
-    reset_on_time_jump: true
+    reset_on_time_jump: false
 
     # Recall config settings are in the form of:
     # [x, y, z,
@@ -178,8 +178,8 @@ ekf_global_node:
       false,  false, false # xddot, yddot, zddot
     ]
     imu0_queue_size: 5
-    imu0_nodelay: false
-    imu0_differential: false
+    imu0_nodelay: true # false before
+    imu0_differential: true
     imu0_relative: false
 
     # [ADVANCED] Some IMUs automatically remove acceleration due to gravity, and others don't. If yours doesn't, please set
@@ -190,7 +190,7 @@ ekf_global_node:
     pose0: transformed_total_station_prism
     pose0_config: [
       true, true, true,
-      false, false, false,  
+      true, true, true,  # was all false before
       false, false, false,
       false, false, false,
       false, false, false

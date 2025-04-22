@@ -86,8 +86,8 @@ void CmdMuxNode::timerCallback()
   }
 
   // Clamp commands
-  cmd_msg_.wheel_velocity = std::max(-100.0, std::min(cmd_msg_.wheel_velocity, 100.0)); // [-100.0, 100.0]
-  cmd_msg_.steer_position = std::max(-100.0, std::min(cmd_msg_.steer_position, 100.0)); // [-100.0, 100.0]
+  cmd_msg_.wheel_velocity = std::max(-40.0, std::min(cmd_msg_.wheel_velocity, 40.0)); // [-100.0, 100.0]
+  cmd_msg_.steer_position = std::max(-65.0, std::min(cmd_msg_.steer_position, 65.0)); // [-100.0, 100.0]
   cmd_msg_.tool_position = std::max(0.0, std::min(cmd_msg_.tool_position, 100.0)); // [0.0, 100.0]
 
   // Publish the message
@@ -124,6 +124,8 @@ void CmdMuxNode::teleopCallback(const cg_msgs::msg::ActuatorCommand::SharedPtr m
   {
     // Update the command message directly
     cmd_msg_ = *msg;
+
+    // cmd_msg_.wheel_velocity = -msg->wheel_velocity;
   }
 }
 
@@ -141,6 +143,7 @@ void CmdMuxNode::autonomyCallback(const cg_msgs::msg::ActuatorCommand::SharedPtr
     // Update the command message directly
     cmd_msg_ = *msg;
   }
+  
 }
 
 } // namespace cmdmux
