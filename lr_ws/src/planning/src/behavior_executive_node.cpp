@@ -13,6 +13,9 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
   viz_agent_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/viz/planning/current_agent", 1);
   viz_curr_goal_pub_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/viz/planning/current_goal", 1);
 
+  cmd_pub_ = this->create_publisher<cg_msgs::msg::ActuatorCommand>("/autonomy_cmd", 1);
+  tool_height_pub_ = this->create_publisher<std_msgs::msg::Float64>("/tool_height", 1);
+
   /* Initialize services */
   // Create reentrant callback group for service call in timer: https://docs.ros.org/en/galactic/How-To-Guides/Using-callback-groups.html
   this->declare_parameter<bool>("sync_callback_groups", true);
@@ -170,6 +173,12 @@ void BehaviorExecutive::fsmTimerCallback()
   std::cout << "      State L0: " << fsm_.currStateL0ToString() << std::endl;
   std::cout << "      State L1: " << fsm_.currStateL1ToString() << std::endl;
 
+  // Print tool height
+  // TODO: Refactor this
+  std_msgs::msg::Float64 msg;
+  msg.data = tool_height_;
+  tool_height_pub_->publish(msg);
+
   switch (fsm_.getCurrStateL0())
   {
   case cg::planning::FSM::StateL0::READY:
@@ -214,8 +223,10 @@ void BehaviorExecutive::fsmTimerCallback()
     break;
 
   case cg::planning::FSM::StateL0::GET_WORKSYSTEM_TRAJECTORY:
-    // WARNING: CURRENTLY NOT IN USE
-    get_worksystem_trajectory_.runState();
+    // WARNING: This state is currently used for tool up and down motion
+
+    handleToolTrajectory(current_goalPose_type);
+    get_worksystem_trajectory_.runState(current_goalPose_type, wait_for_tool_);
     break;
 
   case cg::planning::FSM::StateL0::FOLLOWING_TRAJECTORY:
@@ -269,11 +280,11 @@ void BehaviorExecutive::globalRobotStateCallback(const nav_msgs::msg::Odometry::
   current_agent_pose_ = cg::planning::create_pose2d(global_robot_state_.pose.pose.position.x, global_robot_state_.pose.pose.position.y,  global_robot_yaw);
   // current_agent_pose_ = cg::planning::transformPose(global_robot_pose_, global_map_relative_to_local_frame_);
 
-  if (debug_trigger_) {
-    std::cout << "Pose2D: x = " << current_agent_pose_.pt.x
-              << ", y = " << current_agent_pose_.pt.y
-              << ", yaw = " << current_agent_pose_.yaw << std::endl;
-  }
+  // if (debug_trigger_) {
+  //   std::cout << "Pose2D: x = " << current_agent_pose_.pt.x
+  //             << ", y = " << current_agent_pose_.pt.y
+  //             << ", yaw = " << current_agent_pose_.yaw << std::endl;
+  // }
 }
 
 void BehaviorExecutive::odomRobotStateCallback(const nav_msgs::msg::Odometry::SharedPtr msg) {
@@ -302,9 +313,9 @@ void BehaviorExecutive::vizTimerCallback() {
     viz_agent_pub_->publish(viz_agent_);
   }
   else {
-    if (debug_trigger_) {
-      std::cout << "Robot pose not initialized" << std::endl;
-    }
+    // if (debug_trigger_) {
+    //   std::cout << "Robot pose not initialized" << std::endl;
+    // }
   }
 
   // Current goal
@@ -373,8 +384,63 @@ void BehaviorExecutive::vizTimerCallback() {
 }
 
 void BehaviorExecutive::debugTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg) {
-  (void)msg; // Message not used, just "touch" to hide unused parameter warning
-  debug_trigger_ = true;
+  debug_trigger_ = msg->data;
+
+  if (debug_trigger_) {
+    RCLCPP_INFO(this->get_logger(), "[Debug] Debug mode ENABLED");
+  } else {
+    RCLCPP_INFO(this->get_logger(), "[Debug] Debug mode DISABLED");
+  }
+
+  if (nav_goal_active_ && current_goal_handle_) {
+    RCLCPP_INFO(this->get_logger(), "[Debug] Cancelling current navigation goal...");
+    nav_action_client_->async_cancel_goal(current_goal_handle_);
+    nav_goal_active_ = false;
+  }
+
+  debug_trigger_ = false;
+}
+
+
+// Publisher
+void BehaviorExecutive::handleToolTrajectory(std::string &current_goalPose_type)
+{
+  // if (!wait_for_tool_) {
+  cg_msgs::msg::ActuatorCommand cmd_msg;
+
+  // Set the wheel velocity and steer position as stationary
+  cmd_msg.wheel_velocity = 0.0;
+  cmd_msg.steer_position = 0.0;
+
+  // Set tool position based on goal type
+  if (current_goalPose_type == "offset" || current_goalPose_type == "source") {
+    tool_height_ = 100.0;
+  } else if (current_goalPose_type == "sink") {
+    tool_height_ = 10.0;
+  } else if (current_goalPose_type == "sink_backblade") {
+    tool_height_ = 5.0;
+  } else {
+    RCLCPP_WARN(this->get_logger(), "[Tool] Unknown goalPose_type: %s. Defaulting tool position to 100.0", current_goalPose_type.c_str());
+    tool_height_ = 100.0;
+  }
+
+  cmd_msg.tool_position = tool_height_;
+  cmd_msg.header.stamp = this->get_clock()->now();
+  cmd_pub_->publish(cmd_msg);
+
+  RCLCPP_INFO(this->get_logger(), "[Tool] Sent actuator command. goalPose_type = %s, tool_position = %.1f",
+              current_goalPose_type.c_str(), cmd_msg.tool_position);
+  // }
+
+  wait_for_tool_ = true;
+  tool_counter_++;
+
+  // Wait 30 ticks for the tool planner
+  if (tool_counter_ >= 30) {
+    tool_counter_ = 0;
+    wait_for_tool_ = false;
+    RCLCPP_INFO(this->get_logger(), "[Tool] Completed 30 iterations. Resetting.");
+  }
 }
 
 
@@ -469,6 +535,7 @@ void BehaviorExecutive::handleNavigationResult(
       break;
     case rclcpp_action::ResultCode::CANCELED:
       RCLCPP_WARN(this->get_logger(), "[Nav] Goal canceled.");
+      nav_goal_succeeded_ = true;
       break;
     default:
       RCLCPP_ERROR(this->get_logger(), "[Nav] Unknown result code.");

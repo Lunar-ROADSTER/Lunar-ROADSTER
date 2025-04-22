@@ -14,8 +14,8 @@ behavior_executive_node:
     source_threshold_z: 0.03 # meters off fit plane
     sink_threshold_z: 0.01 # meters below fit plane
     thresh_max_assignment_distance: 0.4 # max meters between transport assignments
-    last_pose_offset: 2.0 # meters to rearward offset last pose in transport assignment by
-    source_pose_offset: 0.7 # meters to rearward offset source pose in transport assignment by
+    last_pose_offset: 1.0 # meters to rearward offset last pose in transport assignment by
+    source_pose_offset: 0.3 # meters to rearward offset source pose in transport assignment by
     transport_plan_max_calls: 100 # Number of calls to REPLAN_TRANSPORT before a replan is triggered
     boundary_min: 0.7 # max pose for x-y in sitemap frame
     boundary_max: 4.3 # min pose for x-y in sitemap frame

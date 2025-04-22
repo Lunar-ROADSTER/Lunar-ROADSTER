@@ -6,6 +6,7 @@
 #include <cg_msgs/srv/site_map.hpp> // Service for receiving SiteMap height data
 #include <cg_msgs/srv/update_trajectory.hpp>   // Service for updating current trajectory
 #include <cg_msgs/srv/enable_worksystem.hpp> // Service to enable/disable worksystem controller
+#include <cg_msgs/msg/actuator_command.hpp> // Publisher for tool height
 #include <nav_msgs/msg/odometry.hpp> // Callback for pose
 #include <tf2/LinearMath/Matrix3x3.h> // For converting from nav_msgs quaternions to rpy
 #include <limits> // used for infinity values
@@ -44,6 +45,7 @@
 
 // Debug
 #include <std_msgs/msg/bool.hpp> // Stepping through planning debug
+#include "std_msgs/msg/float64.hpp"
 
 namespace cg {
 namespace planning {
@@ -61,6 +63,9 @@ private:
   rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr viz_state_l1_goals_pub_;
   rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr viz_agent_pub_;
   rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr viz_curr_goal_pub_;
+
+  rclcpp::Publisher<cg_msgs::msg::ActuatorCommand>::SharedPtr cmd_pub_;
+  rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr tool_height_pub_;
 
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr global_robot_state_sub_;
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_robot_state_sub_;
@@ -98,6 +103,9 @@ private:
     const rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::WrappedResult &result);
   void handleNavigationResponse(
     rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr);
+
+  /* Tool */
+  void handleToolTrajectory(std::string &current_goalPose_type);
 
   /* Callbacks */
   int fsm_timer_callback_ms_;
@@ -138,6 +146,9 @@ private:
 
   bool nav_transport_ = false;
   bool enable_worksystem_ = false;
+  double tool_height_ = 100.0;
+  int tool_counter_ = 0;
+  bool wait_for_tool_ = false;
 
   /* Map parameters */
   size_t map_height;

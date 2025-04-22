@@ -10,8 +10,7 @@ namespace planning {
 class GetWorksystemTrajectory : public FSM {
 
 public:
-  // void runState(const bool worksystem_enabled, bool &updated_trajectory, bool &calculated_trajectory);
-  void runState();
+  void runState(std::string &current_goalPose_type, bool &wait_for_tool_);
   
 }; // class State
 

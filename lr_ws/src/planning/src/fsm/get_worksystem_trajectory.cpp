@@ -4,23 +4,16 @@
 namespace cg {
 namespace planning {
 
-// void GetWorksystemTrajectory::runState(const bool worksystem_enabled, bool &updated_trajectory, bool &calculated_trajectory)
-void GetWorksystemTrajectory::runState()
+void GetWorksystemTrajectory::runState(std::string &current_goalPose_type, bool &wait_for_tool_)
 {
   std::cout << "GET_WORKSYSTEM_TRAJECTORY" << std::endl;
 
-  // if (worksystem_enabled && updated_trajectory) {
-  //   // Reset state flags for next trajectory iteration, if sent and enabled correctly
-  //   updated_trajectory = false;
-  //   calculated_trajectory = false;
+  std::cout << "current_goalPose_type = " << current_goalPose_type << std::endl;
 
-  //   // Update shared current state and the precursing signal if trajectory was sent and worksystem is now enabled
-  //   pre_signal_ = Signal::FOLLOW_TRAJECTORY;
-  //   curr_state_l0_ = StateL0::FOLLOWING_TRAJECTORY;
-  // }
-
-  pre_signal_ = Signal::FOLLOW_TRAJECTORY;
-  curr_state_l0_ = StateL0::FOLLOWING_TRAJECTORY;
+  if (!wait_for_tool_) {
+    pre_signal_ = Signal::FOLLOW_TRAJECTORY;
+    curr_state_l0_ = StateL0::FOLLOWING_TRAJECTORY;
+  }
 }
 
 } // planning namespace

@@ -37,13 +37,13 @@ void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssign
 
 
   // Set up sink offset pose
-  float sink_pose_offset = 0.4;
+  float sink_pose_offset = 0.15;
   double sink_offset_pose_x = sink_pose.pt.x - sink_pose_offset * std::cos(yaw);
   double sink_offset_pose_y = sink_pose.pt.y - sink_pose_offset * std::sin(yaw);
   sink_pose = cg::planning::create_pose2d(sink_offset_pose_x, sink_offset_pose_y, yaw);
 
    //Calculate distance between source and sink 
-  double manipulation_distance = cg::planning::euclidean_distance(source_pose.pt, sink_pose.pt);
+  double manipulation_distance = cg::planning::euclidean_distance(source_pose.pt, sink_pose.pt) + 0.1;
 
   // Set up source backblading pose 
   double backblading_pose_x = sink_pose.pt.x + manipulation_distance * std::cos(yaw);
@@ -77,6 +77,14 @@ void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssign
     }
   }
 
+  // Create new sink for backblading full crater 
+  float new_sink_offset = 0.7;
+  double new_sink_x = backblading_pose_x - new_sink_offset * std::cos(yaw); 
+  double new_sink_y = backblading_pose_y - new_sink_offset * std::sin(yaw); 
+  cg_msgs::msg::Pose2D sink_backblading = cg::planning::create_pose2d(new_sink_x, new_sink_y, yaw);
+
+
+
   // Create final poses
   cg_msgs::msg::Pose2D offset_pose = cg::planning::create_pose2d(offset_pose_x, offset_pose_y, yaw);
 
@@ -90,13 +98,13 @@ void TransportPlanner::makeGoalsFromAssignment(const std::vector<TransportAssign
   goalPoses.push_back(source_pose);
   goalPoses.push_back(sink_pose);
   goalPoses.push_back(source_pose_backblading);
-  goalPoses.push_back(sink_pose); 
+  goalPoses.push_back(sink_backblading); 
   goalPoses.push_back(offset_pose);
   goalPose_types.push_back("offset");
   goalPose_types.push_back("source");
   goalPose_types.push_back("sink");
   goalPose_types.push_back("source");
-  goalPose_types.push_back("sink");
+  goalPose_types.push_back("sink_backblade");
   goalPose_types.push_back("offset");
 
 }
@@ -165,7 +173,7 @@ void TransportPlanner::getGoalPoseType(std::vector<std::string> &goalPose_types)
     "source",   // Pose 1
     "sink",     // Pose 2
     "source",   // Pose 3 (backblading)
-    "sink",     // Pose 4
+    "sink_backblade",     // Pose 4
     "offset"    // Pose 5 (exit)
   };
 }

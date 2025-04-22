@@ -17,8 +17,11 @@ void GoalsRemaining::runState(std::vector<cg_msgs::msg::Pose2D> &current_goal_po
     current_goalPose_types.erase(current_goalPose_types.begin());
 
     // Change state to follow trajectory
-    pre_signal_ = Signal::FOLLOW_TRAJECTORY;
-    curr_state_l0_ = StateL0::FOLLOWING_TRAJECTORY;
+    pre_signal_ = Signal::YES;
+    curr_state_l0_ = StateL0::GET_WORKSYSTEM_TRAJECTORY;
+
+    // pre_signal_ = Signal::FOLLOW_TRAJECTORY;
+    // curr_state_l0_ = StateL0::FOLLOWING_TRAJECTORY;
     return;
   }
 
