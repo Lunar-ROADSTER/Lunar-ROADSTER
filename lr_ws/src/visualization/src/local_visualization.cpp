@@ -13,6 +13,8 @@ ElevationGridMapNode::ElevationGridMapNode() : Node("local_visualization_node")
 
     grid_map_pub_ = this->create_publisher<grid_map_msgs::msg::GridMap>("/local_grid_map", 100);
 
+    elevation_data_pub_ = this->create_publisher<std_msgs::msg::Float64MultiArray>("/mean_rmse_slope", 10);
+
     RCLCPP_INFO(this->get_logger(), "Local visualization wrapper initialized");
 }
 
@@ -21,9 +23,9 @@ void ElevationGridMapNode::occupancyCallback(const nav_msgs::msg::OccupancyGrid:
 {
 
   bool publish_grid_map = publish_callback_.exchange(false);
-  // if (!publish_grid_map) {
-  //   return;
-  // }
+  if (!publish_grid_map) {
+    return;
+  }
   
   // Convert map from OccupancyGrid format to GridMap format
   const int width = msg->info.width;
@@ -85,13 +87,56 @@ void ElevationGridMapNode::occupancyCallback(const nav_msgs::msg::OccupancyGrid:
         max_gradient = gradient;
     }
   }
-  
-  // RCLCPP_INFO(this->get_logger(), "Maximum gradient (slope): %.3f m/m", max_gradient);
 
   // Convert max gradient to degrees
   double slope_deg = std::atan(max_gradient) * 180.0 / M_PI;
+
+  // Calculate mean elevation
+  double elevation_sum = 0.0;
+  int valid_cell_count = 0;
+
+  for (grid_map::GridMapIterator it(map); !it.isPastEnd(); ++it)
+  {
+    float elevation = map.at("elevation", *it);
+    if (!std::isnan(elevation))
+    {
+      elevation_sum += elevation;
+      valid_cell_count++;
+    }
+  }
+
+  double mean_elevation = 0.0;
+  if (valid_cell_count > 0)
+    mean_elevation = elevation_sum / valid_cell_count;
+
+  // Calculate RMSE from mean
+  double sum_squared_error = 0.0;
+
+  for (grid_map::GridMapIterator it(map); !it.isPastEnd(); ++it)
+  {
+    float elevation = map.at("elevation", *it);
+    if (!std::isnan(elevation))
+    {
+      double error = elevation - mean_elevation;
+      sum_squared_error += error * error;
+    }
+  }
+
+  double rmse = 0.0;
+  if (valid_cell_count > 0)
+    rmse = std::sqrt(sum_squared_error / valid_cell_count);
+
+  // Change to cm
+  mean_elevation = mean_elevation * 100.0;
+  rmse = rmse * 100.0;
+
+  RCLCPP_INFO(this->get_logger(), "Mean elevation: %.2f cm", mean_elevation);
+  RCLCPP_INFO(this->get_logger(), "Elevation RMSE: %.2f cm", rmse);
   RCLCPP_INFO(this->get_logger(), "Maximum slope angle: %.2f degrees", slope_deg);
 
+  std_msgs::msg::Float64MultiArray elevation_msg;
+  elevation_msg.data = {mean_elevation, rmse, slope_deg};
+  elevation_data_pub_->publish(elevation_msg);
 }
 
 void ElevationGridMapNode::publishLocalMapCallback(const std_msgs::msg::Bool::SharedPtr msg) {

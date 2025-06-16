@@ -7,7 +7,10 @@
 #include <grid_map_msgs/msg/grid_map.hpp>
 #include <grid_map_ros/GridMapRosConverter.hpp>
 #include <std_msgs/msg/bool.hpp> 
+#include <std_msgs/msg/float64_multi_array.hpp>
 #include <atomic>
+#include <iostream>
+#include <iomanip>
 
 class ElevationGridMapNode : public rclcpp::Node
 {
@@ -18,6 +21,7 @@ class ElevationGridMapNode : public rclcpp::Node
 
         // Publishers
         rclcpp::Publisher<grid_map_msgs::msg::GridMap>::SharedPtr grid_map_pub_;
+        rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr elevation_data_pub_;
 
         // Functions
         void occupancyCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg);

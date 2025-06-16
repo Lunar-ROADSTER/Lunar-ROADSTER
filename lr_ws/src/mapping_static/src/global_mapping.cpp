@@ -52,7 +52,7 @@ void WorldModel::configureMaps(){
     this->global_map_.info.resolution = MAP_RESOLUTION;
     this->global_map_.info.width = MAP_DIMENSION/MAP_RESOLUTION;
     this->global_map_.info.height = MAP_DIMENSION/MAP_RESOLUTION;
-    this->global_map_.info.origin.position.x = 0.0;
+    this->global_map_.info.origin.position.x = -0.15;
     this->global_map_.info.origin.position.y = 0.0;
 
     filtered_global_map_.header.frame_id = "map";

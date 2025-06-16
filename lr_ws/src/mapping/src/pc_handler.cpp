@@ -42,6 +42,7 @@ void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::S
         {
             cam2map_transform = tf_buffer_->lookupTransform("base_link","camera_depth_optical_frame",tf2::TimePointZero, tf2::durationFromSec(1));
             RCLCPP_INFO(this->get_logger(), "Transform found");
+
         }
         catch (tf2::TransformException& ex)
         {
@@ -49,7 +50,19 @@ void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::S
             return;
         }
     }
-  
+
+    // DEBUGGER
+    // RCLCPP_INFO(this->get_logger(), "Transform Translation:");
+    // RCLCPP_INFO(this->get_logger(), "  x: %.6f", cam2map_transform.transform.translation.x);
+    // RCLCPP_INFO(this->get_logger(), "  y: %.6f", cam2map_transform.transform.translation.y);
+    // RCLCPP_INFO(this->get_logger(), "  z: %.6f", cam2map_transform.transform.translation.z);
+
+    // RCLCPP_INFO(this->get_logger(), "Transform Rotation (quaternion):");
+    // RCLCPP_INFO(this->get_logger(), "  x: %.6f", cam2map_transform.transform.rotation.x);
+    // RCLCPP_INFO(this->get_logger(), "  y: %.6f", cam2map_transform.transform.rotation.y);
+    // RCLCPP_INFO(this->get_logger(), "  z: %.6f", cam2map_transform.transform.rotation.z);
+    // RCLCPP_INFO(this->get_logger(), "  w: %.6f", cam2map_transform.transform.rotation.w);
+
     // convert x,y,z,w to roll, pitch, yaw
     tf2::Quaternion q(cam2map_transform.transform.rotation.x, cam2map_transform.transform.rotation.y, cam2map_transform.transform.rotation.z, cam2map_transform.transform.rotation.w);
     tf2::Matrix3x3 m(q);

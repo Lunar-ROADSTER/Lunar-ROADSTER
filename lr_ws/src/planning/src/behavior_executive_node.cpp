@@ -68,14 +68,14 @@ BehaviorExecutive::BehaviorExecutive() : Node("behavior_executive_node")
   this->get_parameter("width", map_width);
   this->declare_parameter<float>("resolution", 0.1);
   this->get_parameter("resolution", map_resolution);
-  // this->declare_parameter<std::string>("design_topo_filepath", "/root/Lunar_ROADSTER/lr_ws/src/planning/saved_maps/zeros_height_map.csv");
-  // this->get_parameter("design_topo_filepath", design_topo_filepath);
-  // this->declare_parameter<std::string>("site_topo_filepath", "/root/Lunar_ROADSTER/lr_ws/src/planning/saved_maps/elevation_map_1d.csv");
-  // this->get_parameter("site_topo_filepath", site_topo_filepath);
-  this->declare_parameter<std::string>("design_topo_filepath", "/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/saved_maps/zeros_height_map.csv");
+  this->declare_parameter<std::string>("design_topo_filepath", "/root/Lunar_ROADSTER/lr_ws/src/planning/saved_maps/zeros_height_map.csv");
   this->get_parameter("design_topo_filepath", design_topo_filepath);
-  this->declare_parameter<std::string>("site_topo_filepath", "/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/saved_maps/elevation_map_1d.csv");
+  this->declare_parameter<std::string>("site_topo_filepath", "/root/Lunar_ROADSTER/lr_ws/src/planning/saved_maps/elevation_map_1d.csv");
   this->get_parameter("site_topo_filepath", site_topo_filepath);
+  // this->declare_parameter<std::string>("design_topo_filepath", "/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/saved_maps/zeros_height_map.csv");
+  // this->get_parameter("design_topo_filepath", design_topo_filepath);
+  // this->declare_parameter<std::string>("site_topo_filepath", "/home/williamfbx/Lunar-ROADSTER/lr_ws/src/planning/saved_maps/elevation_map_1d.csv");
+  // this->get_parameter("site_topo_filepath", site_topo_filepath);
   float xTransform;
   float yTransform;
   this->declare_parameter<float>("xTransform", 0.0);
@@ -419,10 +419,12 @@ void BehaviorExecutive::handleToolTrajectory(std::string &current_goalPose_type)
     tool_height_ = 100.0;
   } else if (current_goalPose_type == "sink") {
     tool_height_ = 10.0;
-    handleLocalMap(false);
   } else if (current_goalPose_type == "sink_backblade") {
     tool_height_ = 5.0;
-    handleLocalMap(false);
+  } else if (current_goalPose_type == "offset_backblade") {
+    if (tool_counter_ >= 10) {
+      tool_height_ = 100.0;
+    }
   } else {
     RCLCPP_WARN(this->get_logger(), "[Tool] Unknown goalPose_type: %s. Defaulting tool position to 100.0", current_goalPose_type.c_str());
     tool_height_ = 100.0;
@@ -438,6 +440,15 @@ void BehaviorExecutive::handleToolTrajectory(std::string &current_goalPose_type)
 
   wait_for_tool_ = true;
   tool_counter_++;
+
+  // Send local visualization command
+  if (current_goalPose_type == "sink" && tool_counter_ == 20) {
+    handleLocalMap(false);
+  }
+
+  if (current_goalPose_type == "offset_backblade" && tool_counter_ == 5) {
+    handleLocalMap(false);
+  }
 
   // Wait 30 ticks for the tool planner
   if (tool_counter_ >= 30) {

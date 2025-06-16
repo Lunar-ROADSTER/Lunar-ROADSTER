@@ -92,5 +92,5 @@ def generate_launch_description():
         # localization_launch,
         # planning_launch,
         # rviz_static_map_node,
-        rviz_local_map_node,
+        # rviz_local_map_node,
     ])

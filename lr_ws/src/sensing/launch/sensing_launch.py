@@ -38,5 +38,5 @@ def generate_launch_description():
         # camera_model_arg,
         # zed_launch,
         realsense_launch,
-        imu_launch
+        # imu_launch
     ])

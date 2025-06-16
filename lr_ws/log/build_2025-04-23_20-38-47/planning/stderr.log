@@ -1,0 +1,11 @@
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/fsm/following_trajectory.cpp:[m[K In member function ‘[01m[Kbool cg::planning::FollowingTrajectory::runState(cg_msgs::msg::Pose2D&, bool, std::string&)[m[K’:
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/fsm/following_trajectory.cpp:12:3:[m[K [01;31m[Kerror: [m[K‘[01m[KMove[m[K’ was not declared in this scope; did you mean ‘[01m[Kremove[m[K’?
+   12 |   [01;31m[KMove[m[K to next state if goal is reached
+      |   [01;31m[K^~~~[m[K
+      |   [32m[Kremove[m[K
+[01m[K/root/Lunar_ROADSTER/lr_ws/src/planning/src/fsm/following_trajectory.cpp:7:88:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kgoal_reached[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+    7 | bool FollowingTrajectory::runState(cg_msgs::msg::Pose2D &current_goal_pose, [01;35m[Kconst bool goal_reached[m[K, std::string &current_goalPose_type) {
+      |                                                                             [01;35m[K~~~~~~~~~~~^~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/behavior_executive_node.dir/build.make:230: CMakeFiles/behavior_executive_node.dir/src/fsm/following_trajectory.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/behavior_executive_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
