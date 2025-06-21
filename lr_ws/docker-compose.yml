@@ -1,0 +1,71 @@
+services:
+  lr-dev-full-build-linux:
+    build:
+      context: ./                             # Location of the Dockerfile (Build context is lr_ws)
+      dockerfile: ./docker/lrdev_linux.dockerfile   # Dockerfile name
+    container_name: lunar_roadster_dev_full_linux
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws    # Sync the workspace between host and container
+      - /dev/:/dev/
+    privileged: true
+    environment:
+      - TERM=xterm-256color                   # Enable colors in terminal
+    tty: true                                 # use terminal, i.e. the `-t` flag
+    network_mode: "host"
+    stdin_open: true                          # allow terminal input, i.e. the `-i` flag
+    working_dir: /root/Lunar_ROADSTER/lr_ws   # Set the working directory in the container
+    ports:
+      - 5910:5910                            # <external port>:<container port>
+      - 9090:9090                             # Websocket for health monitoring via rosbridge_suite
+
+
+  lr-dev-full-build-jetson:
+    build:
+      context: ./                            
+      dockerfile: ./docker/lrdev_jetson.dockerfile   
+    container_name: lunar_roadster_dev_full_jetson_cuda
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws    
+      - /dev/:/dev/
+    privileged: true
+    environment:
+      - TERM=xterm-256color                  
+    tty: true    
+    network_mode: "host"
+    stdin_open: true                         
+    working_dir: /root/Lunar_ROADSTER/lr_ws   
+    ports:
+      - 5910:5910
+      - 9090:9090
+                          
+  
+  lr-dev-linux:
+    image: bhaswantha/lr-dev:v1.0.5
+    privileged: true
+    container_name: lunar_roadster_dev_linux
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws
+      - /dev/:/dev/
+    tty: true
+    network_mode: "host"
+    stdin_open: true
+    working_dir: /root/Lunar_ROADSTER/lr_ws
+    ports:
+      - 5910:5910
+      - 9090:9090
+
+
+  lr-dev-jetson:
+    image: bhaswantha/lr-dev-jetson:v1.1.6 # bhaswantha/lr-dev-jetson:v1.1.3, 1.1.4, 1.1.5
+    privileged: true
+    container_name: lunar_roadster_dev_jetson
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws
+      - /dev/:/dev/
+    tty: true
+    network_mode: "host"
+    stdin_open: true
+    working_dir: /root/Lunar_ROADSTER/lr_ws
+    ports:
+      - 5910:5910
+      - 9090:9090

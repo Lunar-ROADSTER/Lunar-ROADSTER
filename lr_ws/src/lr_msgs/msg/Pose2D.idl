@@ -1,0 +1,11 @@
+#include "lr_msgs/msg/Point2D.idl"
+
+module lr_msgs {
+  module msg {
+    struct Pose2D {
+      lr_msgs::msg::Point2D pt;
+      @default(value = 0.0)
+      double yaw; // [rad], continuous in global map frame
+    };
+  };
+};
