@@ -1,8 +1,3 @@
-######
-# Initially written by Alex Pletta (apletta@andrew.cmu.edu)
-# Modified for SLAM project by Boxiang Fu (boxiangf@andrew.cmu.edu)
-######
-
 cmake_minimum_required(VERSION 3.8)
 project(realsense)
 
