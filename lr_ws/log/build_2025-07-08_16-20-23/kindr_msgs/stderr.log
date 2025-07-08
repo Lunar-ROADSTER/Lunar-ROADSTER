@@ -1,0 +1,59 @@
+Traceback (most recent call last):
+  File "/opt/ros/humble/lib/rosidl_typesupport_cpp/rosidl_typesupport_cpp", line 6, in <module>
+    from rosidl_typesupport_cpp import generate_cpp
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_typesupport_cpp/__init__.py", line 15, in <module>
+Traceback (most recent call last):
+  File "/opt/ros/humble/lib/rosidl_typesupport_fastrtps_cpp/rosidl_typesupport_fastrtps_cpp", line 6, in <module>
+gmake[2]: *** wait: No child processes.  Stop.
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[2]: *** wait: No child processes.  Stop.
+    from rosidl_typesupport_fastrtps_cpp import generate_cpp
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_typesupport_fastrtps_cpp/__init__.py", line 15, in <module>
+    from rosidl_cmake import generate_files
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_cmake/__init__.py", line 18, in <module>
+Traceback (most recent call last):
+  File "/opt/ros/humble/lib/rosidl_typesupport_introspection_cpp/rosidl_typesupport_introspection_cpp", line 6, in <module>
+    from rosidl_typesupport_introspection_cpp import generate_cpp
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_typesupport_introspection_cpp/__init__.py", line 15, in <module>
+    import pathlib
+  File "/usr/lib/python3.10/pathlib.py", line 1, in <module>
+    from rosidl_cmake import generate_files
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_cmake/__init__.py", line 22, in <module>
+    import em
+  File "/usr/lib/python3/dist-packages/em.py", line 20, in <module>
+    import fnmatch
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+    import inspect
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1010, in get_code
+  File "<frozen importlib._bootstrap>", line 246, in _verbose_message
+KeyboardInterrupt
+  File "<frozen importlib._bootstrap_external>", line 1012, in get_code
+  File "<frozen importlib._bootstrap_external>", line 672, in _compile_bytecode
+KeyboardInterrupt
+gmake[2]: *** [CMakeFiles/kindr_msgs__rosidl_typesupport_cpp.dir/build.make:142: rosidl_typesupport_cpp/kindr_msgs/msg/vector_at_position__type_support.cpp] Interrupt
+gmake[1]: *** [CMakeFiles/Makefile2:394: CMakeFiles/kindr_msgs__rosidl_typesupport_cpp.dir/all] Interrupt
+    from rosidl_cmake import generate_files
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_cmake/__init__.py", line 22, in <module>
+    import em
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+gmake[2]: *** [CMakeFiles/kindr_msgs__rosidl_typesupport_introspection_cpp.dir/build.make:144: rosidl_typesupport_introspection_cpp/kindr_msgs/msg/detail/vector_at_position__rosidl_typesupport_introspection_cpp.hpp] Interrupt
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1012, in get_code
+  File "<frozen importlib._bootstrap_external>", line 672, in _compile_bytecode
+gmake[1]: *** [CMakeFiles/Makefile2:368: CMakeFiles/kindr_msgs__rosidl_typesupport_introspection_cpp.dir/all] Interrupt
+KeyboardInterrupt
+gmake[2]: *** [CMakeFiles/kindr_msgs__rosidl_typesupport_fastrtps_cpp.dir/build.make:144: rosidl_typesupport_fastrtps_cpp/kindr_msgs/msg/detail/dds_fastrtps/vector_at_position__type_support.cpp] Interrupt
+gmake[1]: *** [CMakeFiles/Makefile2:342: CMakeFiles/kindr_msgs__rosidl_typesupport_fastrtps_cpp.dir/all] Interrupt
+gmake[1]: *** wait: No child processes.  Stop.
+gmake[1]: *** Waiting for unfinished jobs....
+gmake[1]: *** wait: No child processes.  Stop.
+gmake: *** [Makefile:146: all] Error 2

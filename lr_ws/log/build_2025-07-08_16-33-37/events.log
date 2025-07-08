@@ -1,0 +1,61 @@
+[0.000000] (-) TimerEvent: {}
+[0.000192] (-) JobUnselected: {'identifier': 'arduino'}
+[0.000227] (-) JobUnselected: {'identifier': 'elevation_mapping'}
+[0.000252] (-) JobUnselected: {'identifier': 'grid_map'}
+[0.000274] (-) JobUnselected: {'identifier': 'grid_map_cmake_helpers'}
+[0.000413] (-) JobUnselected: {'identifier': 'grid_map_core'}
+[0.000483] (-) JobUnselected: {'identifier': 'grid_map_costmap_2d'}
+[0.000518] (-) JobUnselected: {'identifier': 'grid_map_cv'}
+[0.000551] (-) JobUnselected: {'identifier': 'grid_map_demos'}
+[0.000578] (-) JobUnselected: {'identifier': 'grid_map_filters'}
+[0.000629] (-) JobUnselected: {'identifier': 'grid_map_loader'}
+[0.000651] (-) JobUnselected: {'identifier': 'grid_map_msgs'}
+[0.000684] (-) JobUnselected: {'identifier': 'grid_map_octomap'}
+[0.000737] (-) JobUnselected: {'identifier': 'grid_map_pcl'}
+[0.000771] (-) JobUnselected: {'identifier': 'grid_map_ros'}
+[0.000791] (-) JobUnselected: {'identifier': 'grid_map_rviz_plugin'}
+[0.000811] (-) JobUnselected: {'identifier': 'grid_map_sdf'}
+[0.000870] (-) JobUnselected: {'identifier': 'grid_map_visualization'}
+[0.000894] (-) JobUnselected: {'identifier': 'kindr'}
+[0.000913] (-) JobUnselected: {'identifier': 'kindr_msgs'}
+[0.000935] (-) JobUnselected: {'identifier': 'kindr_ros'}
+[0.001047] (-) JobUnselected: {'identifier': 'launcher'}
+[0.001082] (-) JobUnselected: {'identifier': 'lr_msgs'}
+[0.001115] (-) JobUnselected: {'identifier': 'motion_control'}
+[0.001128] (-) JobUnselected: {'identifier': 'realsense'}
+[0.001136] (-) JobUnselected: {'identifier': 'realsense2_camera'}
+[0.001144] (-) JobUnselected: {'identifier': 'realsense2_camera_msgs'}
+[0.001151] (-) JobUnselected: {'identifier': 'realsense2_description'}
+[0.001158] (-) JobUnselected: {'identifier': 'sensing'}
+[0.001166] (-) JobUnselected: {'identifier': 'visualization'}
+[0.001175] (localization) JobQueued: {'identifier': 'localization', 'dependencies': OrderedDict([('lr_msgs', '/root/Lunar_ROADSTER/lr_ws/install/lr_msgs')])}
+[0.001187] (localization) JobStarted: {'identifier': 'localization'}
+[0.011407] (localization) JobProgress: {'identifier': 'localization', 'progress': 'cmake'}
+[0.012131] (localization) JobProgress: {'identifier': 'localization', 'progress': 'build'}
+[0.012572] (localization) Command: {'cmd': ['/usr/local/bin/cmake', '--build', '/root/Lunar_ROADSTER/lr_ws/build/localization', '--', '-j16', '-l16'], 'cwd': '/root/Lunar_ROADSTER/lr_ws/build/localization', 'env': OrderedDict([('HOSTNAME', 'Griddle'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/root/Lunar_ROADSTER/lr_ws/install/lr_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('ROS_PYTHON_VERSION', '3'), ('WORKSPACE', '/root/Lunar_ROADSTER/lr_ws'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/lr_msgs:/opt/ros/humble'), ('DEBIAN_FRONTEND', 'noninteractive'), ('PWD', '/root/Lunar_ROADSTER/lr_ws/build/localization'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/root/Lunar_ROADSTER/lr_ws/install/lr_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/Lunar_ROADSTER/lr_ws/install/lr_msgs:/opt/ros/humble')]), 'shell': False}
+[0.043176] (localization) StdoutLine: {'line': b'[  9%] \x1b[32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o\x1b[0m\n'}
+[0.043417] (localization) StdoutLine: {'line': b'[ 18%] \x1b[32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o\x1b[0m\n'}
+[0.045895] (localization) StdoutLine: {'line': b'[ 36%] Built target kalman_filter_linear\n'}
+[0.051851] (localization) StdoutLine: {'line': b'[ 63%] Built target imu_tf_publisher\n'}
+[0.061778] (localization) StdoutLine: {'line': b'[ 90%] Built target slip_estimate_node\n'}
+[0.099336] (-) TimerEvent: {}
+[0.199635] (-) TimerEvent: {}
+[0.299974] (-) TimerEvent: {}
+[0.320847] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3\x1b[m\x1b[K:\n'}
+[0.321163] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:15:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kfatal error: \x1b[m\x1b[Klr_msgs/msg/rover_command.hpp: No such file or directory\n'}
+[0.321260] (localization) StderrLine: {'line': b'   15 | #include \x1b[01;31m\x1b[K"lr_msgs/msg/rover_command.hpp"\x1b[m\x1b[K\n'}
+[0.321332] (localization) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[0.321398] (localization) StderrLine: {'line': b'compilation terminated.\n'}
+[0.321465] (localization) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:42\x1b[m\x1b[K:\n'}
+[0.321527] (localization) StderrLine: {'line': b'\x1b[01m\x1b[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:15:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kfatal error: \x1b[m\x1b[Klr_msgs/msg/rover_command.hpp: No such file or directory\n'}
+[0.321604] (localization) StderrLine: {'line': b'   15 | #include \x1b[01;31m\x1b[K"lr_msgs/msg/rover_command.hpp"\x1b[m\x1b[K\n'}
+[0.321661] (localization) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[0.321716] (localization) StderrLine: {'line': b'compilation terminated.\n'}
+[0.324503] (localization) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:76: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o] Error 1\n'}
+[0.324676] (localization) StderrLine: {'line': b'gmake[2]: *** Waiting for unfinished jobs....\n'}
+[0.324766] (localization) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:90: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o] Error 1\n'}
+[0.324903] (localization) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/ts_prism_transformer.dir/all] Error 2\n'}
+[0.325086] (localization) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[0.328226] (localization) CommandEnded: {'returncode': 2}
+[0.374943] (localization) JobEnded: {'identifier': 'localization', 'rc': 2}
+[0.375674] (-) EventReactorShutdown: {}

@@ -1,0 +1,28 @@
+[0.013s] Invoking command in '/root/Lunar_ROADSTER/lr_ws/build/localization': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lr_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lr_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/lr_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/lr_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/localization -- -j16 -l16
+[0.038s] [35m[1mConsolidate compiler generated dependencies of target kalman_filter_linear[0m
+[0.039s] [35m[1mConsolidate compiler generated dependencies of target imu_tf_publisher[0m
+[0.042s] [ 18%] [32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o[0m
+[0.042s] [ 18%] [32mBuilding CXX object CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o[0m
+[0.047s] [ 36%] Built target kalman_filter_linear
+[0.054s] [ 63%] Built target imu_tf_publisher
+[0.056s] [ 72%] [32mBuilding CXX object CMakeFiles/slip_estimate_node.dir/src/slip_estimate_node.cpp.o[0m
+[0.056s] [ 81%] [32mBuilding CXX object CMakeFiles/slip_estimate_node.dir/src/slip_estimate_main.cpp.o[0m
+[0.355s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer.cpp:42[m[K:
+[0.355s] [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:15:10:[m[K [01;31m[Kfatal error: [m[Klr_msgs/msg/rover_command.hpp: No such file or directory
+[0.355s]    15 | #include [01;31m[K"lr_msgs/msg/rover_command.hpp"[m[K
+[0.355s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.355s] In file included from [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/src/ts_prism_transformer_main.cpp:3[m[K:
+[0.355s] [01m[K/root/Lunar_ROADSTER/lr_ws/src/localization/include/localization/ts_prism_transformer.hpp:15:10:[m[K [01;31m[Kfatal error: [m[Klr_msgs/msg/rover_command.hpp: No such file or directory
+[0.356s]    15 | #include [01;31m[K"lr_msgs/msg/rover_command.hpp"[m[K
+[0.356s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.356s] compilation terminated.
+[0.356s] compilation terminated.
+[0.359s] gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:90: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer.cpp.o] Error 1
+[0.359s] gmake[2]: *** Waiting for unfinished jobs....
+[0.359s] gmake[2]: *** [CMakeFiles/ts_prism_transformer.dir/build.make:76: CMakeFiles/ts_prism_transformer.dir/src/ts_prism_transformer_main.cpp.o] Error 1
+[0.359s] gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/ts_prism_transformer.dir/all] Error 2
+[0.359s] gmake[1]: *** Waiting for unfinished jobs....
+[9.089s] [ 90%] [32m[1mLinking CXX executable slip_estimate_node[0m
+[9.627s] [ 90%] Built target slip_estimate_node
+[9.628s] gmake: *** [Makefile:146: all] Error 2
+[9.630s] Invoked command in '/root/Lunar_ROADSTER/lr_ws/build/localization' returned '2': AMENT_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lr_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/root/Lunar_ROADSTER/lr_ws/install/lr_msgs:/opt/ros/humble LD_LIBRARY_PATH=/root/Lunar_ROADSTER/lr_ws/install/lr_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/root/Lunar_ROADSTER/lr_ws/install/lr_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/local/bin/cmake --build /root/Lunar_ROADSTER/lr_ws/build/localization -- -j16 -l16
