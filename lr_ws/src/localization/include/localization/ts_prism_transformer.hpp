@@ -10,9 +10,9 @@
 #include <tf2_ros/transform_listener.h>
 #include <tf2_ros/transform_broadcaster.h>
 #include <tf2_ros/buffer.h>
-#include "lx_msgs/action/calibrate_imu.hpp"
+#include "lr_msgs/action/calibrate_imu.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
-#include "lx_msgs/msg/rover_command.hpp"
+#include "lr_msgs/msg/rover_command.hpp"
 #include <Eigen/Eigen>
 #include <Eigen/Geometry>
 #include <math.h>
@@ -25,7 +25,7 @@ class TSPrismTransformer : public rclcpp::Node {
 
 public:
     TSPrismTransformer();
-    using CalibrateImu = lx_msgs::action::CalibrateImu;
+    using CalibrateImu = lr_msgs::action::CalibrateImu;
     using GoalHandleCalibrateImu = rclcpp_action::ServerGoalHandle<CalibrateImu>;
 
 private:
