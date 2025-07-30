@@ -15,7 +15,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(cg_msgs REQUIRED)
+find_package(lr_msgs REQUIRED)
 
 include_directories(include)
 
@@ -27,7 +27,7 @@ ament_target_dependencies(teleop_node
   rclcpp
   rclcpp_components
   sensor_msgs
-  cg_msgs
+  lr_msgs
 )
 
 if(BUILD_TESTING)
