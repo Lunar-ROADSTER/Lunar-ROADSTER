@@ -4,7 +4,7 @@
 
 int main(int argc, char * argv[]) {
     rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<cg::teleop::TeleopNode>());
+    rclcpp::spin(std::make_shared<lr::teleop::TeleopNode>());
     rclcpp::shutdown();
     return 0;
 }
