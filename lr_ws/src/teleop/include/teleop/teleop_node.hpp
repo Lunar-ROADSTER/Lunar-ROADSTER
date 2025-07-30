@@ -3,10 +3,10 @@
 
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/joy.hpp>
-#include <cg_msgs/msg/mux_mode.hpp>
-#include <cg_msgs/msg/actuator_command.hpp>
+#include <lr_msgs/msg/mux_mode.hpp>
+#include <lr_msgs/msg/actuator_command.hpp>
 
-namespace cg {
+namespace lr {
 namespace teleop {
 
 class TeleopNode : public rclcpp::Node {
@@ -16,18 +16,18 @@ public:
 
 private:
   /* Publishers and Subscribers */
-  rclcpp::Publisher<cg_msgs::msg::ActuatorCommand>::SharedPtr cmd_pub_;
+  rclcpp::Publisher<lr_msgs::msg::ActuatorCommand>::SharedPtr cmd_pub_;
   rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr joy_sub_;
   rclcpp::TimerBase::SharedPtr timer_;
-  rclcpp::Subscription<cg_msgs::msg::MuxMode>::SharedPtr mode_sub_;            // Multiplexer mode number
-  rclcpp::Subscription<cg_msgs::msg::ActuatorCommand>::SharedPtr act_cmd_sub_; // subscribe to the last actuator command so the relative teleop inputs start with existing state
+  rclcpp::Subscription<lr_msgs::msg::MuxMode>::SharedPtr mode_sub_;            // Multiplexer mode number
+  rclcpp::Subscription<lr_msgs::msg::ActuatorCommand>::SharedPtr act_cmd_sub_; // subscribe to the last actuator command so the relative teleop inputs start with existing state
 
   /* Callbacks */
   // Callback for joystick input
   void timerCallback();
   void joyCallback(const sensor_msgs::msg::Joy::SharedPtr msg);
-  void modeCallback(const cg_msgs::msg::MuxMode::SharedPtr msg);
-  void actCmdCallback(const cg_msgs::msg::ActuatorCommand::SharedPtr msg);
+  void modeCallback(const lr_msgs::msg::MuxMode::SharedPtr msg);
+  void actCmdCallback(const lr_msgs::msg::ActuatorCommand::SharedPtr msg);
 
   int joy_axis_drive_i_; // Axis index for forward/backward drive
   int joy_axis_steer_i_; // Axis index for steer data
@@ -47,6 +47,6 @@ private:
 
 
 }  // namespace teleop
-}  // namespace cg
+}  // namespace lr
 
 #endif  // TELEOP__TELEOP_NODE_HPP
