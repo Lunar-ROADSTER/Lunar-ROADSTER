@@ -1,7 +1,7 @@
 #ifndef MAPPING__MAP_POINT_HPP
 #define MAPPING__MAP_POINT_HPP
 
-namespace cg {
+namespace lr {
 namespace mapping {
 
 struct mapPoint {
@@ -12,6 +12,6 @@ struct mapPoint {
 };
 
 } // mapping namespace
-} // cg namespace
+} // lr namespace
 
 #endif // MAPPING__MAP_POINT_HPP

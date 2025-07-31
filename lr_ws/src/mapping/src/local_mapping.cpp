@@ -1,20 +1,61 @@
-/* Author: Boxiang Fu
- * Publishers:
- * - TODO
- * Services:
- * - TODO
+/**
+ * @file local_mapping.cpp
+ * @brief Builds and maintains a local elevation map centered on the robot using pointcloud data and Bayesian filtering.
  *
- * - Summary
- * - TODO
- * */
-
+ * This node constructs a local elevation occupancy grid in the robot’s `base_link` frame, primarily used for local terrain
+ * awareness, obstacle processing, or refinement of global mapping. Incoming transformed pointclouds are discretized into a
+ * 2D elevation grid, averaged, and filtered using a per-cell BayesFilter to reduce noise and enforce local consistency.
+ *
+ * The map is reset on each update, reflecting the dynamic and egocentric nature of the local terrain.
+ *
+ * @version 1.0.0
+ * @date 2025-07-27
+ *
+ * Maintainer: Boxiang (William) Fu
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
+ *
+ * Subscribers:
+ * - /mapping/transformed_pointcloud: [sensor_msgs::msg::PointCloud2] Local pointcloud data in robot-centric frame.
+ *
+ * Publishers:
+ * - /mapping/local_map: [nav_msgs::msg::OccupancyGrid] Raw unfiltered local elevation map. *(currently commented out)*
+ * - /mapping/filtered_local_map: [nav_msgs::msg::OccupancyGrid] Smoothed and filtered local elevation map.
+ *
+ * Parameters (Constants/macros used):
+ * - MAP_RESOLUTION: Grid resolution in meters.
+ * - MAP_DIMENSION: Width and height of the square grid.
+ * - ELEVATION_SCALE: Multiplier to convert real-world z-elevation into occupancy cell values.
+ *
+ * Main Components:
+ * - `setupCommunications()`: Initializes ROS 2 publishers, subscribers, and a TF listener.
+ * - `configureMaps()`: Configures the structure and size of the occupancy grid and initializes the Bayes filters.
+ * - `transformedPCLCallback()`: Triggers elevation fusion thread on new incoming pointcloud data.
+ * - `fuseMap()`: Resets the local map and fuses new pointcloud data into elevation values using spatial binning and filtering.
+ * - `filterMap()`: Applies a smoothing pass to limit steep elevation transitions across neighboring cells.
+ * - `publishLocalMap()`: Publishes the current filtered local map with thread-safe access.
+ * - `resetMaps()`: Clears elevation values in both raw and filtered maps.
+ *
+ * Elevation Filtering Model:
+ * - Applies a Bayesian update per cell:
+ *   \f[
+ *   z_t = \hat{z}_{t-1} + K_t(z_{meas} - \hat{z}_{t-1}), \quad K_t = \frac{\sigma^2_{t-1}}{\sigma^2_{t-1} + \sigma^2_t}
+ *   \f]
+ * - Neighbor elevation propagation is applied when gradient exceeds `ELEVATION_SCALE / 0.866`.
+ *
+ * Assumptions:
+ * - Pointclouds are centered in the robot’s frame and aligned with base_link.
+ * - The local map only represents the robot’s current vicinity and is overwritten on each update.
+ *
+ * @credit Based on standard occupancy grid and elevation filtering practices in planetary and mobile robotics.
+ */
 
 #include "mapping/local_mapping.hpp"
 
 #define GETMAXINDEX(x, y, width) ((y) * (width) + (x))
 
 WorldModel::WorldModel() : Node("local_mapping_node")
-{   
+{
 
     // Setup Communications
     setupCommunications();
@@ -26,11 +67,12 @@ WorldModel::WorldModel() : Node("local_mapping_node")
 }
 
 // Setup
-void WorldModel::setupCommunications(){
+void WorldModel::setupCommunications()
+{
     // QoS
     rclcpp::QoS qos(10);
     qos.transient_local();
-    qos.reliable(); 
+    qos.reliable();
     qos.keep_last(1);
 
     // Publishers
@@ -38,8 +80,8 @@ void WorldModel::setupCommunications(){
     filtered_local_map_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("mapping/filtered_local_map", qos);
 
     // Subscribers
-    transformed_pcl_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("mapping/transformed_pointcloud", 10, 
-                                                                                std::bind(&WorldModel::transformedPCLCallback, this, std::placeholders::_1));
+    transformed_pcl_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("mapping/transformed_pointcloud", 10,
+                                                                                           std::bind(&WorldModel::transformedPCLCallback, this, std::placeholders::_1));
 
     // Transform Listener
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
@@ -49,13 +91,14 @@ void WorldModel::setupCommunications(){
     timer_local_map_ = this->create_wall_timer(std::chrono::milliseconds(1000), std::bind(&WorldModel::publishLocalMap, this));
 }
 
-void WorldModel::configureMaps(){
+void WorldModel::configureMaps()
+{
 
     // Configuring occupancy grid
     this->local_map_.header.frame_id = "base_link";
     this->local_map_.info.resolution = MAP_RESOLUTION;
-    this->local_map_.info.width = MAP_DIMENSION/MAP_RESOLUTION;
-    this->local_map_.info.height = MAP_DIMENSION/MAP_RESOLUTION;
+    this->local_map_.info.width = MAP_DIMENSION / MAP_RESOLUTION;
+    this->local_map_.info.height = MAP_DIMENSION / MAP_RESOLUTION;
     this->local_map_.info.origin.position.x = 0.0;
     this->local_map_.info.origin.position.y = -1.0;
 
@@ -63,31 +106,35 @@ void WorldModel::configureMaps(){
     filtered_local_map_.info = local_map_.info;
 
     // Initialize bayes filter
-    for(size_t i = 0; i < local_map_.info.width*local_map_.info.height; i++){
+    for (size_t i = 0; i < local_map_.info.width * local_map_.info.height; i++)
+    {
         BayesFilter bf;
         bayes_filter_.push_back(bf);
     }
 
     // Initialize occupancy grid
-    this->local_map_.data.resize(local_map_.info.width*local_map_.info.height);
-    this->filtered_local_map_.data.resize(local_map_.info.width*local_map_.info.height);
-    for(size_t i = 0; i < this->local_map_.info.width*this->local_map_.info.height; i++){
+    this->local_map_.data.resize(local_map_.info.width * local_map_.info.height);
+    this->filtered_local_map_.data.resize(local_map_.info.width * local_map_.info.height);
+    for (size_t i = 0; i < this->local_map_.info.width * this->local_map_.info.height; i++)
+    {
         this->local_map_.data[i] = 0;
         this->filtered_local_map_.data[i] = 0;
     }
 }
 
-void WorldModel::resetMaps(){
+void WorldModel::resetMaps()
+{
 
-    for(size_t i = 0; i < this->local_map_.info.width*this->local_map_.info.height; i++){
+    for (size_t i = 0; i < this->local_map_.info.width * this->local_map_.info.height; i++)
+    {
         this->local_map_.data[i] = 0;
         this->filtered_local_map_.data[i] = 0;
     }
 }
-
 
 // Pointcloud callback
-void WorldModel::transformedPCLCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg){
+void WorldModel::transformedPCLCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
+{
     auto msg_copy = std::make_shared<sensor_msgs::msg::PointCloud2>(*msg);
     fuse_map_thread_ = std::thread(std::bind(&WorldModel::fuseMap, this, msg_copy));
 
@@ -95,7 +142,8 @@ void WorldModel::transformedPCLCallback(const sensor_msgs::msg::PointCloud2::Sha
     fuse_map_thread_.detach();
 }
 
-void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {
+void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
+{
 
     // Mutex guard
     std::lock_guard<std::mutex> lock(map_mutex_);
@@ -106,69 +154,81 @@ void WorldModel::fuseMap(const sensor_msgs::msg::PointCloud2::SharedPtr msg)  {
     pcl::PointCloud<pcl::PointXYZ>::Ptr cropped_cloud_local_map(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *cropped_cloud_local_map);
 
-    std::vector<double> elevation_values(local_map_.info.width*local_map_.info.height, 0.0);
-    std::vector<double> density_values(local_map_.info.width*local_map_.info.height, 0.0);
+    std::vector<double> elevation_values(local_map_.info.width * local_map_.info.height, 0.0);
+    std::vector<double> density_values(local_map_.info.width * local_map_.info.height, 0.0);
 
-    for(size_t i = 0; i < cropped_cloud_local_map->points.size(); i++){
-        int col_x =  int(cropped_cloud_local_map->points[i].x / local_map_.info.resolution );
+    for (size_t i = 0; i < cropped_cloud_local_map->points.size(); i++)
+    {
+        int col_x = int(cropped_cloud_local_map->points[i].x / local_map_.info.resolution);
         double offset_y = 1.0;
-        int row_y = int((cropped_cloud_local_map->points[i].y + offset_y) / local_map_.info.resolution );
+        int row_y = int((cropped_cloud_local_map->points[i].y + offset_y) / local_map_.info.resolution);
 
-        col_x = std::min(std::max(col_x, 0), int(local_map_.info.width-1));
-        row_y = std::min(std::max(row_y, 0), int(local_map_.info.height-1));
+        col_x = std::min(std::max(col_x, 0), int(local_map_.info.width - 1));
+        row_y = std::min(std::max(row_y, 0), int(local_map_.info.height - 1));
 
-        int local_idx = col_x + row_y*local_map_.info.width;
+        int local_idx = col_x + row_y * local_map_.info.width;
         double elev = cropped_cloud_local_map->points[i].z;
-        elevation_values[local_idx] += ELEVATION_SCALE*(elev);
+        elevation_values[local_idx] += ELEVATION_SCALE * (elev);
         density_values[local_idx] += 1.0;
     }
 
-    for(size_t i = 0; i < local_map_.info.width*local_map_.info.height; i++){
-        if(density_values[i] > 1.0){
-            local_map_.data[i] = int(elevation_values[i]/density_values[i]);
-            filtered_local_map_.data[i] = int(elevation_values[i]/density_values[i]);
+    for (size_t i = 0; i < local_map_.info.width * local_map_.info.height; i++)
+    {
+        if (density_values[i] > 1.0)
+        {
+            local_map_.data[i] = int(elevation_values[i] / density_values[i]);
+            filtered_local_map_.data[i] = int(elevation_values[i] / density_values[i]);
         }
     }
-    
+
     filterMap();
 }
 
-void WorldModel::filterMap(){
-    double gradient = ELEVATION_SCALE/0.866;
+void WorldModel::filterMap()
+{
+    double gradient = ELEVATION_SCALE / 0.866;
     // use globalmap to update bayes filter and then update filtered global map
-    for(size_t i = 0; i < local_map_.info.width*local_map_.info.height; i++){
-        if(local_map_.data[i] == 0){
+    for (size_t i = 0; i < local_map_.info.width * local_map_.info.height; i++)
+    {
+        if (local_map_.data[i] == 0)
+        {
             continue;
         }
         // RCLCPP_INFO(this->get_logger(), "Bayes Filter initialized5");
-        if(abs(filtered_local_map_.data[i] - local_map_.data[i]) > gradient){
+        if (abs(filtered_local_map_.data[i] - local_map_.data[i]) > gradient)
+        {
             bayes_filter_[i].updateCell(local_map_.data[i], 10.0);
             filtered_local_map_.data[i] = int(bayes_filter_[i].getCellElevation());
         }
 
-        // double 
+        // double
         // update cell of neighbours
-        int neighbour_deltas[8] = {-1, 1, -(int)local_map_.info.width, (int)local_map_.info.width, -(int)local_map_.info.width-1, -(int)local_map_.info.width+1, (int)local_map_.info.width-1, (int)local_map_.info.width+1};
+        int neighbour_deltas[8] = {-1, 1, -(int)local_map_.info.width, (int)local_map_.info.width, -(int)local_map_.info.width - 1, -(int)local_map_.info.width + 1, (int)local_map_.info.width - 1, (int)local_map_.info.width + 1};
         // only 4 neighbours
         // int neighbour_deltas[4] = {-1, 1, -local_map_.info.width, local_map_.info.width};
-        for(size_t j=0;j<4;j++){
-            size_t neighbour_idx = i+neighbour_deltas[j];
-            if(neighbour_idx > local_map_.info.width*local_map_.info.height){
+        for (size_t j = 0; j < 4; j++)
+        {
+            size_t neighbour_idx = i + neighbour_deltas[j];
+            if (neighbour_idx > local_map_.info.width * local_map_.info.height)
+            {
                 continue;
             }
             // else if(filtered_local_map_.data[neighbour_idx] == 0){
             //     continue;
-            // }   
-            if(abs(filtered_local_map_.data[i] - filtered_local_map_.data[neighbour_idx]) <= gradient){
+            // }
+            if (abs(filtered_local_map_.data[i] - filtered_local_map_.data[neighbour_idx]) <= gradient)
+            {
                 continue;
             }
             // else if(local_map_.data[i] > local_map_.data[neighbour_idx]){
-            else if(filtered_local_map_.data[i] > filtered_local_map_.data[neighbour_idx]){
+            else if (filtered_local_map_.data[i] > filtered_local_map_.data[neighbour_idx])
+            {
                 bayes_filter_[neighbour_idx].updateCell(filtered_local_map_.data[i] - gradient, 10000.0);
                 filtered_local_map_.data[neighbour_idx] = int(bayes_filter_[neighbour_idx].getCellElevation());
             }
             // // // else if(local_map_.data[i] < local_map_.data[neighbour_idx]){
-            else if(filtered_local_map_.data[i] < filtered_local_map_.data[neighbour_idx]){
+            else if (filtered_local_map_.data[i] < filtered_local_map_.data[neighbour_idx])
+            {
                 bayes_filter_[neighbour_idx].updateCell(filtered_local_map_.data[i] + gradient, 10000.0);
                 filtered_local_map_.data[neighbour_idx] = int(bayes_filter_[neighbour_idx].getCellElevation());
             }
@@ -176,13 +236,13 @@ void WorldModel::filterMap(){
     }
 }
 
-
 // Map publishers
-void WorldModel::publishLocalMap(){
+void WorldModel::publishLocalMap()
+{
 
     // Mutex guard
     std::lock_guard<std::mutex> lock(map_mutex_);
-    
+
     // local_map_publisher_->publish(local_map_);
     filtered_local_map_publisher_->publish(filtered_local_map_);
 }

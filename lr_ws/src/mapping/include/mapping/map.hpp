@@ -8,9 +8,9 @@
 #include <cassert> // checking for valid input
 #include <cmath> // math.floor function
 #include <mapping/map_util.hpp> // helper functions
-#include <cg_msgs/msg/point2_d.hpp> // use of cg:msgs::Point2D
+#include <lr_msgs/msg/point2_d.hpp> // use of lr:msgs::Point2D
 
-namespace cg {
+namespace lr {
 namespace mapping {
 
 template <class T>
@@ -24,12 +24,12 @@ class Map {
     Map(size_t height, size_t width, float resolution, std::vector<T> cell_data_);
 
     // Helpers
-    size_t continousCoordsToCellIndex(const cg_msgs::msg::Point2D &pt) const;
-    cg_msgs::msg::Point2D indexToContinuousCoords(size_t idx) const; 
+    size_t continousCoordsToCellIndex(const lr_msgs::msg::Point2D &pt) const;
+    lr_msgs::msg::Point2D indexToContinuousCoords(size_t idx) const; 
 
     // Checkers
     bool validIdx(size_t idx) const;
-    bool validPoint(const cg_msgs::msg::Point2D &pt) const;
+    bool validPoint(const lr_msgs::msg::Point2D &pt) const;
 
     // Getter functions 
     T getDataAtIdx(size_t idx) const;
@@ -110,19 +110,19 @@ void Map<T>::updateDimensions(size_t height, size_t width, float resolution)
 }
 
 template <class T>
-bool Map<T>::validPoint(const cg_msgs::msg::Point2D &pt) const {
-  return cg::mapping::pointInMap(pt.x, pt.y, width_, height_, resolution_);
+bool Map<T>::validPoint(const lr_msgs::msg::Point2D &pt) const {
+  return lr::mapping::pointInMap(pt.x, pt.y, width_, height_, resolution_);
 }
 
 template <class T>
-size_t Map<T>::continousCoordsToCellIndex(const cg_msgs::msg::Point2D &pt) const {
-  size_t idx = cg::mapping::continousCoordsToCellIndex(pt.x, pt.y, width_, resolution_);
+size_t Map<T>::continousCoordsToCellIndex(const lr_msgs::msg::Point2D &pt) const {
+  size_t idx = lr::mapping::continousCoordsToCellIndex(pt.x, pt.y, width_, resolution_);
   return idx;
 }
 
 template <class T>
-cg_msgs::msg::Point2D Map<T>::indexToContinuousCoords(size_t idx) const {
-  cg_msgs::msg::Point2D pt;
+lr_msgs::msg::Point2D Map<T>::indexToContinuousCoords(size_t idx) const {
+  lr_msgs::msg::Point2D pt;
   pt.x = resolution_* (idx % width_);
   pt.y = resolution_ * std::floor(idx/width_);
   return pt;
@@ -157,7 +157,7 @@ template <class T>
 bool Map<T>::write_map_to_file(const std::string& filepath) {
   // Modify name if file already exists
   std::string write_filepath = filepath;
-  while (cg::mapping::file_exists(write_filepath)) {
+  while (lr::mapping::file_exists(write_filepath)) {
     std::string::size_type pos = write_filepath.find('.');
     write_filepath = write_filepath.substr(0, pos) + "_repeat" + ".csv";
   }
@@ -229,6 +229,6 @@ bool Map<T>::load_map_from_file(const std::string& filepath){
 }
 
 } // mapping namespace
-} // cg namespace
+} // lr namespace
 
 #endif // MAPPING__MAP_HPP

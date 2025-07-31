@@ -1,8 +1,9 @@
 #include <mapping/map.hpp>
 
-namespace cg {
-namespace mapping {
+namespace lr
+{
+    namespace mapping
+    {
 
-
-} // mapping namespace
-} // cg namespace
+    } // mapping namespace
+} // lr namespace

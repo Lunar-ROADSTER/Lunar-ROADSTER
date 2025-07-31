@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.8)
-project(cg_msgs)
+project(lr_msgs)
 
 find_package(rosidl_cmake REQUIRED)
 find_package(builtin_interfaces REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(std_msgs REQUIRED)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   # Add custom interfaces here
   "msg/ActuatorCommand.idl"

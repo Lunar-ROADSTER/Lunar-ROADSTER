@@ -1,50 +1,96 @@
-/* Author: Boxiang Fu
- * TODO
- * */
-
+/**
+ * @file pc_handler.cpp
+ * @brief Handles point cloud preprocessing, transformation, and filtering for mapping applications.
+ *
+ * This node processes raw point clouds (e.g., from an RGB-D camera) and transforms them into the `base_link` frame
+ * using TF2. It performs denoising using statistical outlier filtering, applies an affine transformation based on
+ * camera-to-base_link pose, and crops the cloud to retain only relevant spatial extents. The processed cloud is
+ * then published for use in elevation mapping or terrain analysis.
+ *
+ * Optional debug utilities include ground plane segmentation and ground height estimation, though these are currently
+ * commented out. The code supports thread-safe offloading of point cloud processing for real-time responsiveness.
+ *
+ * @version 1.0.0
+ * @date 2025-07-27
+ *
+ * Maintainer: Boxiang (William) Fu
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
+ *
+ * Subscribers:
+ * - /camera/camera/depth/color/points: [sensor_msgs::msg::PointCloud2] Raw point cloud from RGB-D or depth sensor.
+ *
+ * Publishers:
+ * - /mapping/transformed_pointcloud: [sensor_msgs::msg::PointCloud2] Denoised, cropped, and base_link-aligned point cloud.
+ * - /mapping/pcl_ground_height: [std_msgs::msg::Float64] (Optional) Estimated ground z-height (commented).
+ * - /mapping/ground_pointcloud: [sensor_msgs::msg::PointCloud2] (Optional) Cropped ground-level points for debugging.
+ *
+ * TF Usage:
+ * - Lookup transform between `camera_depth_optical_frame` and `base_link` using TF2.
+ * - Convert TF quaternion to roll-pitch-yaw and apply affine transform using Eigen.
+ *
+ * Processing Steps:
+ * 1. Wait for static TF transform if not cached.
+ * 2. Apply `StatisticalOutlierRemoval` filter to remove noise.
+ * 3. Construct `Eigen::Affine3f` transform from TF data.
+ * 4. Transform point cloud to base frame.
+ * 5. Apply crop box to filter extreme ranges.
+ * 6. (Optional) Estimate and publish ground height.
+ *
+ * Optional Components:
+ * - RANSAC-based plane segmentation for ground plane debugging.
+ * - Exponential moving average filter on z-height (commented out).
+ *
+ * Assumptions:
+ * - TF between camera and base_link is available.
+ * - All filtered clouds are published in `base_link` frame.
+ *
+ * @credit Adapted from standard ROS 2 + PCL pipelines for LiDAR and RGB-D preprocessing.
+ */
 
 #include "mapping/pc_handler.hpp"
 
 PointCloudHandler::PointCloudHandler() : Node("pc_handler_node")
-{       
+{
     // Setup Communications
     setupCommunications();
 
     RCLCPP_INFO(this->get_logger(), "Point Cloud Handler initialized");
 }
 
-
-void PointCloudHandler::setupCommunications(){
+void PointCloudHandler::setupCommunications()
+{
     // Subscribers
-    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("camera/camera/depth/color/points", 10, 
-                                                                                        std::bind(&PointCloudHandler::processPointCloud, this, std::placeholders::_1));
+    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("camera/camera/depth/color/points", 10,
+                                                                                      std::bind(&PointCloudHandler::processPointCloud, this, std::placeholders::_1));
     // Publishers
     transformed_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("mapping/transformed_pointcloud", 10);
     ground_height_publisher_ = this->create_publisher<std_msgs::msg::Float64>("mapping/pcl_ground_height", 10);
     ground_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("mapping/ground_pointcloud", 10);
-    
+
     // Transform Listener
-    tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock(), tf2::durationFromSec(100000000));    
+    tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock(), tf2::durationFromSec(100000000));
     tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 }
 
-
-void PointCloudHandler::pointCloudCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg){
+void PointCloudHandler::pointCloudCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
+{
     pointcloud_thread_ = std::thread(std::bind(&PointCloudHandler::processPointCloud, this, msg));
 
     pointcloud_thread_.detach();
 }
 
-void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::SharedPtr msg){
-    if(this->cam2map_transform.header.frame_id == ""){
+void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
+{
+    if (this->cam2map_transform.header.frame_id == "")
+    {
         // Lookup the transform from the sensor frame to the target frame
         try
         {
-            cam2map_transform = tf_buffer_->lookupTransform("base_link","camera_depth_optical_frame",tf2::TimePointZero, tf2::durationFromSec(1));
+            cam2map_transform = tf_buffer_->lookupTransform("base_link", "camera_depth_optical_frame", tf2::TimePointZero, tf2::durationFromSec(1));
             RCLCPP_INFO(this->get_logger(), "Transform found");
-
         }
-        catch (tf2::TransformException& ex)
+        catch (tf2::TransformException &ex)
         {
             RCLCPP_INFO(this->get_logger(), "Waiting for transform... %s", ex.what());
             return;
@@ -68,17 +114,17 @@ void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::S
     tf2::Matrix3x3 m(q);
     double roll, pitch, yaw;
     m.getRPY(roll, pitch, yaw);
-    
+
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::fromROSMsg(*msg, *cloud);
 
-    //remove noise from the point cloud
+    // remove noise from the point cloud
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
     sor.setInputCloud(cloud);
     sor.setMeanK(50);
     sor.setStddevMulThresh(1.0);
-    sor.filter(*cloud_filtered);  
+    sor.filter(*cloud_filtered);
 
     Eigen::Affine3f affine_transform = Eigen::Affine3f::Identity();
     affine_transform.rotate(Eigen::AngleAxisf(yaw, Eigen::Vector3f::UnitZ()));
@@ -86,27 +132,28 @@ void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::S
     affine_transform.rotate(Eigen::AngleAxisf(roll, Eigen::Vector3f::UnitX()));
     affine_transform.translation() << cam2map_transform.transform.translation.x, cam2map_transform.transform.translation.y, cam2map_transform.transform.translation.z;
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
+    pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud(new pcl::PointCloud<pcl::PointXYZ>());
     pcl::transformPointCloud(*cloud_filtered, *transformed_cloud, affine_transform);
 
-    if(debug_mode_){
+    if (debug_mode_)
+    {
         // find the best fit plane
-        pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients);
-        pcl::PointIndices::Ptr inliers (new pcl::PointIndices);
+        pcl::ModelCoefficients::Ptr coefficients(new pcl::ModelCoefficients);
+        pcl::PointIndices::Ptr inliers(new pcl::PointIndices);
         // find coefficients
         pcl::SACSegmentation<pcl::PointXYZ> seg;
-        seg.setOptimizeCoefficients (true);
-        seg.setModelType (pcl::SACMODEL_PLANE);
-        seg.setMethodType (pcl::SAC_RANSAC);
+        seg.setOptimizeCoefficients(true);
+        seg.setModelType(pcl::SACMODEL_PLANE);
+        seg.setMethodType(pcl::SAC_RANSAC);
         seg.setDistanceThreshold(0.01);
-        seg.setInputCloud (transformed_cloud);
-        seg.segment (*inliers, *coefficients);
+        seg.setInputCloud(transformed_cloud);
+        seg.segment(*inliers, *coefficients);
 
         RCLCPP_INFO(this->get_logger(), "Model coefficients: %f %f %f %f", coefficients->values[0], coefficients->values[1], coefficients->values[2], coefficients->values[3]);
     }
 
     // crop the point cloud to the desired region
-    pcl::PointCloud<pcl::PointXYZ>::Ptr result_cloud (new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::PointCloud<pcl::PointXYZ>::Ptr result_cloud(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::CropBox<pcl::PointXYZ> cropFilter;
     cropFilter.setInputCloud(transformed_cloud);
     cropFilter.setMax(Eigen::Vector4f(1000, 1000, 20.0, 1.0));
@@ -144,7 +191,7 @@ void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::S
     // }
 
     sensor_msgs::msg::PointCloud2 result_msg;
-    pcl::toROSMsg(*result_cloud, result_msg);   
-    result_msg.header.frame_id = "base_link"; 
+    pcl::toROSMsg(*result_cloud, result_msg);
+    result_msg.header.frame_id = "base_link";
     transformed_pointcloud_publisher_->publish(result_msg);
 }
