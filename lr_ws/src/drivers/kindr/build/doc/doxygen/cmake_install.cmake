@@ -1,4 +1,4 @@
-# Install script for directory: /home/williamfbx/SLAM/slam_ws/src/drivers/kindr/doc/doxygen
+# Install script for directory: /home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/doc/doxygen
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
