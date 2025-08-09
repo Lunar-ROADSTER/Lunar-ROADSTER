@@ -1,8 +1,8 @@
-if(NOT EXISTS "/home/williamfbx/SLAM/slam_ws/src/drivers/kindr/build/install_manifest.txt")
-  message(FATAL_ERROR "Cannot find install manifest: /home/williamfbx/SLAM/slam_ws/src/drivers/kindr/build/install_manifest.txt")
-endif(NOT EXISTS "/home/williamfbx/SLAM/slam_ws/src/drivers/kindr/build/install_manifest.txt")
+if(NOT EXISTS "/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/build/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: /home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/build/install_manifest.txt")
+endif(NOT EXISTS "/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/build/install_manifest.txt")
 
-file(READ "/home/williamfbx/SLAM/slam_ws/src/drivers/kindr/build/install_manifest.txt" files)
+file(READ "/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/build/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 foreach(file ${files})
   message(STATUS "Uninstalling $ENV{DESTDIR}${file}")
