@@ -11,7 +11,7 @@ namespace planning {
 class PlanTransport : public FSM {
 
   public:
-  void runState(cg::planning::TransportPlanner &transport_planner, const cg::mapping::Map<float> &current_height_map, const cg::mapping::Map<float> &design_height_map, const std::vector<int> &seen_map, const float thresh_max_assignment_distance, std::vector<std::string> &goalPose_types); // Main function to run current state; optionally modifies signal and state for transition
+  void runState(lr::planning::TransportPlanner &transport_planner, const lr::mapping::Map<float> &current_height_map, const lr::mapping::Map<float> &design_height_map, const std::vector<int> &seen_map, const float thresh_max_assignment_distance, std::vector<std::string> &goalPose_types); // Main function to run current state; optionally modifies signal and state for transition
 
 }; // class State
 

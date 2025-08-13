@@ -2,7 +2,7 @@
 #define PLANNING__FOLLOWING_TRAJECTORY_HPP
 
 #include <planning/fsm/fsm.hpp>
-#include <cg_msgs/msg/pose2_d.hpp>
+#include <lr_msgs/msg/pose2_d.hpp>
 
 namespace lr {
 namespace planning {
@@ -11,7 +11,7 @@ namespace planning {
 class FollowingTrajectory : public FSM {
 
 public:
-  bool runState(cg_msgs::msg::Pose2D &current_goal_pose, const bool goal_reached, std::string &current_goalPose_type);
+  bool runState(lr_msgs::msg::Pose2D &current_goal_pose, const bool goal_reached, std::string &current_goalPose_type);
 
 private:
 
