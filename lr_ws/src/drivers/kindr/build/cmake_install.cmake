@@ -1,4 +1,4 @@
-# Install script for directory: /home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr
+# Install script for directory: /root/Lunar_ROADSTER/lr_ws/src/drivers/kindr
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -43,25 +43,25 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/include/kindr")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/root/Lunar_ROADSTER/lr_ws/src/drivers/kindr/include/kindr")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/build/test/cmake_install.cmake")
+  include("/root/Lunar_ROADSTER/lr_ws/src/drivers/kindr/build/test/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/build/doc/doxygen/cmake_install.cmake")
+  include("/root/Lunar_ROADSTER/lr_ws/src/drivers/kindr/build/doc/doxygen/cmake_install.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xdevx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kindr/cmake" TYPE FILE FILES "/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/build/CMakeFiles/kindrConfig.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kindr/cmake" TYPE FILE FILES "/root/Lunar_ROADSTER/lr_ws/src/drivers/kindr/build/CMakeFiles/kindrConfig.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xdevx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kindr" TYPE FILE FILES "/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kindr" TYPE FILE FILES "/root/Lunar_ROADSTER/lr_ws/src/drivers/kindr/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -72,5 +72,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/bhaswanth_a/Lunar-ROADSTER/lr_ws/src/drivers/kindr/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/root/Lunar_ROADSTER/lr_ws/src/drivers/kindr/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

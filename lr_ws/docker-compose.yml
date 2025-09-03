@@ -37,6 +37,25 @@ services:
     ports:
       - 5910:5910
       - 9090:9090
+  
+  lr-dev-full-build-orin:
+    build:
+      context: ./                            
+      dockerfile: ./docker/lrdev_jetson_zed.dockerfile   
+    container_name: lunar_roadster_dev_full_orin
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws    
+      - /dev/:/dev/
+    privileged: true
+    environment:
+      - TERM=xterm-256color                  
+    tty: true    
+    network_mode: "host"
+    stdin_open: true                         
+    working_dir: /root/Lunar_ROADSTER/lr_ws   
+    ports:
+      - 5910:5910
+      - 9090:9090
                           
   
   lr-dev-linux:
@@ -69,3 +88,16 @@ services:
     ports:
       - 5910:5910
       - 9090:9090
+
+
+  lr-dev-orin:
+    image: deepamameria/lunarroadster_zed:v2
+    container_name: lunar_roadster_dev_orin
+    privileged: true
+    runtime: nvidia
+    network_mode: "host"
+    volumes:
+      - .:/root/Lunar_ROADSTER/lr_ws
+      - /dev:/dev
+    stdin_open: true
+    tty: true
