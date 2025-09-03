@@ -4,7 +4,7 @@
  
 # Compute paths
 get_filename_component(kindr_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-set(kindr_INCLUDE_DIRS "/usr/local/include;/usr/include/eigen3")
+set(kindr_INCLUDE_DIRS "/usr/local/include;/usr/local/include/eigen3")
 
 # This causes catkin_simple to link against these libraries
 set(kindr_FOUND_CATKIN_PROJECT true)

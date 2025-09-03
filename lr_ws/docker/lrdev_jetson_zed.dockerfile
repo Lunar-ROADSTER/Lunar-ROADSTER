@@ -1,7 +1,5 @@
 # ------- ZED Camera SDK -------- 
-# FROM stereolabs/zed:4.2-runtime-cuda12.1-ubuntu22.04
-# FROM stereolabs/zed:4.2-runtime-jetson-jp6.1.0
-FROM stereolabs/zed:4.2-devel-jetson-jp6.1.0
+FROM deepamameria/zed_ros2_sdk:36.4.0
 
 # ------- ROS 2 Humble image -------- 
 # FROM dustynv/ros:humble-desktop-l4t-r36.2.0
@@ -13,16 +11,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # ---------------- NVIDIA Libraries Configuration -------------------------
 # Ensure NVIDIA drivers and CUDA libraries are accessible inside the container
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES all
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=all
 ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu/tegra:$LD_LIBRARY_PATH
 
-# Copy ZED SDK from the source image
-# COPY --from=zed_sdk /usr/local/zed /usr/local/zed
-
-# Add ZED SDK environment variables
-# ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/zed/lib
-# ENV PATH=$PATH:/usr/local/zed/bin
 
 COPY ./ $WORKSPACE
 
@@ -34,6 +26,9 @@ RUN apt-get update && apt-get install -y zsh bash wget \
   && PATH="$PATH:/usr/bin/zsh" \
   # Install Oh-My-Zsh with default theme
   && sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.3/zsh-in-docker.sh)" \
+  # Zsh Autocomplete
+  && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
+  && echo "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#777777'" >> ~/.zshrc \
   # Initialize custom zsh theme
   && echo "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" >> ~/.zshrc \
   # Source ROS 
@@ -73,16 +68,17 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o 
 
 # Install essential development tools and utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  build-essential \
-  cmake \
-  python3-pip \
-  nano \
-  python3-rosdep \
-  python3-colcon-common-extensions \
-  python3-argcomplete && \
-  rosdep init && \
-  rosdep update \
+      build-essential \
+      cmake \
+      python3-pip \
+      nano \
+      python3-rosdep \
+      python3-colcon-common-extensions \
+      python3-argcomplete \
+  && if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then rosdep init; fi \
+  && rosdep update \
   && rm -rf /var/lib/apt/lists/*
+
 # ---------------------------------------------------------------------------
 
 
@@ -103,8 +99,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ros-$ROS_DISTRO-plotjuggler-ros \
   # Teleop
   ros-$ROS_DISTRO-joy \
-  # robot_localization package ekf/ukf
+  # Localization 
   ros-$ROS_DISTRO-robot-localization \
+  # Map server
+  ros-$ROS_DISTRO-nav2-map-server \
   # PCL
   keyboard-configuration \
   libpcl-dev \
@@ -115,6 +113,14 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ros-$ROS_DISTRO-rosbridge-suite \
   && rm -rf /var/lib/apt/lists/*
 # ---------------------------------------------------------------------------  
+
+# --- Foxglove Bridge (ROS 2) ---
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-$ROS_DISTRO-foxglove-bridge \
+ && rm -rf /var/lib/apt/lists/*
+
+# Default Foxglove WebSocket port
+EXPOSE 8765
 
 
 # --------------------------- Install Micro-ROS -----------------------------
@@ -167,14 +173,70 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.23.4/cmake-3.23.4
   && rm -rf cmake-3.23.4 cmake-3.23.4.tar.gz 
 
 
+# Fast CMake via Kitware APT (works on Jammy/arm64)
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#       ca-certificates gnupg wget \
+#   && mkdir -p /etc/apt/keyrings \
+#   && wget -qO- https://apt.kitware.com/keys/kitware-archive-latest.asc \
+#      | gpg --dearmor -o /etc/apt/keyrings/kitware-archive-keyring.gpg \
+#   && echo "deb [signed-by=/etc/apt/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo $UBUNTU_CODENAME) main" \
+#      > /etc/apt/sources.list.d/kitware.list \
+#   && apt-get update \
+#   && apt-get install -y --no-install-recommends cmake \
+#   && rm -rf /var/lib/apt/lists/*
+
+# Install OR-Tools; see https://github.com/google/or-tools/blob/stable/cmake/README.md
+RUN cd /root/ && git clone https://github.com/CraterGrader/or-tools.git \
+  && cd or-tools && mkdir build \
+  && cmake -S. -Bbuild -DBUILD_SAMPLES:BOOL=OFF -DBUILD_EXAMPLES:BOOL=OFF -DBUILD_DEPS:BOOL=ON -DUSE_COINOR:BOOL=OFF -DUSE_SCIP:BOOL=OFF -DUSE_PDLP:BOOL=ON \
+  && cmake --build build \
+  && cd build/ && make install \
+  && cd /root/ \
+  && rm -rf or-tools
+
+
+
 # Setup Python environment
-COPY ./docker/requirements.txt /root/requirements.txt
+COPY docker/requirements.txt /root/requirements.txt
+
+
+# Use the public PyPI unless you really need Jetson?s mirror for some package
+ENV PIP_INDEX_URL=https://pypi.org/simple
+# ENV PIP_EXTRA_INDEX_URL=
+
+
+# Jetson/aarch64: install OpenCV from apt
+RUN if [ "$(uname -m)" = "aarch64" ]; then \
+      apt-get update && apt-get install -y --no-install-recommends python3-opencv && \
+      rm -rf /var/lib/apt/lists/* ; \
+    fi
+
 RUN pip3 install --no-cache-dir -r /root/requirements.txt && rm -f /root/requirements.txt
 
 # Prep for colcon build, but don't build anything yet
 WORKDIR $WORKSPACE
-COPY ./src $WORKSPACE/src
-RUN rosdep install --from-paths src --ignore-src -r -y
+COPY /src $WORKSPACE/src
+
+
+# Make sure we have OpenCV headers from Jetson repo
+# RUN apt-get update && apt-get install -y --no-install-recommends libopencv-dev
+
+# Bring in source packages that otherwise come from apt and clash with OpenCV
+WORKDIR $WORKSPACE/src
+# cv_bridge
+RUN git clone -b humble --depth 1 https://github.com/ros-perception/vision_opencv.git
+# grid_map for ROS 2
+RUN git clone -b ros2 --depth 1 https://github.com/ANYbotics/grid_map.git
+# example_interfaces (to avoid apt fallback if your packages depend on it)
+RUN git clone -b humble --depth 1 https://github.com/ros2/common_interfaces.git
+
+WORKDIR $WORKSPACE
+# Important: update apt before rosdep; skip OpenCV keys to avoid downgrades
+RUN apt-get update \
+ && rosdep update \
+ && rosdep install --from-paths src --ignore-src -r -y --rosdistro $ROS_DISTRO \
+      --skip-keys="opencv opencv4 libopencv-dev libopencv-core-dev libopencv-viz-dev" \
+ && rm -rf /var/lib/apt/lists/*
 # --------------------------------------------------------------------------------------
 
 # -------------------------- Container entrypoint --------------------------------------
