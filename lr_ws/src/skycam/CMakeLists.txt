@@ -17,6 +17,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(lr_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(tf2_ros REQUIRED)
 
 # TODO: Need to change directory path if compiled elsewhere
 set(Torch_DIR "/home/williamfbx/libtorch/share/cmake/Torch/")
@@ -36,6 +37,7 @@ ament_target_dependencies(skycam_data_collection_node
   geometry_msgs
   lr_msgs
   cv_bridge
+  tf2_ros
 )
 
 target_link_libraries(skycam_data_collection_node

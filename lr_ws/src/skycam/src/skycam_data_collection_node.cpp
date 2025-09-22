@@ -43,6 +43,7 @@
 #include "skycam/skycam_data_collection.hpp"
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/imgcodecs.hpp>
+#include <tf2/LinearMath/Matrix3x3.h>
 
 using namespace std::chrono_literals;
  
@@ -65,6 +66,9 @@ SkycamDataCollectionNode::SkycamDataCollectionNode() : Node("skycam_data_collect
     this->declare_parameter<std::string>("mode", "train");
     mode_ = this->get_parameter("mode").as_string();
 
+    this->declare_parameter<bool>("zero_on_startup", true);
+    zero_on_startup_ = this->get_parameter("zero_on_startup").as_bool();
+
     // Subscribers
     image_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
         "/flir_camera/image_raw",
@@ -75,6 +79,14 @@ SkycamDataCollectionNode::SkycamDataCollectionNode() : Node("skycam_data_collect
         "/total_station_prism",
         10,
         std::bind(&SkycamDataCollectionNode::prismPoseCallback, this, std::placeholders::_1));
+    
+    imu_sub_ = this->create_subscription<sensor_msgs::msg::Imu>(
+        "/vectornav/imu",
+        rclcpp::SensorDataQoS(),
+        std::bind(&SkycamDataCollectionNode::imuCallback, this, std::placeholders::_1));
+
+    // Publishers
+    pose_vis_pub_ = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("/skycam/data_collection_pose", 10);
     
     // Save most recent collected data
     timer_ = this->create_wall_timer(
@@ -105,11 +117,30 @@ void SkycamDataCollectionNode::ensureOutputDir()
 }
 
 
-std::string SkycamDataCollectionNode::currentImageBasename() const
+std::string SkycamDataCollectionNode::currentImageBasenameCounter() const
 {
     std::ostringstream ss;
     ss << std::setw(4) << std::setfill('0') << image_counter_ << ".jpg";
     return ss.str();
+}
+
+
+std::string SkycamDataCollectionNode::currentImageBasenameHash() const
+{
+    static const char charset[] =
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+
+    static thread_local std::mt19937 rg{std::random_device{}()};
+    static thread_local std::uniform_int_distribution<std::size_t> pick(0, sizeof(charset) - 2);
+
+    std::string s;
+    s.reserve(15);
+    for (int i = 0; i < 15; i++) {
+        s.push_back(charset[pick(rg)]);
+    }
+    return s + ".jpg";
 }
 
 
@@ -137,10 +168,48 @@ void SkycamDataCollectionNode::prismPoseCallback(const geometry_msgs::msg::PoseW
 }
 
 
+void SkycamDataCollectionNode::imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg)
+{
+    std::lock_guard<std::mutex> lock(data_mutex_);
+    latest_imu_ = msg;
+    last_imu_time_ = this->get_clock()->now();
+    // last_imu_time_ = msg->header.stamp;
+
+    const auto &qmsg = msg->orientation;
+    if (qmsg.w == 0.0 && qmsg.x == 0.0 && qmsg.y == 0.0 && qmsg.z == 0.0) {
+        have_imu_ = false;
+        return;
+    }
+
+    tf2::Quaternion q_cur(qmsg.x, qmsg.y, qmsg.z, qmsg.w);
+
+    // Capture baseline once at startup
+    if (zero_on_startup_ && !have_baseline_) {
+        q_baseline_ = q_cur;
+        have_baseline_ = true;
+        RCLCPP_INFO(this->get_logger(), "Captured IMU baseline orientation.");
+    }
+
+    if (!have_baseline_) {
+        have_imu_ = false;
+        return;
+    }
+
+    // Compute relative quaternion
+    tf2::Quaternion q_rel = q_baseline_.inverse() * q_cur;
+    double r_rel, p_rel, y_rel;
+    tf2::Matrix3x3(q_rel).getRPY(r_rel, p_rel, y_rel);
+    latest_rel_rpy_ = {r_rel, p_rel, y_rel};
+    have_imu_ = true;
+}
+
+
 void SkycamDataCollectionNode::timerCallback()
 {
     sensor_msgs::msg::Image::SharedPtr image_msg;
     geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr pose_msg;
+    std::array<double,3> rpy_copy{0.0, 0.0, 0.0};
+    bool have_imu_copy = false;
     rclcpp::Time img_t, pose_t;
 
     // Guard against race conditions
@@ -150,6 +219,8 @@ void SkycamDataCollectionNode::timerCallback()
         pose_msg  = latest_prism_pose_;
         img_t     = last_image_time_;
         pose_t    = last_prism_pose_time_;
+        rpy_copy = latest_rel_rpy_;
+        have_imu_copy = have_imu_;
     }
 
     if (!image_msg) {
@@ -172,7 +243,7 @@ void SkycamDataCollectionNode::timerCallback()
         return;
     }
 
-    const std::string basename = currentImageBasename();
+    const std::string basename = currentImageBasenameHash();
     const std::filesystem::path image_path  = std::filesystem::path(output_dir_) / basename;
     const std::filesystem::path files_list  = std::filesystem::path(output_dir_) / (mode_ + "_files.txt");
     const std::filesystem::path labels_list = std::filesystem::path(output_dir_) / (mode_ + "_labels.txt");
@@ -212,11 +283,43 @@ void SkycamDataCollectionNode::timerCallback()
         const int64_t img_ns = img_t.nanoseconds();
         const int64_t pose_ns = pose_t.nanoseconds();
 
+        double roll = std::numeric_limits<double>::quiet_NaN();
+        double pitch = std::numeric_limits<double>::quiet_NaN();
+        double yaw = std::numeric_limits<double>::quiet_NaN();
+        if (have_imu_copy) {
+            roll = rpy_copy[0];
+            pitch = rpy_copy[1];
+            yaw = rpy_copy[2];
+        }
+
         std::ofstream ofs(labels_list, std::ios::app);
         ofs << std::fixed << std::setprecision(6)
             << p.x << " " << p.y << " " << p.z << " "
-            << img_ns << " " << pose_ns << "\n";
+            << img_ns << " " << pose_ns << " "
+            << roll << " " << pitch << " " << yaw << "\n";
         ofs.flush();
+
+        // Publish to topic for debugging
+        geometry_msgs::msg::PoseWithCovarianceStamped vis;
+        vis.header.stamp = this->get_clock()->now();
+        vis.header.frame_id = pose_msg->header.frame_id;
+        vis.pose.pose.position = p;
+
+        if (have_imu_copy) {
+            tf2::Quaternion q; q.setRPY(rpy_copy[0], rpy_copy[1], rpy_copy[2]);
+            vis.pose.pose.orientation.x = q.x();
+            vis.pose.pose.orientation.y = q.y();
+            vis.pose.pose.orientation.z = q.z();
+            vis.pose.pose.orientation.w = q.w();
+        } else {
+            vis.pose.pose.orientation.x = 0.0;
+            vis.pose.pose.orientation.y = 0.0;
+            vis.pose.pose.orientation.z = 0.0;
+            vis.pose.pose.orientation.w = 1.0;
+        }
+
+        pose_vis_pub_->publish(vis);
+
     }
     catch (const std::exception &e)
     {
@@ -226,6 +329,17 @@ void SkycamDataCollectionNode::timerCallback()
     advanceCounter();
 
     RCLCPP_INFO(this->get_logger(), "Saved %s", image_path.c_str());
+}
+
+
+inline std::array<double,3>SkycamDataCollectionNode::quatToRPY(double x, double y, double z, double w)
+{
+    tf2::Quaternion q;
+    q.setX(x); q.setY(y); q.setZ(z); q.setW(w);
+    tf2::Matrix3x3 m(q);
+    double roll, pitch, yaw;
+    m.getRPY(roll, pitch, yaw);
+    return {roll, pitch, yaw};
 }
 
 } // namespace skycam
