@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from PIL import Image
-from utils import load_files_list, load_labels
+from utils import load_files_list, load_labels_xyzrpy
 
 
 class SkyCamDataset(torch.utils.data.Dataset):
@@ -16,7 +16,7 @@ class SkyCamDataset(torch.utils.data.Dataset):
         super().__init__()
         self.images_dir = images_dir
         self.files = load_files_list(files_txt)
-        self.labels = load_labels(labels_txt)
+        self.labels = load_labels_xyzrpy(labels_txt)
         self.image_size = image_size
         self.channels = channels
 
@@ -44,10 +44,10 @@ class SkyCamDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         name = self.files[idx]
         img_path = os.path.join(self.images_dir, name)
-        x, y, z = self.labels[idx]
+        x, y, z, roll, pitch, yaw = self.labels[idx]
 
         img_t = self._load_image_tensor(img_path)
-        target = torch.tensor([x, y, z], dtype=torch.float32)
+        target = torch.tensor([x, y, z, roll, pitch, yaw], dtype=torch.float32)
         return img_t, target, name
 
 
@@ -78,7 +78,7 @@ class SkyCamConvNet(nn.Module):
             nn.Flatten(),                              # 32
             nn.Linear(32, 16),
             nn.ReLU(inplace=True),
-            nn.Linear(16, 3),                          # x,y,z
+            nn.Linear(16, 6),                          # x, y, z, roll, pitch, yaw
         )
         
         self.to(self.device)
@@ -106,19 +106,19 @@ class SkyCamConvNet(nn.Module):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Train a ConvNet on SkyCam (x,y,z) regression.")
+    parser = argparse.ArgumentParser(description="Train a ConvNet on SkyCam regression.")
     parser.add_argument("--data_dir", type=str, default='./data',
                    help="Directory with images.")
     parser.add_argument("--files_txt", type=str, default="train_files.txt",
                    help="List of image filenames to load (default: train_files.txt).")
     parser.add_argument("--labels_txt", type=str, default="train_labels.txt",
-                   help="Labels (x y z img_ns pose_ns) file (default: train_labels.txt).")
+                   help="Labels (x y z img_ns pose_ns roll pitch yaw) file (default: train_labels.txt).")
     parser.add_argument("--image_size", type=int, default=224,
                    help="Square resize dimension before feeding to the CNN.")
     parser.add_argument("--channels", type=int, default=3, choices=[1, 3],
                    help="1 for grayscale, 3 for RGB.")
-    parser.add_argument("--batch_size", type=int, default=32)
-    parser.add_argument("--epochs", type=int, default=3)
+    parser.add_argument("--batch_size", type=int, default=16)
+    parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--num_workers", type=int, default=4)
     parser.add_argument("--save_path", type=str, default="skycam_convnet.pt",
@@ -184,7 +184,7 @@ def main():
     plt.figure()
     plt.plot(np.arange(1, len(losses) + 1), losses)
     plt.xlabel("Epoch")
-    plt.ylabel("MSE Loss (x,y,z)")
+    plt.ylabel("MSE Loss (x,y,z,roll,pitch,yaw)")
     plt.title("SkyCam ConvNet Training Loss")
     plt.grid(True, alpha=0.3)
     plt.tight_layout()

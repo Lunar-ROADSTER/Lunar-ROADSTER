@@ -1,42 +1,51 @@
 /**
  * @file skycam_data_collection.cpp
- * @brief Collects synchronized FLIR camera images and total station prism poses for training or evaluation datasets.
+ * @brief Collect synchronized FLIR images, prism poses, and optional IMU RPY for dataset generation.
  *
- * This node subscribes to raw camera images and prism pose measurements, caches the most recent of each, and
- * periodically (at `hz_rate`) saves synchronized samples into the specified output directory. For each valid sample,
- * the node stores:
- *   1. An image file saved as an incremented sequence (0001.jpg, 0002.jpg, ...).
- *   2. The image filename appended to either `train_files.txt` or `eval_files.txt` depending on the selected mode.
- *   3. The prism pose (x, y, z) and the corresponding image/pose timestamps appended to `{mode}_labels.txt`.
+ * This node listens to the raw FLIR camera stream, total-station prism poses, and (optionally) an IMU topic.
+ * At a fixed rate (`hz_rate`), it saves a sample **only** when an image and a prism pose are both available
+ * and their timestamps differ by less than `max_time_diff_sec`. For each valid sample it:
+ *   1) Saves the image to `output_dir` using a **15-char base62 hash** basename (e.g., `Q8kYp3mAz1BdC2f.jpg`).
+ *   2) The image filename appended to either `train_files.txt` or `eval_files.txt` depending on the selected mode..
+ *   3) Appends a line to `{mode}_labels.txt` with: `x y z img_ns pose_ns roll pitch yaw`
+ *      where `(x,y,z)` are prism (map-frame) coordinates, `img_ns`/`pose_ns` are image/pose timestamps (ns),
+ *      and `(roll,pitch,yaw)` are **relative** IMU angles if available, else NaN.
  *
- * Samples are only saved if both an image and prism pose are available, and if their timestamps differ by less than
- * `max_time_diff_sec` seconds. Otherwise, the timer callback skips saving that frame.
+ * IMU handling:
+ * - If `zero_on_startup=true`, the node captures the first valid IMU orientation as a baseline and logs
+ *   subsequent **relative** RPY (baseline⁻¹ ∘ current). If no valid IMU is present, RPY are recorded as NaN.
  *
- * @version 1.0.0
- * @date 2025-09-20
+ * Synchronization policy:
+ * - A sample is skipped if |t_image − t_pose| > `max_time_diff_sec`.
  *
- * Maintainer: Boxiang (William) Fu  
- * Team: Lunar ROADSTER  
+ * @version 1.1.0
+ * @date 2025-09-21
+ *
+ * Maintainer: Boxiang (William) Fu
+ * Team: Lunar ROADSTER
  * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
  *
  * Subscribers:
- * - /flir_camera/image_raw : [sensor_msgs::msg::Image] Raw FLIR camera frames used as visual input.
- * - /total_station_prism   : [geometry_msgs::msg::PoseWithCovarianceStamped] Raw prism pose measurements in map frame.
+ * - /flir_camera/image_raw : sensor_msgs::msg::Image
+ * - /total_station_prism   : geometry_msgs::msg::PoseWithCovarianceStamped
+ * - /vectornav/imu         : sensor_msgs::msg::Imu (optional; used for relative RPY if available)
  *
  * Publishers:
- * - None
+ * - /skycam/data_collection_pose : geometry_msgs::msg::PoseWithCovarianceStamped (for visualization/debug)
  *
  * Parameters:
- * - hz_rate: [double] Frequency of the timer callback for saving samples (default: 10.0 Hz).
- * - output_dir: [string] Base directory where images and label files are stored (default: "/home").
- * - max_time_diff_sec: [double] Maximum allowable time difference (seconds) between image and pose (default: 1.0).
- * - mode: [string] Dataset mode; determines file naming (`train_*` or `eval_*`) (default: "train").
+ * - hz_rate (double, default: 10.0)           : Timer frequency for attempting to save samples.
+ * - output_dir (string, default: "/home")     : Base directory for images and list/label files.
+ * - max_time_diff_sec (double, default: 1.0)  : Max allowed |t_image − t_pose| (seconds) for a valid sample.
+ * - mode (string, default: "train")           : Dataset split; determines `{mode}_files.txt` and `{mode}_labels.txt`.
+ * - zero_on_startup (bool, default: true)     : If true, capture IMU baseline at startup and log relative RPY.
  *
  * Features:
- * - Ensures the output directory exists before saving.
- * - Sequentially names images with zero-padded counters.
- * - Appends dataset file lists and label files incrementally.
- * - Skips saving when no data is available or if image/pose timestamps are out of sync.
+ * - Ensures `output_dir` exists before saving.
+ * - Uses **hashed filenames** for images.
+ * - Appends to `{mode}_files.txt` and `{mode}_labels.txt` incrementally.
+ * - Publishes the saved pose to `/skycam/data_collection_pose` for easy RViz inspection.
+ * - Skips saving when data are missing or out of sync.
  */
 
 

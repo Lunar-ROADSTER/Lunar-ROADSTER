@@ -7,14 +7,14 @@ import numpy as np
 import torch
 import torch.nn as nn
 from PIL import Image
-from utils import load_files_list, load_labels
+from utils import load_files_list, load_labels_xyz
 
 class SkyCamDataset(torch.utils.data.Dataset):
     def __init__(self, images_dir, files_txt, labels_txt, image_size=224, channels=3):
         super().__init__()
         self.images_dir = images_dir
         self.files = load_files_list(files_txt)
-        self.labels = load_labels(labels_txt)
+        self.labels = load_labels_xyz(labels_txt)
         self.image_size = image_size
         self.channels = channels
 
