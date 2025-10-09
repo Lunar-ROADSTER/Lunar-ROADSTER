@@ -10,6 +10,48 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+
+include_directories(include)
+
+add_executable(global_astar_node
+  src/global_planner_node.cpp
+  src/global_planner_main.cpp
+)
+ament_target_dependencies(global_astar_node
+  rclcpp
+  nav_msgs
+  geometry_msgs
+  std_msgs
+  visualization_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+)
+
+add_executable(crater_centroids_pub
+  src/crater_centroids_pub.cpp
+)
+ament_target_dependencies(crater_centroids_pub
+  rclcpp
+  geometry_msgs
+)
+
+add_executable(crater_diameters_pub
+  src/crater_diameters_pub.cpp
+)
+ament_target_dependencies(crater_diameters_pub
+  rclcpp
+  std_msgs
+)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -22,5 +64,11 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+install(TARGETS global_astar_node
+  DESTINATION lib/${PROJECT_NAME})
+
+install(TARGETS crater_centroids_pub crater_diameters_pub
+  DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
