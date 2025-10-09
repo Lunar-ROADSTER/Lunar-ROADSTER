@@ -7,6 +7,11 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -52,6 +57,34 @@ ament_target_dependencies(crater_diameters_pub
   std_msgs
 )
 
+
+add_executable(global_planner_controller_main
+  src/global_planner_controller_main.cpp
+  src/global_planner_controller_node.cpp
+)
+
+ament_target_dependencies(global_planner_controller_main
+  rclcpp
+  nav_msgs
+  geometry_msgs
+  tf2_ros
+  tf2_geometry_msgs
+)
+
+install(TARGETS
+  global_planner_controller_main
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
+install(
+  DIRECTORY config
+  DESTINATION share/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
