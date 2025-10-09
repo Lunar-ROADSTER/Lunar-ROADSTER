@@ -1,4 +1,4 @@
-#include "global_controller/global_planner_controller.hpp"
+#include "navigation/global_planner_controller_node.hpp"
 #include <algorithm>
 
 namespace lr_global_planner_controller

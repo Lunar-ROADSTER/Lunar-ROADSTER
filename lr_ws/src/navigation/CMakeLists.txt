@@ -71,21 +71,6 @@ ament_target_dependencies(global_planner_controller_main
   tf2_geometry_msgs
 )
 
-install(TARGETS
-  global_planner_controller_main
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-install(
-  DIRECTORY include/
-  DESTINATION include
-)
-
-install(
-  DIRECTORY config
-  DESTINATION share/${PROJECT_NAME}
-)
-
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -103,5 +88,21 @@ install(TARGETS global_astar_node
 
 install(TARGETS crater_centroids_pub crater_diameters_pub
   DESTINATION lib/${PROJECT_NAME})
+
+install(TARGETS
+  global_planner_controller_main
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
+install(
+  DIRECTORY config
+  DESTINATION share/${PROJECT_NAME}
+)
+
 
 ament_package()
