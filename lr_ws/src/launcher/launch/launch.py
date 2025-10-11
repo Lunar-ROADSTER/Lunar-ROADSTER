@@ -82,15 +82,15 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        sensing_launch,
-        mapping_launch,
-        mapping_static_launch,
-        visualization_launch,
+        # sensing_launch,
+        # mapping_launch,
+        # mapping_static_launch,
+        # visualization_launch,
         # motion_control_launch,
         # vectornav_launch,
         # imu_launch,
         # localization_launch,
         # planning_launch,
         # rviz_static_map_node,
-        # rviz_local_map_node,
+        rviz_local_map_node,
     ])

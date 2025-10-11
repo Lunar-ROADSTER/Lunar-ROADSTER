@@ -12,7 +12,6 @@
 #include <tf2_ros/buffer.h>
 #include "lr_msgs/action/calibrate_imu.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
-#include "lr_msgs/msg/rover_command.hpp"
 #include <Eigen/Eigen>
 #include <Eigen/Geometry>
 #include <math.h>

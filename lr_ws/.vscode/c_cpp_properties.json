@@ -31,4 +31,37 @@
     }
   ],
   "version": 4
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/install/vectornav/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/install/vectornav_msgs/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/install/teleop/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/install/motion_control/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/install/localization/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/install/imu/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/install/arduino/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/install/cg_msgs/include/**",
+                "/opt/ros/humble/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/src/arduino/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/src/imu/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/src/localization/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/src/motion_control/include/**",
+                "/home/boxiangf/Lunar-ROADSTER/lr_ws/src/teleop/include/**",
+                "/usr/include/**",
+                "${workspaceFolder}/src/validation/include",
+                "${workspaceFolder}/src/skycam/include"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++14"
+        }
+    ],
+    "version": 4
 }

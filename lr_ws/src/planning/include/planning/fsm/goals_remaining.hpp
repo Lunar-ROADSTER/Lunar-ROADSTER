@@ -3,7 +3,7 @@
 
 #include <planning/fsm/fsm.hpp>
 #include <vector>
-#include <cg_msgs/msg/pose2_d.hpp>
+#include <lr_msgs/msg/pose2_d.hpp>
 
 namespace lr {
 namespace planning {
@@ -12,7 +12,7 @@ namespace planning {
 class GoalsRemaining : public FSM {
 
 public:
-  void runState(std::vector<cg_msgs::msg::Pose2D> &current_goal_poses, cg_msgs::msg::Pose2D &current_goal_pose, std::vector<std::string> &current_goalPose_types, std::string &current_goalPose_type); // Main function to run current state; optionally modifies signal and state for transition
+  void runState(std::vector<lr_msgs::msg::Pose2D> &current_goal_poses, lr_msgs::msg::Pose2D &current_goal_pose, std::vector<std::string> &current_goalPose_types, std::string &current_goalPose_type); // Main function to run current state; optionally modifies signal and state for transition
 
 }; // class State
 

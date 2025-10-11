@@ -50,7 +50,7 @@ PointCloudHandler::PointCloudHandler() : Node("pc_handler_node")
 void PointCloudHandler::setupCommunications()
 {
     // Subscribers
-    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("camera/camera/depth/color/points", 10,
+    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("zed/zed_node/point_cloud/cloud_registered", 10,
                                                                                       std::bind(&PointCloudHandler::processPointCloud, this, std::placeholders::_1));
     // Publishers
     transformed_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("mapping/transformed_pointcloud", 10);
@@ -76,7 +76,7 @@ void PointCloudHandler::processPointCloud(const sensor_msgs::msg::PointCloud2::S
         // Lookup the transform from the sensor frame to the target frame
         try
         {
-            cam2map_transform = tf_buffer_->lookupTransform("base_link", "camera_depth_optical_frame", tf2::TimePointZero, tf2::durationFromSec(1));
+            cam2map_transform = tf_buffer_->lookupTransform("base_link", "zed_camera_link", tf2::TimePointZero, tf2::durationFromSec(1));
             RCLCPP_INFO(this->get_logger(), "Transform found");
         }
         catch (tf2::TransformException &ex)
