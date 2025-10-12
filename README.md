@@ -42,7 +42,7 @@ This sets up and starts the micro-ROS agent which bridges communication between 
 cd Lunar_ROADSTER/lr_ws
 source install/setup.zsh
 ros2 launch motion_control motion_control_launch.py
-ros2 topic pub /mux_mode cg_msgs/msg/MuxMode "{mode: 3}" --once
+ros2 topic pub /mux_mode lr_msgs/msg/MuxMode "{mode: 3}" --once
 ```
 Launches the motion control node to interpret teleop commands. The mux mode switch tells the robot to listen to teleop commands rather than autonomous input.
 

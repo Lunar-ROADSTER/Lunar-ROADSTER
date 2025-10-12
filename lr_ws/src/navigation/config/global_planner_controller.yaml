@@ -1,0 +1,17 @@
+global_planner_controller:
+  # The forward distance to look for a target point on the path.
+  lookahead_distance: 1.5 # meters
+
+  # The desired linear velocity for the robot to follow the path.
+  desired_linear_velocity: 5.0 # m/s
+
+  # The maximum turning speed for the robot in radians per second.
+  max_angular_velocity: 3.0 # rad/s
+
+  # The tolerance radius to consider the goal as reached.
+  goal_tolerance: 0.25 # meters
+  
+  robot_frame: "base_link"
+
+  global_frame: "map"
+
