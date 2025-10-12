@@ -1,10 +1,13 @@
 zed_static_transform_publisher:
   ros__parameters:
-    x: 1.0
+    x: 0.45
     y: 0.0
-    z: 0.5
+    z: 0.64
     yaw: 0.0
-    pitch: -1.57079632679
-    roll: 0.0
+    # pitch: 0.52359877559 # 30pi/180
+    # pitch: 0.54105206811 # 31pi/180
+    pitch: 0.55850536063 # 32pi/180
+    # roll: -0.03490658503 # -2pi/180
+    roll: -0.05235987755 # -3pi/180
     parent_frame_id: base_link
     child_frame_id: zed_camera_link

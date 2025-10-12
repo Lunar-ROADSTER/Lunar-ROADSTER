@@ -15,7 +15,7 @@
  * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
  *
  * Subscribers:
- * - /camera/camera/depth/color/points: [sensor_msgs::msg::PointCloud2] Raw depth camera point cloud.
+ * - /zed/zed_node/point_cloud/cloud_registered: [sensor_msgs::msg::PointCloud2] Raw depth camera point cloud.
  *
  * Publishers:
  * - /mapping/transformed_pointcloud: [sensor_msgs::msg::PointCloud2] Noise-filtered, cropped, and transformed point cloud in the `base_link` frame.

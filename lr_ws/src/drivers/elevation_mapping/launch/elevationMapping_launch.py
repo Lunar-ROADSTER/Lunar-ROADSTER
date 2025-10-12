@@ -33,12 +33,12 @@ def generate_launch_description():
             #    'robot_description': launch.substitutions.Command(['xacro', ' ', xacro_path])
             #}]
         #)
-            launch_ros.actions.Node(
-                package= 'rviz2',
-                executable= 'rviz2',
-                name= 'rviz',
-                arguments= ['--display-config', os.path.join(share_dir, 'rviz2', 'custom_rviz2.rviz')],
-                output= 'screen'
-            )
+            # launch_ros.actions.Node(
+            #     package= 'rviz2',
+            #     executable= 'rviz2',
+            #     name= 'rviz',
+            #     arguments= ['--display-config', os.path.join(share_dir, 'rviz2', 'custom_rviz2.rviz')],
+            #     output= 'screen'
+            # )
         ]
     )

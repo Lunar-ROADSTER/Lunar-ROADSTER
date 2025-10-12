@@ -23,6 +23,7 @@ find_package(visualization_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+find_package(lr_msgs REQUIRED)
 
 include_directories(include)
 
@@ -67,9 +68,29 @@ ament_target_dependencies(global_planner_controller_main
   rclcpp
   nav_msgs
   geometry_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  visualization_msgs
+)
+
+add_executable(basic_astar_planner_node
+  src/basic_astar.cpp
+)
+ament_target_dependencies(basic_astar_planner_node
+  rclcpp
+  nav_msgs
+  geometry_msgs
+  std_msgs
+  visualization_msgs
+  tf2
   tf2_ros
   tf2_geometry_msgs
 )
+
+add_executable(autonomy_command src/autonomy_command.cpp)
+ament_target_dependencies(autonomy_command rclcpp geometry_msgs lr_msgs)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -89,8 +110,16 @@ install(TARGETS global_astar_node
 install(TARGETS crater_centroids_pub crater_diameters_pub
   DESTINATION lib/${PROJECT_NAME})
 
+install(TARGETS basic_astar_planner_node
+  DESTINATION lib/${PROJECT_NAME})
+
 install(TARGETS
   global_planner_controller_main
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(TARGETS
+  autonomy_command
   DESTINATION lib/${PROJECT_NAME}
 )
 

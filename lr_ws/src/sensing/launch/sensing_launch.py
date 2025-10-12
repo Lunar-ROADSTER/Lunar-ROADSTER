@@ -84,6 +84,6 @@ def generate_launch_description():
         zed_static_tf_pub,
         # realsense_launch,
         # imu_launch,
-        pseudo_base_link,
-        pseudo_base_link_2
+        # pseudo_base_link,
+        # pseudo_base_link_2
     ])
