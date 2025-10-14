@@ -130,7 +130,8 @@ void ValidationNode::enableCallback(const std_msgs::msg::Bool::SharedPtr msg)
 void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
 {
     if (!enabled_) {
-        RCLCPP_INFO(this->get_logger(), "Validation is disabled; skipping point cloud processing.");
+        // Debugging
+        // RCLCPP_INFO(this->get_logger(), "Validation is disabled; skipping point cloud processing.");
         return;
     }
 
@@ -221,6 +222,11 @@ void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPt
     if (!window_ready) {
         RCLCPP_INFO(this->get_logger(), "Accumulating: %zu/%d",
                     mean_v_.size(), average_window_);
+        
+        // Debugging
+        // RCLCPP_INFO(this->get_logger(),
+        //             "Current stats: mean=%.2f deg, rmse=%.2f deg, max=%.2f deg",
+        //             mean_deg, rmse_deg, max_deg);
         return;
     }
 
