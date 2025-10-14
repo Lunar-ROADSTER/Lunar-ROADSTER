@@ -14,9 +14,9 @@ class CraterDetectionNode(Node):
         # Initialize CV bridge
         self.bridge = CvBridge()
 
-        # Load YOLOv8 model
-        model_path = 'best.pt'  # TODO: update this path
-        self.model = YOLO(model_path)
+        # Load YOLOv8 model on GPU if available
+        model_path = '/root/Lunar_ROADSTER/lr_ws/src/perception/perception/best.pt'
+        self.model = YOLO(model_path)  # use device='cuda:0' if GPU is available
         self.get_logger().info(f'Loaded YOLOv8 model from {model_path}')
 
         # Subscribe to ZED2i RGB topic
@@ -24,23 +24,44 @@ class CraterDetectionNode(Node):
             Image,
             '/zed/zed_node/rgb/image_rect_color',
             self.image_callback,
-            10
+            10  # QoS depth
         )
         self.subscription  # prevent unused variable warning
 
     def image_callback(self, msg):
-        # Convert ROS Image to OpenCV image
-        frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
+        try:
+            # Convert ROS Image to OpenCV image
+            frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
 
-        # Run YOLO inference
-        results = self.model(frame, verbose=False)[0]
+            # Optional: resize to speed up inference (comment out if you want full-res)
+            scale_factor = 0.5  # reduce resolution by 50%
+            frame_small = cv2.resize(frame, (0, 0), fx=scale_factor, fy=scale_factor)
 
-        # Draw detections on the image
-        annotated_frame = results.plot()
+            # Run YOLO inference
+            results = self.model(frame_small, verbose=False)[0]
 
-        # Display result
-        cv2.imshow('Crater Detection', annotated_frame)
-        cv2.waitKey(1)
+            # Draw bounding boxes and crosshairs manually
+            annotated_frame = frame_small.copy()
+            for box in results.boxes.xyxy:  # xyxy = [x1, y1, x2, y2]
+                x1, y1, x2, y2 = map(int, box)
+                # Draw bounding box
+                cv2.rectangle(annotated_frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+                # Compute midpoint
+                cx = int((x1 + x2) / 2)
+                cy = int((y1 + y2) / 2)
+
+                # Draw crosshair
+                size = 5  # half-length of crosshair lines
+                cv2.line(annotated_frame, (cx - size, cy), (cx + size, cy), (0, 0, 255), 2)
+                cv2.line(annotated_frame, (cx, cy - size), (cx, cy + size), (0, 0, 255), 2)
+
+            # Display the annotated frame
+            cv2.imshow('Crater Detection', annotated_frame)
+            cv2.waitKey(1)
+
+        except Exception as e:
+            self.get_logger().error(f'Error in image_callback: {e}')
 
 def main(args=None):
     rclpy.init(args=args)
