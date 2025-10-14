@@ -1,5 +1,53 @@
 /**
- * TODO
+ * @file validation_node.cpp
+ * @brief Computes terrain slope statistics from point clouds, applies smoothing & trimming,
+ *        and publishes a grading/validation summary for traversability.
+ *
+ * This ROS 2 node subscribes to a fused, world-aligned point cloud and (when enabled) performs:
+ *  1) Voxel downsampling for computational efficiency.
+ *  2) Surface normal estimation (OMP) and per-point slope (deg) from the vertical (z-axis).
+ *  3) Wall/edge masking via slope threshold and height-jump checks.
+ *  4) One- or two-pass bilateral smoothing in space–range (meters/degrees).
+ *  5) Windowed aggregation with trimmed mean (drop lowest/highest values).
+ *
+ * After accumulating a window of measurements, it publishes a single summary:
+ *  - mean_gradient : Trimmed mean of smoothed slopes (deg).
+ *  - rmse_gradient : Trimmed RMS of smoothed slopes (deg).
+ *  - max_gradient : Trimmed maximum of smoothed slopes (deg).
+ *  - max_traversal_slope : (max_gradient - mean_gradient), a conservative margin (deg).
+ *  - grading_success : true if max_traversal_slope <= max_traversal_slope_deg.
+ *
+ * Processing runs only while `enabled_` is true (toggled by /validation/enable_validation). When a
+ * summary is published, the node disables itself, clears accumulators, and waits for the next enable.
+ *
+ * @version 1.1.0
+ * @date 2025-10-13
+ *
+ * Maintainer: Boxiang (William) Fu  
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
+ *
+ * Subscribers:
+ * - /validation/enable_validation : [std_msgs::msg::Bool] Gates processing; true to start accumulation.
+ * - /mapping/transformed_pointcloud : [sensor_msgs::msg::PointCloud2] World-aligned (or map-frame) cloud.
+ *
+ * Publishers:
+ * - /validation/elevation_data : [lr_msgs::msg::Validation].
+ *
+ * Parameters:
+ * - average_window          : [int] Number of measurements to accumulate before publishing (default: 10).
+ * - trim_count              : [int] Number of low/high samples dropped in trimmed averages (default: 1).
+ * - max_traversal_slope_deg : [double] Success threshold for (max - mean) in degrees (default: 5.0).
+ * - voxel_leaf_m            : [double] Voxel grid leaf size in meters (default: 0.05).
+ * - omp_threads             : [int] Threads for NormalEstimationOMP (default: 8).
+ * - knn_normals             : [int] KNN for normal estimation (default: 20).
+ * - max_keep_slope_deg      : [double] Points above this slope (deg) are masked as walls (default: 45.0).
+ * - wall_jump_thresh_m      : [double] Height jump (m) to mark a local wall/ledge (default: 0.10).
+ * - Ksmooth1                : [int] KNN for 1st bilateral smoothing pass (default: 32).
+ * - Ksmooth2                : [int] KNN for optional 2nd bilateral pass (default: 16).
+ * - do_second_pass          : [bool] Enable the 2nd bilateral pass (default: false).
+ * - sigma_spatial_m         : [double] Bilateral spatial sigma (meters) (default: 0.10).
+ * - sigma_slope_deg         : [double] Bilateral range sigma (degrees) (default: 5.0).
  */
 
 
