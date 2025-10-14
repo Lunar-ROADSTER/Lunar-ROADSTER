@@ -6,6 +6,7 @@ find_package(builtin_interfaces REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   # Add custom interfaces here
   "msg/ActuatorCommand.idl"
@@ -19,6 +20,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ActuatorState.idl"
   "msg/SiteMap.idl"
   "msg/Trajectory.idl"
+  "msg/Validation.idl"
   "srv/SiteMap.srv"
   "srv/UpdateTrajectory.srv"
   "srv/EnableWorksystem.srv"

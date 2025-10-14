@@ -12,20 +12,33 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(nav_msgs REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(PCL REQUIRED COMPONENTS common search kdtree features filters)
 find_package(sensor_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(lr_msgs REQUIRED)
 find_package(pcl_conversions REQUIRED)
+find_package(PCL REQUIRED COMPONENTS common search kdtree features filters)
 find_package(OpenMP)
 
 include_directories(include)
+include_directories(config)
 
-add_executable(validation_node src/validation_node.cpp)
+add_executable(validation_node 
+  src/validation_main.cpp
+  src/validation_node.cpp
+)
+
 ament_target_dependencies(validation_node
-  rclcpp sensor_msgs std_msgs pcl_conversions)
-target_link_libraries(validation_node ${PCL_LIBRARIES})
+  rclcpp
+  sensor_msgs
+  std_msgs
+  pcl_conversions
+  lr_msgs
+)
+
+target_link_libraries(validation_node
+  ${PCL_LIBRARIES}
+)
+
 if (OpenMP_CXX_FOUND)
   target_link_libraries(validation_node OpenMP::OpenMP_CXX)
 endif()
@@ -41,6 +54,9 @@ DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION include/${PROJECT_NAME})
+
+install(DIRECTORY config
+  DESTINATION share/${PROJECT_NAME})
 
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME})
