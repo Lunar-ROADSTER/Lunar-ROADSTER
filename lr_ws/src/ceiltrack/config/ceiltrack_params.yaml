@@ -1,0 +1,24 @@
+ceiltrack_node:
+  ros__parameters:
+    cam_tilt_rad: 0.0
+    xgrid: 0.25 # unitless grid_meters / height
+    ygrid: 0.25 # unitless grid_meters / height
+    ceil_height: 8.0 # meters
+    threshold: 233
+    niter: 5
+    publish_grid_marker: true # Should only be true for debugging
+  
+    lens.width: 640
+    lens.height: 480
+    lens.center_limit: 64.0
+    lens.cell_limit: 9.0
+
+    lens.fx: 239.22139424050349
+    lens.fy: 239.18055604379532
+    lens.cx: 327.24047691408475
+    lens.cy: 230.38304598028427
+    lens.k1: 0.0
+
+    home.x: 0.0
+    home.y: 0.0
+    home.theta: 0.0

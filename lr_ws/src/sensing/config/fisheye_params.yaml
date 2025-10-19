@@ -1,0 +1,11 @@
+fisheye_camera:
+  ros__parameters:
+    video_device: "/dev/video2"
+    image_width: 640
+    image_height: 480
+    framerate: 5.0 # this also determines how fast ceiltrack runs
+    camera_name: "fisheye"
+    camera_info_url: ""
+    pixel_format: "yuyv"
+    power_line_frequency: 2
+    white_balance_automatic: true
