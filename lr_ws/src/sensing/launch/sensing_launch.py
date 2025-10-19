@@ -61,29 +61,29 @@ def generate_launch_description():
       )
     )
 
-    # For debugging purposes
-    pseudo_base_link = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        # x y z yaw pitch roll parent child
-        arguments=['0', '0', '0', '0', '0', '0', 'map', 'odom'],
-        name='odom_to_base_link_static'
+    fisheye_params_file = os.path.join(
+        get_package_share_directory('sensing'),
+        'config',
+        'fisheye_params.yaml'
     )
 
-    pseudo_base_link_2 = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        # x y z yaw pitch roll parent child
-        arguments=['0', '0', '0', '0', '0', '0', 'odom', 'base_link'],
-        name='odom_to_base_link_static'
+    fisheye_node = Node(
+        package='usb_cam',
+        executable='usb_cam_node_exe',
+        name='fisheye_camera',
+        output='screen',
+        parameters=[fisheye_params_file],
+        remappings=[
+            ('image_raw', '/fisheye_camera/image_raw'),
+            ('camera_info', '/fisheye_camera/camera_info'),
+        ]
     )
 
     return LaunchDescription([
-        camera_model_arg,
-        zed_launch,
-        zed_static_tf_pub,
+        # camera_model_arg,
+        # zed_launch,
+        # zed_static_tf_pub,
         # realsense_launch,
         # imu_launch,
-        # pseudo_base_link,
-        # pseudo_base_link_2
+        fisheye_node
     ])
