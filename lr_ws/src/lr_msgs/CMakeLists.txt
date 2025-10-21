@@ -26,6 +26,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/EnableWorksystem.srv"
   "srv/SaveMap.srv"
   "action/CalibrateImu.action"
+  "action/RunValidation.action"
   # Implementation-specific messages
   DEPENDENCIES builtin_interfaces std_msgs action_msgs
 )

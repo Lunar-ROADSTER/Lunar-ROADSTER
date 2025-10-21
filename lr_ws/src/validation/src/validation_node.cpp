@@ -1,7 +1,7 @@
 /**
  * @file validation_node.cpp
- * @brief Computes terrain slope statistics from point clouds, applies smoothing & trimming,
- *        and publishes a grading/validation summary for traversability.
+ * @brief Action-based terrain validation: accumulates point clouds, smooths/filters slopes,
+ *        streams progress as feedback, and returns a final traversability summary as the action result.
  *
  * This ROS 2 node subscribes to a fused, world-aligned point cloud and (when enabled) performs:
  *  1) Voxel downsampling for computational efficiency.
@@ -20,19 +20,43 @@
  * Processing runs only while `enabled_` is true (toggled by /validation/enable_validation). When a
  * summary is published, the node disables itself, clears accumulators, and waits for the next enable.
  *
- * @version 1.1.0
- * @date 2025-10-13
+ * @version 2.1.0
+ * @date 2025-10-21
  *
  * Maintainer: Boxiang (William) Fu  
  * Team: Lunar ROADSTER
  * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
  *
  * Subscribers:
- * - /validation/enable_validation : [std_msgs::msg::Bool] Gates processing; true to start accumulation.
  * - /mapping/transformed_pointcloud : [sensor_msgs::msg::PointCloud2] World-aligned (or map-frame) cloud.
  *
- * Publishers:
- * - /validation/elevation_data : [lr_msgs::msg::Validation].
+ * Actions:
+ * - /validation/run : [lr_msgs::action::RunValidation] Triggers a validation run with feedback/result.
+ * 
+ * Execution model:
+ * - Action name:          /validation/run
+ * - Action type:          lr_msgs::action::RunValidation
+ * - Single active goal:   New goals are rejected while one is executing.
+ * - Start/stop:           Accumulation begins on goal acceptance and ends on success, cancel, or timeout.
+ * 
+ * Goal fields (overrides; if 0/false, use node params):
+ * - average_window : [int] Number of measurements to accumulate before computing the result.
+ * - do_second_pass : [bool] Enable the 2nd bilateral smoothing pass.
+ * - timeout_sec    : [int] Abort if not finished before this many seconds (0 = no timeout).
+ * 
+ * Feedback (sent after each processed cloud):
+ * - collected               : [int] k out of average_window
+ * - current_mean_gradient   : [double] Mean slope (deg) for the latest cloud
+ * - current_rmse_gradient   : [double] RMS slope (deg) for the latest cloud
+ * - current_max_gradient    : [double] Max slope (deg) for the latest cloud
+ * 
+ * Result (returned on success/abort):
+ * - grading_success     : [bool] True if (max_gradient - mean_gradient) <= max_traversal_slope_deg
+ * - mean_gradient       : [double] Trimmed mean of smoothed slopes (deg)
+ * - rmse_gradient       : [double] Trimmed RMS of smoothed slopes (deg)
+ * - max_gradient        : [double] Trimmed maximum of smoothed slopes (deg)
+ * - max_traversal_slope : [double] (max_gradient - mean_gradient), a conservative margin (deg)
+ * - frame_id            : [string] Frame of the analyzed cloud
  *
  * Parameters:
  * - average_window          : [int] Number of measurements to accumulate before publishing (default: 10).
@@ -48,6 +72,10 @@
  * - do_second_pass          : [bool] Enable the 2nd bilateral pass (default: false).
  * - sigma_spatial_m         : [double] Bilateral spatial sigma (meters) (default: 0.10).
  * - sigma_slope_deg         : [double] Bilateral range sigma (degrees) (default: 5.0).
+ * 
+ * Example (CLI with feedback):
+ * ros2 action send_goal /validation/run lr_msgs/action/RunValidation \
+ *   '{"average_window": 10, "do_second_pass": true, "timeout_sec": 0}' --feedback
  */
 
 
@@ -98,32 +126,93 @@ ValidationNode::ValidationNode() : Node("validation_node")
     this->declare_parameter<double>("sigma_slope_deg", 5.0);
     this->get_parameter("sigma_slope_deg", sigma_slope_deg_);
 
-    // Publishers
-    validation_pub_ = this->create_publisher<lr_msgs::msg::Validation>(
-        "/validation/elevation_data", 10);
-
     // Subscribers
-    enable_validation_sub_ = this->create_subscription<std_msgs::msg::Bool>(
-        "/validation/enable_validation",
-        10,
-        std::bind(&ValidationNode::enableCallback, this, std::placeholders::_1)
-    );
-
     pointcloud_sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
         "/mapping/transformed_pointcloud",
         rclcpp::SensorDataQoS(),
         std::bind(&ValidationNode::cloudCallback, this, std::placeholders::_1)
     );
 
+    // Action Servers
+    action_server_ = rclcpp_action::create_server<RunValidation>(
+        this,
+        "/validation/run",
+        std::bind(&ValidationNode::handleGoal, this, std::placeholders::_1, std::placeholders::_2),
+        std::bind(&ValidationNode::handleCancel, this, std::placeholders::_1),
+        std::bind(&ValidationNode::handleAccepted, this, std::placeholders::_1)
+    );
+
     // Initialization complete
-    RCLCPP_INFO(this->get_logger(), "Validation node initialized");
+    RCLCPP_INFO(this->get_logger(), "Validation action server initialized");
 }
 
 
-void ValidationNode::enableCallback(const std_msgs::msg::Bool::SharedPtr msg)
+rclcpp_action::GoalResponse ValidationNode::handleGoal(const rclcpp_action::GoalUUID &, std::shared_ptr<const RunValidation::Goal> goal)
 {
-    enabled_ = msg->data;
-    RCLCPP_INFO(this->get_logger(), "Validation enabled: %s", enabled_ ? "true" : "false");
+    (void)goal;
+    std::scoped_lock lk(goal_mutex_);
+    if (active_goal_)
+    {
+        RCLCPP_WARN(this->get_logger(), "Rejecting new goal: another goal is active.");
+        return rclcpp_action::GoalResponse::REJECT;
+    }
+    return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
+}
+
+
+rclcpp_action::CancelResponse ValidationNode::handleCancel(const std::shared_ptr<GoalHandleRV> goal_handle)
+{
+    std::scoped_lock lk(goal_mutex_);
+    if (active_goal_ && goal_handle == active_goal_)
+    {
+        enabled_ = false;
+        resetAccumulators();
+        RCLCPP_INFO(this->get_logger(), "Validation goal canceled.");
+        return rclcpp_action::CancelResponse::ACCEPT;
+    }
+    return rclcpp_action::CancelResponse::REJECT;
+}
+
+
+void ValidationNode::handleAccepted(const std::shared_ptr<GoalHandleRV> goal_handle)
+{
+    std::scoped_lock lk(goal_mutex_);
+    active_goal_ = goal_handle;
+
+    const auto &g = *goal_handle->get_goal();
+    if (g.average_window > 0)
+        average_window_ = g.average_window;
+    if (g.do_second_pass)
+        do_second_pass_ = g.do_second_pass;
+
+    if (g.timeout_sec > 0)
+    {
+        timeout_timer_ = this->create_wall_timer(
+            std::chrono::seconds(g.timeout_sec),
+            [this, gh = goal_handle]()
+            {
+                std::scoped_lock lk(goal_mutex_);
+                if (!active_goal_ || gh != active_goal_)
+                    return;
+                enabled_ = false;
+                resetAccumulators();
+                auto res = RunValidation::Result();
+                RCLCPP_WARN(this->get_logger(), "Validation timed out.");
+                gh->abort(std::make_shared<RunValidation::Result>(res));
+                active_goal_.reset();
+                timeout_timer_.reset();
+            });
+    }
+    else
+    {
+        timeout_timer_.reset();
+    }
+
+    // Start accumulation
+    resetAccumulators();
+    enabled_ = true;
+    RCLCPP_INFO(this->get_logger(), "Validation goal started (average_window=%d, 2nd_pass=%s)",
+                average_window_, do_second_pass_ ? "true" : "false");
 }
 
 
@@ -214,6 +303,19 @@ void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPt
         return;
     }
 
+    // Send action feedback
+    {
+        std::scoped_lock lk(goal_mutex_);
+        if (active_goal_) {
+        auto fb = RunValidation::Feedback();
+        fb.collected = ++collected_;
+        fb.current_mean_gradient = mean_deg;
+        fb.current_rmse_gradient = rmse_deg;
+        fb.current_max_gradient  = max_deg;
+        active_goal_->publish_feedback(std::make_shared<RunValidation::Feedback>(fb));
+        }
+    }
+
     mean_v_.push_back(mean_deg);
     rmse_v_.push_back(rmse_deg);
     max_v_.push_back(max_deg);
@@ -237,32 +339,31 @@ void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPt
     const double avg_max_traversal_slope = max_deg_avg - mean_deg_avg;
     const bool avg_grading_success = (avg_max_traversal_slope <= max_traversal_slope_deg_);
 
-    lr_msgs::msg::Validation out_msg;
-
-    out_msg.header.stamp = this->get_clock()->now();
-    out_msg.header.frame_id = msg->header.frame_id;
-
-    out_msg.grading_success = avg_grading_success;
-    out_msg.mean_gradient = mean_deg_avg;
-    out_msg.rmse_gradient = rmse_deg_avg;
-    out_msg.max_gradient = max_deg_avg;
-    out_msg.max_traversal_slope = avg_max_traversal_slope;
-
-    validation_pub_->publish(out_msg);
-
-    RCLCPP_INFO(this->get_logger(),
-                "Validation: success=%s, mean=%.2f deg, rmse=%.2f deg, max=%.2f deg, max_traversal=%.2f deg (thresh=%.2f deg)",
-                avg_grading_success ? "true" : "false",
-                mean_deg_avg,
-                rmse_deg_avg,
-                max_deg_avg,
-                avg_max_traversal_slope,
-                max_traversal_slope_deg_);
+    // Send action result
+    {
+        std::scoped_lock lk(goal_mutex_);
+        if (active_goal_)
+        {
+            RunValidation::Result res;
+            res.grading_success = avg_grading_success;
+            res.mean_gradient = mean_deg_avg;
+            res.rmse_gradient = rmse_deg_avg;
+            res.max_gradient = max_deg_avg;
+            res.max_traversal_slope = avg_max_traversal_slope;
+            res.frame_id = msg->header.frame_id;
+            active_goal_->succeed(std::make_shared<RunValidation::Result>(res));
+            RCLCPP_INFO(this->get_logger(),
+                        "Validation DONE: success=%s mean=%.2f rmse=%.2f max=%.2f max_trav=%.2f (th=%.2f)",
+                        avg_grading_success ? "true" : "false",
+                        mean_deg_avg, rmse_deg_avg, max_deg_avg,
+                        avg_max_traversal_slope, max_traversal_slope_deg_);
+            active_goal_.reset();
+        }
+    }
     
     enabled_ = false;
-    mean_v_.clear();
-    rmse_v_.clear();
-    max_v_.clear();
+    resetAccumulators();
+    timeout_timer_.reset();
 }
 
 
@@ -369,6 +470,13 @@ void ValidationNode::bilateralSmooth(
         if (wsum > 0.0)
             out_slope[i] = static_cast<float>(ssum / wsum);
     }
+}
+
+
+void ValidationNode::resetAccumulators()
+{
+  mean_v_.clear(); rmse_v_.clear(); max_v_.clear();
+  collected_ = 0;
 }
 
 } // namespace validation

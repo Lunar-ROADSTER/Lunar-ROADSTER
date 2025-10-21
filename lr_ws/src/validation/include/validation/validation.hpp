@@ -2,8 +2,10 @@
 #define VALIDATION_H
 
 #include "rclcpp/rclcpp.hpp"
+#include <rclcpp_action/rclcpp_action.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
 #include <lr_msgs/msg/validation.hpp>
+#include "lr_msgs/action/run_validation.hpp"
 #include <memory>
 #include <std_msgs/msg/bool.hpp>
 
@@ -24,20 +26,36 @@
 
 namespace lr{
 namespace validation{
+
+using RunValidation = lr_msgs::action::RunValidation;
+using GoalHandleRV  = rclcpp_action::ServerGoalHandle<RunValidation>;
     
 class ValidationNode : public rclcpp::Node
 {
     private:
         // Subscribers
         rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr pointcloud_sub_;
-        rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr enable_validation_sub_;
 
-        // Publishers
-        rclcpp::Publisher<lr_msgs::msg::Validation>::SharedPtr validation_pub_;
+        // Action Server
+        rclcpp_action::Server<RunValidation>::SharedPtr action_server_;
+        std::mutex goal_mutex_;
+        std::shared_ptr<GoalHandleRV> active_goal_;
+        rclcpp::TimerBase::SharedPtr timeout_timer_;
+        int collected_ = 0;
+
+        // Action Callbacks
+        rclcpp_action::GoalResponse handleGoal(
+            const rclcpp_action::GoalUUID & uuid,
+            std::shared_ptr<const RunValidation::Goal> goal);
+
+        rclcpp_action::CancelResponse handleCancel(
+            const std::shared_ptr<GoalHandleRV> goal_handle);
+
+        void handleAccepted(const std::shared_ptr<GoalHandleRV> goal_handle);
 
         // Functions
+        void resetAccumulators();
         void cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPtr msg);
-        void enableCallback(const std_msgs::msg::Bool::SharedPtr msg);
         double trimmedAvg(const std::vector<double>& data) const;
         void bilateralSmooth(
             const pcl::PointCloud<pcl::PointXYZ>& cloud,
