@@ -10,12 +10,16 @@
 #include "visualization_msgs/msg/image_marker.hpp"
 #include "ceiltrack/fisheye.hpp"
 
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+
 #include <cstdint>
 #include <utility>
 #include <vector>
 #include <cstring>
 #include <cmath>
 #include <algorithm>
+#include <atomic>
 
 
 namespace lr{
@@ -43,6 +47,8 @@ class CeiltrackNode : public rclcpp::Node
 
         // Parameters
         double cam_tilt_rad_;
+        double xgrid_m_;
+        double ygrid_m_;
         double xgrid_;
         double ygrid_;
         double ceil_height_;
@@ -58,6 +64,7 @@ class CeiltrackNode : public rclcpp::Node
         double home_x_;
         double home_y_;
         double home_theta_;
+        std::atomic<bool> have_home_ref_{false};
 
         float* uvmap_{nullptr};
         int uvmaplen_{0};
@@ -82,6 +89,10 @@ class CeiltrackNode : public rclcpp::Node
                                     std::vector<std::pair<float,float>>& out);
 
         void ceiltrackShutdown();
+
+        inline static double wrapAngle(double a) {
+            return std::atan2(std::sin(a), std::cos(a));
+        }
 
     public:
         // Constructor and destructor
