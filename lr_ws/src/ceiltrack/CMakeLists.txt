@@ -17,6 +17,8 @@ find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
 include_directories(include)
 include_directories(config)
@@ -39,6 +41,8 @@ ament_target_dependencies(ceiltrack_node
   sensor_msgs
   visualization_msgs
   geometry_msgs
+  tf2
+  tf2_geometry_msgs
 )
 
 if(BUILD_TESTING)

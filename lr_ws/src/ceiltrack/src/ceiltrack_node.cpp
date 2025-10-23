@@ -6,8 +6,8 @@
  * Selects bright pixels, and optimizes grid alignment via a closed-form Levenberg–Marquardt
  * update. Publishes both image-plane and metric poses.
  *
- * @version 1.0.0
- * @date 2025-10-19
+ * @version 1.0.1
+ * @date 2025-10-22
  * 
  * Maintainer: Boxiang (William) Fu  
  * Team: Lunar ROADSTER  
@@ -24,8 +24,8 @@
  *
  * Parameters:
  * - cam_tilt_rad : [double] Camera tilt angle from vertical (radians).
- * - xgrid : [double] Grid spacing in x (unitless).
- * - ygrid : [double] Grid spacing in y (unitless).
+ * - xgrid_m : [double] Grid spacing in x (meters).
+ * - ygrid_m : [double] Grid spacing in y (meters).
  * - ceil_height : [double] Ceiling height (meters).
  * - threshold : [int] Brightness threshold.
  * - niter : [int] Number of iterations for optimization.
@@ -62,14 +62,16 @@ CeiltrackNode::CeiltrackNode() : Node("ceiltrack_node")
     this->declare_parameter<double>("cam_tilt_rad", 0.0);
     cam_tilt_rad_ = this->get_parameter("cam_tilt_rad").as_double();
 
-    this->declare_parameter<double>("xgrid", 0.25);
-    xgrid_ = this->get_parameter("xgrid").as_double();
-
-    this->declare_parameter<double>("ygrid", 0.25);
-    ygrid_ = this->get_parameter("ygrid").as_double();
-
     this->declare_parameter<double>("ceil_height", 2.5);
     ceil_height_ = this->get_parameter("ceil_height").as_double();
+
+    this->declare_parameter<double>("xgrid_m", 0.25);
+    xgrid_m_ = this->get_parameter("xgrid_m").as_double();
+    xgrid_ = xgrid_m_ / ceil_height_;
+
+    this->declare_parameter<double>("ygrid_m", 0.25);
+    ygrid_m_ = this->get_parameter("ygrid_m").as_double();
+    ygrid_ = ygrid_m_ / ceil_height_;
 
     this->declare_parameter<int>("threshold", 233);
     threshold_ = this->get_parameter("threshold").as_int();
@@ -453,33 +455,49 @@ void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
         xytheta_,
         niter_);
 
+    const double u_abs = static_cast<double>(xytheta_[0]);
+    const double v_abs = static_cast<double>(xytheta_[1]);
+    const double th_cam_abs = static_cast<double>(xytheta_[2]);
+    const double yaw_abs = -th_cam_abs;
+    const double X_abs = -u_abs * ceil_height_;
+    const double Y_abs = -v_abs * ceil_height_;
+
+    double X_rel = X_abs;
+    double Y_rel = Y_abs;
+    double yaw_rel = yaw_abs;
+
+    if (have_home_ref_.load())
+    {
+        X_rel = X_abs - home_x_;
+        Y_rel = Y_abs - home_y_;
+        yaw_rel = wrapAngle(yaw_abs - home_theta_);
+    }
+
+    const double u_rel = -X_rel / ceil_height_;
+    const double v_rel = -Y_rel / ceil_height_;
+    const double th_cam_rel = -yaw_rel;
+
     // Publish camera coordinate frame pose
     geometry_msgs::msg::Pose2D p_camera;
-    p_camera.x = xytheta_[0];
-    p_camera.y = xytheta_[1];
-    p_camera.theta = xytheta_[2];
+    p_camera.x = u_rel;
+    p_camera.y = v_rel;
+    p_camera.theta = th_cam_rel;
     pose_camera_pub_->publish(p_camera);
 
     // Publish world coordinate frame pose
     geometry_msgs::msg::PoseWithCovarianceStamped p_world;
     p_world.header = msg->header;
-    p_world.header.frame_id = "total_station_prism";
-
-    // Negate to convert bottom-up to top-down coordinates
-    const double X = -static_cast<double>(xytheta_[0]) * ceil_height_;
-    const double Y = -static_cast<double>(xytheta_[1]) * ceil_height_;
-    p_world.pose.pose.position.x = X;
-    p_world.pose.pose.position.y = Y;
+    p_world.header.frame_id = "map";
+    p_world.pose.pose.position.x = X_rel;
+    p_world.pose.pose.position.y = Y_rel;
     p_world.pose.pose.position.z = 0.0;
 
-    // At the moment do not calculate orientation
-    p_world.pose.pose.orientation.x = 0.0;
-    p_world.pose.pose.orientation.y = 0.0;
-    p_world.pose.pose.orientation.z = 0.0;
-    p_world.pose.pose.orientation.w = 1.0;
+    tf2::Quaternion q;
+    q.setRPY(0.0, 0.0, yaw_rel);
+    p_world.pose.pose.orientation = tf2::toMsg(q);
 
-    for (double &c : p_world.pose.covariance) c = 0.0;
-
+    for (double &c : p_world.pose.covariance)
+        c = 0.0;
     pose_world_pub_->publish(p_world);
 
     // Publish image overlay with grid points
@@ -529,23 +547,31 @@ void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 
     // DEBUG
     RCLCPP_INFO(this->get_logger(),
-                "cost=%.6f  pose(u=%.4f, v=%.4f, th=%.4f)  (thresh=%d, niter=%d)",
-                cost, xytheta_[0], xytheta_[1], xytheta_[2], threshold_, niter_);
+                "cost=%.6f, camera pose(u=%.4f, v=%.4f, th=%.4f), world pose(X=%.4f, Y=%.4f, yaw=%.4f)",
+                cost,
+                u_rel, v_rel, th_cam_rel,
+                X_rel, Y_rel, yaw_rel);
 }
 
 
 void CeiltrackNode::setHomeCallback(const std_msgs::msg::Bool::SharedPtr msg)
 {
-    if (msg->data)
-    {
-        xytheta_[0] = home_x_;
-        xytheta_[1] = home_y_;
-        xytheta_[2] = home_theta_;
+    if (!msg->data) return;
 
-        RCLCPP_INFO(this->get_logger(), "Ceiltrack home reset: xytheta set to %.4f, %.4f, %.4f",
-                    xytheta_[0], xytheta_[1], xytheta_[2]);
-    }
+    const double X_now = -static_cast<double>(xytheta_[0]) * ceil_height_;
+    const double Y_now = -static_cast<double>(xytheta_[1]) * ceil_height_;
+    const double yaw_now = -static_cast<double>(xytheta_[2]);
+
+    home_x_ = X_now;
+    home_y_ = Y_now;
+    home_theta_ = yaw_now;
+    have_home_ref_.store(true);
+
+    RCLCPP_INFO(this->get_logger(),
+        "Home set to current world pose: X=%.4f, Y=%.4f, yaw=%.4f rad",
+        home_x_, home_y_, home_theta_);
 }
+
 
 } // namespace ceiltrack
 } // namespace lr
