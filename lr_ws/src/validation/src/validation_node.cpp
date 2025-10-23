@@ -10,25 +10,18 @@
  *  4) One- or two-pass bilateral smoothing in space–range (meters/degrees).
  *  5) Windowed aggregation with trimmed mean (drop lowest/highest values).
  *
- * After accumulating a window of measurements, it publishes a single summary:
- *  - mean_gradient : Trimmed mean of smoothed slopes (deg).
- *  - rmse_gradient : Trimmed RMS of smoothed slopes (deg).
- *  - max_gradient : Trimmed maximum of smoothed slopes (deg).
- *  - max_traversal_slope : (max_gradient - mean_gradient), a conservative margin (deg).
- *  - grading_success : true if max_traversal_slope <= max_traversal_slope_deg.
- *
- * Processing runs only while `enabled_` is true (toggled by /validation/enable_validation). When a
+ * Processing runs only while `enabled_` is true (toggled by action /validation/run). When a
  * summary is published, the node disables itself, clears accumulators, and waits for the next enable.
  *
- * @version 2.1.0
- * @date 2025-10-21
+ * @version 2.1.1
+ * @date 2025-10-22
  *
  * Maintainer: Boxiang (William) Fu  
  * Team: Lunar ROADSTER
  * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
  *
  * Subscribers:
- * - /mapping/transformed_pointcloud : [sensor_msgs::msg::PointCloud2] World-aligned (or map-frame) cloud.
+ * - /mapping/transformed_pointcloud : [sensor_msgs::msg::PointCloud2] base_link-aligned cloud.
  *
  * Actions:
  * - /validation/run : [lr_msgs::action::RunValidation] Triggers a validation run with feedback/result.
@@ -49,12 +42,18 @@
  * - current_mean_gradient   : [double] Mean slope (deg) for the latest cloud
  * - current_rmse_gradient   : [double] RMS slope (deg) for the latest cloud
  * - current_max_gradient    : [double] Max slope (deg) for the latest cloud
+ * - current_min_z           : [double] Minimum z (m) for the latest cloud
+ * - current_max_z           : [double] Maximum z (m) for the latest cloud
+ * - current_avg_z           : [double] Average z (m) for the latest cloud
  * 
  * Result (returned on success/abort):
  * - grading_success     : [bool] True if (max_gradient - mean_gradient) <= max_traversal_slope_deg
  * - mean_gradient       : [double] Trimmed mean of smoothed slopes (deg)
  * - rmse_gradient       : [double] Trimmed RMS of smoothed slopes (deg)
  * - max_gradient        : [double] Trimmed maximum of smoothed slopes (deg)
+ * - min_z               : [double] Trimmed minimum z (m)
+ * - max_z               : [double] Trimmed maximum z (m)
+ * - avg_z               : [double] Trimmed average z (m)
  * - max_traversal_slope : [double] (max_gradient - mean_gradient), a conservative margin (deg)
  * - frame_id            : [string] Frame of the analyzed cloud
  *
@@ -283,6 +282,42 @@ void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPt
         slope_final = slope_sm1;
     }
 
+    // Compute min/max z and points
+    double min_z = std::numeric_limits<double>::infinity();
+    double max_z = -std::numeric_limits<double>::infinity();
+    pcl::PointXYZ min_pt, max_pt;
+
+    for (size_t i = 0; i < N; ++i)
+    {
+        if (is_wall[i])
+            continue;
+        const auto &p = cloud_ds->points[i];
+        if (!std::isfinite(p.x) || !std::isfinite(p.y) || !std::isfinite(p.z))
+            continue;
+        const double z = static_cast<double>(p.z);
+        if (z < min_z)
+        {
+            min_z = z;
+            min_pt = p;
+        }
+        if (z > max_z)
+        {
+            max_z = z;
+            max_pt = p;
+        }
+    }
+
+    if (!std::isfinite(min_z) || !std::isfinite(max_z))
+    {
+        RCLCPP_WARN(this->get_logger(), "No valid non-wall points for extrema");
+        return;
+    }
+
+    curr_min_z_ = min_z;
+    curr_max_z_ = max_z;
+    curr_min_pt_ = min_pt;
+    curr_max_pt_ = max_pt;
+
     // Compute statistics
     double sum = 0.0, sse = 0.0, max_deg = 0.0; int count = 0;
     for (size_t i = 0; i < N; ++i) {
@@ -296,6 +331,7 @@ void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPt
 
     const double mean_deg = sum / static_cast<double>(count);
     const double rmse_deg = std::sqrt(sse / static_cast<double>(count));
+    const double curr_avg_z = 0.5 * (curr_min_z_ + curr_max_z_);
 
     // Publish results
     if (count == 0 || !std::isfinite(mean_deg) || !std::isfinite(rmse_deg) || !std::isfinite(max_deg)) {
@@ -312,6 +348,9 @@ void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPt
         fb.current_mean_gradient = mean_deg;
         fb.current_rmse_gradient = rmse_deg;
         fb.current_max_gradient  = max_deg;
+        fb.current_min_z = curr_min_z_;
+        fb.current_max_z = curr_max_z_;
+        fb.current_avg_z = curr_avg_z;
         active_goal_->publish_feedback(std::make_shared<RunValidation::Feedback>(fb));
         }
     }
@@ -319,22 +358,26 @@ void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPt
     mean_v_.push_back(mean_deg);
     rmse_v_.push_back(rmse_deg);
     max_v_.push_back(max_deg);
+    min_z_v_.push_back(curr_min_z_);
+    max_z_v_.push_back(curr_max_z_);
 
     const bool window_ready = (mean_v_.size() >= static_cast<size_t>(average_window_));
     if (!window_ready) {
         RCLCPP_INFO(this->get_logger(), "Accumulating: %zu/%d",
                     mean_v_.size(), average_window_);
         
-        // Debugging
-        // RCLCPP_INFO(this->get_logger(),
-        //             "Current stats: mean=%.2f deg, rmse=%.2f deg, max=%.2f deg",
-        //             mean_deg, rmse_deg, max_deg);
+        RCLCPP_INFO(this->get_logger(),
+                    "Current stats: mean=%.2f deg, rmse=%.2f deg, max=%.2f deg, max_z=%.2f m, min_z=%.2f m avg_z=%.2f m",
+                    mean_deg, rmse_deg, max_deg, curr_max_z_, curr_min_z_, curr_avg_z);
         return;
     }
 
     const double mean_deg_avg = trimmedAvg(mean_v_);
     const double rmse_deg_avg = trimmedAvg(rmse_v_);
     const double max_deg_avg = trimmedAvg(max_v_);
+    const double min_z_avg = trimmedAvg(min_z_v_);
+    const double max_z_avg = trimmedAvg(max_z_v_);
+    const double avg_z_avg = 0.5 * (min_z_avg + max_z_avg);
 
     const double avg_max_traversal_slope = max_deg_avg - mean_deg_avg;
     const bool avg_grading_success = (avg_max_traversal_slope <= max_traversal_slope_deg_);
@@ -344,19 +387,24 @@ void ValidationNode::cloudCallback(const sensor_msgs::msg::PointCloud2::SharedPt
         std::scoped_lock lk(goal_mutex_);
         if (active_goal_)
         {
+            
             RunValidation::Result res;
             res.grading_success = avg_grading_success;
             res.mean_gradient = mean_deg_avg;
             res.rmse_gradient = rmse_deg_avg;
             res.max_gradient = max_deg_avg;
+            res.min_z = min_z_avg;
+            res.max_z = max_z_avg;
+            res.avg_z = avg_z_avg;
             res.max_traversal_slope = avg_max_traversal_slope;
             res.frame_id = msg->header.frame_id;
             active_goal_->succeed(std::make_shared<RunValidation::Result>(res));
+            
             RCLCPP_INFO(this->get_logger(),
-                        "Validation DONE: success=%s mean=%.2f rmse=%.2f max=%.2f max_trav=%.2f (th=%.2f)",
+                        "Validation DONE: success=%s mean=%.2f rmse=%.2f max=%.2f max_trav=%.2f min_z=%.2f max_z=%.2f avg_z=%.2f (th=%.2f)",
                         avg_grading_success ? "true" : "false",
                         mean_deg_avg, rmse_deg_avg, max_deg_avg,
-                        avg_max_traversal_slope, max_traversal_slope_deg_);
+                        avg_max_traversal_slope, min_z_avg, max_z_avg, avg_z_avg, max_traversal_slope_deg_);
             active_goal_.reset();
         }
     }
@@ -475,8 +523,18 @@ void ValidationNode::bilateralSmooth(
 
 void ValidationNode::resetAccumulators()
 {
-  mean_v_.clear(); rmse_v_.clear(); max_v_.clear();
-  collected_ = 0;
+    mean_v_.clear();
+    rmse_v_.clear();
+    max_v_.clear();
+    min_z_v_.clear();
+    max_z_v_.clear();
+
+    curr_min_z_ = std::numeric_limits<double>::infinity();
+    curr_max_z_ = -std::numeric_limits<double>::infinity();
+    curr_min_pt_ = {};
+    curr_max_pt_ = {};
+
+    collected_ = 0;
 }
 
 } // namespace validation

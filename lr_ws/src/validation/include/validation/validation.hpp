@@ -75,6 +75,11 @@ class ValidationNode : public rclcpp::Node
         int omp_threads_;     // Threads for NormalEstimationOMP
         int knn_normals_;     // K for normal estimation
 
+        double curr_min_z_{std::numeric_limits<double>::infinity()};
+        double curr_max_z_{-std::numeric_limits<double>::infinity()};
+        pcl::PointXYZ curr_min_pt_{};
+        pcl::PointXYZ curr_max_pt_{};
+
         double max_keep_slope_deg_;
         double wall_jump_thresh_m_;
 
@@ -88,6 +93,8 @@ class ValidationNode : public rclcpp::Node
         std::vector<double> mean_v_;
         std::vector<double> rmse_v_;
         std::vector<double> max_v_;
+        std::vector<double> min_z_v_;
+        std::vector<double> max_z_v_;
 
     public:
         // Constructor and destructor
