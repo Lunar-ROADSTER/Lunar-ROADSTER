@@ -19,7 +19,7 @@ if(BUILD_TESTING)
 endif()
 
 # Install directories
-install(DIRECTORY launch
+install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
 )
 

@@ -10,7 +10,7 @@ namespace planning {
 class SiteWorkDone : public FSM {
 
 public:
-  // void runState(const cg::mapping::Map<float> &current_height_map, const cg::mapping::Map<float> &design_height_map, float topology_equality_threshold);
+  // void runState(const lr::mapping::Map<float> &current_height_map, const lr::mapping::Map<float> &design_height_map, float topology_equality_threshold);
   void runState();
 
 }; // class State
