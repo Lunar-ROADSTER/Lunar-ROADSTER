@@ -172,6 +172,8 @@ namespace navigation
         std::vector<NodeState> sub_goals_;
         nav_msgs::msg::Path final_planned_path_;
 
+        double weight_data_{0.0}, weight_smooth_{0.0};
+
         void loadParams();
         void mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr map_msg);
         void craterCentroidsCallback(const geometry_msgs::msg::PoseArray::SharedPtr centroids_msg);
