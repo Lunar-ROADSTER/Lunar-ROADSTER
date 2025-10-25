@@ -64,6 +64,9 @@ class CeiltrackNode : public rclcpp::Node
         double home_x_;
         double home_y_;
         double home_theta_;
+        double home_x_init_;
+        double home_y_init_;
+        double home_theta_init_;
         std::atomic<bool> have_home_ref_{false};
 
         float* uvmap_{nullptr};

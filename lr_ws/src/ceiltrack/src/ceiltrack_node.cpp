@@ -19,7 +19,7 @@
  *
  * Publishers:
  * - /ceiling_pose : [geometry_msgs::msg::Pose2D] Pose in image-plane units.
- * - /total_station_prism : [geometry_msgs::msg::PoseWithCovarianceStamped] Pose in world coordinates.
+ * - /ceiling_pose_with_covariance : [geometry_msgs::msg::PoseWithCovarianceStamped] Pose in world coordinates.
  * - /ceiling_image_marker : [sensor_msgs::msg::Image] Debug image with grid overlay.
  *
  * Parameters:
@@ -112,11 +112,20 @@ CeiltrackNode::CeiltrackNode() : Node("ceiltrack_node")
     this->declare_parameter<double>("home.x", 0.0);
     home_x_ = this->get_parameter("home.x").as_double();
 
+    this->declare_parameter<double>("home.x_init", 0.0);
+    home_x_init_ = this->get_parameter("home.x_init").as_double();
+
     this->declare_parameter<double>("home.y", 0.0);
     home_y_ = this->get_parameter("home.y").as_double();
 
+    this->declare_parameter<double>("home.y_init", 0.0);
+    home_y_init_ = this->get_parameter("home.y_init").as_double();
+
     this->declare_parameter<double>("home.theta", 0.0);
     home_theta_ = this->get_parameter("home.theta").as_double();
+
+    this->declare_parameter<double>("home.theta_init", 0.0);
+    home_theta_init_ = this->get_parameter("home.theta_init").as_double();
 
     // Fisheye calibration
     lens_.SetCalibration(static_cast<float>(fx), static_cast<float>(fy),
@@ -127,7 +136,7 @@ CeiltrackNode::CeiltrackNode() : Node("ceiltrack_node")
     
     // Publishers
     pose_camera_pub_ = this->create_publisher<geometry_msgs::msg::Pose2D>("ceiling_pose", 10);
-    pose_world_pub_ = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("total_station_prism", 10);
+    pose_world_pub_ = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("ceiling_pose_with_covariance", 10);
     image_marker_pub_ = this->create_publisher<sensor_msgs::msg::Image>("ceiling_image_marker", 10);
 
     // Subscribers
@@ -468,8 +477,8 @@ void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 
     if (have_home_ref_.load())
     {
-        X_rel = X_abs - home_x_;
-        Y_rel = Y_abs - home_y_;
+        X_rel = X_abs - home_x_ + home_x_init_;
+        Y_rel = Y_abs - home_y_ + home_y_init_;
         yaw_rel = wrapAngle(yaw_abs - home_theta_);
     }
 
