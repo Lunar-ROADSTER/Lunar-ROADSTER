@@ -66,6 +66,9 @@ namespace navigation
         declare_parameter("yaw_tolerance_deg", 15.0);
         declare_parameter("max_expansions", max_expansions_);
 
+        declare_parameter("weight_data", weight_data_);
+        declare_parameter("weight_smooth", weight_smooth_);
+
         get_parameter("crater_threshold", crater_threshold_);
         get_parameter("ring_bias_k", ring_bias_k_);
         get_parameter("align_k", align_k_);
@@ -101,6 +104,9 @@ namespace navigation
         yaw_tolerance_ = yaw_tol_deg * M_PI / 180.0;
 
         get_parameter("max_expansions", max_expansions_);
+
+        get_parameter("weight_data", weight_data_);
+        get_parameter("weight_smooth", weight_smooth_);
     }
 
     void AStarPlanner::mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr map_msg)
@@ -268,7 +274,7 @@ namespace navigation
 
             if (!final_planned_path_.poses.empty())
             {
-                smoothPath(final_planned_path_, 0.1, 1.0);
+                smoothPath(final_planned_path_, weight_smooth_, weight_data_);
                 planned_path_pub_->publish(final_planned_path_);
             }
 
@@ -346,11 +352,11 @@ namespace navigation
         std::vector<geometry_msgs::msg::PoseStamped> viz_pts;
         if (ring_total_length_ > 0)
         {
-            for (double s = 0; s < ring_total_length_; s += 0.2) 
+            for (double s = 0; s < ring_total_length_; s += 0.2)
             {
                 viz_pts.push_back(getPoseAtS(s));
             }
-            viz_pts.push_back(getPoseAtS(0)); 
+            viz_pts.push_back(getPoseAtS(0));
         }
         return viz_pts;
     }
@@ -367,7 +373,7 @@ namespace navigation
 
     void AStarPlanner::updateRingCache(const std::vector<geometry_msgs::msg::PoseStamped> &pts)
     {
-        ring_pts_ = pts; 
+        ring_pts_ = pts;
         if (ring_pts_.size() < 3)
             return;
 
@@ -450,7 +456,7 @@ namespace navigation
         }
 
         double best_d2 = std::numeric_limits<double>::infinity();
-        const int samples_per_segment = 20; 
+        const int samples_per_segment = 20;
 
         for (size_t i = 0; i < ring_pts_.size(); ++i)
         {
@@ -592,7 +598,7 @@ namespace navigation
         m.pose.position.y = y;
         m.pose.position.z = 0.05;
         m.pose.orientation = yawToQuat(yaw);
-        m.scale.x = 1.0;
+        m.scale.x = 0.5;
         m.scale.y = 0.15;
         m.scale.z = 0.25;
         m.color.a = 1.0;
@@ -651,8 +657,8 @@ namespace navigation
         const auto &info = map_.info;
         const int idx = my * static_cast<int>(info.width) + mx;
         if (idx < 0 || idx >= static_cast<int>(map_.data.size()))
-            return -1;         
-        return map_.data[idx]; 
+            return -1;
+        return map_.data[idx];
     }
 
     double AStarPlanner::obstacleCostAlongPrimitive(const NodeState &from, double kappa, double length) const
@@ -1025,11 +1031,11 @@ namespace navigation
     {
         if (path.poses.size() <= 2)
         {
-            return; 
+            return;
         }
 
         nav_msgs::msg::Path original_path = path;
-        int iterations = 50; 
+        int iterations = 50;
 
         for (int i = 0; i < iterations; ++i)
         {

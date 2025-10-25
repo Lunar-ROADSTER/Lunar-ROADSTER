@@ -1,33 +1,36 @@
 global_astar_planner:
   ros__parameters:
     # --- Crater classification ---
-    crater_threshold: 3.9            # meters; <= is gradable, > is obstacle
+    crater_threshold: 0.5            # meters; <= is gradable, > is obstacle
 
     # --- Ring bias + alignment (behavior shaping) ---
-    ring_bias_k: 5.0                 # How strongly the rover is pulled towards the crater ring during planning
-    align_k: 0.2                     # how much the rover is penalized for not facing in the same direction as the ring tangent
+    ring_bias_k: 10.0                 # How strongly the rover is pulled towards the crater ring during planning
+    align_k: 0.5                     # how much the rover is penalized for not facing in the same direction as the ring tangent
 
     # --- Vehicle + motion primitive settings ---
     wheelbase: 0.7                   # meters
-    step_length: 0.5                 # meters per primitive
+    step_length: 0.2 #0.5                 # meters per primitive
     max_steer_front_deg: 25.0        # degrees 
     max_steer_rear_deg: 25.0         # degrees 
     steer_scale: [0.0, 0.5, -0.5, 0.4, -0.4]  
 
     # --- Obstacle/costmap sampling ---
-    occupancy_threshold: 50          # >= blocked 
-    obstacle_weight: 5.0             # weight for soft obstacle cost
-    sample_ds: 0.1                   # m between samples along a primitive
+    occupancy_threshold: 65          # >= blocked 
+    obstacle_weight: 0.0             # weight for soft obstacle cost
+    sample_ds: 0.05                   # m between samples along a primitive
 
     # --- Planning start/goal and search limits ---
     # start_x: 0.0
     # start_y: 0.0
     # start_yaw_deg: 0.0
-    goal_x: 0.0
-    goal_y: 0.0
-    goal_yaw_deg: 0.0
-    goal_ccw_advance: 8.0            # meters of arc-length to plan ahead along ring
-    goal_s_tolerance: 0.5            # meters along-ring tolerance
-    xy_tolerance: 0.1                # meters positional tolerance
-    yaw_tolerance_deg: 10.0          # degrees yaw tolerance
-    max_expansions: 5000             # A* node expansion cap
+    goal_x: 1.379673719406128
+    goal_y: 3.705350399017334
+    goal_yaw_deg: -86.6
+    goal_ccw_advance: 0.0            # meters of arc-length to plan ahead along ring
+    goal_s_tolerance: 0.3            # meters along-ring tolerance
+    xy_tolerance: 1.0                # meters positional tolerance
+    yaw_tolerance_deg: 20.0          # degrees yaw tolerance
+    max_expansions: 5000000          # A* node expansion cap
+
+    weight_data: 0.8
+    weight_smooth: 0.9
