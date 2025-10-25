@@ -10,6 +10,8 @@
 #include <std_msgs/msg/float32_multi_array.hpp>
 #include <visualization_msgs/msg/marker_array.hpp>
 #include <tf2/LinearMath/Quaternion.h>
+#include <tf2_ros/transform_listener.h>
+#include <tf2_ros/buffer.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <tf2/utils.h>
 
@@ -132,10 +134,14 @@ namespace navigation
 
         rclcpp::TimerBase::SharedPtr timer_;
 
+        std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+        std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+
         nav_msgs::msg::OccupancyGrid map_;
         bool map_loaded_ = false;
 
         bool got_start_pose_{false};
+        bool got_goal_pose_{false};
 
         std::vector<geometry_msgs::msg::Point> crater_centroids_;
         std::vector<float> crater_diameters_;
@@ -173,6 +179,8 @@ namespace navigation
         nav_msgs::msg::Path final_planned_path_;
 
         double weight_data_{0.0}, weight_smooth_{0.0};
+
+        bool lookupBaseInMap(geometry_msgs::msg::PoseStamped& out) const;
 
         void loadParams();
         void mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr map_msg);
