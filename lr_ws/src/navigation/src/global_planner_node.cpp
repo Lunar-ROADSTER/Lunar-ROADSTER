@@ -192,7 +192,7 @@ namespace navigation
         goal_y_ = map_goal.pose.position.y;
         goal_yaw_ = angleWrap(tf2::getYaw(map_goal.pose.orientation));
 
-        got_goal_pose_.store(true);
+        got_goal_pose_ = true;
 
         RCLCPP_INFO(get_logger(), "Goal set from /goal_pose: (%.2f, %.2f, %.1f°)",
                     goal_x_, goal_y_, goal_yaw_ * 180.0 / M_PI);
@@ -264,7 +264,7 @@ namespace navigation
             return;
         }
 
-        if (!got_goal_pose_.load())
+        if (!got_goal_pose_)
         {
             RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 2000,
                                  "No goal yet. Click a goal in RViz on /goal_pose.");

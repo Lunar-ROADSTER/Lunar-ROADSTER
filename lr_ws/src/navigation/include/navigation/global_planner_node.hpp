@@ -141,7 +141,7 @@ namespace navigation
         bool map_loaded_ = false;
 
         bool got_start_pose_{false};
-        bool got_goal_pose_{false};
+        bool got_goal_pose_ = false;
 
         std::vector<geometry_msgs::msg::Point> crater_centroids_;
         std::vector<float> crater_diameters_;
