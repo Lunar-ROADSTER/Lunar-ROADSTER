@@ -4,6 +4,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/bool.hpp"
 #include "sensor_msgs/msg/image.hpp"
+#include "sensor_msgs/msg/imu.hpp"
 #include "geometry_msgs/msg/pose2_d.hpp"
 #include "geometry_msgs/msg/pose_with_covariance_stamped.hpp"
 #include "visualization_msgs/msg/marker.hpp"
@@ -13,6 +14,17 @@
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
+#include <opencv2/core.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/calib3d.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/core/matx.hpp>
+#include <opencv2/core/types.hpp>
+#include <opencv2/core/utility.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/imgcodecs/legacy/constants_c.h>
+
 #include <cstdint>
 #include <utility>
 #include <vector>
@@ -20,6 +32,7 @@
 #include <cmath>
 #include <algorithm>
 #include <atomic>
+#include <mutex>
 
 
 namespace lr{
@@ -31,15 +44,18 @@ class CeiltrackNode : public rclcpp::Node
         // Subscribers
         rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr img_sub_;
         rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr set_home_sub_;
+        rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_sub_;
 
         // Publishers
         rclcpp::Publisher<geometry_msgs::msg::Pose2D>::SharedPtr pose_camera_pub_;
         rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr pose_world_pub_;
         rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr image_marker_pub_;
+        rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr deoriented_image_pub_;
 
         // Functions
         void imageCallback(const sensor_msgs::msg::Image::SharedPtr msg);
         void setHomeCallback(const std_msgs::msg::Bool::SharedPtr msg);
+        void imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg);
 
         // Variables
         FisheyeLens lens_;
@@ -76,6 +92,17 @@ class CeiltrackNode : public rclcpp::Node
 
         float xytheta_[3] = {0.f, 0.f, 0.f};
 
+        // IMU orientation
+        std::mutex imu_mutex_;
+        bool have_imu_{false};
+        tf2::Quaternion imu_q_;
+
+        // Camera distortion model
+        cv::Matx33d K_; // Intrinsic matrix
+        cv::Vec4d D_; // Distortion coefficients
+        bool cv_model_ready_{false};
+        cv::Mat deoriented_img_;
+
         // Helper functions
         struct RLEMask;
 
@@ -96,6 +123,8 @@ class CeiltrackNode : public rclcpp::Node
         inline static double wrapAngle(double a) {
             return std::atan2(std::sin(a), std::cos(a));
         }
+
+        void deorientImage(const sensor_msgs::msg::Image::SharedPtr msg);
 
     public:
         // Constructor and destructor

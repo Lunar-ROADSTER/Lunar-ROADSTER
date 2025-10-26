@@ -19,6 +19,7 @@ find_package(visualization_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
 
 include_directories(include)
 include_directories(config)
@@ -32,6 +33,10 @@ add_executable(ceiltrack_node
 target_include_directories(ceiltrack_node PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_SOURCE_DIR}/config
+)
+
+target_link_libraries(ceiltrack_node
+  ${OpenCV_LIBS}
 )
 
 ament_target_dependencies(ceiltrack_node

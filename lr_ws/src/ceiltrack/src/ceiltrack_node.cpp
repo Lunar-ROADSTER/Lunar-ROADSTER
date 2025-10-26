@@ -1,4 +1,8 @@
 /**
+ * TODO: EDIT HEADER
+ * 
+ * 
+ * 
  * @file ceiltrack_node.cpp
  * @brief Ceiling-grid localization using a fisheye camera.
  *
@@ -6,8 +10,8 @@
  * Selects bright pixels, and optimizes grid alignment via a closed-form Levenberg–Marquardt
  * update. Publishes both image-plane and metric poses.
  *
- * @version 1.0.1
- * @date 2025-10-22
+ * @version 1.0.2
+ * @date 2025-10-25
  * 
  * Maintainer: Boxiang (William) Fu  
  * Team: Lunar ROADSTER  
@@ -128,25 +132,36 @@ CeiltrackNode::CeiltrackNode() : Node("ceiltrack_node")
     home_theta_init_ = this->get_parameter("home.theta_init").as_double();
 
     // Fisheye calibration
+    K_ = cv::Matx33d(fx, 0.0, cx,
+                     0.0, fy, cy,
+                     0.0, 0.0, 1.0);
+    D_ = cv::Vec4d(k1, 0.0, 0.0, 0.0);
+    cv_model_ready_ = true;
+
     lens_.SetCalibration(static_cast<float>(fx), static_cast<float>(fy),
                         static_cast<float>(cx), static_cast<float>(cy),
                         static_cast<float>(k1));
     RCLCPP_INFO(this->get_logger(), "Fisheye lens: fx=%.2f, fy=%.2f, cx=%.2f, cy=%.2f, k1=%.6f",
-                lens_.fx, lens_.fy, lens_.cx, lens_.cy, lens_.k1);
-    
+                fx, fy, cx, cy, k1);
+
     // Publishers
     pose_camera_pub_ = this->create_publisher<geometry_msgs::msg::Pose2D>("ceiling_pose", 10);
     pose_world_pub_ = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("ceiling_pose_with_covariance", 10);
     image_marker_pub_ = this->create_publisher<sensor_msgs::msg::Image>("ceiling_image_marker", 10);
+    deoriented_image_pub_ = this->create_publisher<sensor_msgs::msg::Image>("deoriented_ceiling_image", 10);
 
     // Subscribers
     img_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
         "/fisheye_camera/image_raw", rclcpp::SensorDataQoS(),
-        std::bind(&CeiltrackNode::imageCallback, this, std::placeholders::_1)
-    );
+        std::bind(&CeiltrackNode::imageCallback, this, std::placeholders::_1));
+
     set_home_sub_ = this->create_subscription<std_msgs::msg::Bool>(
         "/ceiltrack/set_home", 10,
         std::bind(&CeiltrackNode::setHomeCallback, this, std::placeholders::_1));
+
+    imu_sub_ = this->create_subscription<sensor_msgs::msg::Imu>(
+        "/vectornav/imu", rclcpp::SensorDataQoS(),
+        std::bind(&CeiltrackNode::imuCallback, this, std::placeholders::_1));
 
     // Initialization
     tracker_ready_ = ceiltrackInit(lens_, static_cast<float>(cam_tilt_rad_));
@@ -416,6 +431,74 @@ void CeiltrackNode::ceiltrackShutdown()
 }
 
 
+void CeiltrackNode::deorientImage(const sensor_msgs::msg::Image::SharedPtr msg)
+{
+    tf2::Quaternion q;
+    {
+        std::lock_guard<std::mutex> lk(imu_mutex_);
+        if (!have_imu_ || !cv_model_ready_)
+        {
+            deoriented_img_.create(height_, width_, CV_8UC1);
+            for (int r = 0; r < height_; ++r)
+            {
+                const uint8_t *row = msg->data.data() + r * static_cast<int>(msg->step);
+                uint8_t *out = deoriented_img_.ptr<uint8_t>(r);
+                for (int c = 0; c < width_; ++c)
+                    out[c] = row[2 * c];
+            }
+            return;
+        }
+        q = imu_q_;
+    }
+
+    // Convert message YUY2 -> mono8
+    cv::Mat src_mono(height_, width_, CV_8UC1);
+    for (int r = 0; r < height_; ++r)
+    {
+        const uint8_t *row = msg->data.data() + r * static_cast<int>(msg->step);
+        uint8_t *out = src_mono.ptr<uint8_t>(r);
+        for (int c = 0; c < width_; ++c)
+            out[c] = row[2 * c];
+    }
+
+    // Build rectification rotation (remove roll, pitch, yaw)
+    tf2::Matrix3x3 R_ic(0, -1, 0,
+                        1, 0, 0,
+                        0, 0, 1);
+    tf2::Quaternion q_ic;
+    R_ic.getRotation(q_ic);
+    tf2::Quaternion q_cam = imu_q_ * q_ic;
+    tf2::Matrix3x3 Rcw(q_cam);
+    cv::Matx33d R_rect(
+        Rcw[0][0], Rcw[0][1], Rcw[0][2],
+        Rcw[1][0], Rcw[1][1], Rcw[1][2],
+        Rcw[2][0], Rcw[2][1], Rcw[2][2]);
+
+    // Make rectification maps
+    cv::Mat map1, map2;
+    cv::fisheye::initUndistortRectifyMap(
+        K_, D_, R_rect,
+        K_,
+        cv::Size(width_, height_),
+        CV_16SC2, map1, map2);
+
+    cv::remap(src_mono, deoriented_img_, map1, map2, cv::INTER_LINEAR, cv::BORDER_CONSTANT);
+
+    if (publish_grid_)
+    {
+        sensor_msgs::msg::Image img_msg;
+        img_msg.header = msg->header;
+        img_msg.height = deoriented_img_.rows;
+        img_msg.width  = deoriented_img_.cols;
+        img_msg.encoding = "mono8";
+        img_msg.is_bigendian = 0;
+        img_msg.step = static_cast<sensor_msgs::msg::Image::_step_type>(deoriented_img_.cols);
+        img_msg.data.assign(deoriented_img_.datastart, deoriented_img_.dataend);
+        deoriented_image_pub_->publish(img_msg);
+    }
+}
+
+
 void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 {
     if (!tracker_ready_)
@@ -440,24 +523,11 @@ void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
         return;
     }
 
-    const uint8_t *data = nullptr;
-    std::vector<uint8_t> ybuf;
-
-    // Convert YUY2 (Y0 U Y1 V) to mono8 by extracting Y bytes
-    ybuf.resize(msg->width * msg->height);
-    for (uint32_t r = 0; r < msg->height; ++r)
-    {
-        const uint8_t *row = msg->data.data() + r * msg->step;
-        uint8_t *out = ybuf.data() + r * msg->width;
-        for (uint32_t c = 0; c < msg->width; ++c)
-        {
-            out[c] = row[2 * c];
-        }
-    }
-    data = ybuf.data();
+    deorientImage(msg);
+    if (deoriented_img_.empty() || deoriented_img_.type() != CV_8UC1) return;
 
     const float cost = ceiltrackUpdate(
-        data,
+        deoriented_img_.ptr<uint8_t>(),
         static_cast<uint8_t>(std::clamp(threshold_, 0, 255)),
         static_cast<float>(xgrid_),
         static_cast<float>(ygrid_),
@@ -512,6 +582,19 @@ void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
     // Publish image overlay with grid points
     if (publish_grid_)
     {
+        // Convert YUY2 (Y0 U Y1 V) to mono8 by extracting Y bytes
+        std::vector<uint8_t> ybuf;
+        ybuf.resize(msg->width * msg->height);
+        for (uint32_t r = 0; r < msg->height; ++r)
+        {
+            const uint8_t *row = msg->data.data() + r * msg->step;
+            uint8_t *out = ybuf.data() + r * msg->width;
+            for (uint32_t c = 0; c < msg->width; ++c)
+            {
+                out[c] = row[2 * c];
+            }
+        }
+
         std::vector<std::pair<float, float>> uv;
         uv.reserve(31 * 31);
         ceiltrackGetMatchedGrid(lens_, xytheta_,
@@ -555,11 +638,11 @@ void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
     }
 
     // DEBUG
-    RCLCPP_INFO(this->get_logger(),
-                "cost=%.6f, camera pose(u=%.4f, v=%.4f, th=%.4f), world pose(X=%.4f, Y=%.4f, yaw=%.4f)",
-                cost,
-                u_rel, v_rel, th_cam_rel,
-                X_rel, Y_rel, yaw_rel);
+    // RCLCPP_INFO(this->get_logger(),
+    //             "cost=%.6f, camera pose(u=%.4f, v=%.4f, th=%.4f), world pose(X=%.4f, Y=%.4f, yaw=%.4f)",
+    //             cost,
+    //             u_rel, v_rel, th_cam_rel,
+    //             X_rel, Y_rel, yaw_rel);
 }
 
 
@@ -579,6 +662,23 @@ void CeiltrackNode::setHomeCallback(const std_msgs::msg::Bool::SharedPtr msg)
     RCLCPP_INFO(this->get_logger(),
         "Home set to current world pose: X=%.4f, Y=%.4f, yaw=%.4f rad",
         home_x_, home_y_, home_theta_);
+}
+
+
+void CeiltrackNode::imuCallback(const sensor_msgs::msg::Imu::SharedPtr msg)
+{
+    std::lock_guard<std::mutex> lk(imu_mutex_);
+    imu_q_.setX(msg->orientation.x);
+    imu_q_.setY(msg->orientation.y);
+    imu_q_.setZ(msg->orientation.z);
+    imu_q_.setW(msg->orientation.w);
+    have_imu_ = true;
+
+    double r, p, y;
+    tf2::Matrix3x3(imu_q_).getRPY(r, p, y);
+    RCLCPP_INFO(this->get_logger(),
+        "IMU orientation received: roll=%.4f, pitch=%.4f, yaw=%.4f rad",
+        r, p, y);
 }
 
 
