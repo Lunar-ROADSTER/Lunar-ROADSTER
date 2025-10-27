@@ -210,8 +210,8 @@ void ValidationNode::handleAccepted(const std::shared_ptr<GoalHandleRV> goal_han
     // Start accumulation
     resetAccumulators();
     enabled_ = true;
-    RCLCPP_INFO(this->get_logger(), "Validation goal started (average_window=%d, 2nd_pass=%s)",
-                average_window_, do_second_pass_ ? "true" : "false");
+    RCLCPP_INFO(this->get_logger(), "Validation goal started (average_window=%d, 2nd_pass=%s, timeout_sec=%d).",
+                average_window_, do_second_pass_ ? "true" : "false", g.timeout_sec);
 }
 
 
