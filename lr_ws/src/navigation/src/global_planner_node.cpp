@@ -16,19 +16,26 @@ namespace navigation
             "/crater_diameters",
             10,
             std::bind(&AStarPlanner::craterDiametersCallback, this, _1));
-        goal_pose_sub_ = create_subscription<geometry_msgs::msg::PoseStamped>(
-            "/goal_pose",
-            10,
-            std::bind(&AStarPlanner::goalPoseCallback, this, _1));
+        // goal_pose_sub_ = create_subscription<geometry_msgs::msg::PoseStamped>(
+        //     "/goal_pose",
+        //     10,
+        //     std::bind(&AStarPlanner::goalPoseCallback, this, _1));
 
         ring_path_pub_ = create_publisher<nav_msgs::msg::Path>("ring_path", 1);
         planner_viz_pub_ = create_publisher<visualization_msgs::msg::MarkerArray>("crater_debug", 1);
         planned_path_pub_ = create_publisher<nav_msgs::msg::Path>("planned_path", 1);
         start_goal_markers_pub_ = create_publisher<visualization_msgs::msg::MarkerArray>("start_goal_markers", 1);
 
-        timer_ = create_wall_timer(
-            std::chrono::milliseconds(200),
-            std::bind(&AStarPlanner::runPlanner, this));
+        tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+        tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+
+        // timer_ = create_wall_timer(
+        //     std::chrono::milliseconds(200),
+        //     std::bind(&AStarPlanner::runPlanner, this));
+        plan_srv_ = create_service<lr_msgs::srv::PlanPath>(
+            "~/plan_path",
+            std::bind(&AStarPlanner::handlePlanRequest, this, std::placeholders::_1,
+                      std::placeholders::_2, std::placeholders::_3));
 
         loadParams();
 
@@ -119,25 +126,80 @@ namespace navigation
                     map_msg->info.origin.position.x, map_msg->info.origin.position.y);
     }
 
-    void AStarPlanner::goalPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr start_msg)
+    bool AStarPlanner::lookupBaseInMap(geometry_msgs::msg::PoseStamped &out)
     {
-        if (start_msg->header.frame_id != "map")
+        try
         {
-            RCLCPP_WARN(get_logger(), "goal_pose frame_id='%s' != 'map' — assuming it's in map.",
-                        start_msg->header.frame_id.c_str());
+            auto tf = tf_buffer_->lookupTransform(
+                "map", "base_link", tf2::TimePointZero, tf2::durationFromSec(0.1));
+
+            out.header = tf.header;
+            out.header.frame_id = "map";
+            out.pose.position.x = tf.transform.translation.x;
+            out.pose.position.y = tf.transform.translation.y;
+            out.pose.position.z = tf.transform.translation.z;
+            out.pose.orientation = tf.transform.rotation;
+            return true;
+        }
+        catch (const tf2::TransformException &ex)
+        {
+            RCLCPP_WARN(get_logger(), "TF lookup map->base_link failed: %s", ex.what());
+            return false;
+        }
+    }
+
+    void AStarPlanner::goalPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
+    {
+        // if (start_msg->header.frame_id != "map")
+        // {
+        //     RCLCPP_WARN(get_logger(), "goal_pose frame_id='%s' != 'map' — assuming it's in map.",
+        //                 start_msg->header.frame_id.c_str());
+        // }
+
+        // start_x_ = start_msg->pose.position.x;
+        // start_y_ = start_msg->pose.position.y;
+
+        // double yaw = tf2::getYaw(start_msg->pose.orientation);
+        // start_yaw_ = angleWrap(yaw);
+
+        // got_start_pose_ = true;
+
+        // RCLCPP_INFO(get_logger(),
+        //             "Start pose set from /goal_pose: (%.2f, %.2f, %.1f°)",
+        //             start_x_, start_y_, start_yaw_ * 180.0 / M_PI);
+
+        geometry_msgs::msg::PoseStamped in = *msg;
+        geometry_msgs::msg::PoseStamped map_goal;
+
+        if (in.header.frame_id != "map" && !in.header.frame_id.empty())
+        {
+            try
+            {
+                map_goal = tf_buffer_->transform(in, "map", tf2::durationFromSec(0.2));
+            }
+            catch (const tf2::TransformException &ex)
+            {
+                RCLCPP_WARN(get_logger(),
+                            "Transforming goal %s->map failed: %s. Using as-is.",
+                            in.header.frame_id.c_str(), ex.what());
+                map_goal = in;
+                map_goal.header.frame_id = "map";
+            }
+        }
+        else
+        {
+            map_goal = in;
+            map_goal.header.frame_id = "map";
         }
 
-        start_x_ = start_msg->pose.position.x;
-        start_y_ = start_msg->pose.position.y;
+        goal_x_ = map_goal.pose.position.x;
+        goal_y_ = map_goal.pose.position.y;
+        goal_yaw_ = angleWrap(tf2::getYaw(map_goal.pose.orientation));
 
-        double yaw = tf2::getYaw(start_msg->pose.orientation);
-        start_yaw_ = angleWrap(yaw);
+        got_goal_pose_ = true;
 
-        got_start_pose_ = true;
-
-        RCLCPP_INFO(get_logger(),
-                    "Start pose set from /goal_pose: (%.2f, %.2f, %.1f°)",
-                    start_x_, start_y_, start_yaw_ * 180.0 / M_PI);
+        RCLCPP_INFO(get_logger(), "Goal set from /goal_pose: (%.2f, %.2f, %.1f°)",
+                    goal_x_, goal_y_, goal_yaw_ * 180.0 / M_PI);
     }
 
     void AStarPlanner::craterCentroidsCallback(const geometry_msgs::msg::PoseArray::SharedPtr centroids_msg)
@@ -196,6 +258,121 @@ namespace navigation
         // RCLCPP_INFO(get_logger(), "Craters fused: %zu", craters_.size());
     }
 
+    void AStarPlanner::handlePlanRequest(
+        const std::shared_ptr<rmw_request_id_t>,
+        const std::shared_ptr<lr_msgs::srv::PlanPath::Request> req,
+        std::shared_ptr<lr_msgs::srv::PlanPath::Response> res)
+    {
+        if (!map_loaded_ || !craters_loaded_)
+        {
+            res->success = false;
+            res->message = "Map/craters not ready yet.";
+            return;
+        }
+
+        if (!req->goal.header.frame_id.empty() && req->goal.header.frame_id != "map")
+        {
+            RCLCPP_ERROR(get_logger(), "Plan request goal frame is '%s' but must be 'map'.",
+                         req->goal.header.frame_id.c_str());
+            res->success = false;
+            res->message = "Goal must be in 'map' frame.";
+            return;
+        }
+
+        geometry_msgs::msg::PoseStamped goal_in_map = req->goal;
+        goal_in_map.header.frame_id = "map";
+
+        nav_msgs::msg::Path path;
+        const bool ok = planOnce(goal_in_map, path, req->smooth);
+
+        res->success = ok;
+        res->path = path;
+        res->message = ok ? "OK" : "Planning failed";
+    }
+
+    bool AStarPlanner::planOnce(const geometry_msgs::msg::PoseStamped &goal_msg,
+                                nav_msgs::msg::Path &out_path,
+                                bool do_smooth)
+    {
+        geometry_msgs::msg::PoseStamped start_ps;
+        if (!lookupBaseInMap(start_ps))
+        {
+            RCLCPP_WARN(get_logger(), "TF (map<-base_link) not available.");
+            return false;
+        }
+        start_x_ = start_ps.pose.position.x;
+        start_y_ = start_ps.pose.position.y;
+        start_yaw_ = angleWrap(tf2::getYaw(start_ps.pose.orientation));
+
+        goal_x_ = goal_msg.pose.position.x;
+        goal_y_ = goal_msg.pose.position.y;
+        goal_yaw_ = angleWrap(tf2::getYaw(goal_msg.pose.orientation));
+
+        std::vector<Crater> gradable, obstacles;
+        gradable.reserve(craters_.size());
+        obstacles.reserve(craters_.size());
+        for (const auto &c : craters_)
+        {
+            if (c.diameter <= crater_threshold_)
+                gradable.emplace_back(c);
+            else
+                obstacles.emplace_back(c);
+        }
+        if (gradable.size() < 3)
+        {
+            ring_ready_ = false;
+            publishCraterDebug(gradable, obstacles);
+            RCLCPP_WARN(get_logger(), "Need at least 3 gradable craters to build ring.");
+            return false;
+        }
+
+        auto viz_points = buildRingCCW(gradable);
+        publishRingPath(viz_points);
+        if (!ring_ready_)
+        {
+            return false;
+        }
+
+        generateSubGoals();
+
+        final_planned_path_.poses.clear();
+        final_planned_path_.header.stamp = now();
+        final_planned_path_.header.frame_id = "map";
+
+        NodeState current_start = getInitialStartState();
+        final_planned_path_.poses.push_back(nodeToPoseStamped(current_start));
+
+        for (const auto &sub_goal : sub_goals_)
+        {
+            auto seg = runLatticeAStar(current_start, sub_goal);
+            if (seg.empty())
+            {
+                RCLCPP_ERROR(get_logger(), "Failed to plan segment to a sub-goal.");
+                final_planned_path_.poses.clear();
+                break;
+            }
+            for (size_t i = 1; i < seg.size(); ++i)
+            {
+                final_planned_path_.poses.push_back(nodeToPoseStamped(seg[i]));
+            }
+            current_start = seg.back();
+        }
+
+        if (final_planned_path_.poses.empty())
+        {
+            return false;
+        }
+
+        if (do_smooth)
+        {
+            smoothPath(final_planned_path_, weight_smooth_, weight_data_);
+        }
+
+        planned_path_pub_->publish(final_planned_path_);
+        out_path = final_planned_path_;
+        return true;
+    }
+
     void AStarPlanner::runPlanner()
     {
         if (!map_loaded_ || !craters_loaded_)
@@ -203,6 +380,13 @@ namespace navigation
             RCLCPP_WARN(get_logger(), "map_loaded=%d, craters_loaded=%d, ring_ready=%d",
                         map_loaded_, craters_loaded_, ring_ready_);
 
+            return;
+        }
+
+        if (!got_goal_pose_)
+        {
+            RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 2000,
+                                 "No goal yet. Click a goal in RViz on /goal_pose.");
             return;
         }
 
@@ -232,57 +416,58 @@ namespace navigation
             return;
         }
 
-        if (got_start_pose_)
+        geometry_msgs::msg::PoseStamped base_in_map;
+        if (!lookupBaseInMap(base_in_map))
         {
+            RCLCPP_WARN(get_logger(), "Robot pose unavailable from TF (map->base_link) ...");
+            return;
+        }
+        start_x_ = base_in_map.pose.position.x;
+        start_y_ = base_in_map.pose.position.y;
+        start_yaw_ = angleWrap(tf2::getYaw(base_in_map.pose.orientation));
 
-            std::vector<geometry_msgs::msg::PoseStamped> viz_points = buildRingCCW(gradable);
-            publishRingPath(viz_points);
+        std::vector<geometry_msgs::msg::PoseStamped> viz_points = buildRingCCW(gradable);
+        publishRingPath(viz_points);
 
-            if (!ring_ready_)
-            {
-                got_start_pose_ = false;
-                return;
-            }
-
-            generateSubGoals();
-
-            final_planned_path_.poses.clear();
-            final_planned_path_.header.stamp = now();
-            final_planned_path_.header.frame_id = "map";
-
-            NodeState current_start = getInitialStartState();
-            final_planned_path_.poses.push_back(nodeToPoseStamped(current_start));
-
-            for (const auto &sub_goal : sub_goals_)
-            {
-                std::vector<NodeState> path_segment = runLatticeAStar(current_start, sub_goal);
-
-                if (path_segment.empty())
-                {
-                    RCLCPP_ERROR(get_logger(), "Failed to plan segment to sub-goal!");
-                    final_planned_path_.poses.clear();
-                    break;
-                }
-
-                for (size_t i = 1; i < path_segment.size(); ++i)
-                {
-                    final_planned_path_.poses.push_back(nodeToPoseStamped(path_segment[i]));
-                }
-
-                current_start = path_segment.back();
-            }
-
-            if (!final_planned_path_.poses.empty())
-            {
-                smoothPath(final_planned_path_, weight_smooth_, weight_data_);
-                planned_path_pub_->publish(final_planned_path_);
-            }
-
+        if (!ring_ready_)
+        {
             got_start_pose_ = false;
+            return;
         }
 
-        else
-            RCLCPP_WARN(get_logger(), "Robot pose unavailable ...");
+        generateSubGoals();
+
+        final_planned_path_.poses.clear();
+        final_planned_path_.header.stamp = now();
+        final_planned_path_.header.frame_id = "map";
+
+        NodeState current_start = getInitialStartState();
+        final_planned_path_.poses.push_back(nodeToPoseStamped(current_start));
+
+        for (const auto &sub_goal : sub_goals_)
+        {
+            std::vector<NodeState> path_segment = runLatticeAStar(current_start, sub_goal);
+
+            if (path_segment.empty())
+            {
+                RCLCPP_ERROR(get_logger(), "Failed to plan segment to sub-goal!");
+                final_planned_path_.poses.clear();
+                break;
+            }
+
+            for (size_t i = 1; i < path_segment.size(); ++i)
+            {
+                final_planned_path_.poses.push_back(nodeToPoseStamped(path_segment[i]));
+            }
+
+            current_start = path_segment.back();
+        }
+
+        if (!final_planned_path_.poses.empty())
+        {
+            smoothPath(final_planned_path_, weight_smooth_, weight_data_);
+            planned_path_pub_->publish(final_planned_path_);
+        }
     }
 
     geometry_msgs::msg::Point AStarPlanner::evalCatmullRom(double t, const geometry_msgs::msg::Point &p0, const geometry_msgs::msg::Point &p1, const geometry_msgs::msg::Point &p2, const geometry_msgs::msg::Point &p3) const

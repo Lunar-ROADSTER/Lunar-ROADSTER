@@ -23,6 +23,7 @@ find_package(visualization_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+find_package(lr_msgs REQUIRED)
 
 include_directories(include)
 
@@ -39,6 +40,7 @@ ament_target_dependencies(global_astar_node
   tf2
   tf2_ros
   tf2_geometry_msgs
+  lr_msgs
 )
 
 add_executable(crater_centroids_pub
