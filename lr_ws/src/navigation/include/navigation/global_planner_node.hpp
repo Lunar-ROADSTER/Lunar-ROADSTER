@@ -27,6 +27,7 @@
 #include <queue>
 #include <unordered_map>
 #include <tuple>
+#include <cstring>
 
 using std::placeholders::_1;
 
@@ -84,6 +85,16 @@ struct KeyHash
     }
 };
 
+struct DeviationStats
+{
+    double cumulative{};  // ∫ |e(s)| ds  (m·m = m^2? No — e in m, ds in m → m^2, but this is a path-integral of absolute error; see note)
+    double mean{};        // length-weighted mean |e|
+    double rms{};         // length-weighted RMS(e)
+    double max{};         // max |e|
+    double path_length{}; // total path length used for weighting
+    size_t samples{};
+};
+
 namespace navigation
 {
     class AStarPlanner : public rclcpp::Node
@@ -132,6 +143,7 @@ namespace navigation
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr planner_viz_pub_;
         rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr planned_path_pub_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr start_goal_markers_pub_;
+        rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr latitude_circle_pub_;
 
         // rclcpp::TimerBase::SharedPtr timer_;
         rclcpp::Service<lr_msgs::srv::PlanPath>::SharedPtr plan_srv_;
@@ -235,6 +247,12 @@ namespace navigation
         visualization_msgs::msg::Marker make_sphere(int id, double x, double y, float r, float g, float b) const;
         visualization_msgs::msg::Marker make_arrow(int id, double x, double y, double yaw, float r, float g, float b) const;
         void smoothPath(nav_msgs::msg::Path &path, double weight_smooth, double weight_data) const;
+
+        std::optional<std::tuple<double, double, double>> bestFitCircleAllCraters() const;
+        void publishLatitudeCircle(double cx, double cy, double R);
+        bool solve3x3(double M[3][3], double b[3], double x[3]) const;
+        bool refineCircleGaussNewton(double &cx, double &cy, double &R, int iters = 10, double huber_k = 0.0) const;
+        DeviationStats computeDeviationStatsWeighted(const nav_msgs::msg::Path &path, double cx, double cy, double R) const;
     };
 }
 
