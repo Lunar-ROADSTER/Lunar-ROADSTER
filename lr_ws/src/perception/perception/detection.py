@@ -2,7 +2,6 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer
-
 from sensor_msgs.msg import Image, CameraInfo
 from geometry_msgs.msg import PointStamped
 from cv_bridge import CvBridge
@@ -25,7 +24,7 @@ class CraterDetectionNode(Node):
         self.model = YOLO(model_path)
         self.get_logger().info(f'Loaded YOLOv8 model from {model_path}')
 
-        # Publisher
+        # Publisher for crater points
         self.crater_pub = self.create_publisher(PointStamped, '/crater_detection/point', 10)
 
         # Action server
@@ -36,7 +35,7 @@ class CraterDetectionNode(Node):
             self.execute_callback
         )
 
-        # Subscriptions (created on demand)
+        # Subscriptions (created dynamically when detection starts)
         self.sub_rgb = None
         self.sub_depth = None
         self.sub_camera_info = None
@@ -54,15 +53,18 @@ class CraterDetectionNode(Node):
             self.sub_depth = self.create_subscription(Image, '/zed/zed_node/depth/depth_registered', self.depth_callback, 10)
             self.sub_camera_info = self.create_subscription(CameraInfo, '/zed/zed_node/rgb/camera_info', self.camera_info_callback, 10)
 
-        # Run until FSM cancels or until some timeout (for demo: 10 seconds)
+        # Run detection for ~10 seconds or until canceled
         start_time = self.get_clock().now().seconds_nanoseconds()[0]
         num_craters = 0
         while rclpy.ok() and self.active:
-            # send feedback (optional)
+            # Send feedback (optional)
             feedback.num_craters_detected = num_craters
             goal_handle.publish_feedback(feedback)
+
             await rclpy.sleep(0.5)
-            if self.get_clock().now().seconds_nanoseconds()[0] - start_time > 10:
+
+            # Timeout after 15 seconds
+            if self.get_clock().now().seconds_nanoseconds()[0] - start_time > 15:
                 break
 
         # Wrap up
@@ -117,10 +119,10 @@ class CraterDetectionNode(Node):
                 u_left, u_right = x1, x2
                 diameter = (u_right - u_left) * Z_center / self.projector.fx
 
-                # 🟢 Publish SAME message as before
+                # 🟢 Publish crater info as PointStamped
                 crater_msg = PointStamped()
                 crater_msg.header.stamp = self.get_clock().now().to_msg()
-                crater_msg.header.frame_id = f"{diameter:.3f}"  # diameter encoded here
+                crater_msg.header.frame_id = f"{diameter:.3f}"  # encode diameter in frame_id
                 crater_msg.point.x = X_center
                 crater_msg.point.y = Y_center
                 crater_msg.point.z = Z_center
@@ -130,6 +132,7 @@ class CraterDetectionNode(Node):
                     f"Published crater -> X:{X_center:.2f}, Y:{Y_center:.2f}, Z:{Z_center:.2f}, D:{diameter:.2f}m"
                 )
 
+                # Annotate for visualization
                 cv2.rectangle(annotated, (x1, y1), (x2, y2), (0, 255, 0), 1)
                 crater_texts.append(f"X:{X_center:.2f} Y:{Y_center:.2f} Z:{Z_center:.2f} D:{diameter:.2f}m")
 
@@ -141,3 +144,14 @@ class CraterDetectionNode(Node):
 
         except Exception as e:
             self.get_logger().error(f'Error in image_callback: {e}')
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = CraterDetectionNode()
+    rclpy.spin(node)
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
