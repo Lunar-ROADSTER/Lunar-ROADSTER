@@ -307,7 +307,7 @@ namespace navigation
         }
 
         publishCraterDebug(gradable, obstacles);
-        
+
         if (gradable.size() < 3)
         {
             ring_ready_ = false;

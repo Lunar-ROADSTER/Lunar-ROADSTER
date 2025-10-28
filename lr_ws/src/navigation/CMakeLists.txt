@@ -77,6 +77,21 @@ ament_target_dependencies(global_planner_controller_main
   rclcpp_action
 )
 
+add_executable(controller_executor
+  src/controller_executor.cpp
+)
+
+ament_target_dependencies(controller_executor
+  rclcpp
+  rclcpp_action
+  geometry_msgs
+  nav_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  lr_msgs
+)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -100,6 +115,9 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(TARGETS controller_executor
+  DESTINATION lib/${PROJECT_NAME})
+  
 install(
   DIRECTORY include/
   DESTINATION include
