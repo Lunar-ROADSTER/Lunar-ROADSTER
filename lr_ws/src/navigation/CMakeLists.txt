@@ -24,6 +24,7 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(lr_msgs REQUIRED)
+find_package(rclcpp_action REQUIRED)
 
 include_directories(include)
 
@@ -71,6 +72,9 @@ ament_target_dependencies(global_planner_controller_main
   geometry_msgs
   tf2_ros
   tf2_geometry_msgs
+  visualization_msgs
+  lr_msgs
+  rclcpp_action
 )
 
 if(BUILD_TESTING)
