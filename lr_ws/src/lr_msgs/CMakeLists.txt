@@ -30,6 +30,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/PlanPath.srv"
   "action/CalibrateImu.action"
   "action/FollowPath.action"
+  "action/RunValidation.action"
   # Implementation-specific messages
   DEPENDENCIES builtin_interfaces std_msgs action_msgs geometry_msgs nav_msgs
 )
