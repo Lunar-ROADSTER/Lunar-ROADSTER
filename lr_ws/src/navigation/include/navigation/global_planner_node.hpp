@@ -14,6 +14,7 @@
 #include <tf2_ros/buffer.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <tf2/utils.h>
+#include <lr_msgs/srv/plan_path.hpp>
 
 #include <algorithm>
 #include <numeric>
@@ -26,6 +27,7 @@
 #include <queue>
 #include <unordered_map>
 #include <tuple>
+#include <cstring>
 
 using std::placeholders::_1;
 
@@ -83,6 +85,16 @@ struct KeyHash
     }
 };
 
+struct DeviationStats
+{
+    double cumulative{};  // ∫ |e(s)| ds  (m·m = m^2? No — e in m, ds in m → m^2, but this is a path-integral of absolute error; see note)
+    double mean{};        // length-weighted mean |e|
+    double rms{};         // length-weighted RMS(e)
+    double max{};         // max |e|
+    double path_length{}; // total path length used for weighting
+    size_t samples{};
+};
+
 namespace navigation
 {
     class AStarPlanner : public rclcpp::Node
@@ -125,14 +137,19 @@ namespace navigation
         rclcpp::Subscription<nav_msgs::msg::OccupancyGrid>::SharedPtr map_sub_;
         rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr centroids_sub_;
         rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr diameters_sub_;
-        rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr goal_pose_sub_;
+        // rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr goal_pose_sub_;
 
         rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr ring_path_pub_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr planner_viz_pub_;
         rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr planned_path_pub_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr start_goal_markers_pub_;
+        rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr latitude_circle_pub_;
 
-        rclcpp::TimerBase::SharedPtr timer_;
+        // rclcpp::TimerBase::SharedPtr timer_;
+        rclcpp::Service<lr_msgs::srv::PlanPath>::SharedPtr plan_srv_;
+
+        std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+        std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 
         std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
         std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
@@ -140,6 +157,8 @@ namespace navigation
         nav_msgs::msg::OccupancyGrid map_;
         bool map_loaded_ = false;
 
+        // bool got_start_pose_{false};
+        // bool got_goal_pose_ = false;
         bool got_start_pose_{false};
         bool got_goal_pose_ = false;
 
@@ -180,15 +199,24 @@ namespace navigation
 
         double weight_data_{0.0}, weight_smooth_{0.0};
 
+        bool lookupBaseInMap(geometry_msgs::msg::PoseStamped &out);
+
+        void handlePlanRequest(
+            const std::shared_ptr<rmw_request_id_t> header,
+            const std::shared_ptr<lr_msgs::srv::PlanPath::Request> req,
+            std::shared_ptr<lr_msgs::srv::PlanPath::Response> res);
+        bool planOnce(const geometry_msgs::msg::PoseStamped &goal_msg,
+                      nav_msgs::msg::Path &out_path,
+                      bool do_smooth);
         bool lookupBaseInMap(geometry_msgs::msg::PoseStamped& out) const;
 
         void loadParams();
         void mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr map_msg);
         void craterCentroidsCallback(const geometry_msgs::msg::PoseArray::SharedPtr centroids_msg);
         void craterDiametersCallback(const std_msgs::msg::Float32MultiArray::SharedPtr diameters_msg);
-        void goalPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr start_msg);
+        // void goalPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr start_msg);
         void fuseCraters();
-        void runPlanner();
+        // void runPlanner();
         std::vector<geometry_msgs::msg::PoseStamped> buildRingCCW(const std::vector<Crater> &gradable);
         void publishRingPath(const std::vector<geometry_msgs::msg::PoseStamped> &points);
         void publishCraterDebug(const std::vector<Crater> &gradable, const std::vector<Crater> &obstacles);
@@ -225,6 +253,12 @@ namespace navigation
         visualization_msgs::msg::Marker make_sphere(int id, double x, double y, float r, float g, float b) const;
         visualization_msgs::msg::Marker make_arrow(int id, double x, double y, double yaw, float r, float g, float b) const;
         void smoothPath(nav_msgs::msg::Path &path, double weight_smooth, double weight_data) const;
+
+        std::optional<std::tuple<double, double, double>> bestFitCircleAllCraters() const;
+        void publishLatitudeCircle(double cx, double cy, double R);
+        bool solve3x3(double M[3][3], double b[3], double x[3]) const;
+        bool refineCircleGaussNewton(double &cx, double &cy, double &R, int iters = 10, double huber_k = 0.0) const;
+        DeviationStats computeDeviationStatsWeighted(const nav_msgs::msg::Path &path, double cx, double cy, double R) const;
     };
 }
 
