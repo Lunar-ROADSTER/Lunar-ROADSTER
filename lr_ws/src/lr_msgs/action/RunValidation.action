@@ -1,0 +1,26 @@
+# ---- Goal ----
+int32 average_window
+bool do_second_pass
+int32 timeout_sec
+
+---
+# ---- Result ----
+bool grading_success
+float64 mean_gradient
+float64 rmse_gradient
+float64 max_gradient
+float64 min_z
+float64 max_z
+float64 avg_z
+float64 max_traversal_slope
+string frame_id
+
+---
+# ---- Feedback ----
+int32 collected
+float64 current_mean_gradient
+float64 current_rmse_gradient
+float64 current_max_gradient
+float64 current_min_z
+float64 current_max_z
+float64 current_avg_z

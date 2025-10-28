@@ -151,11 +151,16 @@ namespace navigation
         std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
         std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 
+        std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+        std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+
         nav_msgs::msg::OccupancyGrid map_;
         bool map_loaded_ = false;
 
         // bool got_start_pose_{false};
         // bool got_goal_pose_ = false;
+        bool got_start_pose_{false};
+        bool got_goal_pose_ = false;
 
         std::vector<geometry_msgs::msg::Point> crater_centroids_;
         std::vector<float> crater_diameters_;
@@ -203,6 +208,7 @@ namespace navigation
         bool planOnce(const geometry_msgs::msg::PoseStamped &goal_msg,
                       nav_msgs::msg::Path &out_path,
                       bool do_smooth);
+        bool lookupBaseInMap(geometry_msgs::msg::PoseStamped& out) const;
 
         void loadParams();
         void mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr map_msg);

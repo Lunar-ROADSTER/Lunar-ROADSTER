@@ -1,0 +1,28 @@
+ceiltrack_node:
+  ros__parameters:
+    cam_tilt_rad: 0.0
+    xgrid_m: 2.95 # meters horizontal to Moon Yard
+    ygrid_m: 2.63 # meters vertical to Moon Yard (i.e. parallel to the two prism locations)
+    ceil_height: 5.79 # meters
+    threshold: 234
+    niter: 5
+    publish_grid_marker: true # Should only be true for debugging
+  
+    lens.width: 640
+    lens.height: 480
+    lens.center_limit: 64.0
+    lens.cell_limit: 9.0
+
+    lens.fx: 239.22139424050349
+    lens.fy: 239.18055604379532
+    lens.cx: 327.24047691408475
+    lens.cy: 230.38304598028427
+    lens.k1: 0.0
+
+    home.x: 0.0
+    home.y: 0.0
+    home.theta: 0.0
+
+    home.x_init: -0.10
+    home.y_init: 3.29
+    home.theta_init: 0.0

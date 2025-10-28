@@ -22,6 +22,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ActuatorState.idl"
   "msg/SiteMap.idl"
   "msg/Trajectory.idl"
+  "msg/Validation.idl"
   "srv/SiteMap.srv"
   "srv/UpdateTrajectory.srv"
   "srv/EnableWorksystem.srv"

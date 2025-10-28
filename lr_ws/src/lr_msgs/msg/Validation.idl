@@ -1,0 +1,24 @@
+#include "std_msgs/msg/Header.idl"
+
+module lr_msgs {
+  module msg {
+    struct Validation {
+      std_msgs::msg::Header header;
+
+      @default (value = false)
+      boolean grading_success;
+
+      @default (value = 0.0)
+      float mean_gradient;
+
+      @default (value = 0.0)
+      float rmse_gradient;
+
+      @default (value = 0.0)
+      float max_gradient;
+
+      @default (value = 0.0)
+      float max_traversal_slope;
+    };
+  };
+};

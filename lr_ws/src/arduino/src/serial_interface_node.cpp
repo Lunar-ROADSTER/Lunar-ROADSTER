@@ -134,7 +134,7 @@ namespace arduino {
     data = static_cast<uint8_t>((actuator_cmd_.steer_position + 100) / 200.0 * 255);
     cmd_data |= (data << 8);
     // Scale tool position in range [0.0, 100.0] to [0, 255]
-    data = static_cast<uint8_t>((actuator_cmd_.tool_position) / 100.0 * 255);
+    data = static_cast<uint8_t>((actuator_cmd_.tool_position) / 100.0 * 255); //changed from 255 to 1023
     cmd_data |= (data << 16);
 
     cmd_msg.data = cmd_data;

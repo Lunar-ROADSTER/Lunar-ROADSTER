@@ -97,8 +97,11 @@ OdomNode::OdomNode() : Node("odom_node") {
 void OdomNode::odomCallback(const lr_msgs::msg::EncoderTelemetry::SharedPtr msg) {
 
   float pos_delta = qp_drive_to_pos_m_*(msg->drive_delta_front - msg->drive_delta_rear)/2; // flip if the direction is wrong
-  float steer_angle = qp_steer_to_radian_*(msg->steer_pos_rear - msg->steer_pos_front)/2; // flip this sign if the steer is reversed 
-  float drive_velocity = qpps_drive_to_speed_ms_*(msg->drive_vel_front - msg->drive_vel_rear)/2; // flip this sign if the drive velocity is reversed
+  float steer_angle = -qp_steer_to_radian_*(msg->steer_pos_rear - msg->steer_pos_front)/2; // flip this sign if the steer is reversed 
+  float drive_velocity = -qpps_drive_to_speed_ms_*(msg->drive_vel_front - msg->drive_vel_rear)/2; // flip this sign if the drive velocity is reversed
+
+  // DEBUG
+  RCLCPP_INFO(this->get_logger(), "Pos Delta: %.6f m, Steer Angle: %.6f rad, Drive Velocity: %.6f m/s", pos_delta, steer_angle, drive_velocity);
 
   // Actuator State message
   auto act_state_msg = lr_msgs::msg::ActuatorState();
