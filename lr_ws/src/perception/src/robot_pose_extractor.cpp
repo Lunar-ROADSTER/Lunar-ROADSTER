@@ -1,26 +1,45 @@
 #include "perception/robot_pose_extractor.hpp"
+#include "perception/srv/pose_extract.hpp"
 
-float manipulation_offset = 0.1 // metres
-
-    namespace lr
+namespace lr
 {
 
     namespace perception
     {
 
-        PoseExtractor::PoseExtractor(std::shared_ptr<rclcpp::Node> node)
+        PoseExtractor::PoseExtractor(const rclcpp::Node::SharedPtr &node)
             : GoalPlanner(),
               tf_buffer_(node->get_clock()),
               tf_listener_(tf_buffer_),
               clock_(node->get_clock())
         {
+            node->declare_parameter<double>("manipulation_offset", static_cast<double>(manipulation_offset_));
+            manipulation_offset_ = static_cast<float>(node->get_parameter("manipulation_offset").as_double());
+
+            node->declare_parameter<double>("last_pose_offset", static_cast<double>(last_pose_offset_));
+            last_pose_offset_ = static_cast<float>(node->get_parameter("last_pose_offset").as_double());
+
+            node->declare_parameter<double>("backblading_multipler", static_cast<double>(backblading_multipler_));
+            backblading_multipler_ = static_cast<float>(node->get_parameter("backblading_multipler").as_double());
+
+            node->declare_parameter<double>("boundary_min", static_cast<double>(boundary_min_));
+            boundary_min_ = static_cast<float>(node->get_parameter("boundary_min").as_double());
+
+            node->declare_parameter<double>("boundary_max", static_cast<double>(boundary_max_));
+            boundary_max_ = static_cast<float>(node->get_parameter("boundary_max").as_double());
+
+            node->declare_parameter<double>("boundary_increment", static_cast<double>(boundary_increment_));
+            boundary_increment_ = static_cast<float>(node->get_parameter("boundary_increment").as_double());
+
+            node->declare_parameter<double>("robot_half_length", static_cast<double>(robot_half_length_));
+            robot_half_length_ = static_cast<float>(node->get_parameter("robot_half_length").as_double());
             // Nothing else yet; TF buffer and listener are initialized
         }
 
         void PoseExtractor::makeGoalsfromCraterGeometry(std::vector<lr_msgs::msg::Pose2D> &goalPoses, std::vector<std::string> &goalPose_types, std::vector<float> &craterCentroid, float &craterDiameter)
         {
             // Get current rover pose
-            geometry_msgs::msg::PoseStamped rover_pose = getRoverPose('map', 'base_link');
+            geometry_msgs::msg::PoseStamped rover_pose = getRoverPose("map", "base_link");
 
             // Calculate manipulation distance
             float manipulation_distance = (craterDiameter / 2) + manipulation_offset_;
@@ -29,24 +48,24 @@ float manipulation_offset = 0.1 // metres
             double yaw = static_cast<double>(atan2((craterCentroid[1] - rover_pose.pose.position.y), (craterCentroid[0] - rover_pose.pose.position.x)));
 
             // Set up source pose
-            double source_pose_x = craterCentroid[0] - manipulation_distance * std::cos(yaw);
-            double source_pose_y = craterCentroid[1] - manipulation_distance * std::sin(yaw);
-            lr_msgs::msg::Pose2D source_pose = lr::planning::create_pose2d(source_pose_x, source_pose_y, yaw);
+            double source_pose_x = craterCentroid[0] - (manipulation_distance + robot_half_length_) * std::cos(yaw);
+            double source_pose_y = craterCentroid[1] - (manipulation_distance + robot_half_length_) * std::sin(yaw);
+            lr_msgs::msg::Pose2D source_pose = lr::perception::create_pose2d(source_pose_x, source_pose_y, yaw);
 
             // Set up sink pose
             double sink_pose_x = craterCentroid[0];
             double sink_pose_y = craterCentroid[1];
-            lr_msgs::msg::Pose2D sink_pose = lr::planning::create_pose2d(sink_pose_x, sink_pose_y, yaw);
+            lr_msgs::msg::Pose2D sink_pose = lr::perception::create_pose2d(sink_pose_x, sink_pose_y, yaw);
 
             // Set up backblading source pose
-            double backblading_pose_x = sink_pose.pt.x + manipulation_distance * std::cos(yaw);
-            double backblading_pose_y = sink_pose.pt.y + manipulation_distance * std::sin(yaw);
-            lr_msgs::msg::Pose2D source_pose_backblading = lr::planning::create_pose2d(backblading_pose_x, backblading_pose_y, yaw);
+            double backblading_pose_x = sink_pose.pt.x + (manipulation_distance + robot_half_length_) * std::cos(yaw);
+            double backblading_pose_y = sink_pose.pt.y + (manipulation_distance + robot_half_length_) * std::sin(yaw);
+            lr_msgs::msg::Pose2D source_pose_backblading = lr::perception::create_pose2d(backblading_pose_x, backblading_pose_y, yaw);
 
             // Set up last offset pose
-            double last_offset_pose_x = backblading_pose_x - manipulation_distance * std::cos(yaw) * backblading_multipler_;
-            double last_offset_pose_y = backblading_pose_y - manipulation_distance * std::sin(yaw) * backblading_multipler_;
-            lr_msgs::msg::Pose2D last_offset_pose = lr::planning::create_pose2d(last_offset_pose_x, last_offset_pose_y, yaw);
+            double last_offset_pose_x = backblading_pose_x - (manipulation_distance + robot_half_length_) * std::cos(yaw) * backblading_multipler_;
+            double last_offset_pose_y = backblading_pose_y - (manipulation_distance + robot_half_length_) * std::sin(yaw) * backblading_multipler_;
+            lr_msgs::msg::Pose2D last_offset_pose = lr::perception::create_pose2d(last_offset_pose_x, last_offset_pose_y, yaw);
 
             if (offset_pose_x > boundary_max_ ||
                 offset_pose_x < boundary_min_ ||
@@ -116,3 +135,37 @@ float manipulation_offset = 0.1 // metres
     } // namespace perception
 
 } // namespace lr
+
+int main(int argc, char **argv)
+{
+    rclcpp::init(argc, argv);
+    const auto node = rclcpp::Node::make_shared("pose_extractor");
+    auto pose_extractor = std::make_shared<lr::perception::PoseExtractor>(node);
+
+    auto service = node->create_service<::perception::srv::PoseExtract>(
+        "generate_crater_goals",
+        [pose_extractor](
+            const std::shared_ptr<::perception::srv::PoseExtract::Request> request,
+            std::shared_ptr<::perception::srv::PoseExtract::Response> response)
+        {
+            std::vector<lr_msgs::msg::Pose2D> goal_poses;
+            std::vector<std::string> goal_types;
+            std::vector<float> crater_centroid{
+                request->centroid.x,
+                request->centroid.y,
+                request->centroid.z};
+
+            float diameter = request->diameter;
+
+            pose_extractor->makeGoalsfromCraterGeometry(goal_poses, goal_types, crater_centroid, diameter);
+
+            response->goal_poses = goal_poses;
+            response->goal_types = goal_types;
+            response->success = !goal_poses.empty();
+            response->message = "Generated " + std::to_string(goal_poses.size()) + " goal poses.";
+        });
+
+    rclcpp::spin(node);
+    rclcpp::shutdown();
+    return 0;
+}

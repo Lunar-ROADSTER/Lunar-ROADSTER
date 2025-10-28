@@ -30,10 +30,10 @@
  * @credit John Harrington, Team CraterGrader. Based on ROS2 architecture and mathematical principles required for planning.
  */
 
-#include "planning/common.hpp"
+#include "perception/common.hpp"
 
 namespace lr {
-namespace planning {
+namespace perception {
 
 lr_msgs::msg::Point2D create_point2d(const double& x, const double& y) {
   lr_msgs::msg::Point2D pt;
@@ -174,12 +174,12 @@ int getClosestTrajIndex(const lr_msgs::msg::Trajectory &target_trajectory, const
       current_state.pose.pose.orientation.z,
       current_state.pose.pose.orientation.w);
 
-  lr_msgs::msg::Pose2D cur_pose = lr::planning::create_pose2d(
+  lr_msgs::msg::Pose2D cur_pose = lr::perception::create_pose2d(
       current_state.pose.pose.position.x,
       current_state.pose.pose.position.y,
       tf2::getYaw(q));
 
-  lr_msgs::msg::Point2D cur_point = lr::planning::create_point2d(
+  lr_msgs::msg::Point2D cur_point = lr::perception::create_point2d(
       current_state.pose.pose.position.x,
       current_state.pose.pose.position.y);
 
@@ -187,7 +187,7 @@ int getClosestTrajIndex(const lr_msgs::msg::Trajectory &target_trajectory, const
   int min_idx = -1;
   size_t search_window = 1; // Number of points to search ahead from
   for (size_t i = prev_traj_idx; i < std::min(prev_traj_idx + search_window, target_trajectory.path.size()); ++i) {
-    double dist = lr::planning::euclidean_distance(target_trajectory.path[i].pt, cur_pose.pt);
+    double dist = lr::perception::euclidean_distance(target_trajectory.path[i].pt, cur_pose.pt);
     if (dist < min_dist) {
         min_dist = dist;
         min_idx = i;
@@ -201,7 +201,7 @@ int getClosestTrajIndex(const lr_msgs::msg::Trajectory &target_trajectory, const
 
   // check if we are ahead of a forward drive, or behind a backup drive 
   // make local frame using path and yaw
-  lr_msgs::msg::Point2D point_rel_to_traj = lr::planning::transformPointGlobalToLocal(cur_point, target_trajectory.path[min_idx]);
+  lr_msgs::msg::Point2D point_rel_to_traj = lr::perception::transformPointGlobalToLocal(cur_point, target_trajectory.path[min_idx]);
   // get x componant of pose in traj frame
   double x_of_point_in_traj_frame = point_rel_to_traj.x;
   // get velocity componant
@@ -213,5 +213,5 @@ int getClosestTrajIndex(const lr_msgs::msg::Trajectory &target_trajectory, const
   return min_idx;
 }
 
-} // planning namespace
+} // perception namespace
 } // lr namespace

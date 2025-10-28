@@ -1,5 +1,5 @@
-#ifndef PLANNING__COMMON_HPP
-#define PLANNING__COMMON_HPP
+#ifndef PERCEPTION__COMMON_HPP
+#define PERCEPTION__COMMON_HPP
 
 #include <cmath> // sqrt, fmod
 #include <Eigen/Dense> // matrix multiplication
@@ -13,7 +13,7 @@
 #include <tf2/utils.h>
 
 namespace lr {
-namespace planning {
+namespace perception {
 
 // Functions
 lr_msgs::msg::Point2D create_point2d(const double& x, const double& y);
@@ -49,7 +49,7 @@ bool samePoseWithinThresh(
 // checks what the new closest index should be on a trajectory based on localization
 int getClosestTrajIndex(const lr_msgs::msg::Trajectory &target_trajectory, const nav_msgs::msg::Odometry &current_state, int prev_traj_idx);
 
-} // planning namespace
+} // perception namespace
 } // lr namespace
 
-#endif // PLANNING__COMMON_HPP
+#endif // PERCEPTION__COMMON_HPP
