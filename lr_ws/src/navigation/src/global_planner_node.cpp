@@ -37,12 +37,6 @@ namespace navigation
             "~/plan_path",
             std::bind(&AStarPlanner::handlePlanRequest, this, std::placeholders::_1,
                       std::placeholders::_2, std::placeholders::_3));
-        tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
-        tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
-
-        timer_ = create_wall_timer(
-            std::chrono::milliseconds(200),
-            std::bind(&AStarPlanner::runPlanner, this));
 
         loadParams();
 
@@ -153,87 +147,13 @@ namespace navigation
             RCLCPP_WARN(get_logger(), "TF lookup map->base_link failed: %s", ex.what());
             return false;
         }
-    bool AStarPlanner::lookupBaseInMap(geometry_msgs::msg::PoseStamped &out) const
-    {
-        try
-        {
-            auto tf = tf_buffer_->lookupTransform(
-                "map", "base_link", tf2::TimePointZero, tf2::durationFromSec(0.1));
-
-            out.header = tf.header;
-            out.header.frame_id = "map";
-            out.pose.position.x = tf.transform.translation.x;
-            out.pose.position.y = tf.transform.translation.y;
-            out.pose.position.z = tf.transform.translation.z;
-            out.pose.orientation = tf.transform.rotation;
-            return true;
-        }
-        catch (const tf2::TransformException &ex)
-        {
-            RCLCPP_WARN(get_logger(), "TF lookup map->base_link failed: %s", ex.what());
-            return false;
-        }
-    }
-
-    void AStarPlanner::goalPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
-    {
-        // if (start_msg->header.frame_id != "map")
-        // {
-        //     RCLCPP_WARN(get_logger(), "goal_pose frame_id='%s' != 'map' — assuming it's in map.",
-        //                 start_msg->header.frame_id.c_str());
-        // }
-
-        // start_x_ = start_msg->pose.position.x;
-        // start_y_ = start_msg->pose.position.y;
-
-        // double yaw = tf2::getYaw(start_msg->pose.orientation);
-        // start_yaw_ = angleWrap(yaw);
-
-        // got_start_pose_ = true;
-
-        // RCLCPP_INFO(get_logger(),
-        //             "Start pose set from /goal_pose: (%.2f, %.2f, %.1f°)",
-        //             start_x_, start_y_, start_yaw_ * 180.0 / M_PI);
-
-        geometry_msgs::msg::PoseStamped in = *msg;
-        geometry_msgs::msg::PoseStamped map_goal;
-
-        if (in.header.frame_id != "map" && !in.header.frame_id.empty())
-        {
-            try
-            {
-                map_goal = tf_buffer_->transform(in, "map", tf2::durationFromSec(0.2));
-            }
-            catch (const tf2::TransformException &ex)
-            {
-                RCLCPP_WARN(get_logger(),
-                            "Transforming goal %s->map failed: %s. Using as-is.",
-                            in.header.frame_id.c_str(), ex.what());
-                map_goal = in;
-                map_goal.header.frame_id = "map";
-            }
-        }
-        else
-        {
-            map_goal = in;
-            map_goal.header.frame_id = "map";
-        }
-
-        goal_x_ = map_goal.pose.position.x;
-        goal_y_ = map_goal.pose.position.y;
-        goal_yaw_ = angleWrap(tf2::getYaw(map_goal.pose.orientation));
-
-        got_goal_pose_ = true;
-
-        RCLCPP_INFO(get_logger(), "Goal set from /goal_pose: (%.2f, %.2f, %.1f°)",
-                    goal_x_, goal_y_, goal_yaw_ * 180.0 / M_PI);
     }
 
     // void AStarPlanner::goalPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
     // {
     //     // if (start_msg->header.frame_id != "map")
     //     // {
-    //     //     RCLCPP_WARN(get_logger(), "goal_pose frame_id='%s' != 'map' — assuming it's in map.",
+    //     //     RCLCPP_WARN(get_logger(), "goal_pose frame_id='%s' != 'map' ? assuming it's in map.",
     //     //                 start_msg->header.frame_id.c_str());
     //     // }
 
@@ -362,16 +282,6 @@ namespace navigation
 
         geometry_msgs::msg::PoseStamped goal_in_map = req->goal;
         goal_in_map.header.frame_id = "map";
-        if (!got_goal_pose_)
-        {
-            RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 2000,
-                                 "No goal yet. Click a goal in RViz on /goal_pose.");
-            return;
-        }
-
-        RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 2000,
-                             "map_loaded=%d, craters_loaded=%d, ring_ready=%d",
-                             map_loaded_, craters_loaded_, ring_ready_);
 
         nav_msgs::msg::Path path;
         const bool ok = planOnce(goal_in_map, path, req->smooth);
@@ -411,14 +321,25 @@ namespace navigation
             auto [cx0, cy0, R0] = *circle;
             double cx = cx0, cy = cy0, R = R0;
             // refine geometrically; set huber_k>0 to downweight big outlier crater
-            refineCircleGaussNewton(cx, cy, R, 15, /*huber_k=*/0.25); // tune 0.1–0.5 m as needed
+            refineCircleGaussNewton(cx, cy, R, 15, /*huber_k=*/0.25); // tune 0.1?0.5 m as needed
 
             publishLatitudeCircle(cx, cy, R);
 
             auto st = computeDeviationStatsWeighted(final_planned_path_, cx, cy, R);
+
+            double pct_mean_dev = 0.0;
+            double pct_cum_dev = 0.0;
+            if (R > 1e-9 && st.path_length > 1e-9)
+            {
+                // mean% = 100 * mean(|r-R|)/R
+                pct_mean_dev = 100.0 * (st.mean / R);
+                // "cumulative %" = 100 * cumulative / (R * path_length) == mean% (reported separately for clarity)
+                pct_cum_dev = 100.0 * (st.cumulative / (R * st.path_length));
+            }
+
             RCLCPP_INFO(get_logger(),
                         "Circle (refined): C=(%.3f,%.3f), R=%.3f | mean=%.3f, rms=%.3f, max=%.3f, cum=%.3f, len=%.2f",
-                        cx, cy, R, st.mean, st.rms, st.max, st.cumulative, st.path_length);
+                        cx, cy, R, st.mean, st.rms, st.max, st.cumulative, st.path_length, pct_mean_dev, pct_cum_dev);
         }
 
         else
@@ -468,48 +389,6 @@ namespace navigation
             for (size_t i = 1; i < seg.size(); ++i)
             {
                 final_planned_path_.poses.push_back(nodeToPoseStamped(seg[i]));
-        geometry_msgs::msg::PoseStamped base_in_map;
-        if (!lookupBaseInMap(base_in_map))
-        {
-            RCLCPP_WARN(get_logger(), "Robot pose unavailable from TF (map->base_link) ...");
-            return;
-        }
-        start_x_ = base_in_map.pose.position.x;
-        start_y_ = base_in_map.pose.position.y;
-        start_yaw_ = angleWrap(tf2::getYaw(base_in_map.pose.orientation));
-
-        std::vector<geometry_msgs::msg::PoseStamped> viz_points = buildRingCCW(gradable);
-        publishRingPath(viz_points);
-
-        if (!ring_ready_)
-        {
-            got_start_pose_ = false;
-            return;
-        }
-
-        generateSubGoals();
-
-        final_planned_path_.poses.clear();
-        final_planned_path_.header.stamp = now();
-        final_planned_path_.header.frame_id = "map";
-
-        NodeState current_start = getInitialStartState();
-        final_planned_path_.poses.push_back(nodeToPoseStamped(current_start));
-
-        for (const auto &sub_goal : sub_goals_)
-        {
-            std::vector<NodeState> path_segment = runLatticeAStar(current_start, sub_goal);
-
-            if (path_segment.empty())
-            {
-                RCLCPP_ERROR(get_logger(), "Failed to plan segment to sub-goal!");
-                final_planned_path_.poses.clear();
-                break;
-            }
-
-            for (size_t i = 1; i < path_segment.size(); ++i)
-            {
-                final_planned_path_.poses.push_back(nodeToPoseStamped(path_segment[i]));
             }
             current_start = seg.back();
         }
@@ -528,14 +407,6 @@ namespace navigation
         out_path = final_planned_path_;
 
         return true;
-            current_start = path_segment.back();
-        }
-
-        if (!final_planned_path_.poses.empty())
-        {
-            smoothPath(final_planned_path_, weight_smooth_, weight_data_);
-            planned_path_pub_->publish(final_planned_path_);
-        }
     }
 
     // void AStarPlanner::runPlanner()
@@ -1710,8 +1581,8 @@ namespace navigation
         if (path.poses.size() < 2)
             return out;
 
-        double sum_abs_trap = 0.0; // ∑ 0.5*(|e_i|+|e_{i+1}|)*ds
-        double sum_sq_trap = 0.0;  // ∑ 0.5*(e_i^2+e_{i+1}^2)*ds
+        double sum_abs_trap = 0.0; // ? 0.5*(|e_i|+|e_{i+1}|)*ds
+        double sum_sq_trap = 0.0;  // ? 0.5*(e_i^2+e_{i+1}^2)*ds
         double total_len = 0.0;
         double max_abs = 0.0;
         size_t samples = 0;
