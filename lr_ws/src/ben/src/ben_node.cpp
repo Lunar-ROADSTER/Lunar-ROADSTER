@@ -126,7 +126,9 @@ void BenNode::debugTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg)
 
     if (debug_trigger_)
     {
-        RCLCPP_INFO(this->get_logger(), "[DEBUG] Debug mode triggered.");
+        RCLCPP_INFO(this->get_logger(), "[DEBUG] Debug mode triggered. Transitioning to DEBUG state.");
+
+        fsm_.setCurrState(lr::ben::FSM::State::DEBUG);
     }
 
     // TODO: Implement whatever you need for debug trigger
