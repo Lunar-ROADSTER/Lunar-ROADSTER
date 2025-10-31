@@ -77,8 +77,28 @@ void BenNode::fsmTimerCallback()
         fsmRunStartMission();
         break;
 
+    case lr::ben::FSM::State::GLOBAL_NAV_PLANNER:
+        fsmRunGlobalNavPlanner();
+        break;
+
+    case lr::ben::FSM::State::GLOBAL_NAV_CONTROLLER:
+        fsmRunGlobalNavController();
+        break;
+
     case lr::ben::FSM::State::VALIDATION:
         fsmRunValidation();
+        break;
+
+    case lr::ben::FSM::State::PERCEPTION:
+        fsmRunPerception();
+        break;
+    
+    case lr::ben::FSM::State::MANIPULATION_PLANNER:
+        fsmRunManipulationPlanner();
+        break;
+    
+    case lr::ben::FSM::State::MANIPULATION_CONTROLLER:
+        fsmRunManipulationController();
         break;
 
     case lr::ben::FSM::State::END_MISSION:
@@ -89,7 +109,9 @@ void BenNode::fsmTimerCallback()
         fsmRunStopped();
         break;
 
-    // TODO: Implement other states
+    case lr::ben::FSM::State::DEBUG:
+        fsmRunDebug();
+        break;
 
     default:
         RCLCPP_WARN(this->get_logger(), "[FSM] State not recognized!");
@@ -139,13 +161,33 @@ void BenNode::globalRobotStateCallback(const nav_msgs::msg::Odometry::SharedPtr 
 // --------------------------------------------------------------------------------------------------------------------- //
 void BenNode::fsmRunStartMission()
 {
-    // Turn rover to TELEOP mode
+    // Turn rover to FULL_AUTONOMY mode
     lr_msgs::msg::MuxMode mux_msg;
-    mux_msg.mode = 3;
+    mux_msg.mode = 2;
     mux_mode_pub_->publish(mux_msg);
-    RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Changing MUX mode to TELEOP.");
+    RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Changing MUX mode to FULL_AUTONOMY.");
 
-    RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Transitioning to VALIDATION.");
+    RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Transitioning to GLOBAL_NAV_PLANNER.");
+    fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_PLANNER);
+}
+
+
+void BenNode::fsmRunGlobalNavPlanner()
+{
+    RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_PLANNER] Running global navigation planner...");
+
+    // Debug
+    RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_PLANNER] Transitioning to GLOBAL_NAV_CONTROLLER.");
+    fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_CONTROLLER);
+}
+
+
+void BenNode::fsmRunGlobalNavController()
+{
+    RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Running global navigation controller...");
+
+    // Debug
+    RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Transitioning to VALIDATION.");
     fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
 }
 
@@ -165,15 +207,17 @@ void BenNode::fsmRunValidation()
             if (ok)
             {
                 RCLCPP_INFO(this->get_logger(),
-                            "[FSM: VALIDATION] Grading SUCCESS. Transitioning to END_MISSION.");
-                fsm_.setCurrState(lr::ben::FSM::State::END_MISSION);
+                            "[FSM: VALIDATION] Grading SUCCESS. Transitioning to GLOBAL_NAV_PLANNER.");
+                validation_attempts_ = 0;
+                fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_PLANNER);
                 return;
             }
             else
             {
                 RCLCPP_WARN(this->get_logger(),
-                            "[FSM: VALIDATION] Grading FAILED. Transitioning to START_MISSION.");
-                fsm_.setCurrState(lr::ben::FSM::State::START_MISSION);
+                            "[FSM: VALIDATION] Grading FAILED. Transitioning to PERCEPTION.");
+                validation_attempts_++;
+                fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
                 return;
             }
         }
@@ -224,6 +268,7 @@ void BenNode::fsmRunValidation()
             if (res.code == rclcpp_action::ResultCode::SUCCEEDED && res.result)
             {
                 validation_last_success_ = res.result->grading_success;
+                validation_last_max_z_ = res.result->max_z;
                 RCLCPP_INFO(this->get_logger(),
                             "[FSM: VALIDATION] Result: success=%s mean=%.2f rmse=%.2f max=%.2f max_trav=%.2f min_z=%.2f max_z=%.2f avg_z=%.2f",
                             res.result->grading_success ? "true" : "false",
@@ -271,6 +316,24 @@ void BenNode::fsmRunValidation()
 }
 
 
+void BenNode::fsmRunPerception()
+{
+    RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] Running perception...");
+}
+
+
+void BenNode::fsmRunManipulationPlanner()
+{
+    RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_PLANNER] Running manipulation planner...");
+}
+
+
+void BenNode::fsmRunManipulationController()
+{
+    RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Running manipulation controller...");
+}
+
+
 void BenNode::fsmRunEndMission()
 {
     // Turn rover to IDLE mode
@@ -287,6 +350,12 @@ void BenNode::fsmRunEndMission()
 void BenNode::fsmRunStopped()
 {
     RCLCPP_INFO(this->get_logger(), "[FSM: STOPPED] Mission has ended. Robot is stopped.");
+}
+
+
+void BenNode::fsmRunDebug()
+{
+    RCLCPP_INFO(this->get_logger(), "[FSM: DEBUG] Debug state active.");
 }
 
 } // namespace ben
