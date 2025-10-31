@@ -12,14 +12,97 @@ import numpy as np
 import time
 
 from perception.action import CraterDetect
+from tf2_ros import Buffer, TransformListener
+import tf_transformations
+from lr_msgs.msg import CraterStamped
+
+
+import numpy as np
+import cv2
+from sensor_msgs.msg import CameraInfo, Image
+
+class DepthProjector:
+    """Utility class to project 2D image pixels to 3D camera coordinates."""
+
+    def __init__(self):
+        self.fx = None
+        self.fy = None
+        self.cx = None
+        self.cy = None
+        self.depth_image = None
+        self.depth_timestamp = None
+
+    def update_intrinsics(self, camera_info_msg: CameraInfo):
+        """Extract and store camera intrinsics from CameraInfo."""
+        K = camera_info_msg.k
+        self.fx = K[0]
+        self.fy = K[4]
+        self.cx = K[2]
+        self.cy = K[5]
+
+    def update_depth(self, depth_msg: Image, bridge):
+        """Convert ROS depth image to numpy array and store."""
+        try:
+            depth_image = bridge.imgmsg_to_cv2(depth_msg, desired_encoding='passthrough')
+            if depth_image is not None:
+                self.depth_image = np.nan_to_num(depth_image, nan=0.0)
+                self.depth_timestamp = depth_msg.header.stamp
+        except Exception as e:
+            print(f"[DepthProjector] Failed to convert depth image: {e}")
+
+    def pixel_to_camera(self, u, v):
+        """Project pixel (u, v) and depth to 3D (X, Y, Z) in camera frame."""
+        if self.depth_image is None:
+            return None
+        if self.fx is None or self.fy is None or self.cx is None or self.cy is None:
+            return None
+        
+        if v >= self.depth_image.shape[0] or u >= self.depth_image.shape[1]:
+            return None
+
+        Z = float(self.depth_image[v, u])  # depth in meters
+        if Z <= 0.0:
+            return None
+
+        X = (u - self.cx) * Z / self.fx
+        Y = (v - self.cy) * Z / self.fy
+        return X, Y, Z
 
 
 class CraterDetectionNode(Node):
+    
+    def transform_point(self, x, y, z, from_frame='zed_camera_center', to_frame='map'):
+        try:
+            # Lookup the latest available transform
+            trans = self.tf_buffer.lookup_transform(
+                to_frame,
+                from_frame,
+                rclpy.time.Time()
+            )
+
+            # Extract translation and rotation
+            t = trans.transform.translation
+            q = trans.transform.rotation
+            rot_matrix = tf_transformations.quaternion_matrix([q.x, q.y, q.z, q.w])
+
+            # Apply transform
+            point = np.array([x, y, z, 1.0])
+            translation = np.array([t.x, t.y, t.z])
+            transformed = rot_matrix.dot(point)
+            transformed[:3] += translation
+            return transformed[0], transformed[1], transformed[2]
+        except Exception as e:
+            self.get_logger().warn(f"Transform lookup failed: {e}")
+            return None
+        
     def __init__(self):
         super().__init__('crater_detection_node')
 
         self.bridge = CvBridge()
         self.projector = DepthProjector()
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
+
 
         # Parameters
         self.declare_parameter('filter_type', 'mean')  # mean or median
@@ -39,7 +122,7 @@ class CraterDetectionNode(Node):
         )
 
         # Publisher for crater point
-        self.crater_pub = self.create_publisher(PointStamped, '/crater_detection/point', qos_profile)
+        self.crater_pub = self.create_publisher(CraterStamped, '/crater_detection/crater', qos_profile)
 
         # Action server
         self._action_server = ActionServer(
@@ -62,6 +145,7 @@ class CraterDetectionNode(Node):
 
     async def execute_callback(self, goal_handle):
         """Triggered by FSM via action goal."""
+        self.xs, self.ys, self.zs, self.ds = [], [], [], []
         self.active = True
         self.get_logger().info("Crater detection activated.")
         feedback = CraterDetect.Feedback()
@@ -120,15 +204,26 @@ class CraterDetectionNode(Node):
         else:
             X, Y, Z, D = np.mean(self.xs), np.mean(self.ys), np.mean(self.zs), np.mean(self.ds)
 
+                # Transform to world (map) frame
+        transformed = self.transform_point(X, Y, Z, from_frame='zed_camera_center', to_frame='map')
+        if transformed is not None:
+            X, Y, Z = transformed
+        else:
+            self.get_logger().warn("Could not transform crater point to map frame, using camera frame.")
+
+
         # 4️⃣ Publish averaged crater point
-        crater_msg = PointStamped()
+        crater_msg = CraterStamped()
         crater_msg.header.stamp = self.get_clock().now().to_msg()
-        crater_msg.header.frame_id = f"{D:.3f}"
-        crater_msg.point.x = X
-        crater_msg.point.y = Y
-        crater_msg.point.z = Z
+        crater_msg.header.frame_id = 'map'  # since you transformed to world frame
+        crater_msg.position.x = float(X)
+        crater_msg.position.y = float(Y)
+        crater_msg.position.z = float(Z)
+        crater_msg.diameter = float(D)
+
         self.crater_pub.publish(crater_msg)
-        self.get_logger().info(f"Published filtered crater -> X:{X:.2f}, Y:{Y:.2f}, Z:{Z:.2f}, D:{D:.2f}m")
+        self.get_logger().info(f"Published crater in map frame -> "
+                            f"X:{X:.2f}, Y:{Y:.2f}, Z:{Z:.2f}, Diameter:{D:.2f}m")
 
         # 5️⃣ Cleanup
         self.deactivate_subscribers()
@@ -141,9 +236,18 @@ class CraterDetectionNode(Node):
     def deactivate_subscribers(self):
         self.active = False
         self.get_logger().info("Deactivating crater detection subscribers.")
-        self.sub_rgb = None
-        self.sub_depth = None
-        self.sub_camera_info = None
+
+        if self.sub_rgb is not None:
+            self.destroy_subscription(self.sub_rgb)
+            self.sub_rgb = None
+
+        if self.sub_depth is not None:
+            self.destroy_subscription(self.sub_depth)
+            self.sub_depth = None
+
+        if self.sub_camera_info is not None:
+            self.destroy_subscription(self.sub_camera_info)
+            self.sub_camera_info = None
 
     def camera_info_callback(self, msg):
         if self.active:
