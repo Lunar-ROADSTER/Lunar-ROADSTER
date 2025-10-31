@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>validation</name>
-  <version>1.0.0</version>
+  <version>2.1.1</version>
   <description>Validation package for Lunar Roadster</description>
   <maintainer email="boxiangf@andrew.cmu.edu">Boxiang Fu</maintainer>
   <license>Apache License 2.0</license>
@@ -10,14 +10,12 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <depend>rclcpp</depend>
-  <depend>nav_msgs</depend>
+  <depend>rclcpp_action</depend>
   <depend>sensor_msgs</depend>
+  <depend>lr_msgs</depend>
   <depend>std_msgs</depend>
   <depend>pcl_conversions</depend>
   <depend>pcl_ros</depend>
-  <depend>eigen3_cmake_module</depend>
-
-  <exec_depend>libopencv-dev</exec_depend>
 
   <exec_depend>ros2launch</exec_depend>
 

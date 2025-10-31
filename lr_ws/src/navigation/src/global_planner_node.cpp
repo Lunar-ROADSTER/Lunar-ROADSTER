@@ -16,19 +16,27 @@ namespace navigation
             "/crater_diameters",
             10,
             std::bind(&AStarPlanner::craterDiametersCallback, this, _1));
-        goal_pose_sub_ = create_subscription<geometry_msgs::msg::PoseStamped>(
-            "/goal_pose",
-            10,
-            std::bind(&AStarPlanner::goalPoseCallback, this, _1));
+        // goal_pose_sub_ = create_subscription<geometry_msgs::msg::PoseStamped>(
+        //     "/goal_pose",
+        //     10,
+        //     std::bind(&AStarPlanner::goalPoseCallback, this, _1));
 
         ring_path_pub_ = create_publisher<nav_msgs::msg::Path>("ring_path", 1);
         planner_viz_pub_ = create_publisher<visualization_msgs::msg::MarkerArray>("crater_debug", 1);
         planned_path_pub_ = create_publisher<nav_msgs::msg::Path>("planned_path", 1);
         start_goal_markers_pub_ = create_publisher<visualization_msgs::msg::MarkerArray>("start_goal_markers", 1);
+        latitude_circle_pub_ = create_publisher<visualization_msgs::msg::Marker>("latitude_circle", 1);
 
-        timer_ = create_wall_timer(
-            std::chrono::milliseconds(200),
-            std::bind(&AStarPlanner::runPlanner, this));
+        tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+        tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+
+        // timer_ = create_wall_timer(
+        //     std::chrono::milliseconds(200),
+        //     std::bind(&AStarPlanner::runPlanner, this));
+        plan_srv_ = create_service<lr_msgs::srv::PlanPath>(
+            "~/plan_path",
+            std::bind(&AStarPlanner::handlePlanRequest, this, std::placeholders::_1,
+                      std::placeholders::_2, std::placeholders::_3));
 
         loadParams();
 
@@ -66,6 +74,9 @@ namespace navigation
         declare_parameter("yaw_tolerance_deg", 15.0);
         declare_parameter("max_expansions", max_expansions_);
 
+        declare_parameter("weight_data", weight_data_);
+        declare_parameter("weight_smooth", weight_smooth_);
+
         get_parameter("crater_threshold", crater_threshold_);
         get_parameter("ring_bias_k", ring_bias_k_);
         get_parameter("align_k", align_k_);
@@ -101,6 +112,9 @@ namespace navigation
         yaw_tolerance_ = yaw_tol_deg * M_PI / 180.0;
 
         get_parameter("max_expansions", max_expansions_);
+
+        get_parameter("weight_data", weight_data_);
+        get_parameter("weight_smooth", weight_smooth_);
     }
 
     void AStarPlanner::mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr map_msg)
@@ -113,26 +127,81 @@ namespace navigation
                     map_msg->info.origin.position.x, map_msg->info.origin.position.y);
     }
 
-    void AStarPlanner::goalPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr start_msg)
+    bool AStarPlanner::lookupBaseInMap(geometry_msgs::msg::PoseStamped &out)
     {
-        if (start_msg->header.frame_id != "map")
+        try
         {
-            RCLCPP_WARN(get_logger(), "goal_pose frame_id='%s' != 'map' — assuming it's in map.",
-                        start_msg->header.frame_id.c_str());
+            auto tf = tf_buffer_->lookupTransform(
+                "map", "base_link", tf2::TimePointZero, tf2::durationFromSec(0.1));
+
+            out.header = tf.header;
+            out.header.frame_id = "map";
+            out.pose.position.x = tf.transform.translation.x;
+            out.pose.position.y = tf.transform.translation.y;
+            out.pose.position.z = tf.transform.translation.z;
+            out.pose.orientation = tf.transform.rotation;
+            return true;
         }
-
-        start_x_ = start_msg->pose.position.x;
-        start_y_ = start_msg->pose.position.y;
-
-        double yaw = tf2::getYaw(start_msg->pose.orientation);
-        start_yaw_ = angleWrap(yaw);
-
-        got_start_pose_ = true;
-
-        RCLCPP_INFO(get_logger(),
-                    "Start pose set from /goal_pose: (%.2f, %.2f, %.1f°)",
-                    start_x_, start_y_, start_yaw_ * 180.0 / M_PI);
+        catch (const tf2::TransformException &ex)
+        {
+            RCLCPP_WARN(get_logger(), "TF lookup map->base_link failed: %s", ex.what());
+            return false;
+        }
     }
+
+    // void AStarPlanner::goalPoseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
+    // {
+    //     // if (start_msg->header.frame_id != "map")
+    //     // {
+    //     //     RCLCPP_WARN(get_logger(), "goal_pose frame_id='%s' != 'map' ? assuming it's in map.",
+    //     //                 start_msg->header.frame_id.c_str());
+    //     // }
+
+    //     // start_x_ = start_msg->pose.position.x;
+    //     // start_y_ = start_msg->pose.position.y;
+
+    //     // double yaw = tf2::getYaw(start_msg->pose.orientation);
+    //     // start_yaw_ = angleWrap(yaw);
+
+    //     // got_start_pose_ = true;
+
+    //     // RCLCPP_INFO(get_logger(),
+    //     //             "Start pose set from /goal_pose: (%.2f, %.2f, %.1f°)",
+    //     //             start_x_, start_y_, start_yaw_ * 180.0 / M_PI);
+
+    //     geometry_msgs::msg::PoseStamped in = *msg;
+    //     geometry_msgs::msg::PoseStamped map_goal;
+
+    //     if (in.header.frame_id != "map" && !in.header.frame_id.empty())
+    //     {
+    //         try
+    //         {
+    //             map_goal = tf_buffer_->transform(in, "map", tf2::durationFromSec(0.2));
+    //         }
+    //         catch (const tf2::TransformException &ex)
+    //         {
+    //             RCLCPP_WARN(get_logger(),
+    //                         "Transforming goal %s->map failed: %s. Using as-is.",
+    //                         in.header.frame_id.c_str(), ex.what());
+    //             map_goal = in;
+    //             map_goal.header.frame_id = "map";
+    //         }
+    //     }
+    //     else
+    //     {
+    //         map_goal = in;
+    //         map_goal.header.frame_id = "map";
+    //     }
+
+    //     goal_x_ = map_goal.pose.position.x;
+    //     goal_y_ = map_goal.pose.position.y;
+    //     goal_yaw_ = angleWrap(tf2::getYaw(map_goal.pose.orientation));
+
+    //     got_goal_pose_ = true;
+
+    //     RCLCPP_INFO(get_logger(), "Goal set from /goal_pose: (%.2f, %.2f, %.1f°)",
+    //                 goal_x_, goal_y_, goal_yaw_ * 180.0 / M_PI);
+    // }
 
     void AStarPlanner::craterCentroidsCallback(const geometry_msgs::msg::PoseArray::SharedPtr centroids_msg)
     {
@@ -190,94 +259,252 @@ namespace navigation
         // RCLCPP_INFO(get_logger(), "Craters fused: %zu", craters_.size());
     }
 
-    void AStarPlanner::runPlanner()
+    void AStarPlanner::handlePlanRequest(
+        const std::shared_ptr<rmw_request_id_t>,
+        const std::shared_ptr<lr_msgs::srv::PlanPath::Request> req,
+        std::shared_ptr<lr_msgs::srv::PlanPath::Response> res)
     {
         if (!map_loaded_ || !craters_loaded_)
         {
-            RCLCPP_WARN(get_logger(), "map_loaded=%d, craters_loaded=%d, ring_ready=%d",
-                        map_loaded_, craters_loaded_, ring_ready_);
-
+            res->success = false;
+            res->message = "Map/craters not ready yet.";
             return;
         }
 
-        RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 2000,
-                             "map_loaded=%d, craters_loaded=%d, ring_ready=%d",
-                             map_loaded_, craters_loaded_, ring_ready_);
+        if (!req->goal.header.frame_id.empty() && req->goal.header.frame_id != "map")
+        {
+            RCLCPP_ERROR(get_logger(), "Plan request goal frame is '%s' but must be 'map'.",
+                         req->goal.header.frame_id.c_str());
+            res->success = false;
+            res->message = "Goal must be in 'map' frame.";
+            return;
+        }
 
+        geometry_msgs::msg::PoseStamped goal_in_map = req->goal;
+        goal_in_map.header.frame_id = "map";
+
+        nav_msgs::msg::Path path;
+        const bool ok = planOnce(goal_in_map, path, req->smooth);
+
+        res->success = ok;
+        res->path = path;
+        res->message = ok ? "OK" : "Planning failed";
+    }
+
+    bool AStarPlanner::planOnce(const geometry_msgs::msg::PoseStamped &goal_msg,
+                                nav_msgs::msg::Path &out_path,
+                                bool do_smooth)
+    {
         std::vector<Crater> gradable, obstacles;
-
         gradable.reserve(craters_.size());
         obstacles.reserve(craters_.size());
-
         for (const auto &c : craters_)
         {
             if (c.diameter <= crater_threshold_)
                 gradable.emplace_back(c);
-
             else
                 obstacles.emplace_back(c);
         }
 
+        publishCraterDebug(gradable, obstacles);
+
         if (gradable.size() < 3)
         {
             ring_ready_ = false;
-            RCLCPP_WARN(get_logger(), "Need at least 3 gradable craters for a spline ring, have %zu.", gradable.size());
             publishCraterDebug(gradable, obstacles);
-            return;
+            RCLCPP_WARN(get_logger(), "Need at least 3 gradable craters to build ring.");
+            return false;
         }
 
-        if (got_start_pose_)
+        if (auto circle = bestFitCircleAllCraters())
         {
+            auto [cx0, cy0, R0] = *circle;
+            double cx = cx0, cy = cy0, R = R0;
+            // refine geometrically; set huber_k>0 to downweight big outlier crater
+            refineCircleGaussNewton(cx, cy, R, 15, /*huber_k=*/0.25); // tune 0.1?0.5 m as needed
 
-            std::vector<geometry_msgs::msg::PoseStamped> viz_points = buildRingCCW(gradable);
-            publishRingPath(viz_points);
+            publishLatitudeCircle(cx, cy, R);
 
-            if (!ring_ready_)
+            auto st = computeDeviationStatsWeighted(final_planned_path_, cx, cy, R);
+
+            double pct_mean_dev = 0.0;
+            double pct_cum_dev = 0.0;
+            if (R > 1e-9 && st.path_length > 1e-9)
             {
-                got_start_pose_ = false;
-                return;
+                // mean% = 100 * mean(|r-R|)/R
+                pct_mean_dev = 100.0 * (st.mean / R);
+                // "cumulative %" = 100 * cumulative / (R * path_length) == mean% (reported separately for clarity)
+                pct_cum_dev = 100.0 * (st.cumulative / (R * st.path_length));
             }
 
-            generateSubGoals();
-
-            final_planned_path_.poses.clear();
-            final_planned_path_.header.stamp = now();
-            final_planned_path_.header.frame_id = "map";
-
-            NodeState current_start = getInitialStartState();
-            final_planned_path_.poses.push_back(nodeToPoseStamped(current_start));
-
-            for (const auto &sub_goal : sub_goals_)
-            {
-                std::vector<NodeState> path_segment = runLatticeAStar(current_start, sub_goal);
-
-                if (path_segment.empty())
-                {
-                    RCLCPP_ERROR(get_logger(), "Failed to plan segment to sub-goal!");
-                    final_planned_path_.poses.clear();
-                    break;
-                }
-
-                for (size_t i = 1; i < path_segment.size(); ++i)
-                {
-                    final_planned_path_.poses.push_back(nodeToPoseStamped(path_segment[i]));
-                }
-
-                current_start = path_segment.back();
-            }
-
-            if (!final_planned_path_.poses.empty())
-            {
-                smoothPath(final_planned_path_, 0.1, 1.0);
-                planned_path_pub_->publish(final_planned_path_);
-            }
-
-            got_start_pose_ = false;
+            RCLCPP_INFO(get_logger(),
+                        "Circle (refined): C=(%.3f,%.3f), R=%.3f | mean=%.3f, rms=%.3f, max=%.3f, cum=%.3f, len=%.2f",
+                        cx, cy, R, st.mean, st.rms, st.max, st.cumulative, st.path_length, pct_mean_dev, pct_cum_dev);
         }
 
         else
-            RCLCPP_WARN(get_logger(), "Robot pose unavailable ...");
+        {
+            RCLCPP_WARN(get_logger(), "Latitude circle fit failed (need >=3 craters with good geometry).");
+        }
+
+        geometry_msgs::msg::PoseStamped start_ps;
+        if (!lookupBaseInMap(start_ps))
+        {
+            RCLCPP_WARN(get_logger(), "TF (map<-base_link) not available.");
+            return false;
+        }
+        start_x_ = start_ps.pose.position.x;
+        start_y_ = start_ps.pose.position.y;
+        start_yaw_ = angleWrap(tf2::getYaw(start_ps.pose.orientation));
+
+        goal_x_ = goal_msg.pose.position.x;
+        goal_y_ = goal_msg.pose.position.y;
+        goal_yaw_ = angleWrap(tf2::getYaw(goal_msg.pose.orientation));
+
+        auto viz_points = buildRingCCW(gradable);
+        publishRingPath(viz_points);
+        if (!ring_ready_)
+        {
+            return false;
+        }
+
+        generateSubGoals();
+
+        final_planned_path_.poses.clear();
+        final_planned_path_.header.stamp = now();
+        final_planned_path_.header.frame_id = "map";
+
+        NodeState current_start = getInitialStartState();
+        final_planned_path_.poses.push_back(nodeToPoseStamped(current_start));
+
+        for (const auto &sub_goal : sub_goals_)
+        {
+            auto seg = runLatticeAStar(current_start, sub_goal);
+            if (seg.empty())
+            {
+                RCLCPP_ERROR(get_logger(), "Failed to plan segment to a sub-goal.");
+                final_planned_path_.poses.clear();
+                break;
+            }
+            for (size_t i = 1; i < seg.size(); ++i)
+            {
+                final_planned_path_.poses.push_back(nodeToPoseStamped(seg[i]));
+            }
+            current_start = seg.back();
+        }
+
+        if (final_planned_path_.poses.empty())
+        {
+            return false;
+        }
+
+        if (do_smooth)
+        {
+            smoothPath(final_planned_path_, weight_smooth_, weight_data_);
+        }
+
+        planned_path_pub_->publish(final_planned_path_);
+        out_path = final_planned_path_;
+
+        return true;
     }
+
+    // void AStarPlanner::runPlanner()
+    // {
+    //     if (!map_loaded_ || !craters_loaded_)
+    //     {
+    //         RCLCPP_WARN(get_logger(), "map_loaded=%d, craters_loaded=%d, ring_ready=%d",
+    //                     map_loaded_, craters_loaded_, ring_ready_);
+
+    //         return;
+    //     }
+
+    //     if (!got_goal_pose_)
+    //     {
+    //         RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 2000,
+    //                              "No goal yet. Click a goal in RViz on /goal_pose.");
+    //         return;
+    //     }
+
+    //     RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 2000,
+    //                          "map_loaded=%d, craters_loaded=%d, ring_ready=%d",
+    //                          map_loaded_, craters_loaded_, ring_ready_);
+
+    //     std::vector<Crater> gradable, obstacles;
+
+    //     gradable.reserve(craters_.size());
+    //     obstacles.reserve(craters_.size());
+
+    //     for (const auto &c : craters_)
+    //     {
+    //         if (c.diameter <= crater_threshold_)
+    //             gradable.emplace_back(c);
+
+    //         else
+    //             obstacles.emplace_back(c);
+    //     }
+
+    //     if (gradable.size() < 3)
+    //     {
+    //         ring_ready_ = false;
+    //         RCLCPP_WARN(get_logger(), "Need at least 3 gradable craters for a spline ring, have %zu.", gradable.size());
+    //         publishCraterDebug(gradable, obstacles);
+    //         return;
+    //     }
+
+    //     geometry_msgs::msg::PoseStamped base_in_map;
+    //     if (!lookupBaseInMap(base_in_map))
+    //     {
+    //         RCLCPP_WARN(get_logger(), "Robot pose unavailable from TF (map->base_link) ...");
+    //         return;
+    //     }
+    //     start_x_ = base_in_map.pose.position.x;
+    //     start_y_ = base_in_map.pose.position.y;
+    //     start_yaw_ = angleWrap(tf2::getYaw(base_in_map.pose.orientation));
+
+    //     std::vector<geometry_msgs::msg::PoseStamped> viz_points = buildRingCCW(gradable);
+    //     publishRingPath(viz_points);
+
+    //     if (!ring_ready_)
+    //     {
+    //         got_start_pose_ = false;
+    //         return;
+    //     }
+
+    //     generateSubGoals();
+
+    //     final_planned_path_.poses.clear();
+    //     final_planned_path_.header.stamp = now();
+    //     final_planned_path_.header.frame_id = "map";
+
+    //     NodeState current_start = getInitialStartState();
+    //     final_planned_path_.poses.push_back(nodeToPoseStamped(current_start));
+
+    //     for (const auto &sub_goal : sub_goals_)
+    //     {
+    //         std::vector<NodeState> path_segment = runLatticeAStar(current_start, sub_goal);
+
+    //         if (path_segment.empty())
+    //         {
+    //             RCLCPP_ERROR(get_logger(), "Failed to plan segment to sub-goal!");
+    //             final_planned_path_.poses.clear();
+    //             break;
+    //         }
+
+    //         for (size_t i = 1; i < path_segment.size(); ++i)
+    //         {
+    //             final_planned_path_.poses.push_back(nodeToPoseStamped(path_segment[i]));
+    //         }
+
+    //         current_start = path_segment.back();
+    //     }
+
+    //     if (!final_planned_path_.poses.empty())
+    //     {
+    //         smoothPath(final_planned_path_, weight_smooth_, weight_data_);
+    //         planned_path_pub_->publish(final_planned_path_);
+    //     }
+    // }
 
     geometry_msgs::msg::Point AStarPlanner::evalCatmullRom(double t, const geometry_msgs::msg::Point &p0, const geometry_msgs::msg::Point &p1, const geometry_msgs::msg::Point &p2, const geometry_msgs::msg::Point &p3) const
     {
@@ -346,11 +573,11 @@ namespace navigation
         std::vector<geometry_msgs::msg::PoseStamped> viz_pts;
         if (ring_total_length_ > 0)
         {
-            for (double s = 0; s < ring_total_length_; s += 0.2) 
+            for (double s = 0; s < ring_total_length_; s += 0.2)
             {
                 viz_pts.push_back(getPoseAtS(s));
             }
-            viz_pts.push_back(getPoseAtS(0)); 
+            viz_pts.push_back(getPoseAtS(0));
         }
         return viz_pts;
     }
@@ -367,7 +594,7 @@ namespace navigation
 
     void AStarPlanner::updateRingCache(const std::vector<geometry_msgs::msg::PoseStamped> &pts)
     {
-        ring_pts_ = pts; 
+        ring_pts_ = pts;
         if (ring_pts_.size() < 3)
             return;
 
@@ -450,7 +677,7 @@ namespace navigation
         }
 
         double best_d2 = std::numeric_limits<double>::infinity();
-        const int samples_per_segment = 20; 
+        const int samples_per_segment = 20;
 
         for (size_t i = 0; i < ring_pts_.size(); ++i)
         {
@@ -592,7 +819,7 @@ namespace navigation
         m.pose.position.y = y;
         m.pose.position.z = 0.05;
         m.pose.orientation = yawToQuat(yaw);
-        m.scale.x = 1.0;
+        m.scale.x = 0.5;
         m.scale.y = 0.15;
         m.scale.z = 0.25;
         m.color.a = 1.0;
@@ -651,8 +878,8 @@ namespace navigation
         const auto &info = map_.info;
         const int idx = my * static_cast<int>(info.width) + mx;
         if (idx < 0 || idx >= static_cast<int>(map_.data.size()))
-            return -1;         
-        return map_.data[idx]; 
+            return -1;
+        return map_.data[idx];
     }
 
     double AStarPlanner::obstacleCostAlongPrimitive(const NodeState &from, double kappa, double length) const
@@ -1025,11 +1252,11 @@ namespace navigation
     {
         if (path.poses.size() <= 2)
         {
-            return; 
+            return;
         }
 
         nav_msgs::msg::Path original_path = path;
-        int iterations = 50; 
+        int iterations = 50;
 
         for (int i = 0; i < iterations; ++i)
         {
@@ -1086,6 +1313,311 @@ namespace navigation
         path.poses = std::move(poses);
 
         planned_path_pub_->publish(path);
+    }
+
+    std::optional<std::tuple<double, double, double>> AStarPlanner::bestFitCircleAllCraters() const
+    {
+        if (craters_.size() < 3)
+            return std::nullopt;
+
+        double Sx = 0, Sy = 0, Sxx = 0, Syy = 0, Sxy = 0, Sxz = 0, Syz = 0, Sz = 0;
+        size_t n = 0;
+        for (const auto &c : craters_)
+        {
+            const double x = c.x;
+            const double y = c.y;
+            const double z = x * x + y * y;
+            Sx += x;
+            Sy += y;
+            Sz += z;
+            Sxx += x * x;
+            Syy += y * y;
+            Sxy += x * y;
+            Sxz += x * z;
+            Syz += y * z;
+            ++n;
+        }
+
+        // Normal equations
+        double M[3][3] = {
+            {Sxx, Sxy, Sx},
+            {Sxy, Syy, Sy},
+            {Sx, Sy, static_cast<double>(n)}};
+        double b[3] = {-Sxz, -Syz, -Sz};
+
+        auto solve3 = [](double M[3][3], double b[3], double x[3]) -> bool
+        {
+            // Forward elimination with partial pivoting
+            for (int k = 0; k < 2; ++k)
+            {
+                int piv = k;
+                double best = fabs(M[k][k]);
+                for (int r = k + 1; r < 3; ++r)
+                {
+                    double v = fabs(M[r][k]);
+                    if (v > best)
+                    {
+                        best = v;
+                        piv = r;
+                    }
+                }
+                if (piv != k)
+                {
+                    for (int c = k; c < 3; ++c)
+                        std::swap(M[k][c], M[piv][c]);
+                    std::swap(b[k], b[piv]);
+                }
+                const double pk = M[k][k];
+                if (fabs(pk) < 1e-12)
+                    return false;
+                for (int r = k + 1; r < 3; ++r)
+                {
+                    const double f = M[r][k] / pk;
+                    for (int c = k; c < 3; ++c)
+                        M[r][c] -= f * M[k][c];
+                    b[r] -= f * b[k];
+                }
+            }
+            // Back substitution
+            for (int i = 2; i >= 0; --i)
+            {
+                double s = b[i];
+                for (int c = i + 1; c < 3; ++c)
+                    s -= M[i][c] * x[c];
+                const double pii = M[i][i];
+                if (fabs(pii) < 1e-12)
+                    return false;
+                x[i] = s / pii;
+            }
+            return true;
+        };
+
+        // Copy to scratch (optional; solve3 mutates its inputs)
+        double MM[3][3];
+        std::memcpy(MM, M, sizeof(MM));
+        double bb[3];
+        std::memcpy(bb, b, sizeof(bb));
+
+        double xsol[3] = {0.0, 0.0, 0.0};
+        if (!solve3(MM, bb, xsol))
+            return std::nullopt;
+
+        const double A = xsol[0];
+        const double B = xsol[1];
+        const double C = xsol[2];
+
+        const double cx = -A / 2.0;
+        const double cy = -B / 2.0;
+        const double R2 = cx * cx + cy * cy - C;
+        if (R2 <= 0.0)
+            return std::nullopt;
+        const double R = std::sqrt(R2);
+
+        return std::make_tuple(cx, cy, R);
+    }
+
+    bool AStarPlanner::solve3x3(double M[3][3], double b[3], double x[3]) const
+    {
+        for (int k = 0; k < 2; k++)
+        {
+            int piv = k;
+            double best = fabs(M[k][k]);
+            for (int r = k + 1; r < 3; r++)
+            {
+                double v = fabs(M[r][k]);
+                if (v > best)
+                {
+                    best = v;
+                    piv = r;
+                }
+            }
+            if (piv != k)
+            {
+                for (int c = k; c < 3; c++)
+                    std::swap(M[k][c], M[piv][c]);
+                std::swap(b[k], b[piv]);
+            }
+            const double pk = M[k][k];
+            if (fabs(pk) < 1e-12)
+                return false;
+            for (int r = k + 1; r < 3; r++)
+            {
+                const double f = M[r][k] / pk;
+                for (int c = k; c < 3; c++)
+                    M[r][c] -= f * M[k][c];
+                b[r] -= f * b[k];
+            }
+        }
+        for (int i = 2; i >= 0; i--)
+        {
+            double s = b[i];
+            for (int c = i + 1; c < 3; c++)
+                s -= M[i][c] * x[c];
+            const double pii = M[i][i];
+            if (fabs(pii) < 1e-12)
+                return false;
+            x[i] = s / pii;
+        }
+        return true;
+    }
+
+    bool AStarPlanner::refineCircleGaussNewton(double &cx, double &cy, double &R,
+                                               int iters, double huber_k) const
+    {
+        if (craters_.size() < 3)
+            return false;
+
+        for (int it = 0; it < iters; ++it)
+        {
+            double JTJ[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+            double JTr[3] = {0, 0, 0};
+            double cost = 0.0;
+
+            for (const auto &c : craters_)
+            {
+                const double dx = c.x - cx;
+                const double dy = c.y - cy;
+                const double ri = std::hypot(dx, dy);
+                if (ri < 1e-9)
+                    continue;
+                double e = ri - R;
+
+                // Huber weight (optional)
+                double w = 1.0;
+                if (huber_k > 0.0)
+                {
+                    const double a = fabs(e);
+                    if (a > huber_k)
+                        w = huber_k / a;
+                }
+
+                // Jacobian of e wrt [cx, cy, R]:
+                // de/dcx = -(dx/ri), de/dcy = -(dy/ri), de/dR = -1
+                const double j0 = -(dx / ri);
+                const double j1 = -(dy / ri);
+                const double j2 = -1.0;
+
+                const double jw0 = w * j0, jw1 = w * j1, jw2 = w * j2;
+                const double we = w * e;
+
+                // Accumulate JTJ and JTr
+                JTJ[0][0] += jw0 * j0;
+                JTJ[0][1] += jw0 * j1;
+                JTJ[0][2] += jw0 * j2;
+                JTJ[1][0] += jw1 * j0;
+                JTJ[1][1] += jw1 * j1;
+                JTJ[1][2] += jw1 * j2;
+                JTJ[2][0] += jw2 * j0;
+                JTJ[2][1] += jw2 * j1;
+                JTJ[2][2] += jw2 * j2;
+
+                JTr[0] += jw0 * e;
+                JTr[1] += jw1 * e;
+                JTr[2] += jw2 * e;
+
+                cost += w * e * e;
+            }
+
+            // Solve JTJ * delta = -JTr
+            double A[3][3];
+            double b[3];
+            for (int r = 0; r < 3; r++)
+            {
+                for (int c = 0; c < 3; c++)
+                    A[r][c] = JTJ[r][c];
+                b[r] = -JTr[r];
+            }
+
+            double delta[3] = {0, 0, 0};
+            if (!solve3x3(A, b, delta))
+                break;
+
+            cx += delta[0];
+            cy += delta[1];
+            R += delta[2];
+
+            if (std::hypot(delta[0], delta[1]) < 1e-6 && fabs(delta[2]) < 1e-6)
+                break;
+        }
+        return true;
+    }
+
+    void AStarPlanner::publishLatitudeCircle(double cx, double cy, double R)
+    {
+        visualization_msgs::msg::Marker m;
+        m.header.frame_id = "map";
+        m.header.stamp = now();
+        m.ns = "latitude_circle";
+        m.id = 1;
+        m.type = visualization_msgs::msg::Marker::LINE_STRIP;
+        m.action = visualization_msgs::msg::Marker::ADD;
+        m.pose.orientation.w = 1.0;
+
+        const int N = 256;
+        m.points.clear();
+        m.points.reserve(N + 1);
+        for (int i = 0; i <= N; ++i)
+        {
+            const double th = (2.0 * M_PI * i) / N;
+            geometry_msgs::msg::Point p;
+            p.x = cx + R * std::cos(th);
+            p.y = cy + R * std::sin(th);
+            p.z = 0.02;
+            m.points.push_back(p);
+        }
+        m.scale.x = 0.05;
+        m.color.a = 1.0;
+        m.color.r = 0.1f;
+        m.color.g = 0.6f;
+        m.color.b = 1.0f;
+
+        latitude_circle_pub_->publish(m); // OK now
+    }
+
+    DeviationStats AStarPlanner::computeDeviationStatsWeighted(const nav_msgs::msg::Path &path,
+                                                               double cx, double cy, double R) const
+    {
+        DeviationStats out{};
+        if (path.poses.size() < 2)
+            return out;
+
+        double sum_abs_trap = 0.0; // ? 0.5*(|e_i|+|e_{i+1}|)*ds
+        double sum_sq_trap = 0.0;  // ? 0.5*(e_i^2+e_{i+1}^2)*ds
+        double total_len = 0.0;
+        double max_abs = 0.0;
+        size_t samples = 0;
+
+        auto err = [&](double x, double y)
+        {
+            const double r = std::hypot(x - cx, y - cy);
+            return std::fabs(r - R); // radial deviation magnitude
+        };
+
+        for (size_t i = 0; i + 1 < path.poses.size(); ++i)
+        {
+            const auto &p0 = path.poses[i].pose.position;
+            const auto &p1 = path.poses[i + 1].pose.position;
+
+            const double e0 = err(p0.x, p0.y);
+            const double e1 = err(p1.x, p1.y);
+            const double ds = std::hypot(p1.x - p0.x, p1.y - p0.y);
+            if (ds <= 1e-6)
+                continue;
+
+            sum_abs_trap += 0.5 * (e0 + e1) * ds;
+            sum_sq_trap += 0.5 * (e0 * e0 + e1 * e1) * ds;
+            total_len += ds;
+            max_abs = std::max(max_abs, std::max(e0, e1));
+            samples += 2;
+        }
+
+        out.cumulative = sum_abs_trap;                                          // [meters^2] (integral of |error| along path)
+        out.mean = (total_len > 0.0) ? (sum_abs_trap / total_len) : 0.0;        // [m]
+        out.rms = (total_len > 0.0) ? std::sqrt(sum_sq_trap / total_len) : 0.0; // [m]
+        out.max = max_abs;                                                      // [m]
+        out.path_length = total_len;                                            // [m]
+        out.samples = samples;
+        return out;
     }
 
 }

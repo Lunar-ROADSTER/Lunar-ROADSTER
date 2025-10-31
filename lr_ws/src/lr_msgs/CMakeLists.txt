@@ -22,11 +22,15 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Trajectory.idl"
   "msg/ActuatorCommand.idl"
   "msg/CraterStamped.idl"
+  "msg/Validation.idl"
   "srv/SiteMap.srv"
   "srv/UpdateTrajectory.srv"
   "srv/EnableWorksystem.srv"
   "srv/SaveMap.srv"
+  "srv/PlanPath.srv"
   "action/CalibrateImu.action"
+  "action/FollowPath.action"
+  "action/RunValidation.action"
   # Implementation-specific messages
   DEPENDENCIES builtin_interfaces std_msgs action_msgs geometry_msgs
 )

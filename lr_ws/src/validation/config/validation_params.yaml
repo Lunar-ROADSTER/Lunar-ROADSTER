@@ -1,0 +1,15 @@
+validation_node:
+  ros__parameters:
+    average_window: 10
+    trim_count: 1
+    max_traversal_slope_deg: 5.0 # Max acceptable traversal slope (degrees)
+    voxel_leaf_m: 0.05 # Voxel downsampling leaf size (meters)
+    omp_threads: 8 # Threads for NormalEstimationOMP
+    knn_normals: 20 # K for normal estimation
+    max_keep_slope_deg: 45.0
+    wall_jump_thresh_m: 0.10
+    Ksmooth1: 32
+    Ksmooth2: 16
+    do_second_pass: false
+    sigma_spatial_m: 0.10 # Spatial Gaussian sigma (meters)
+    sigma_slope_deg: 5.0 # Slope Gaussian sigma (degrees)

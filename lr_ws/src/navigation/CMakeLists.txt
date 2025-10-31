@@ -24,6 +24,7 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(lr_msgs REQUIRED)
+find_package(rclcpp_action REQUIRED)
 
 include_directories(include)
 
@@ -40,6 +41,7 @@ ament_target_dependencies(global_astar_node
   tf2
   tf2_ros
   tf2_geometry_msgs
+  lr_msgs
 )
 
 add_executable(crater_centroids_pub
@@ -72,6 +74,23 @@ ament_target_dependencies(global_planner_controller_main
   tf2_ros
   tf2_geometry_msgs
   visualization_msgs
+  lr_msgs
+  rclcpp_action
+)
+
+add_executable(controller_executor
+  src/controller_executor.cpp
+)
+
+ament_target_dependencies(controller_executor
+  rclcpp
+  rclcpp_action
+  geometry_msgs
+  nav_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  lr_msgs
 )
 
 add_executable(basic_astar_planner_node
@@ -118,6 +137,9 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(TARGETS controller_executor
+  DESTINATION lib/${PROJECT_NAME})
+  
 install(TARGETS
   autonomy_command
   DESTINATION lib/${PROJECT_NAME}

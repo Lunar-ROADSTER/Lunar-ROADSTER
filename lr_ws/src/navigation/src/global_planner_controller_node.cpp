@@ -1,206 +1,479 @@
 #include "navigation/global_planner_controller_node.hpp"
 #include <algorithm>
-#include <chrono> // Required for std::chrono literals
-#include <vector> // Required for std::vector
-
-// New include for visualization markers
+#include <chrono>
+#include <vector>
+#include <functional>
 #include "visualization_msgs/msg/marker.hpp"
-
-// This header is needed for tf2::TimePointZero
 #include "tf2/time.h"
 
 namespace lr_global_planner_controller
 {
+    using namespace std::placeholders;
+    using namespace std::chrono_literals;
 
-GlobalPlannerController::GlobalPlannerController(const rclcpp::NodeOptions & options)
-: Node("global_planner_controller", options)
-{
-    // Declare and retrieve parameters from the configuration file
-    this->declare_parameter<double>("lookahead_distance", 0.5);
-    this->declare_parameter<double>("desired_linear_velocity", 5.0);
-    this->declare_parameter<double>("max_angular_velocity", 3.0);
-    this->declare_parameter<double>("goal_tolerance", 0.25);
-    this->declare_parameter<std::string>("robot_frame", "base_link");
-    this->declare_parameter<std::string>("global_frame", "map");
+    /**
+     * @brief Constructor for the GlobalPlannerController class (Action Server version).
+     */
+    GlobalPlannerController::GlobalPlannerController(const rclcpp::NodeOptions &options)
+        : Node("global_planner_controller", options)
+    {
+        // Declare and retrieve parameters from the configuration file
+        this->declare_parameter<double>("lookahead_distance", 0.5);
+        this->declare_parameter<double>("desired_linear_velocity", 5.0);
+        this->declare_parameter<double>("max_angular_velocity", 3.0);
+        this->declare_parameter<double>("goal_tolerance", 0.25);
+        this->declare_parameter<std::string>("robot_frame", "base_link");
+        this->declare_parameter<std::string>("global_frame", "map");
 
-    lookahead_distance_ = this->get_parameter("lookahead_distance").as_double();
-    desired_linear_velocity_ = this->get_parameter("desired_linear_velocity").as_double();
-    max_angular_velocity_ = this->get_parameter("max_angular_velocity").as_double();
-    goal_tolerance_ = this->get_parameter("goal_tolerance").as_double();
-    robot_frame_ = this->get_parameter("robot_frame").as_string();
-    global_frame_ = this->get_parameter("global_frame").as_string();
+        lookahead_distance_ = this->get_parameter("lookahead_distance").as_double();
+        desired_linear_velocity_ = this->get_parameter("desired_linear_velocity").as_double();
+        max_angular_velocity_ = this->get_parameter("max_angular_velocity").as_double();
+        goal_tolerance_ = this->get_parameter("goal_tolerance").as_double();
+        robot_frame_ = this->get_parameter("robot_frame").as_string();
+        global_frame_ = this->get_parameter("global_frame").as_string();
 
-    RCLCPP_INFO(this->get_logger(), "Parameters Loaded Successfully:");
-    RCLCPP_INFO(this->get_logger(), "  lookahead_distance: %.2f m", lookahead_distance_);
-    RCLCPP_INFO(this->get_logger(), "  desired_linear_velocity: %.2f m/s", desired_linear_velocity_);
-    RCLCPP_INFO(this->get_logger(), "  max_angular_velocity: %.2f rad/s", max_angular_velocity_);
-    RCLCPP_INFO(this->get_logger(), "  goal_tolerance: %.2f m", goal_tolerance_);
-    RCLCPP_INFO(this->get_logger(), "  robot_frame: %s", robot_frame_.c_str());
-    RCLCPP_INFO(this->get_logger(), "  global_frame: %s", global_frame_.c_str());
+        RCLCPP_INFO(this->get_logger(), "Parameters Loaded Successfully:");
+        RCLCPP_INFO(this->get_logger(), "  lookahead_distance: %.2f m", lookahead_distance_);
+        RCLCPP_INFO(this->get_logger(), "  desired_linear_velocity: %.2f m/s", desired_linear_velocity_);
+        RCLCPP_INFO(this->get_logger(), "  max_angular_velocity: %.2f rad/s", max_angular_velocity_);
+        RCLCPP_INFO(this->get_logger(), "  goal_tolerance: %.2f m", goal_tolerance_);
+        RCLCPP_INFO(this->get_logger(), "  robot_frame: %s", robot_frame_.c_str());
+        RCLCPP_INFO(this->get_logger(), "  global_frame: %s", global_frame_.c_str());
 
-    // Initialize TF buffer and listener
-    tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
-    tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+        // Initialize TF buffer and listener
+        tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+        tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 
-    // Subscribers
-    path_sub_ = this->create_subscription<nav_msgs::msg::Path>(
-        "/planned_path", 10, std::bind(&GlobalPlannerController::pathCallback, this, std::placeholders::_1));
-    odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>(
-        "/odometry/filtered/ekf_global_node", 10, std::bind(&GlobalPlannerController::odomCallback, this, std::placeholders::_1));
+        // Subscribers
+        odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>(
+            "/odometry/filtered/ekf_global_node", 10, std::bind(&GlobalPlannerController::odomCallback, this, _1));
 
-    // Publishers
-    cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 10);
-    target_point_pub_ = this->create_publisher<visualization_msgs::msg::Marker>("/lookahead_point", 10);
+        // Publishers
+        cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 10);
+        target_point_pub_ = this->create_publisher<visualization_msgs::msg::Marker>("/lookahead_point", 10);
 
+        // Create the Action Server
+        this->action_server_ = rclcpp_action::create_server<FollowPath>(
+            this,
+            "follow_path",
+            std::bind(&GlobalPlannerController::handle_goal, this, _1, _2),
+            std::bind(&GlobalPlannerController::handle_cancel, this, _1),
+            std::bind(&GlobalPlannerController::handle_accepted, this, _1));
 
-    // Controller Timer to run the main logic loop
-    controller_timer_ = this->create_wall_timer(
-        std::chrono::milliseconds(100), std::bind(&GlobalPlannerController::executeController, this));
-}
+        RCLCPP_INFO(this->get_logger(), "Action server 'follow_path' started and ready for goals.");
 
-void GlobalPlannerController::pathCallback(const nav_msgs::msg::Path::SharedPtr msg)
-{
-    current_path_ = *msg;
-    path_received_ = !msg->poses.empty();
-    if (path_received_) {
-        RCLCPP_INFO(this->get_logger(), "Received new path with %zu poses.", msg->poses.size());
-    }
-}
-
-void GlobalPlannerController::odomCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
-{
-    current_odometry_ = *msg;
-    odom_received_ = true;
-}
-
-double GlobalPlannerController::calculateDistance(const geometry_msgs::msg::Point& p1, const geometry_msgs::msg::Point& p2)
-{
-    return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
-}
-
-// *** MODIFIED: This function is now more robust ***
-geometry_msgs::msg::PoseStamped GlobalPlannerController::findTargetPoint()
-{
-    // Get the current robot pose
-    const auto& robot_pose = current_odometry_.pose.pose;
-
-    // Get the transform from the global frame to the robot's frame
-    geometry_msgs::msg::TransformStamped transform_stamped;
-    try {
-        transform_stamped = tf_buffer_->lookupTransform(
-            robot_frame_, global_frame_, tf2::TimePointZero);
-    } catch (const tf2::TransformException & ex) {
-        RCLCPP_ERROR(
-            this->get_logger(), "Could not get transform from %s to %s: %s",
-            global_frame_.c_str(), robot_frame_.c_str(), ex.what());
-        // As a fallback, return the last point of the path
-        return current_path_.poses.back();
+        // Controller Timer to run the main logic loop
+        controller_timer_ = this->create_wall_timer(
+            100ms, std::bind(&GlobalPlannerController::executeController, this));
     }
 
-    // Find the closest point on the path to the robot to start our search from
-    auto closest_it = std::min_element(current_path_.poses.begin(), current_path_.poses.end(),
-        [&](const auto& pose1, const auto& pose2) {
-            return calculateDistance(robot_pose.position, pose1.pose.position) <
-                   calculateDistance(robot_pose.position, pose2.pose.position);
-        });
+    /**
+     * @brief Callback for odometry messages.
+     */
+    void GlobalPlannerController::odomCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
+    {
+        current_odometry_ = *msg;
+        odom_received_ = true;
+    }
 
-    // Iterate from the closest point to find the lookahead point
-    for (auto it = closest_it; it != current_path_.poses.end(); ++it) {
-        geometry_msgs::msg::PoseStamped pose_in_robot_frame;
-        // Transform the path point to the robot's frame
-        tf2::doTransform(*it, pose_in_robot_frame, transform_stamped);
+    /**
+     * @brief Action Server: Callback to decide if a new goal should be accepted.
+     */
+    rclcpp_action::GoalResponse GlobalPlannerController::handle_goal(
+        const rclcpp_action::GoalUUID &uuid,
+        std::shared_ptr<const FollowPath::Goal> goal)
+    {
+        (void)uuid;
+        RCLCPP_INFO(this->get_logger(), "Received goal request with path of %zu poses, direction: %s",
+                    goal->path.poses.size(), goal->direction.c_str());
 
-        // Check if the point is in front of the robot
-        if (pose_in_robot_frame.pose.position.x > 0) {
-            // Check if the point is beyond the lookahead distance
-            if (calculateDistance(robot_pose.position, it->pose.position) >= lookahead_distance_) {
-                return *it; // This is our target point
-            }
+        // Validate the direction string ---
+        if (goal->direction != "Forward" && goal->direction != "Backward")
+        {
+            RCLCPP_ERROR(this->get_logger(), "Goal rejected: Invalid direction. Must be 'Forward' or 'Backward'.");
+            return rclcpp_action::GoalResponse::REJECT;
         }
+
+        // Reject the goal if the path is empty
+        if (goal->path.poses.empty())
+        {
+            RCLCPP_ERROR(this->get_logger(), "Goal rejected: Path is empty.");
+            return rclcpp_action::GoalResponse::REJECT;
+        }
+
+        // Accept the new goal.
+        return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
     }
 
-    // If no suitable point is found (e.g., near the end of the path), return the last point
-    return current_path_.poses.back();
-}
+    /**
+     * @brief Action Server: Callback to handle a request to cancel the current goal.
+     */
+    rclcpp_action::CancelResponse GlobalPlannerController::handle_cancel(
+        const std::shared_ptr<GoalHandleFollowPath> goal_handle)
+    {
+        (void)goal_handle;
+        RCLCPP_INFO(this->get_logger(), "Received request to cancel goal. Stopping robot.");
 
-
-void GlobalPlannerController::publishTargetPointMarker(const geometry_msgs::msg::PoseStamped& target_point)
-{
-    auto marker = visualization_msgs::msg::Marker();
-    marker.header.frame_id = global_frame_;
-    marker.header.stamp = this->get_clock()->now();
-    marker.ns = "lookahead_point";
-    marker.id = 0;
-    marker.type = visualization_msgs::msg::Marker::SPHERE;
-    marker.action = visualization_msgs::msg::Marker::ADD;
-    marker.pose = target_point.pose;
-    marker.scale.x = 0.3; // 30 cm diameter sphere
-    marker.scale.y = 0.3;
-    marker.scale.z = 0.3;
-    marker.color.a = 1.0; // Don't forget to set the alpha!
-    marker.color.r = 0.0;
-    marker.color.g = 1.0; // Make it cyan for high visibility
-    marker.color.b = 1.0;
-    marker.lifetime = rclcpp::Duration::from_seconds(0.5); // Marker lasts for 0.5 seconds
-
-    target_point_pub_->publish(marker);
-}
-
-
-void GlobalPlannerController::executeController()
-{
-    if (!path_received_ || !odom_received_) {
-        return;
-    }
-
-    const auto& robot_pose = current_odometry_.pose.pose;
-    const auto& goal_pose = current_path_.poses.back().pose;
-
-    if (calculateDistance(robot_pose.position, goal_pose.position) < goal_tolerance_) {
-        RCLCPP_INFO(this->get_logger(), "Goal reached!");
+        // Stop the robot immediately
         geometry_msgs::msg::Twist stop_cmd;
         stop_cmd.linear.x = 0.0;
         stop_cmd.angular.z = 0.0;
         cmd_vel_pub_->publish(stop_cmd);
-        path_received_ = false;
-        return;
+
+        // Accept the cancellation
+        return rclcpp_action::CancelResponse::ACCEPT;
     }
 
-    geometry_msgs::msg::PoseStamped target_point_map = findTargetPoint();
+    /**
+     * @brief Action Server: Callback that runs when a new goal is accepted.
+     */
+    void GlobalPlannerController::handle_accepted(
+        const std::shared_ptr<GoalHandleFollowPath> goal_handle)
+    {
+        std::lock_guard<std::mutex> lock(goal_handle_mutex_);
 
-    publishTargetPointMarker(target_point_map);
+        // If we have an old goal, abort it.
+        if (this->current_goal_handle_)
+        {
+            RCLCPP_WARN(this->get_logger(), "Aborting previous goal.");
+            auto result = std::make_shared<FollowPath::Result>();
+            result->success = false;
+            this->current_goal_handle_->abort(result);
+        }
 
-    geometry_msgs::msg::PoseStamped target_point_robot;
-    try {
-        // Explicitly set the timestamp to zero to request the latest transform from TF2.
-        target_point_map.header.stamp.sec = 0;
-        target_point_map.header.stamp.nanosec = 0;
-        
-        tf_buffer_->transform(target_point_map, target_point_robot, robot_frame_);
+        // Store the new goal handle, its path, and its direction
+        this->current_goal_handle_ = goal_handle;
+        this->current_path_ = goal_handle->get_goal()->path;
+        this->current_direction_ = goal_handle->get_goal()->direction; // <<< --- MODIFIED: Store the direction
+        RCLCPP_INFO(this->get_logger(), "New goal accepted and path stored. Direction: %s", current_direction_.c_str());
 
-    } catch (const tf2::TransformException & ex) {
-        RCLCPP_ERROR(this->get_logger(), "Could not transform target point to %s frame: %s", robot_frame_.c_str(), ex.what());
-        return;
+        // Reset deviation stats for the new path
+        dev_stats_ = DeviationStats{};
+        have_prev_sample_ = false;
+        prev_error_ = 0.0;
     }
-    
-    // Pure Pursuit lateral error calculation
-    double y_lateral_error = target_point_robot.pose.position.y;
-    double lookahead_dist_sq = lookahead_distance_ * lookahead_distance_;
-    // The curvature is 2*y / L^2, where y is the lateral error and L is the lookahead distance
-    double curvature = (2.0 * y_lateral_error) / lookahead_dist_sq;
 
-    // Calculate required angular velocity: v = w * r => w = v / r = v * curvature
-    double angular_velocity = curvature / 10.0;
+    /**
+     * @brief Helper function to calculate Euclidean distance.
+     */
+    double GlobalPlannerController::calculateDistance(const geometry_msgs::msg::Point &p1, const geometry_msgs::msg::Point &p2)
+    {
+        return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
+    }
 
-    // Clamp the angular velocity to the maximum allowed value
-    double clipped_angular_velocity = std::clamp(
-        angular_velocity, -max_angular_velocity_, max_angular_velocity_);
+    /**
+     * @brief Finds the target point on the path to steer towards.
+     */
+    geometry_msgs::msg::PoseStamped GlobalPlannerController::findTargetPoint()
+    {
+        const auto &robot_pose = current_odometry_.pose.pose;
+        geometry_msgs::msg::TransformStamped transform_stamped;
+        try
+        {
+            // Get the transform from the global frame (map) to the robot frame (base_link)
+            transform_stamped = tf_buffer_->lookupTransform(
+                robot_frame_, global_frame_, tf2::TimePointZero);
+        }
+        catch (const tf2::TransformException &ex)
+        {
+            RCLCPP_ERROR(
+                this->get_logger(), "Could not get transform from %s to %s: %s",
+                global_frame_.c_str(), robot_frame_.c_str(), ex.what());
+            return current_path_.poses.back();
+        }
 
-    geometry_msgs::msg::Twist cmd_vel;
-    cmd_vel.linear.x = desired_linear_velocity_;
-    cmd_vel.angular.z = clipped_angular_velocity;
+        auto closest_it = std::min_element(current_path_.poses.begin(), current_path_.poses.end(),
+                                           [&](const auto &pose1, const auto &pose2)
+                                           {
+                                               return calculateDistance(robot_pose.position, pose1.pose.position) <
+                                                      calculateDistance(robot_pose.position, pose2.pose.position);
+                                           });
 
-    cmd_vel_pub_->publish(cmd_vel);
-}
+        // Check direction ---
+        bool look_forward = (current_direction_ == "Forward");
+
+        for (auto it = closest_it; it != current_path_.poses.end(); ++it)
+        {
+            geometry_msgs::msg::PoseStamped pose_in_robot_frame;
+            tf2::doTransform(*it, pose_in_robot_frame, transform_stamped);
+
+            // Check if the point is in the correct direction (in front or behind)
+            if ((look_forward && pose_in_robot_frame.pose.position.x > 0) ||
+                (!look_forward && pose_in_robot_frame.pose.position.x < 0))
+            {
+                // Check if the point is beyond the lookahead distance
+                if (calculateDistance(robot_pose.position, it->pose.position) >= lookahead_distance_)
+                {
+                    return *it; // This is our target point
+                }
+            }
+        }
+
+        return current_path_.poses.back();
+    }
+
+    /**
+     * @brief Publishes the lookahead point as an Rviz marker.
+     */
+    void GlobalPlannerController::publishTargetPointMarker(const geometry_msgs::msg::PoseStamped &target_point)
+    {
+        auto marker = visualization_msgs::msg::Marker();
+        marker.header.frame_id = global_frame_;
+        marker.header.stamp = this->get_clock()->now();
+        marker.ns = "lookahead_point";
+        marker.id = 0;
+        marker.type = visualization_msgs::msg::Marker::SPHERE;
+        marker.action = visualization_msgs::msg::Marker::ADD;
+        marker.pose = target_point.pose;
+        marker.scale.x = 0.3;
+        marker.scale.y = 0.3;
+        marker.scale.z = 0.3;
+        marker.color.a = 1.0;
+        marker.color.r = 0.0;
+        marker.color.g = 1.0;
+        marker.color.b = 1.0;
+        marker.lifetime = rclcpp::Duration::from_seconds(0.5);
+        target_point_pub_->publish(marker);
+    }
+
+    /**
+     * @brief Gets the robot's current pose in the global frame.
+     */
+    bool GlobalPlannerController::lookupRobotInMap(geometry_msgs::msg::PoseStamped &out) const
+    {
+        try
+        {
+            auto tf = tf_buffer_->lookupTransform(global_frame_, robot_frame_, tf2::TimePointZero);
+            out.header = tf.header;
+            out.header.frame_id = global_frame_;
+            out.pose.position.x = tf.transform.translation.x;
+            out.pose.position.y = tf.transform.translation.y;
+            out.pose.position.z = tf.transform.translation.z;
+            out.pose.orientation = tf.transform.rotation;
+            return true;
+        }
+        catch (const tf2::TransformException &ex)
+        {
+            RCLCPP_WARN(this->get_logger(), "TF %s<- %s failed: %s",
+                        global_frame_.c_str(), robot_frame_.c_str(), ex.what());
+            return false;
+        }
+    }
+
+    /**
+     * @brief Calculates the shortest distance from a point to a line segment.
+     */
+    double GlobalPlannerController::pointToSegmentDistance(
+        const geometry_msgs::msg::Point &p,
+        const geometry_msgs::msg::Point &a,
+        const geometry_msgs::msg::Point &b) const
+    {
+        const double vx = b.x - a.x, vy = b.y - a.y;
+        const double wx = p.x - a.x, wy = p.y - a.y;
+        const double vv = vx * vx + vy * vy;
+        double t = (vv > 1e-12) ? ((wx * vx + wy * vy) / vv) : 0.0;
+        t = std::max(0.0, std::min(1.0, t));
+        const double projx = a.x + t * vx;
+        const double projy = a.y + t * vy;
+        return std::hypot(p.x - projx, p.y - projy);
+    }
+
+    /**
+     * @brief Calculates the shortest distance from a point to the entire path.
+     */
+    double GlobalPlannerController::distancePointToPath(
+        const geometry_msgs::msg::Point &p,
+        const nav_msgs::msg::Path &path) const
+    {
+        if (path.poses.empty())
+            return std::numeric_limits<double>::infinity();
+        if (path.poses.size() == 1)
+        {
+            const auto &q = path.poses.front().pose.position;
+            return std::hypot(p.x - q.x, p.y - q.y);
+        }
+        double best = std::numeric_limits<double>::infinity();
+        for (size_t i = 0; i + 1 < path.poses.size(); ++i)
+        {
+            best = std::min(best,
+                            pointToSegmentDistance(p,
+                                                   path.poses[i].pose.position,
+                                                   path.poses[i + 1].pose.position));
+        }
+        return best;
+    }
+
+    /**
+     * @brief Updates the path deviation statistics (for logging/debugging).
+     */
+    void GlobalPlannerController::updateDeviationStats()
+    {
+        // This function only runs if there's an active goal, checked in executeController
+        if (!odom_received_ || current_path_.poses.empty())
+            return;
+
+        geometry_msgs::msg::PoseStamped robot_map;
+        if (!lookupRobotInMap(robot_map))
+            return;
+
+        const auto &p = robot_map.pose.position;
+        double e = distancePointToPath(p, current_path_);
+
+        if (have_prev_sample_)
+        {
+            const auto &pp = prev_sample_.pose.position;
+            double ds = std::hypot(p.x - pp.x, p.y - pp.y);
+            if (ds > 1e-6)
+            {
+                dev_stats_.path_length += ds;
+                dev_stats_.cumulative += 0.5 * (std::abs(prev_error_) + std::abs(e)) * ds;
+                dev_stats_.rms += 0.5 * (prev_error_ * prev_error_ + e * e) * ds;
+            }
+        }
+
+        dev_stats_.max = std::max(dev_stats_.max, std::abs(e));
+        dev_stats_.samples += 1;
+        prev_sample_ = robot_map;
+        prev_error_ = e;
+        have_prev_sample_ = true;
+
+        if (dev_stats_.path_length > 1e-6)
+        {
+            const double mean = dev_stats_.cumulative / dev_stats_.path_length;
+            const double rms = std::sqrt(dev_stats_.rms / dev_stats_.path_length);
+
+            const double pct_dev = 100.0 * (mean / dev_stats_.path_length);
+
+            RCLCPP_INFO(
+                this->get_logger(),
+                "Path deviation: mean=%.3f m, rms=%.3f m, max=%.3f m, cum=%.3f m², len=%.2f m, dev=%.2f%%",
+                mean, rms, dev_stats_.max, dev_stats_.cumulative, dev_stats_.path_length, pct_dev);
+        }
+    }
+
+    /**
+     * @brief The main control loop, triggered by a timer.
+     */
+    void GlobalPlannerController::executeController()
+    {
+        std::shared_ptr<GoalHandleFollowPath> active_goal_handle;
+        {
+            // Get a thread-safe pointer to the active goal
+            std::lock_guard<std::mutex> lock(goal_handle_mutex_);
+            active_goal_handle = this->current_goal_handle_;
+        }
+
+        // Run deviation stats only when a goal is active
+        if (active_goal_handle)
+        {
+            updateDeviationStats();
+        }
+
+        if (!active_goal_handle || !odom_received_)
+        {
+            // No active goal or no odometry, do nothing.
+            return;
+        }
+
+        // Check if the goal has been canceled
+        if (active_goal_handle->is_canceling())
+        {
+            RCLCPP_INFO(this->get_logger(), "Goal canceled.");
+            auto result = std::make_shared<FollowPath::Result>();
+            result->success = false;
+            active_goal_handle->canceled(result);
+
+            std::lock_guard<std::mutex> lock(goal_handle_mutex_);
+            this->current_goal_handle_ = nullptr;
+            this->current_path_.poses.clear();
+            return;
+        }
+
+        // Get current pose and the final goal pose
+        const auto &robot_pose = current_odometry_.pose.pose;
+        const auto &goal_pose = current_path_.poses.back().pose;
+        double distance_to_final_goal = calculateDistance(robot_pose.position, goal_pose.position);
+
+        // Publish Feedback
+        auto feedback = std::make_shared<FollowPath::Feedback>();
+        feedback->distance_to_goal = distance_to_final_goal;
+        active_goal_handle->publish_feedback(feedback);
+
+        // --- Goal reached logic ---
+        if (distance_to_final_goal < goal_tolerance_)
+        {
+            RCLCPP_INFO(this->get_logger(), "Goal reached successfully!");
+            geometry_msgs::msg::Twist stop_cmd; // Stop the robot
+            stop_cmd.linear.x = 0.0;
+            stop_cmd.angular.z = 0.0;
+            cmd_vel_pub_->publish(stop_cmd);
+
+            // Set goal as succeeded
+            auto result = std::make_shared<FollowPath::Result>();
+            result->success = true;
+            active_goal_handle->succeed(result);
+
+            std::lock_guard<std::mutex> lock(goal_handle_mutex_);
+            this->current_goal_handle_ = nullptr;
+            this->current_path_.poses.clear();
+            return;
+        }
+
+        // --- Start of Control Logic ---
+        geometry_msgs::msg::PoseStamped target_point_map = findTargetPoint();
+        publishTargetPointMarker(target_point_map);
+
+        geometry_msgs::msg::PoseStamped target_point_robot;
+        try
+        {
+            target_point_map.header.stamp.sec = 0;
+            target_point_map.header.stamp.nanosec = 0;
+            tf_buffer_->transform(target_point_map, target_point_robot, robot_frame_);
+        }
+        catch (const tf2::TransformException &ex)
+        {
+            RCLCPP_ERROR(this->get_logger(), "Could not transform target point to %s frame: %s", robot_frame_.c_str(), ex.what());
+
+            // ABORT the goal if TF fails
+            RCLCPP_ERROR(this->get_logger(), "Aborting goal due to transform error.");
+            auto result = std::make_shared<FollowPath::Result>();
+            result->success = false;
+            active_goal_handle->abort(result);
+
+            std::lock_guard<std::mutex> lock(goal_handle_mutex_);
+            this->current_goal_handle_ = nullptr;
+            this->current_path_.poses.clear();
+            return;
+        }
+
+        // Pure Pursuit lateral error calculation
+        double y_lateral_error = target_point_robot.pose.position.y;
+        double lookahead_dist_sq = lookahead_distance_ * lookahead_distance_;
+        double curvature = (lookahead_dist_sq > 1e-6) ? (2.0 * y_lateral_error) / lookahead_dist_sq : 0.0;
+
+        // Angular velocity calculation
+        double angular_velocity = curvature / 10.0;
+
+        // angular_velocity = desired_linear_velocity_ * curvature;
+
+        double clipped_angular_velocity = std::clamp(
+            angular_velocity, -max_angular_velocity_, max_angular_velocity_);
+
+        geometry_msgs::msg::Twist cmd_vel;
+
+        // Set linear velocity and angular velocity based on direction ---
+        if (current_direction_ == "Forward")
+        {
+            cmd_vel.linear.x = desired_linear_velocity_;
+            cmd_vel.angular.z = clipped_angular_velocity;
+        }
+        else // "Backward"
+        {
+            cmd_vel.linear.x = -desired_linear_velocity_;
+            cmd_vel.angular.z = clipped_angular_velocity;
+        }
+
+        cmd_vel_pub_->publish(cmd_vel);
+    }
 
 } // namespace lr_global_planner_controller
