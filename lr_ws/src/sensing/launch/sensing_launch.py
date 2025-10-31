@@ -80,10 +80,10 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        # camera_model_arg,
-        # zed_launch,
-        # zed_static_tf_pub,
+        camera_model_arg,
+        zed_launch,
+        zed_static_tf_pub,
         # realsense_launch,
         # imu_launch,
-        fisheye_node
+        # fisheye_node
     ])
