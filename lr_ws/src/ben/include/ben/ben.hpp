@@ -52,9 +52,15 @@ class BenNode : public rclcpp::Node
 
         // FSM state runners
         void fsmRunStartMission();
+        void fsmRunGlobalNavPlanner();
+        void fsmRunGlobalNavController();
         void fsmRunValidation();
+        void fsmRunPerception();
+        void fsmRunManipulationPlanner();
+        void fsmRunManipulationController();
         void fsmRunEndMission();
         void fsmRunStopped();
+        void fsmRunDebug();
 
         // fsmRunStartMission helpers
         rclcpp::Publisher<lr_msgs::msg::MuxMode>::SharedPtr mux_mode_pub_;
@@ -67,9 +73,12 @@ class BenNode : public rclcpp::Node
         std::mutex validation_mutex_;
         bool validation_goal_active_{false};
         std::optional<bool> validation_last_success_;
+        double validation_last_max_z_{0.0};
+        int validation_attempts_{0};
 
         rclcpp::CallbackGroup::SharedPtr validation_cb_group_;
         rclcpp_action::Client<lr_msgs::action::RunValidation>::SharedPtr validation_client_;
+
 
     public:
         // Constructor and destructor
