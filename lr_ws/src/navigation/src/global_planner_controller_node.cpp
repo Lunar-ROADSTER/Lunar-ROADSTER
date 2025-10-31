@@ -339,7 +339,15 @@ namespace lr_global_planner_controller
 
         if (dev_stats_.path_length > 1e-6)
         {
-            // Log deviation stats (optional, but useful)
+            const double mean = dev_stats_.cumulative / dev_stats_.path_length;
+            const double rms = std::sqrt(dev_stats_.rms / dev_stats_.path_length);
+
+            const double pct_dev = 100.0 * (mean / dev_stats_.path_length);
+
+            RCLCPP_INFO(
+                this->get_logger(),
+                "Path deviation: mean=%.3f m, rms=%.3f m, max=%.3f m, cum=%.3f m², len=%.2f m, dev=%.2f%%",
+                mean, rms, dev_stats_.max, dev_stats_.cumulative, dev_stats_.path_length, pct_dev);
         }
     }
 
@@ -425,7 +433,7 @@ namespace lr_global_planner_controller
         catch (const tf2::TransformException &ex)
         {
             RCLCPP_ERROR(this->get_logger(), "Could not transform target point to %s frame: %s", robot_frame_.c_str(), ex.what());
-            
+
             // ABORT the goal if TF fails
             RCLCPP_ERROR(this->get_logger(), "Aborting goal due to transform error.");
             auto result = std::make_shared<FollowPath::Result>();
@@ -446,7 +454,7 @@ namespace lr_global_planner_controller
         // Angular velocity calculation
         double angular_velocity = curvature / 10.0;
 
-        angular_velocity = desired_linear_velocity_ * curvature;
+        // angular_velocity = desired_linear_velocity_ * curvature;
 
         double clipped_angular_velocity = std::clamp(
             angular_velocity, -max_angular_velocity_, max_angular_velocity_);
