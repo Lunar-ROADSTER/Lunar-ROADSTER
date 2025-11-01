@@ -18,10 +18,10 @@ namespace lr_global_planner_controller
         : Node("global_planner_controller", options)
     {
         // Declare and retrieve parameters from the configuration file
-        this->declare_parameter<double>("lookahead_distance", 0.5);
+        this->declare_parameter<double>("lookahead_distance", 0.7);
         this->declare_parameter<double>("desired_linear_velocity", 5.0);
         this->declare_parameter<double>("max_angular_velocity", 3.0);
-        this->declare_parameter<double>("goal_tolerance", 0.25);
+        this->declare_parameter<double>("goal_tolerance", 0.15);
         this->declare_parameter<std::string>("robot_frame", "base_link");
         this->declare_parameter<std::string>("global_frame", "map");
 
