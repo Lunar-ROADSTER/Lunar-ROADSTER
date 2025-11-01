@@ -2,6 +2,7 @@
 #define BEN__FSM_HPP
 
 #include <string>
+#include <stdexcept>
 
 namespace lr {
 namespace ben {
@@ -37,6 +38,7 @@ class FSM {
 
 		// Helpers
 		std::string currStateToString();
+		State stringToState(const std::string &state_str);
 
 		// Shared private variables
 		protected:

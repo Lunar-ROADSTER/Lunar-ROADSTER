@@ -23,7 +23,6 @@ include_directories(config)
 add_executable(ben_node
   src/ben_main.cpp
   src/ben_node.cpp
-  # FSM
   src/fsm.cpp
 )
 

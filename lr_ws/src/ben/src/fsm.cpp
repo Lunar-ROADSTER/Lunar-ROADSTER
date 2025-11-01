@@ -44,5 +44,31 @@ std::string FSM::currStateToString() {
 	}
 }
 
+FSM::State FSM::stringToState(const std::string &state_str) {
+	if (state_str == "START_MISSION") {
+		return State::START_MISSION;
+	} else if (state_str == "GLOBAL_NAV_PLANNER") {
+		return State::GLOBAL_NAV_PLANNER;
+	} else if (state_str == "GLOBAL_NAV_CONTROLLER") {
+		return State::GLOBAL_NAV_CONTROLLER;
+	} else if (state_str == "VALIDATION") {
+		return State::VALIDATION;
+	} else if (state_str == "PERCEPTION") {
+		return State::PERCEPTION;
+	} else if (state_str == "MANIPULATION_PLANNER") {
+		return State::MANIPULATION_PLANNER;
+	} else if (state_str == "MANIPULATION_CONTROLLER") {
+		return State::MANIPULATION_CONTROLLER;
+	} else if (state_str == "END_MISSION") {
+		return State::END_MISSION;
+	} else if (state_str == "STOPPED") {
+		return State::STOPPED;
+	} else if (state_str == "DEBUG") {
+		return State::DEBUG;
+	} else {
+		return State::DEBUG; // Default to DEBUG for unrecognized strings
+	}
+}
+
 } // namespace ben
 } // namespace lr

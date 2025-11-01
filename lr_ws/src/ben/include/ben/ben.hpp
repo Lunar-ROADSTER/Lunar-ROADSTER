@@ -12,11 +12,14 @@
 #include <ben/fsm.hpp>
 
 #include "lr_msgs/msg/mux_mode.hpp"
-#include <lr_msgs/action/run_validation.hpp>
+#include "lr_msgs/msg/exit_debug.hpp"
 #include <lr_msgs/msg/crater_stamped.hpp>
 #include <lr_msgs/msg/pose2_d.hpp>
+
 #include <lr_msgs/srv/pose_extract.hpp>
 #include <lr_msgs/action/crater_detect.hpp>
+
+#include <lr_msgs/action/run_validation.hpp>
 
 namespace lr{
 namespace ben{
@@ -45,10 +48,20 @@ class BenNode : public rclcpp::Node
         bool debug_trigger_ = false;
         void debugTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
 
+        // Exit debug trigger
+        rclcpp::Subscription<lr_msgs::msg::ExitDebug>::SharedPtr exit_debug_trigger_sub_;
+        bool exit_debug_trigger_ = false;
+        void exitDebugTriggerCallback(const lr_msgs::msg::ExitDebug::SharedPtr msg);
+
         // Verbose trigger
         rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr verbose_trigger_sub_;
         bool verbose_trigger_ = false;
         void verboseTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
+
+        // Crater detection
+        rclcpp::Subscription<lr_msgs::msg::CraterStamped>::SharedPtr crater_sub_;
+        std::optional<lr_msgs::msg::CraterStamped> latest_crater_;
+        void onCraterMsgCallback(const lr_msgs::msg::CraterStamped::SharedPtr msg);
 
         // Finite State Machine
         lr::ben::FSM fsm_;
@@ -67,6 +80,8 @@ class BenNode : public rclcpp::Node
 
         // fsmRunStartMission helpers
         rclcpp::Publisher<lr_msgs::msg::MuxMode>::SharedPtr mux_mode_pub_;
+        int start_mission_delay_iters_{5};
+        int start_mission_delay_count_{0};
 
         // fsmRunValidation helpers
         int  validation_average_window_{10};
@@ -82,17 +97,25 @@ class BenNode : public rclcpp::Node
         rclcpp::CallbackGroup::SharedPtr validation_cb_group_;
         rclcpp_action::Client<lr_msgs::action::RunValidation>::SharedPtr validation_client_;
 
-        // Perception Helpers
-        void onCraterMsg(const lr_msgs::msg::CraterStamped::SharedPtr msg);
-        rclcpp::Subscription<lr_msgs::msg::CraterStamped>::SharedPtr crater_sub_;
-        rclcpp::Client<perception::srv::PoseExtract>::SharedPtr pose_extract_client_;
-        rclcpp_action::Client<lr_msgs::action::CraterDetect>::SharedPtr crater_detect_client_;
-        std::shared_ptr<rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>> crater_detect_goal_handle_;
-        std::optional<lr_msgs::msg::CraterStamped> latest_crater_;
+        // fsmRunPerception helpers
+        std::mutex perception_mutex_;
         std::vector<lr_msgs::msg::Pose2D> goal_poses_;
         std::vector<std::string> goal_pose_types_;
         bool perception_goal_active_{false};
         bool pose_request_inflight_{false};
+
+        rclcpp::CallbackGroup::SharedPtr perception_cb_group_;
+        rclcpp::Client<lr_msgs::srv::PoseExtract>::SharedPtr pose_extract_client_;
+        rclcpp_action::Client<lr_msgs::action::CraterDetect>::SharedPtr crater_detect_client_;
+        std::shared_ptr<rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>> crater_detect_goal_handle_;
+
+        // fsmRunEndMission helpers
+        int end_mission_delay_iters_{5};
+        int end_mission_delay_count_{0};
+
+        // fsmRunDebug helpers
+        std::string exit_debug_target_state_ = "START_MISSION";
+        int exit_debug_crater_index_ = 0;
 
     public:
         // Constructor and destructor
