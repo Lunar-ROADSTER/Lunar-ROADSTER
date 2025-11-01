@@ -57,6 +57,13 @@ BenNode::BenNode() : Node("ben_node")
     validation_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
     validation_client_ = rclcpp_action::create_client<lr_msgs::action::RunValidation>(this, "/validation/run", validation_cb_group_);
 
+    // Perception subscribers and clients
+    crater_sub_ = this->create_subscription<lr_msgs::msg::CraterStamped>(
+        "/crater_detection/crater", rclcpp::QoS(10).transient_local(),
+        std::bind(&BenNode::onCraterMsg, this, std::placeholders::_1));
+    pose_extract_client_ = this->create_client<perception::srv::PoseExtract>("generate_crater_goals");
+    crater_detect_client_ = rclcpp_action::create_client<lr_msgs::action::CraterDetect>(this, "detect_crater");
+
     // Log initialization
     RCLCPP_INFO(this->get_logger(), "[INIT] Behaviour Executive Node initialized.");
 }
@@ -156,6 +163,19 @@ void BenNode::odomRobotStateCallback(const nav_msgs::msg::Odometry::SharedPtr ms
 void BenNode::globalRobotStateCallback(const nav_msgs::msg::Odometry::SharedPtr msg)
 {
     global_robot_state_ = *msg;
+}
+
+void BenNode::onCraterMsg(const lr_msgs::msg::CraterStamped::SharedPtr msg)
+{
+    latest_crater_ = *msg;
+    RCLCPP_INFO(get_logger(),
+                "[FSM: PERCEPTION] Crater update — pos=(%.2f, %.2f, %.2f) diam=%.2f",
+                msg->point.x, msg->point.y, msg->point.z, msg->diameter);
+
+    if (pose_request_inflight_)
+    {
+        RCLCPP_DEBUG(get_logger(), "[FSM: PERCEPTION] Pose request already in flight; storing latest crater.");
+    }
 }
 
 
@@ -321,6 +341,159 @@ void BenNode::fsmRunValidation()
 void BenNode::fsmRunPerception()
 {
     RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] Running perception...");
+
+    // Step 1: Kick off crater detection action.
+    if (!perception_goal_active_)
+    {
+        if (!crater_detect_client_->wait_for_action_server(0s))
+        {
+            RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 5000,
+                                 "[FSM: PERCEPTION] Crater detection action server not available yet. Holding in PERCEPTION.");
+            return;
+        }
+
+        lr_msgs::action::CraterDetect::Goal goal;
+        goal.start_detection = true;
+
+        rclcpp_action::Client<lr_msgs::action::CraterDetect>::SendGoalOptions opts;
+
+        opts.goal_response_callback =
+            [this](std::shared_ptr<rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>> gh)
+            {
+                if (!gh)
+                {
+                    RCLCPP_WARN(this->get_logger(), "[FSM: PERCEPTION] Crater detection goal rejected."); 
+                    perception_goal_active_ = false;
+                    return;
+                }
+
+                RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] Crater detection goal accepted.");
+                crater_detect_goal_handle_ = gh;
+            };
+
+        opts.feedback_callback =
+            [this](rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>::SharedPtr,
+                   const std::shared_ptr<const lr_msgs::action::CraterDetect::Feedback> feedback)
+            {
+                if (feedback)
+                {
+                    RCLCPP_INFO(this->get_logger(),
+                                "[FSM: PERCEPTION] Craters detected so far: %d",
+                                feedback->num_craters_detected);
+                }
+            };
+
+        opts.result_callback =
+            [this](const rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>::WrappedResult &result)
+            {
+                perception_goal_active_ = false;
+
+                if (result.code != rclcpp_action::ResultCode::SUCCEEDED)
+                {
+                    RCLCPP_WARN(this->get_logger(),
+                                "[FSM: PERCEPTION] detect_crater finished with result code %d.", 
+                                static_cast<int>(result.code));
+                }
+                else
+                {
+                    RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] detect_crater action succeeded.");
+                }
+            };
+
+        crater_detect_client_->async_send_goal(goal, opts);
+        perception_goal_active_ = true;
+        RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] detect_crater goal dispatched."); 
+        return;
+    }
+
+    // Step 2: Wait for a crater message to arrive.
+    if (!latest_crater_)
+    {
+        RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 5000,
+                             "[FSM: PERCEPTION] Waiting for /crater_detection/crater update...");
+        return;
+    }
+
+    // Step 3: Avoid concurrent service calls.
+    if (pose_request_inflight_)
+    {
+        RCLCPP_DEBUG(this->get_logger(), "[FSM: PERCEPTION] Pose extraction already in progress.");
+        return;
+    }
+
+    // Step 4: Ensure the pose-extract service is ready.
+    if (!pose_extract_client_->wait_for_service(0s))
+    {
+        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 5000, 
+                             "[FSM: PERCEPTION] Waiting for generate_crater_goals service...");
+        return;
+    }
+
+    // Step 5: Call the pose-extract service to get goal poses.
+    auto request = std::make_shared<perception::srv::PoseExtract::Request>();
+    request->centroid = latest_crater_->point;
+    request->diameter = static_cast<float>(latest_crater_->diameter);
+
+    RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] Requested crater goals from service.");
+
+    pose_request_inflight_ = true;
+    pose_extract_client_->async_send_request(
+        request,
+        [this](rclcpp::Client<perception::srv::PoseExtract>::SharedFuture future)
+        {
+            pose_request_inflight_ = false;
+
+            try
+            {
+                auto response = future.get();
+                goal_poses_ = response->goal_poses;
+                goal_pose_types_ = response->goal_types;
+
+                if (!response->success || goal_poses_.empty())
+                {
+                    RCLCPP_WARN(this->get_logger(),
+                                "[FSM: PERCEPTION] Pose extraction failed: %s",
+                                response->message.c_str());
+                    latest_crater_.reset();
+                    return;
+                }
+
+                RCLCPP_INFO(this->get_logger(),
+                            "[FSM: PERCEPTION] Pose extraction succeeded: %s",
+                            response->message.c_str());
+
+                // for (size_t i = 0; i < goal_poses_.size(); ++i)
+                // {
+                //     const auto &pose = goal_poses_[i];
+                //     const auto type = (i < goal_pose_types_.size()) ? goal_pose_types_[i] : "unknown";
+                //     RCLCPP_INFO(this->get_logger(),
+                //                 "  goal[%zu] type=%s x=%.2f y=%.2f yaw=%.2f",
+                //                 i, type.c_str(), pose.pt.x, pose.pt.y, pose.yaw);
+                // }
+
+                if (crater_detect_goal_handle_)
+                {
+                    crater_detect_client_->async_cancel_goal(crater_detect_goal_handle_);
+                    crater_detect_goal_handle_.reset();
+                }
+
+                latest_crater_.reset();
+                perception_goal_active_ = false;
+
+                
+            }
+            catch (const std::exception &e)
+            {
+                RCLCPP_ERROR(this->get_logger(),
+                             "[FSM: PERCEPTION] Pose extraction request threw: %s",
+                             e.what());
+                latest_crater_.reset();
+            }
+        });
+
+
+    RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] Transitioning to MANIPULATION_PLANNER.");
+    fsm_.setCurrState(lr::ben::FSM::State::MANIPULATION_PLANNER);
 }
 
 
