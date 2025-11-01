@@ -17,20 +17,26 @@ namespace lr_global_planner_controller
     GlobalPlannerController::GlobalPlannerController(const rclcpp::NodeOptions &options)
         : Node("global_planner_controller", options)
     {
-        // Declare and retrieve parameters from the configuration file
+        // --- Declare and retrieve parameters ---
         this->declare_parameter<double>("lookahead_distance", 0.7);
         this->declare_parameter<double>("desired_linear_velocity", 5.0);
         this->declare_parameter<double>("max_angular_velocity", 3.0);
         this->declare_parameter<double>("goal_tolerance", 0.15);
         this->declare_parameter<std::string>("robot_frame", "base_link");
         this->declare_parameter<std::string>("global_frame", "map");
+        this->declare_parameter<double>("manipulation_lookahead_distance", 0.2);
+        this->declare_parameter<double>("manipulation_goal_tolerance", 0.05);
 
+        // Load standard parameters
         lookahead_distance_ = this->get_parameter("lookahead_distance").as_double();
         desired_linear_velocity_ = this->get_parameter("desired_linear_velocity").as_double();
         max_angular_velocity_ = this->get_parameter("max_angular_velocity").as_double();
         goal_tolerance_ = this->get_parameter("goal_tolerance").as_double();
         robot_frame_ = this->get_parameter("robot_frame").as_string();
         global_frame_ = this->get_parameter("global_frame").as_string();
+        manipulation_lookahead_distance_ = this->get_parameter("manipulation_lookahead_distance").as_double();
+        manipulation_goal_tolerance_ = this->get_parameter("manipulation_goal_tolerance").as_double();
+
 
         RCLCPP_INFO(this->get_logger(), "Parameters Loaded Successfully:");
         RCLCPP_INFO(this->get_logger(), "  lookahead_distance: %.2f m", lookahead_distance_);
@@ -39,6 +45,8 @@ namespace lr_global_planner_controller
         RCLCPP_INFO(this->get_logger(), "  goal_tolerance: %.2f m", goal_tolerance_);
         RCLCPP_INFO(this->get_logger(), "  robot_frame: %s", robot_frame_.c_str());
         RCLCPP_INFO(this->get_logger(), "  global_frame: %s", global_frame_.c_str());
+        RCLCPP_INFO(this->get_logger(), "  manipulation_lookahead_distance: %.2f m", manipulation_lookahead_distance_);
+        RCLCPP_INFO(this->get_logger(), "  manipulation_goal_tolerance: %.2f m", manipulation_goal_tolerance_);
 
         // Initialize TF buffer and listener
         tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
@@ -95,21 +103,20 @@ namespace lr_global_planner_controller
         RCLCPP_INFO(this->get_logger(), "Received goal request with path of %zu poses, direction: %s",
                     goal->path.poses.size(), goal->direction.c_str());
 
-        // Validate the direction string ---
-        if (goal->direction != "Forward" && goal->direction != "Backward")
+        if (goal->direction != "Forward" && 
+            goal->direction != "Backward" &&
+            goal->direction != "Forward_manipulation")
         {
-            RCLCPP_ERROR(this->get_logger(), "Goal rejected: Invalid direction. Must be 'Forward' or 'Backward'.");
+            RCLCPP_ERROR(this->get_logger(), "Goal rejected: Invalid direction. Must be 'Forward', 'Backward', or 'Forward_manipulation'.");
             return rclcpp_action::GoalResponse::REJECT;
         }
 
-        // Reject the goal if the path is empty
         if (goal->path.poses.empty())
         {
             RCLCPP_ERROR(this->get_logger(), "Goal rejected: Path is empty.");
             return rclcpp_action::GoalResponse::REJECT;
         }
 
-        // Accept the new goal.
         return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
     }
 
@@ -122,13 +129,11 @@ namespace lr_global_planner_controller
         (void)goal_handle;
         RCLCPP_INFO(this->get_logger(), "Received request to cancel goal. Stopping robot.");
 
-        // Stop the robot immediately
         geometry_msgs::msg::Twist stop_cmd;
         stop_cmd.linear.x = 0.0;
         stop_cmd.angular.z = 0.0;
         cmd_vel_pub_->publish(stop_cmd);
 
-        // Accept the cancellation
         return rclcpp_action::CancelResponse::ACCEPT;
     }
 
@@ -140,7 +145,6 @@ namespace lr_global_planner_controller
     {
         std::lock_guard<std::mutex> lock(goal_handle_mutex_);
 
-        // If we have an old goal, abort it.
         if (this->current_goal_handle_)
         {
             RCLCPP_WARN(this->get_logger(), "Aborting previous goal.");
@@ -149,13 +153,11 @@ namespace lr_global_planner_controller
             this->current_goal_handle_->abort(result);
         }
 
-        // Store the new goal handle, its path, and its direction
         this->current_goal_handle_ = goal_handle;
         this->current_path_ = goal_handle->get_goal()->path;
-        this->current_direction_ = goal_handle->get_goal()->direction; // <<< --- MODIFIED: Store the direction
+        this->current_direction_ = goal_handle->get_goal()->direction; 
         RCLCPP_INFO(this->get_logger(), "New goal accepted and path stored. Direction: %s", current_direction_.c_str());
 
-        // Reset deviation stats for the new path
         dev_stats_ = DeviationStats{};
         have_prev_sample_ = false;
         prev_error_ = 0.0;
@@ -171,14 +173,14 @@ namespace lr_global_planner_controller
 
     /**
      * @brief Finds the target point on the path to steer towards.
+     * @param current_lookahead_distance The active lookahead distance to use (nav or manipulation).
      */
-    geometry_msgs::msg::PoseStamped GlobalPlannerController::findTargetPoint()
+    geometry_msgs::msg::PoseStamped GlobalPlannerController::findTargetPoint(double current_lookahead_distance)
     {
         const auto &robot_pose = current_odometry_.pose.pose;
         geometry_msgs::msg::TransformStamped transform_stamped;
         try
         {
-            // Get the transform from the global frame (map) to the robot frame (base_link)
             transform_stamped = tf_buffer_->lookupTransform(
                 robot_frame_, global_frame_, tf2::TimePointZero);
         }
@@ -197,8 +199,7 @@ namespace lr_global_planner_controller
                                                       calculateDistance(robot_pose.position, pose2.pose.position);
                                            });
 
-        // Check direction ---
-        bool look_forward = (current_direction_ == "Forward");
+        bool look_forward = (current_direction_ == "Forward" || current_direction_ == "Forward_manipulation");
 
         for (auto it = closest_it; it != current_path_.poses.end(); ++it)
         {
@@ -210,7 +211,7 @@ namespace lr_global_planner_controller
                 (!look_forward && pose_in_robot_frame.pose.position.x < 0))
             {
                 // Check if the point is beyond the lookahead distance
-                if (calculateDistance(robot_pose.position, it->pose.position) >= lookahead_distance_)
+                if (calculateDistance(robot_pose.position, it->pose.position) >= current_lookahead_distance)
                 {
                     return *it; // This is our target point
                 }
@@ -366,12 +367,10 @@ namespace lr_global_planner_controller
     {
         std::shared_ptr<GoalHandleFollowPath> active_goal_handle;
         {
-            // Get a thread-safe pointer to the active goal
             std::lock_guard<std::mutex> lock(goal_handle_mutex_);
             active_goal_handle = this->current_goal_handle_;
         }
 
-        // Run deviation stats only when a goal is active
         if (active_goal_handle)
         {
             updateDeviationStats();
@@ -379,11 +378,9 @@ namespace lr_global_planner_controller
 
         if (!active_goal_handle || !odom_received_)
         {
-            // No active goal or no odometry, do nothing.
             return;
         }
 
-        // Check if the goal has been canceled
         if (active_goal_handle->is_canceling())
         {
             RCLCPP_INFO(this->get_logger(), "Goal canceled.");
@@ -397,26 +394,45 @@ namespace lr_global_planner_controller
             return;
         }
 
-        // Get current pose and the final goal pose
+        // Select parameters based on direction ***
+        double current_goal_tolerance;
+        double current_lookahead_distance;
+        double current_linear_velocity = desired_linear_velocity_; // Start with default
+
+        if (current_direction_ == "Forward_manipulation")
+        {
+            current_goal_tolerance = manipulation_goal_tolerance_;
+            current_lookahead_distance = manipulation_lookahead_distance_;
+            RCLCPP_INFO_ONCE(this->get_logger(), "Using MANIPULATION parameters.");
+        }
+        else // "Forward"
+        {
+            current_goal_tolerance = goal_tolerance_;
+            current_lookahead_distance = lookahead_distance_;
+            RCLCPP_INFO_ONCE(this->get_logger(), "Using NAVIGATION parameters.");
+        }
+        
+        if (current_direction_ == "Backward")
+        {
+            current_linear_velocity = -desired_linear_velocity_; // Set negative velocity for backward
+        }
+
         const auto &robot_pose = current_odometry_.pose.pose;
         const auto &goal_pose = current_path_.poses.back().pose;
         double distance_to_final_goal = calculateDistance(robot_pose.position, goal_pose.position);
 
-        // Publish Feedback
         auto feedback = std::make_shared<FollowPath::Feedback>();
         feedback->distance_to_goal = distance_to_final_goal;
         active_goal_handle->publish_feedback(feedback);
 
-        // --- Goal reached logic ---
-        if (distance_to_final_goal < goal_tolerance_)
+        if (distance_to_final_goal < current_goal_tolerance)
         {
             RCLCPP_INFO(this->get_logger(), "Goal reached successfully!");
-            geometry_msgs::msg::Twist stop_cmd; // Stop the robot
+            geometry_msgs::msg::Twist stop_cmd;
             stop_cmd.linear.x = 0.0;
             stop_cmd.angular.z = 0.0;
             cmd_vel_pub_->publish(stop_cmd);
 
-            // Set goal as succeeded
             auto result = std::make_shared<FollowPath::Result>();
             result->success = true;
             active_goal_handle->succeed(result);
@@ -428,7 +444,7 @@ namespace lr_global_planner_controller
         }
 
         // --- Start of Control Logic ---
-        geometry_msgs::msg::PoseStamped target_point_map = findTargetPoint();
+        geometry_msgs::msg::PoseStamped target_point_map = findTargetPoint(current_lookahead_distance);
         publishTargetPointMarker(target_point_map);
 
         geometry_msgs::msg::PoseStamped target_point_robot;
@@ -441,9 +457,6 @@ namespace lr_global_planner_controller
         catch (const tf2::TransformException &ex)
         {
             RCLCPP_ERROR(this->get_logger(), "Could not transform target point to %s frame: %s", robot_frame_.c_str(), ex.what());
-
-            // ABORT the goal if TF fails
-            RCLCPP_ERROR(this->get_logger(), "Aborting goal due to transform error.");
             auto result = std::make_shared<FollowPath::Result>();
             result->success = false;
             active_goal_handle->abort(result);
@@ -454,36 +467,25 @@ namespace lr_global_planner_controller
             return;
         }
 
-        // Pure Pursuit lateral error calculation
         double y_lateral_error = target_point_robot.pose.position.y;
-        double lookahead_dist_sq = lookahead_distance_ * lookahead_distance_;
+        double lookahead_dist_sq = current_lookahead_distance * current_lookahead_distance;
         double curvature = (lookahead_dist_sq > 1e-6) ? (2.0 * y_lateral_error) / lookahead_dist_sq : 0.0;
-
-        // Angular velocity calculation
+        
         double angular_velocity = curvature / 10.0;
-
-        // angular_velocity = desired_linear_velocity_ * curvature;
 
         double clipped_angular_velocity = std::clamp(
             angular_velocity, -max_angular_velocity_, max_angular_velocity_);
 
         geometry_msgs::msg::Twist cmd_vel;
-
-        // Set linear velocity and angular velocity based on direction ---
-        if (current_direction_ == "Forward")
-        {
-            cmd_vel.linear.x = desired_linear_velocity_;
-            cmd_vel.angular.z = clipped_angular_velocity;
-        }
-        else // "Backward"
-        {
-            cmd_vel.linear.x = -desired_linear_velocity_;
-            cmd_vel.angular.z = clipped_angular_velocity;
-        }
+        cmd_vel.linear.x = current_linear_velocity;
+        cmd_vel.angular.z = clipped_angular_velocity;
 
         cmd_vel_pub_->publish(cmd_vel);
     }
 
+    /**
+     * @brief Timer callback to sample TF and build a trail for Rviz.
+     */
     void GlobalPlannerController::sampleTfAndPublishTrail()
     {
         geometry_msgs::msg::PoseStamped pose_map;
@@ -518,7 +520,6 @@ namespace lr_global_planner_controller
 
         trail_.poses.push_back(pose_map);
 
-        // cap length
         if (trail_.poses.size() > trail_max_points_)
         {
             const size_t overflow = trail_.poses.size() - trail_max_points_;
@@ -532,3 +533,5 @@ namespace lr_global_planner_controller
     }
 
 } // namespace lr_global_planner_controller
+
+
