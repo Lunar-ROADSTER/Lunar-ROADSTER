@@ -37,7 +37,6 @@ namespace lr_global_planner_controller
         manipulation_lookahead_distance_ = this->get_parameter("manipulation_lookahead_distance").as_double();
         manipulation_goal_tolerance_ = this->get_parameter("manipulation_goal_tolerance").as_double();
 
-
         RCLCPP_INFO(this->get_logger(), "Parameters Loaded Successfully:");
         RCLCPP_INFO(this->get_logger(), "  lookahead_distance: %.2f m", lookahead_distance_);
         RCLCPP_INFO(this->get_logger(), "  desired_linear_velocity: %.2f m/s", desired_linear_velocity_);
@@ -381,7 +380,7 @@ namespace lr_global_planner_controller
             return;
         }
 
-        if (active_goal_handle->is_canceling())
+        // Check if the goal has been canceled
         {
             RCLCPP_INFO(this->get_logger(), "Goal canceled.");
             auto result = std::make_shared<FollowPath::Result>();
@@ -394,22 +393,21 @@ namespace lr_global_planner_controller
             return;
         }
 
-        // Select parameters based on direction ***
         double current_goal_tolerance;
         double current_lookahead_distance;
-        double current_linear_velocity = desired_linear_velocity_; // Start with default
+        double current_linear_velocity = desired_linear_velocity_;
 
-        if (current_direction_ == "Forward_manipulation")
+        if (current_direction_ == "Forward_manipulation" || current_direction_ == "Backward")
         {
             current_goal_tolerance = manipulation_goal_tolerance_;
             current_lookahead_distance = manipulation_lookahead_distance_;
-            RCLCPP_INFO_ONCE(this->get_logger(), "Using MANIPULATION parameters.");
+            RCLCPP_INFO_ONCE(this->get_logger(), "Using MANIPULATION/BACKWARD parameters.");
         }
         else // "Forward"
         {
             current_goal_tolerance = goal_tolerance_;
             current_lookahead_distance = lookahead_distance_;
-            RCLCPP_INFO_ONCE(this->get_logger(), "Using NAVIGATION parameters.");
+            RCLCPP_INFO_ONCE(this->get_logger(), "Using NAVIGATION (Forward) parameters.");
         }
         
         if (current_direction_ == "Backward")
@@ -473,6 +471,7 @@ namespace lr_global_planner_controller
         
         double angular_velocity = curvature / 10.0;
 
+
         double clipped_angular_velocity = std::clamp(
             angular_velocity, -max_angular_velocity_, max_angular_velocity_);
 
@@ -533,5 +532,6 @@ namespace lr_global_planner_controller
     }
 
 } // namespace lr_global_planner_controller
+
 
 
