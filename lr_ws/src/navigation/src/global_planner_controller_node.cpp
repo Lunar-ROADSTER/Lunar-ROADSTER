@@ -52,6 +52,10 @@ namespace lr_global_planner_controller
         cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 10);
         target_point_pub_ = this->create_publisher<visualization_msgs::msg::Marker>("/lookahead_point", 10);
 
+        trail_pub_ = this->create_publisher<nav_msgs::msg::Path>("/tf_trail", 1);
+        trail_.header.frame_id = global_frame_;
+        trail_.poses.clear();
+
         // Create the Action Server
         this->action_server_ = rclcpp_action::create_server<FollowPath>(
             this,
@@ -65,6 +69,10 @@ namespace lr_global_planner_controller
         // Controller Timer to run the main logic loop
         controller_timer_ = this->create_wall_timer(
             100ms, std::bind(&GlobalPlannerController::executeController, this));
+
+        trail_timer_ = this->create_wall_timer(
+            std::chrono::milliseconds(100),
+            std::bind(&GlobalPlannerController::sampleTfAndPublishTrail, this));
     }
 
     /**
@@ -474,6 +482,53 @@ namespace lr_global_planner_controller
         }
 
         cmd_vel_pub_->publish(cmd_vel);
+    }
+
+    void GlobalPlannerController::sampleTfAndPublishTrail()
+    {
+        geometry_msgs::msg::PoseStamped pose_map;
+        try
+        {
+            auto tf = tf_buffer_->lookupTransform(global_frame_, robot_frame_, tf2::TimePointZero);
+
+            pose_map.header.stamp = this->get_clock()->now();
+            pose_map.header.frame_id = global_frame_;
+            pose_map.pose.position.x = tf.transform.translation.x;
+            pose_map.pose.position.y = tf.transform.translation.y;
+            pose_map.pose.position.z = tf.transform.translation.z;
+            pose_map.pose.orientation = tf.transform.rotation;
+        }
+        catch (const tf2::TransformException &ex)
+        {
+            RCLCPP_WARN(get_logger(),
+                        "Trail TF lookup failed (%s->%s): %s",
+                        global_frame_.c_str(), robot_frame_.c_str(), ex.what());
+            return;
+        }
+
+        bool append = trail_.poses.empty();
+        if (!append)
+        {
+            const auto &q = trail_.poses.back().pose.position;
+            const auto &p = pose_map.pose.position;
+            append = (std::hypot(p.x - q.x, p.y - q.y) >= trail_min_step_);
+        }
+        if (!append)
+            return;
+
+        trail_.poses.push_back(pose_map);
+
+        // cap length
+        if (trail_.poses.size() > trail_max_points_)
+        {
+            const size_t overflow = trail_.poses.size() - trail_max_points_;
+            trail_.poses.erase(trail_.poses.begin(),
+                               trail_.poses.begin() + static_cast<long>(overflow));
+        }
+
+        trail_.header.stamp = pose_map.header.stamp;
+        trail_.header.frame_id = global_frame_;
+        trail_pub_->publish(trail_);
     }
 
 } // namespace lr_global_planner_controller

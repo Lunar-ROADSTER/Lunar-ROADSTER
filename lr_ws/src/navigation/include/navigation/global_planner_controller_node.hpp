@@ -17,7 +17,7 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
-#include <mutex> // For thread-safe goal handling
+#include <mutex>  // For thread-safe goal handling
 #include <limits> // For std::numeric_limits
 
 /**
@@ -26,9 +26,9 @@
  */
 struct DeviationStats
 {
-    double cumulative = 0.0;  // ∫ |e| ds   [m²]
+    double cumulative = 0.0;  // ? |e| ds   [m²]
     double mean = 0.0;        // length-weighted average |e| [m]
-    double rms = 0.0;         // sqrt(∫ e² ds / path_length) [m]
+    double rms = 0.0;         // sqrt(? e² ds / path_length) [m]
     double max = 0.0;         // max |e| [m]
     double path_length = 0.0; // robot-traveled arc length used for weighting [m]
     size_t samples = 0;       // number of deviation samples
@@ -173,6 +173,15 @@ namespace lr_global_planner_controller
         double goal_tolerance_;
         std::string robot_frame_;
         std::string global_frame_;
+
+        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr trail_pub_;
+        rclcpp::TimerBase::SharedPtr trail_timer_;
+        nav_msgs::msg::Path trail_;
+
+        double trail_min_step_{0.05};
+        size_t trail_max_points_{50000};
+
+        void sampleTfAndPublishTrail();
     };
 
 } // namespace lr_global_planner_controller
