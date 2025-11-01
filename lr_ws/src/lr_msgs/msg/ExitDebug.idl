@@ -1,0 +1,15 @@
+module lr_msgs {
+  module msg {
+
+    struct ExitDebug
+    {
+      // Index of crater
+      @default (value = 0)
+      int32 current_crater_index;
+
+      // FSM state we want to return to
+      string current_state;
+    };
+
+  };
+};

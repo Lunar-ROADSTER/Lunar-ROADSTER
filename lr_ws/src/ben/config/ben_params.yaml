@@ -1,8 +1,15 @@
 ben_node:
   ros__parameters:
     debug_trigger: false
-    verbose_trigger: false
+    verbose_trigger: true
     fsm_timer_callback_ms: 2000
+
+    exit_debug_target_state: "START_MISSION"
+    exit_debug_crater_index: 0
+
+    start_mission_delay_iterations: 5
+    end_mission_delay_iterations: 5
+
     validation_average_window: 10
     validation_do_second_pass: false
     validation_timeout_sec: 20 # For no timeout, set to 0
