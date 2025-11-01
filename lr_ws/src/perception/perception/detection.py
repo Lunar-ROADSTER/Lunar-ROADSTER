@@ -11,7 +11,7 @@ from ultralytics import YOLO
 import numpy as np
 import time
 
-from perception.action import CraterDetect
+from lr_msgs.action import CraterDetect
 from tf2_ros import Buffer, TransformListener
 import tf_transformations
 from lr_msgs.msg import CraterStamped

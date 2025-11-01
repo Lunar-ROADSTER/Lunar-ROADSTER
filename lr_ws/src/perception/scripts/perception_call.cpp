@@ -7,7 +7,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <lr_msgs/msg/crater_stamped.hpp>
 #include <lr_msgs/msg/pose2_d.hpp>
-#include <perception/srv/pose_extract.hpp>
+#include <lr_msgs/srv/pose_extract.hpp>
 
 using namespace std::chrono_literals;
 

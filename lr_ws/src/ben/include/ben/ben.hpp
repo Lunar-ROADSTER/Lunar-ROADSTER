@@ -13,7 +13,10 @@
 
 #include "lr_msgs/msg/mux_mode.hpp"
 #include <lr_msgs/action/run_validation.hpp>
-
+#include <lr_msgs/msg/crater_stamped.hpp>
+#include <lr_msgs/msg/pose2_d.hpp>
+#include <lr_msgs/srv/pose_extract.hpp>
+#include <lr_msgs/action/crater_detect.hpp>
 
 namespace lr{
 namespace ben{
@@ -79,6 +82,17 @@ class BenNode : public rclcpp::Node
         rclcpp::CallbackGroup::SharedPtr validation_cb_group_;
         rclcpp_action::Client<lr_msgs::action::RunValidation>::SharedPtr validation_client_;
 
+        // Perception Helpers
+        void onCraterMsg(const lr_msgs::msg::CraterStamped::SharedPtr msg);
+        rclcpp::Subscription<lr_msgs::msg::CraterStamped>::SharedPtr crater_sub_;
+        rclcpp::Client<perception::srv::PoseExtract>::SharedPtr pose_extract_client_;
+        rclcpp_action::Client<lr_msgs::action::CraterDetect>::SharedPtr crater_detect_client_;
+        std::shared_ptr<rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>> crater_detect_goal_handle_;
+        std::optional<lr_msgs::msg::CraterStamped> latest_crater_;
+        std::vector<lr_msgs::msg::Pose2D> goal_poses_;
+        std::vector<std::string> goal_pose_types_;
+        bool perception_goal_active_{false};
+        bool pose_request_inflight_{false};
 
     public:
         // Constructor and destructor

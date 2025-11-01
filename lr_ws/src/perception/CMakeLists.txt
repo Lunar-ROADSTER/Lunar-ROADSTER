@@ -21,11 +21,11 @@ find_package(Eigen3 REQUIRED)
 
 
 # --- Action File Generation ---
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "action/CraterDetect.action"
-  "srv/PoseExtract.srv"
-  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs lr_msgs
-)
+# rosidl_generate_interfaces(${PROJECT_NAME}
+#   "action/CraterDetect.action"
+#   "srv/PoseExtract.srv"
+#   DEPENDENCIES builtin_interfaces std_msgs geometry_msgs lr_msgs
+# )
 
 ament_export_dependencies(
   rosidl_default_runtime
