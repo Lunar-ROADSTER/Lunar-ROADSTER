@@ -1,3 +1,4 @@
+import launch
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -79,6 +80,15 @@ def generate_launch_description():
         ]
     )
 
+    use_sim_time_param = launch.substitutions.LaunchConfiguration('use_sim_time', default='false')  
+    pc_handler_node = Node(
+            package='sensing',
+            executable='pc_handler_node',
+            name='pc_handler_node',
+            emulate_tty=True,
+            parameters=[{'use_sim_time': use_sim_time_param}]
+        )
+
     return LaunchDescription([
         camera_model_arg,
         zed_launch,
@@ -86,4 +96,5 @@ def generate_launch_description():
         # realsense_launch,
         # imu_launch,
         # fisheye_node
+        pc_handler_node
     ])
