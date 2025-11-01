@@ -13,7 +13,6 @@ find_package(rosidl_default_generators REQUIRED)
 find_package(action_msgs REQUIRED)
 find_package(builtin_interfaces REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(mapping REQUIRED)
 find_package(lr_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2 REQUIRED)
@@ -36,7 +35,6 @@ ament_export_dependencies(
   tf2_ros
   tf2
   lr_msgs
-  mapping
   Eigen3
 )
 
@@ -49,7 +47,6 @@ ament_target_dependencies(perception_common
   tf2_ros
   tf2
   lr_msgs
-  mapping
 )
 target_link_libraries(perception_common Eigen3::Eigen)
 
@@ -62,7 +59,6 @@ ament_target_dependencies(pose_extractor
   tf2_ros
   tf2
   lr_msgs
-  mapping
 )
 target_link_libraries(pose_extractor Eigen3::Eigen perception_common)
 rosidl_target_interfaces(pose_extractor
@@ -72,10 +68,14 @@ ament_export_include_directories(include)
 ament_export_libraries(perception_common)
 
 # --- Install Targets ---
-install(TARGETS
-  perception_common
-  pose_extractor
-  DESTINATION lib/${PROJECT_NAME}
+install(
+  TARGETS
+    perception_common
+    pose_extractor
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
+  INCLUDES DESTINATION include
 )
 
 # --- Install Python Nodes ---

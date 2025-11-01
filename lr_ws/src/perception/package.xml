@@ -19,7 +19,6 @@
   <depend>geometry_msgs</depend>
   <depend>std_msgs</depend>
   <depend>cv_bridge</depend>
-  <depend>mapping</depend>
   <depend>lr_msgs</depend>
   <depend>nav_msgs</depend>
   <depend>tf2_ros</depend>
@@ -40,8 +39,11 @@
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
 
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+
   <export>
     <build_type>ament_cmake</build_type>
-    <member_of_group>rosidl_interface_packages</member_of_group>
+    <!-- <member_of_group>rosidl_interface_packages</member_of_group> -->
   </export>
 </package>

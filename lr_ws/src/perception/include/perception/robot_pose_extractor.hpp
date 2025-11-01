@@ -2,8 +2,6 @@
 #define PERCEPTION__POSE_EXTRACTOR_HPP
 
 #include <perception/common.hpp>
-#include <perception/goal_planner.hpp>
-#include <mapping/map.hpp>
 #include <vector>
 #include <string>
 
@@ -23,7 +21,7 @@ namespace lr
 namespace perception
 {
 
-class PoseExtractor : public GoalPlanner{
+class PoseExtractor{
 
     public: 
         explicit PoseExtractor(const rclcpp::Node::SharedPtr &node);
@@ -31,7 +29,7 @@ class PoseExtractor : public GoalPlanner{
         void makeGoalsfromCraterGeometry(
             std::vector<lr_msgs::msg::Pose2D> &goalPoses, 
             std::vector<std::string> &goalPose_types, 
-            std::vector<float> &craterCentroid, float &craterDiameter);
+            std::vector<double> &craterCentroid, double &craterDiameter);
 
         geometry_msgs::msg::PoseStamped getRoverPose(
             const std::string &target_frame = "map",
@@ -39,13 +37,13 @@ class PoseExtractor : public GoalPlanner{
 
     private:
         
-        // float manipulation_offset_ = 0.1; //metres
-        // float last_pose_offset_ = 0.5; //metres
-        // float backblading_multipler_ = 1.5; //multiplier for manipulation distance during backblading
-        // float boundary_min_ = 0.4;
-        // float boundary_max_ = 4.6;
-        // float boundary_increment_ = 0.01;
-        // float robot_half_length_ = 0.5; // metres
+        float manipulation_offset_;
+        float last_pose_offset_;
+        float backblading_multipler_;
+        float boundary_min_;
+        float boundary_max_ ;
+        float boundary_increment_;
+        float robot_half_length_ ; 
         
         // TF2 members for querying transforms
         tf2_ros::Buffer tf_buffer_;
@@ -57,3 +55,5 @@ class PoseExtractor : public GoalPlanner{
 
 }
 }
+
+#endif

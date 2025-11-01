@@ -7,6 +7,8 @@ find_package(rosidl_default_generators REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   # Add custom interfaces here
   "msg/ActuatorCommand.idl"
@@ -20,7 +22,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ActuatorState.idl"
   "msg/SiteMap.idl"
   "msg/Trajectory.idl"
-  "msg/ActuatorCommand.idl"
   "msg/CraterStamped.idl"
   "msg/Validation.idl"
   "srv/SiteMap.srv"
@@ -32,7 +33,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "action/FollowPath.action"
   "action/RunValidation.action"
   # Implementation-specific messages
-  DEPENDENCIES builtin_interfaces std_msgs action_msgs geometry_msgs
+  DEPENDENCIES builtin_interfaces std_msgs action_msgs geometry_msgs nav_msgs
 )
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")

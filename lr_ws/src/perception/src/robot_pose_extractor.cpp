@@ -8,8 +8,7 @@ namespace lr
     {
 
         PoseExtractor::PoseExtractor(const rclcpp::Node::SharedPtr &node)
-            : GoalPlanner(),
-              tf_buffer_(node->get_clock()),
+            : tf_buffer_(node->get_clock()),
               tf_listener_(tf_buffer_),
               clock_(node->get_clock())
         {
@@ -36,7 +35,7 @@ namespace lr
             // Nothing else yet; TF buffer and listener are initialized
         }
 
-        void PoseExtractor::makeGoalsfromCraterGeometry(std::vector<lr_msgs::msg::Pose2D> &goalPoses, std::vector<std::string> &goalPose_types, std::vector<float> &craterCentroid, float &craterDiameter)
+        void PoseExtractor::makeGoalsfromCraterGeometry(std::vector<lr_msgs::msg::Pose2D> &goalPoses, std::vector<std::string> &goalPose_types, std::vector<double> &craterCentroid, double &craterDiameter)
         {
             // Get current rover pose
             geometry_msgs::msg::PoseStamped rover_pose = getRoverPose("map", "base_link");
@@ -66,40 +65,42 @@ namespace lr
             double last_offset_pose_x = backblading_pose_x - (manipulation_distance + robot_half_length_) * std::cos(yaw) * backblading_multipler_;
             double last_offset_pose_y = backblading_pose_y - (manipulation_distance + robot_half_length_) * std::sin(yaw) * backblading_multipler_;
             lr_msgs::msg::Pose2D last_offset_pose = lr::perception::create_pose2d(last_offset_pose_x, last_offset_pose_y, yaw);
+            
+            double last_pose_offset_constrained = last_pose_offset_;
 
-            if (offset_pose_x > boundary_max_ ||
-                offset_pose_x < boundary_min_ ||
-                offset_pose_y > boundary_max_ ||
-                offset_pose_y < boundary_min_)
+            if (last_offset_pose_x > boundary_max_ ||
+                last_offset_pose_x < boundary_min_ ||
+                last_offset_pose_y > boundary_max_ ||
+                last_offset_pose_y < boundary_min_)
             {
 
-                while (offset_pose_x > boundary_max_ ||
-                       offset_pose_x < boundary_min_ ||
-                       offset_pose_y > boundary_max_ ||
-                       offset_pose_y < boundary_min_)
+                while (last_offset_pose_x > boundary_max_ ||
+                       last_offset_pose_x < boundary_min_ ||
+                       last_offset_pose_y > boundary_max_ ||
+                       last_offset_pose_y < boundary_min_)
                 {
 
                     last_pose_offset_constrained -= boundary_increment_;
                     if (last_pose_offset_constrained <= 0.0f)
                     {
-                        offset_pose_x = source_pose.pt.x;
-                        offset_pose_y = source_pose.pt.y;
+                        last_offset_pose_x = source_pose.pt.x;
+                        last_offset_pose_y = source_pose.pt.y;
                         break;
                     }
-                    offset_pose_x = source_pose.pt.x - last_pose_offset_constrained * std::cos(yaw);
-                    offset_pose_y = source_pose.pt.y - last_pose_offset_constrained * std::sin(yaw);
+                    last_offset_pose_x = source_pose.pt.x - last_pose_offset_constrained * std::cos(yaw);
+                    last_offset_pose_y = source_pose.pt.y - last_pose_offset_constrained * std::sin(yaw);
                 }
             }
 
             // Push back the goal poses
             goalPoses.push_back(source_pose);
             goalPoses.push_back(sink_pose);
-            goalPoses.push_back(backblading_pose);
+            goalPoses.push_back(source_pose_backblading);
             goalPoses.push_back(last_offset_pose);
             goalPose_types.push_back("source");
             goalPose_types.push_back("sink");
-            goalPose_types.push_back("source");
-            goalPose_types.push_back("sink");
+            goalPose_types.push_back("source_backblade");
+            goalPose_types.push_back("sink_backblade");
         }
 
         // TF query for rover pose
@@ -150,12 +151,12 @@ int main(int argc, char **argv)
         {
             std::vector<lr_msgs::msg::Pose2D> goal_poses;
             std::vector<std::string> goal_types;
-            std::vector<float> crater_centroid{
+            std::vector<double> crater_centroid{
                 request->centroid.x,
                 request->centroid.y,
                 request->centroid.z};
 
-            float diameter = request->diameter;
+            double diameter = request->diameter;
 
             pose_extractor->makeGoalsfromCraterGeometry(goal_poses, goal_types, crater_centroid, diameter);
 

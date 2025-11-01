@@ -20,6 +20,8 @@ from lr_msgs.msg import CraterStamped
 import numpy as np
 import cv2
 from sensor_msgs.msg import CameraInfo, Image
+import asyncio
+import time
 
 class DepthProjector:
     """Utility class to project 2D image pixels to 3D camera coordinates."""
@@ -143,7 +145,7 @@ class CraterDetectionNode(Node):
         self.last_confidence_time = None
         self.has_stable_detection = False
 
-    async def execute_callback(self, goal_handle):
+    def execute_callback(self, goal_handle):
         """Triggered by FSM via action goal."""
         self.xs, self.ys, self.zs, self.ds = [], [], [], []
         self.active = True
@@ -168,7 +170,7 @@ class CraterDetectionNode(Node):
                     break
             else:
                 stable_start = None
-            await rclpy.sleep(0.1)
+            time.sleep(0.1)
 
         if not self.has_stable_detection:
             self.get_logger().warn("No stable detection found. Exiting action.")
@@ -187,7 +189,10 @@ class CraterDetectionNode(Node):
             goal_handle.publish_feedback(feedback)
             if time.time() - start_collect >= 15.0:
                 break
-            await rclpy.sleep(0.1)
+            time.sleep(0.1)
+
+
+        
 
         # 3️⃣ Apply filtering
         if len(self.xs) == 0:
