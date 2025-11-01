@@ -84,8 +84,9 @@ namespace lr_global_planner_controller
 
         /**
          * @brief Finds the target point on the path to steer towards.
+         * @param current_lookahead_distance The active lookahead distance (nav or manipulation).
          */
-        geometry_msgs::msg::PoseStamped findTargetPoint();
+        geometry_msgs::msg::PoseStamped findTargetPoint(double current_lookahead_distance);
 
         // --- Subscriber Callbacks ---
 
@@ -129,6 +130,11 @@ namespace lr_global_planner_controller
          */
         void updateDeviationStats();
 
+        /**
+         * @brief Timer callback to sample TF and publish a trail for Rviz.
+         */
+        void sampleTfAndPublishTrail();
+
         // --- ROS2 Members (Publishers, Subscribers, etc.) ---
 
         // Subscribers
@@ -137,6 +143,7 @@ namespace lr_global_planner_controller
         // Publishers
         rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
         rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr target_point_pub_;
+        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr trail_pub_;
 
         // Action Server
         rclcpp_action::Server<FollowPath>::SharedPtr action_server_;
@@ -145,8 +152,9 @@ namespace lr_global_planner_controller
         std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
         std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 
-        // Timer
+        // Timers
         rclcpp::TimerBase::SharedPtr controller_timer_;
+        rclcpp::TimerBase::SharedPtr trail_timer_;
 
         // --- State Variables ---
 
@@ -154,7 +162,7 @@ namespace lr_global_planner_controller
         std::shared_ptr<GoalHandleFollowPath> current_goal_handle_;
         std::mutex goal_handle_mutex_; // Protects access to the current_goal_handle_
         nav_msgs::msg::Path current_path_;
-        std::string current_direction_; // To store "Forward" or "Backward"
+        std::string current_direction_; // To store "Forward", "Backward", or "Forward_manipulation"
 
         // Robot State
         nav_msgs::msg::Odometry current_odometry_;
@@ -166,24 +174,23 @@ namespace lr_global_planner_controller
         geometry_msgs::msg::PoseStamped prev_sample_;
         double prev_error_ = 0.0;
 
+        // Trail Visualization
+        nav_msgs::msg::Path trail_;
+        double trail_min_step_{0.05};
+        size_t trail_max_points_{50000};
+        
         // Parameters
         double lookahead_distance_;
         double desired_linear_velocity_;
         double max_angular_velocity_;
         double goal_tolerance_;
         std::string robot_frame_;
-        std::string global_frame_;
-
-        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr trail_pub_;
-        rclcpp::TimerBase::SharedPtr trail_timer_;
-        nav_msgs::msg::Path trail_;
-
-        double trail_min_step_{0.05};
-        size_t trail_max_points_{50000};
-
-        void sampleTfAndPublishTrail();
+        std::string global_frame_;        
+        double manipulation_lookahead_distance_;
+        double manipulation_goal_tolerance_;
     };
 
 } // namespace lr_global_planner_controller
 
 #endif // GLOBAL_PLANNER_CONTROLLER_NODE_HPP_
+

@@ -10,6 +10,9 @@ global_planner_controller:
 
   # The tolerance radius to consider the goal as reached.
   goal_tolerance: 0.25 # meters
+
+  manipulation_lookahead_distance: 0.1 # meters
+  manipulation_goal_tolerance: 0.05 # meters
   
   robot_frame: "base_link"
 
