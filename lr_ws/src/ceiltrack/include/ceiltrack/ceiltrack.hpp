@@ -9,6 +9,7 @@
 #include "visualization_msgs/msg/marker.hpp"
 #include "visualization_msgs/msg/image_marker.hpp"
 #include "ceiltrack/fisheye.hpp"
+#include "lr_msgs/msg/pose2_d.hpp"
 
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
@@ -30,7 +31,7 @@ class CeiltrackNode : public rclcpp::Node
     private:
         // Subscribers
         rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr img_sub_;
-        rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr set_home_sub_;
+        rclcpp::Subscription<lr_msgs::msg::Pose2D>::SharedPtr set_home_sub_;
 
         // Publishers
         rclcpp::Publisher<geometry_msgs::msg::Pose2D>::SharedPtr pose_camera_pub_;
@@ -39,7 +40,7 @@ class CeiltrackNode : public rclcpp::Node
 
         // Functions
         void imageCallback(const sensor_msgs::msg::Image::SharedPtr msg);
-        void setHomeCallback(const std_msgs::msg::Bool::SharedPtr msg);
+        void setHomeCallback(const lr_msgs::msg::Pose2D::SharedPtr msg);
 
         // Variables
         FisheyeLens lens_;
