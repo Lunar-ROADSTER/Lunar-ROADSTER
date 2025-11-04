@@ -15,6 +15,7 @@ using FollowPath = lr_msgs::action::FollowPath;
 #include <mutex>
 #include <chrono>
 #include <functional>
+#include <string>
 
 class ControllerExecutor : public rclcpp::Node
 {
@@ -26,15 +27,18 @@ public:
         declare_parameter<std::string>("controller_action_name", "follow_path");
         declare_parameter<std::string>("global_frame", "map");
         declare_parameter<bool>("smooth", true);
+        declare_parameter<std::string>("direction", "Forward");
 
         planner_service_name_ = get_parameter("planner_service_name").as_string();
         controller_action_name_ = get_parameter("controller_action_name").as_string();
         global_frame_ = get_parameter("global_frame").as_string();
         smooth_ = get_parameter("smooth").as_bool();
+        direction_ = get_parameter("direction").as_string();
 
         RCLCPP_INFO(get_logger(), "Planner service: %s", planner_service_name_.c_str());
         RCLCPP_INFO(get_logger(), "Controller action: %s", controller_action_name_.c_str());
-        RCLCPP_INFO(get_logger(), "Global frame: %s | smooth=%s", global_frame_.c_str(), smooth_ ? "true" : "false");
+        RCLCPP_INFO(get_logger(), "Global frame: %s | smooth=%s | direction=%s",
+                    global_frame_.c_str(), smooth_ ? "true" : "false", direction_.c_str());
 
         tf_buffer_ = std::make_shared<tf2_ros::Buffer>(get_clock());
         tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
@@ -52,6 +56,7 @@ private:
     std::string controller_action_name_;
     std::string global_frame_;
     bool smooth_;
+    std::string direction_;
 
     tf2_ros::Buffer::SharedPtr tf_buffer_;
     std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
@@ -84,46 +89,9 @@ private:
         }
     }
 
-    bool callPlanner(const geometry_msgs::msg::PoseStamped &goal_in_map, nav_msgs::msg::Path &path_out)
-    {
-        if (!planner_client_->wait_for_service(std::chrono::seconds(2)))
-        {
-            RCLCPP_ERROR(get_logger(), "Planning service %s not available.", planner_service_name_.c_str());
-            return false;
-        }
-
-        auto req = std::make_shared<lr_msgs::srv::PlanPath::Request>();
-        req->goal = goal_in_map;
-        req->smooth = smooth_;
-
-        auto fut = planner_client_->async_send_request(req);
-        auto status = fut.wait_for(std::chrono::seconds(10));
-        if (status != std::future_status::ready)
-        {
-            RCLCPP_ERROR(get_logger(), "Planning timed out.");
-            return false;
-        }
-
-        auto resp = fut.get();
-        if (!resp->success)
-        {
-            RCLCPP_WARN(get_logger(), "Planning failed: %s", resp->message.c_str());
-            return false;
-        }
-        if (resp->path.poses.empty())
-        {
-            RCLCPP_WARN(get_logger(), "Planner returned an empty path.");
-            return false;
-        }
-
-        path_out = resp->path;
-        RCLCPP_INFO(get_logger(), "Got path with %zu poses.", path_out.poses.size());
-        return true;
-    }
-
     void sendPathToController(const nav_msgs::msg::Path &path)
     {
-        if (!controller_ac_->wait_for_action_server(std::chrono::seconds(2)))
+        if (!controller_ac_->wait_for_action_server(std::chrono::seconds(10)))
         {
             RCLCPP_ERROR(get_logger(), "Controller action server '%s' not available.", controller_action_name_.c_str());
             return;
@@ -141,6 +109,7 @@ private:
 
         FollowPath::Goal goal_msg;
         goal_msg.path = path;
+        goal_msg.direction = direction_; // pass direction through
 
         rclcpp_action::Client<FollowPath>::SendGoalOptions opts;
 
@@ -205,21 +174,43 @@ private:
             goal_map.header.stamp = now();
         }
 
-        nav_msgs::msg::Path plan;
-        if (!callPlanner(goal_map, plan))
+        if (!planner_client_->wait_for_service(std::chrono::seconds(10)))
         {
-            RCLCPP_ERROR(get_logger(), "Planning failed; not sending to controller.");
+            RCLCPP_ERROR(get_logger(), "Planning service %s not available.", planner_service_name_.c_str());
             return;
         }
 
-        sendPathToController(plan);
+        auto req = std::make_shared<lr_msgs::srv::PlanPath::Request>();
+        req->goal = goal_map;
+        req->smooth = smooth_;
+
+        // Fully ASYNC: do not block the subscription callback
+        planner_client_->async_send_request(
+            req,
+            [this](rclcpp::Client<lr_msgs::srv::PlanPath>::SharedFuture fut)
+            {
+                auto resp = fut.get();
+                if (!resp->success)
+                {
+                    RCLCPP_WARN(get_logger(), "Planning failed: %s", resp->message.c_str());
+                    return;
+                }
+                if (resp->path.poses.empty())
+                {
+                    RCLCPP_WARN(get_logger(), "Planner returned an empty path.");
+                    return;
+                }
+
+                RCLCPP_INFO(get_logger(), "Got path with %zu poses.", resp->path.poses.size());
+                sendPathToController(resp->path);
+            });
     }
 };
 
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<ControllerExecutor>());
+    rclcpp::spin(std::make_shared<ControllerExecutor>()); // single-threaded is fine with async
     rclcpp::shutdown();
     return 0;
 }

@@ -15,6 +15,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/BeaconTag.idl"
   "msg/BeaconMultiTag.idl"
   "msg/EncoderTelemetry.idl"
+  "msg/ExitDebug.idl"
   "msg/Point2D.idl"
   "msg/Pose2D.idl"
   "msg/Slip.idl"
@@ -22,14 +23,18 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ActuatorState.idl"
   "msg/SiteMap.idl"
   "msg/Trajectory.idl"
+  "msg/CraterStamped.idl"
   "msg/Validation.idl"
   "srv/SiteMap.srv"
   "srv/UpdateTrajectory.srv"
   "srv/EnableWorksystem.srv"
   "srv/SaveMap.srv"
+  "srv/PoseExtract.srv"
   "srv/PlanPath.srv"
   "action/CalibrateImu.action"
   "action/FollowPath.action"
+  "action/RunValidation.action"
+  "action/CraterDetect.action"
   # Implementation-specific messages
   DEPENDENCIES builtin_interfaces std_msgs action_msgs geometry_msgs nav_msgs
 )

@@ -2,6 +2,7 @@
 #define BEN__FSM_HPP
 
 #include <string>
+#include <stdexcept>
 
 namespace lr {
 namespace ben {
@@ -11,15 +12,16 @@ class FSM {
 	public:
 		enum class State {
 			START_MISSION,
-			// GENERATE_GLOBAL_WAYPOINTS,
-			// NAVIGATE_TO_GLOBAL_WAYPOINT,
-			// NAVIGATE_TO_LOCAL_WAYPOINT,
-			// PLAN_TOOL_HEIGHT,
-			// GRADING_CRATER,
+			GLOBAL_NAV_PLANNER,
+			GLOBAL_NAV_CONTROLLER,
 			VALIDATION,
-			// CHECK_GOALS_REMAINING,
+			PERCEPTION,
+			MANIPULATION_PLANNER,
+			MANIPULATION_CONTROLLER,
 			END_MISSION,
-			STOPPED
+			STOPPED,
+			DEBUG,
+			MANUAL_OVERRIDE
 		};
 
 		// Constructor
@@ -37,6 +39,7 @@ class FSM {
 
 		// Helpers
 		std::string currStateToString();
+		State stringToState(const std::string &state_str);
 
 		// Shared private variables
 		protected:

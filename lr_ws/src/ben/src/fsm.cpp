@@ -21,26 +21,56 @@ std::string FSM::currStateToString() {
 	switch(curr_state_) {
 		case State::START_MISSION:
 			return "START_MISSION";
-		// case State::GENERATE_GLOBAL_WAYPOINTS:
-		// 	return "GENERATE_GLOBAL_WAYPOINTS";
-		// case State::NAVIGATE_TO_GLOBAL_WAYPOINT:
-		// 	return "NAVIGATE_TO_GLOBAL_WAYPOINT";
-		// case State::NAVIGATE_TO_LOCAL_WAYPOINT:
-		// 	return "NAVIGATE_TO_LOCAL_WAYPOINT";
-		// case State::PLAN_TOOL_HEIGHT:
-		// 	return "PLAN_TOOL_HEIGHT";
-		// case State::GRADING_CRATER:
-		// 	return "GRADING_CRATER";
+		case State::GLOBAL_NAV_PLANNER:
+			return "GLOBAL_NAV_PLANNER";
+		case State::GLOBAL_NAV_CONTROLLER:
+			return "GLOBAL_NAV_CONTROLLER";
 		case State::VALIDATION:
 			return "VALIDATION";
-		// case State::CHECK_GOALS_REMAINING:
-		// 	return "CHECK_GOALS_REMAINING";
+		case State::PERCEPTION:
+			return "PERCEPTION";
+		case State::MANIPULATION_PLANNER:
+			return "MANIPULATION_PLANNER";
+		case State::MANIPULATION_CONTROLLER:
+			return "MANIPULATION_CONTROLLER";
 		case State::END_MISSION:
 			return "END_MISSION";
 		case State::STOPPED:
 			return "STOPPED";
+		case State::DEBUG:
+			return "DEBUG";
+		case State::MANUAL_OVERRIDE:
+			return "MANUAL_OVERRIDE";
 		default:
 			return "State not recognized!";
+	}
+}
+
+FSM::State FSM::stringToState(const std::string &state_str) {
+	if (state_str == "START_MISSION") {
+		return State::START_MISSION;
+	} else if (state_str == "GLOBAL_NAV_PLANNER") {
+		return State::GLOBAL_NAV_PLANNER;
+	} else if (state_str == "GLOBAL_NAV_CONTROLLER") {
+		return State::GLOBAL_NAV_CONTROLLER;
+	} else if (state_str == "VALIDATION") {
+		return State::VALIDATION;
+	} else if (state_str == "PERCEPTION") {
+		return State::PERCEPTION;
+	} else if (state_str == "MANIPULATION_PLANNER") {
+		return State::MANIPULATION_PLANNER;
+	} else if (state_str == "MANIPULATION_CONTROLLER") {
+		return State::MANIPULATION_CONTROLLER;
+	} else if (state_str == "END_MISSION") {
+		return State::END_MISSION;
+	} else if (state_str == "STOPPED") {
+		return State::STOPPED;
+	} else if (state_str == "DEBUG") {
+		return State::DEBUG;
+	} else if (state_str == "MANUAL_OVERRIDE") {
+		return State::MANUAL_OVERRIDE;
+	} else {
+		return State::DEBUG; // Default to DEBUG for unrecognized strings
 	}
 }
 

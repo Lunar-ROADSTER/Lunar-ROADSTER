@@ -49,7 +49,7 @@ struct RingProj
     double t{0.0};                  // param on segment, [0,1]
     double s{0.0};                  // arc-length along ring at foot point
     double dist{0.0};               // Euclidean distance from robot to foot
-    double signed_off{0.0};         // signed lateral offset: how far left (+) or right (−) the robot is relative to the CCW tangent
+    double signed_off{0.0};         // signed lateral offset: how far left (+) or right (?) the robot is relative to the CCW tangent
     geometry_msgs::msg::Point foot; // foot point on ring
     double tangent_yaw{0.0};        // CCW tangent yaw at foot
 };
@@ -87,7 +87,7 @@ struct KeyHash
 
 struct DeviationStats
 {
-    double cumulative{};  // ∫ |e(s)| ds  (m·m = m^2? No — e in m, ds in m → m^2, but this is a path-integral of absolute error; see note)
+    double cumulative{};  // ? |e(s)| ds  (m·m = m^2? No ? e in m, ds in m ? m^2, but this is a path-integral of absolute error; see note)
     double mean{};        // length-weighted mean |e|
     double rms{};         // length-weighted RMS(e)
     double max{};         // max |e|
@@ -151,16 +151,11 @@ namespace navigation
         std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
         std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 
-        std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
-        std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
-
         nav_msgs::msg::OccupancyGrid map_;
         bool map_loaded_ = false;
 
         // bool got_start_pose_{false};
         // bool got_goal_pose_ = false;
-        bool got_start_pose_{false};
-        bool got_goal_pose_ = false;
 
         std::vector<geometry_msgs::msg::Point> crater_centroids_;
         std::vector<float> crater_diameters_;
@@ -208,7 +203,6 @@ namespace navigation
         bool planOnce(const geometry_msgs::msg::PoseStamped &goal_msg,
                       nav_msgs::msg::Path &out_path,
                       bool do_smooth);
-        bool lookupBaseInMap(geometry_msgs::msg::PoseStamped& out) const;
 
         void loadParams();
         void mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr map_msg);

@@ -20,7 +20,7 @@ find_package(OpenCV REQUIRED)
 find_package(tf2_ros REQUIRED)
 
 # TODO: Need to change directory path if compiled elsewhere
-set(Torch_DIR "/root/Lunar_ROADSTER/lr_ws/src/drivers/libtorch/share/cmake/Torch/")
+set(Torch_DIR "/home/williamfbx/libtorch/share/cmake/Torch/")
 find_package(Torch REQUIRED)
 
 include_directories(include)
@@ -65,7 +65,7 @@ target_link_libraries(skycam_node
 set_property(TARGET skycam_node PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 # TODO: Need to change directory path if compiled elsewhere
-set(LIBTORCH_LIB_DIR "/root/Lunar_ROADSTER/lr_ws/src/drivers/libtorch/lib")
+set(LIBTORCH_LIB_DIR "/home/williamfbx/libtorch/lib")
 set_target_properties(skycam_node PROPERTIES
   BUILD_RPATH "${LIBTORCH_LIB_DIR}"
   INSTALL_RPATH "${LIBTORCH_LIB_DIR}"

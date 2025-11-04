@@ -2,12 +2,12 @@
  * @file ceiltrack_node.cpp
  * @brief Ceiling-grid localization using a fisheye camera.
  *
- * Estimates ceiling-aligned (u, v, θ) pose by detecting light patterns in a fisheye image.
+ * Estimates ceiling-aligned (u, v, theta) pose by detecting light patterns in a fisheye image.
  * Selects bright pixels, and optimizes grid alignment via a closed-form Levenberg–Marquardt
  * update. Publishes both image-plane and metric poses.
  *
- * @version 1.0.1
- * @date 2025-10-22
+ * @version 1.0.2
+ * @date 2025-11-01
  * 
  * Maintainer: Boxiang (William) Fu  
  * Team: Lunar ROADSTER  
@@ -15,7 +15,7 @@
  *
  * Subscribers:
  * - /fisheye_camera/image_raw : [sensor_msgs::msg::Image] Input fisheye camera image stream.
- * - /ceiltrack/set_home : [std_msgs::Bool] Resets pose to home.
+ * - /ceiltrack/set_home : [lr_msgs::msg::Pose2D] Resets pose to home.
  *
  * Publishers:
  * - /ceiling_pose : [geometry_msgs::msg::Pose2D] Pose in image-plane units.
@@ -39,9 +39,12 @@
  * - lens.cx : [double] Fisheye principal point x (pixels).
  * - lens.cy : [double] Fisheye principal point y (pixels).
  * - lens.k1 : [double] Fisheye radial distortion coefficient.
- * - home.x : [double] Home position x (meters).
- * - home.y : [double] Home position y (meters).
- * - home.theta : [double] Home orientation (radians).
+ * - home.x : [double] Home position x estimated by fisheye alignment (meters).
+ * - home.y : [double] Home position y estimated by fisheye alignment (meters).
+ * - home.theta : [double] Home orientation estimated by fisheye alignment (radians).
+ * - home.x_init : [double] Initial global home position x (meters).
+ * - home.y_init : [double] Initial global home position y (meters).
+ * - home.theta_init : [double] Initial global home orientation (radians).
  *
  * Notes:
  * - Requires camera output "yuv422_yuy2".
@@ -144,7 +147,7 @@ CeiltrackNode::CeiltrackNode() : Node("ceiltrack_node")
         "/fisheye_camera/image_raw", rclcpp::SensorDataQoS(),
         std::bind(&CeiltrackNode::imageCallback, this, std::placeholders::_1)
     );
-    set_home_sub_ = this->create_subscription<std_msgs::msg::Bool>(
+    set_home_sub_ = this->create_subscription<lr_msgs::msg::Pose2D>(
         "/ceiltrack/set_home", 10,
         std::bind(&CeiltrackNode::setHomeCallback, this, std::placeholders::_1));
 
@@ -563,10 +566,9 @@ void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 }
 
 
-void CeiltrackNode::setHomeCallback(const std_msgs::msg::Bool::SharedPtr msg)
+void CeiltrackNode::setHomeCallback(const lr_msgs::msg::Pose2D::SharedPtr msg)
 {
-    if (!msg->data) return;
-
+    // Store current pose
     const double X_now = -static_cast<double>(xytheta_[0]) * ceil_height_;
     const double Y_now = -static_cast<double>(xytheta_[1]) * ceil_height_;
     const double yaw_now = -static_cast<double>(xytheta_[2]);
@@ -574,10 +576,21 @@ void CeiltrackNode::setHomeCallback(const std_msgs::msg::Bool::SharedPtr msg)
     home_x_ = X_now;
     home_y_ = Y_now;
     home_theta_ = yaw_now;
-    have_home_ref_.store(true);
 
-    RCLCPP_INFO(this->get_logger(),
-        "Home set to current world pose: X=%.4f, Y=%.4f, yaw=%.4f rad",
+    // Store initial home pose (should ideally come from total station or fixed reference point)
+    const double X_home  = msg->pt.x;
+    const double Y_home  = msg->pt.y;
+    const double yaw_home = msg->yaw;
+
+    home_x_init_ = X_home;
+    home_y_init_ = Y_home;
+    home_theta_init_ = yaw_home;
+
+    have_home_ref_.store(true);
+    RCLCPP_INFO(
+        this->get_logger(),
+        "Initial home set to (X=%.4f, Y=%.4f, yaw=%.4f rad); current pose set (X=%.4f, Y=%.4f, yaw=%.4f rad)",
+        home_x_init_, home_y_init_, home_theta_init_,
         home_x_, home_y_, home_theta_);
 }
 

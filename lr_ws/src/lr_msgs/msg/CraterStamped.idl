@@ -1,0 +1,21 @@
+#include "std_msgs/msg/Header.idl"
+#include "geometry_msgs/msg/Point.idl"
+
+module lr_msgs {
+  module msg {
+
+    struct CraterStamped
+    {
+      // Standard message header (timestamp + frame_id)
+      std_msgs::msg::Header header;
+
+      // Crater position in world (map) frame
+      geometry_msgs::msg::Point point;
+
+      // Estimated crater diameter in meters
+      @default (value = 0.0)
+      double diameter;
+    };
+
+  };
+};

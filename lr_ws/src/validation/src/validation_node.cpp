@@ -21,7 +21,7 @@
  * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
  *
  * Subscribers:
- * - /mapping/transformed_pointcloud : [sensor_msgs::msg::PointCloud2] base_link-aligned cloud.
+ * - /sensing/transformed_pointcloud : [sensor_msgs::msg::PointCloud2] base_link-aligned cloud.
  *
  * Actions:
  * - /validation/run : [lr_msgs::action::RunValidation] Triggers a validation run with feedback/result.
@@ -127,7 +127,7 @@ ValidationNode::ValidationNode() : Node("validation_node")
 
     // Subscribers
     pointcloud_sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
-        "/mapping/transformed_pointcloud",
+        "/sensing/transformed_pointcloud",
         rclcpp::SensorDataQoS(),
         std::bind(&ValidationNode::cloudCallback, this, std::placeholders::_1)
     );
