@@ -53,6 +53,11 @@ class BenNode : public rclcpp::Node
         bool exit_debug_trigger_ = false;
         void exitDebugTriggerCallback(const lr_msgs::msg::ExitDebug::SharedPtr msg);
 
+        // Manual override trigger
+        rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr manual_override_trigger_sub_;
+        bool manual_override_trigger_ = false;
+        void manualOverrideTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
+
         // Verbose trigger
         rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr verbose_trigger_sub_;
         bool verbose_trigger_ = false;
@@ -77,6 +82,7 @@ class BenNode : public rclcpp::Node
         void fsmRunEndMission();
         void fsmRunStopped();
         void fsmRunDebug();
+        void fsmRunManualOverride();
 
         // fsmRunStartMission helpers
         rclcpp::Publisher<lr_msgs::msg::MuxMode>::SharedPtr mux_mode_pub_;
@@ -116,6 +122,9 @@ class BenNode : public rclcpp::Node
         // fsmRunDebug helpers
         std::string exit_debug_target_state_ = "START_MISSION";
         int exit_debug_crater_index_ = 0;
+
+        // fsmRunManualOverride helpers
+        bool entered_once_ = false;
 
     public:
         // Constructor and destructor
