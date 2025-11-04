@@ -67,6 +67,10 @@ BenNode::BenNode() : Node("ben_node")
     verbose_trigger_sub_ = this->create_subscription<std_msgs::msg::Bool>(
         "/ben_verbose_trigger", 1, std::bind(&BenNode::verboseTriggerCallback, this, std::placeholders::_1));
 
+    // Manual override trigger subscriber
+    manual_override_trigger_sub_ = this->create_subscription<std_msgs::msg::Bool>(
+        "/ben_manual_override_trigger", 1, std::bind(&BenNode::manualOverrideTriggerCallback, this, std::placeholders::_1));
+
     // Mux mode publisher
     mux_mode_pub_ = this->create_publisher<lr_msgs::msg::MuxMode>("/mux_mode", 1);
 
@@ -151,6 +155,10 @@ void BenNode::fsmTimerCallback()
         fsmRunDebug();
         break;
 
+    case lr::ben::FSM::State::MANUAL_OVERRIDE:
+        fsmRunManualOverride();
+        break;
+
     default:
         RCLCPP_WARN(this->get_logger(), "[FSM] State not recognized!");
         break;
@@ -200,6 +208,29 @@ void BenNode::verboseTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg)
     if (verbose_trigger_)
     {
         RCLCPP_INFO(this->get_logger(), "[VERBOSE] Verbose mode triggered.");
+    }
+}
+
+
+void BenNode::manualOverrideTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg)
+{
+    if (fsm_.getCurrState() != lr::ben::FSM::State::MANUAL_OVERRIDE &&
+        fsm_.getCurrState() != lr::ben::FSM::State::DEBUG) {
+        RCLCPP_WARN(this->get_logger(),
+                    "[MANUAL_OVERRIDE] Manual override requested but not currently in MANUAL_OVERRIDE or DEBUG state (current state: %s). Ignoring.",
+                    fsm_.currStateToString().c_str());
+        return;
+    }
+
+    manual_override_trigger_ = msg->data;
+
+    if (manual_override_trigger_)
+    {
+        RCLCPP_INFO(this->get_logger(), "[MANUAL_OVERRIDE] Requesting to enter MANUAL_OVERRIDE state.");
+    }
+    else
+    {
+        RCLCPP_INFO(this->get_logger(), "[MANUAL_OVERRIDE] Requesting to exit MANUAL_OVERRIDE state.");
     }
 }
 
@@ -627,19 +658,61 @@ void BenNode::fsmRunDebug()
 {
     RCLCPP_INFO(this->get_logger(), "[FSM: DEBUG] Debug state active.");
 
+    if (manual_override_trigger_)
+    {
+        RCLCPP_INFO(this->get_logger(),
+                    "[FSM: DEBUG] Manual override requested. Transitioning to MANUAL_OVERRIDE.");
+        fsm_.setCurrState(lr::ben::FSM::State::MANUAL_OVERRIDE);
+        return;
+    }
+
     if (exit_debug_trigger_)
     {
         exit_debug_trigger_ = false;	
 
         auto target = fsm_.stringToState(exit_debug_target_state_);
         RCLCPP_INFO(this->get_logger(),
-					"[FSM: DEBUG] Exiting DEBUG state to target state '%s' at crater index %d.",
-					exit_debug_target_state_.c_str(),
-					exit_debug_crater_index_);
+                    "[FSM: DEBUG] Exiting DEBUG state to target state '%s' at crater index %d.",
+                    exit_debug_target_state_.c_str(),
+                    exit_debug_crater_index_);
 
         fsm_.setCurrState(target);
     }
 }
+
+
+void BenNode::fsmRunManualOverride()
+{
+    RCLCPP_INFO(this->get_logger(), "[FSM: MANUAL_OVERRIDE] Manual override state active.");
+
+    if (!entered_once_)
+    {
+        lr_msgs::msg::MuxMode mux_msg;
+        mux_msg.mode = 3;
+        mux_mode_pub_->publish(mux_msg);
+
+        entered_once_ = true;
+        RCLCPP_INFO(this->get_logger(),
+                    "[FSM: MANUAL_OVERRIDE] Entered MANUAL_OVERRIDE: Changing MUX mode to FULL_TELEOP.");
+    }
+
+    if (!manual_override_trigger_)
+    {
+        lr_msgs::msg::MuxMode mux_msg;
+        mux_msg.mode = 2;
+        mux_mode_pub_->publish(mux_msg);
+
+        RCLCPP_INFO(this->get_logger(),
+                    "[FSM: MANUAL_OVERRIDE] Exiting MANUAL_OVERRIDE: Changing MUX mode to FULL_AUTONOMY.");
+
+        entered_once_ = false;
+        RCLCPP_INFO(this->get_logger(),
+                    "[FSM: MANUAL_OVERRIDE] Transitioning back to DEBUG.");
+        fsm_.setCurrState(lr::ben::FSM::State::DEBUG);
+        return;
+    }
+}
+
 
 } // namespace ben
 } // namespace lr

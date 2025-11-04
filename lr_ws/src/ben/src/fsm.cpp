@@ -39,6 +39,8 @@ std::string FSM::currStateToString() {
 			return "STOPPED";
 		case State::DEBUG:
 			return "DEBUG";
+		case State::MANUAL_OVERRIDE:
+			return "MANUAL_OVERRIDE";
 		default:
 			return "State not recognized!";
 	}
@@ -65,6 +67,8 @@ FSM::State FSM::stringToState(const std::string &state_str) {
 		return State::STOPPED;
 	} else if (state_str == "DEBUG") {
 		return State::DEBUG;
+	} else if (state_str == "MANUAL_OVERRIDE") {
+		return State::MANUAL_OVERRIDE;
 	} else {
 		return State::DEBUG; // Default to DEBUG for unrecognized strings
 	}

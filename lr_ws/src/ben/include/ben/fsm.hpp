@@ -20,7 +20,8 @@ class FSM {
 			MANIPULATION_CONTROLLER,
 			END_MISSION,
 			STOPPED,
-			DEBUG
+			DEBUG,
+			MANUAL_OVERRIDE
 		};
 
 		// Constructor
