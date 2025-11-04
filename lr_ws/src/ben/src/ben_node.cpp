@@ -99,6 +99,9 @@ BenNode::BenNode() : Node("ben_node")
         "detect_crater",
         perception_cb_group_);
 
+        nav_client_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+        nav_client_ = rclcpp_action::create_client<FollowPath>(this, "/follow_path", nav_client_cb_group_);
+
     // Log initialization
     RCLCPP_INFO(this->get_logger(), "[INIT] Behaviour Executive Node initialized.");
 }
@@ -310,6 +313,9 @@ void BenNode::fsmRunGlobalNavController()
     // Debug
     RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Transitioning to VALIDATION.");
     fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
+
+    std::lock_guard<std::mutex> lock(nav_mutex_);
+    
 }
 
 

@@ -21,6 +21,9 @@
 
 #include <lr_msgs/action/run_validation.hpp>
 
+#include "lr_msgs/action/follow_path.hpp"
+#include "nav_msgs/msg/path.hpp"
+
 namespace lr{
 namespace ben{
 
@@ -114,6 +117,20 @@ class BenNode : public rclcpp::Node
         rclcpp::Client<lr_msgs::srv::PoseExtract>::SharedPtr pose_extract_client_;
         rclcpp_action::Client<lr_msgs::action::CraterDetect>::SharedPtr crater_detect_client_;
         std::shared_ptr<rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>> crater_detect_goal_handle_;
+
+        // fsmNav helpers
+        using FollowPath = lr_msgs::action::FollowPath;
+        using GoalHandleFollowPath = rclcpp_action::ClientGoalHandle<FollowPath>;
+
+        rclcpp::CallbackGroup::SharedPtr nav_client_cb_group_;
+        rclcpp_action::Client<FollowPath>::SharedPtr nav_client_;
+        
+        std::mutex nav_mutex_;
+        bool nav_goal_active_{false};
+        std::optional<bool> nav_last_success_;
+
+        nav_msgs::msg::Path global_path_to_send_;
+        nav_msgs::msg::Path manipulation_path_to_send_;
 
         // fsmRunEndMission helpers
         int end_mission_delay_iters_{5};
