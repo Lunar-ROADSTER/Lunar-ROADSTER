@@ -93,10 +93,10 @@ ament_target_dependencies(controller_executor
   lr_msgs
 )
 
-add_executable(basic_astar_planner_node
-  src/basic_astar.cpp
+add_executable(manipulation_planner_node
+  src/manipulation_planner.cpp
 )
-ament_target_dependencies(basic_astar_planner_node
+ament_target_dependencies(manipulation_planner_node
   rclcpp
   nav_msgs
   geometry_msgs
@@ -105,6 +105,7 @@ ament_target_dependencies(basic_astar_planner_node
   tf2
   tf2_ros
   tf2_geometry_msgs
+  lr_msgs
 )
 
 add_executable(autonomy_command src/autonomy_command.cpp)
@@ -129,7 +130,7 @@ install(TARGETS global_astar_node
 install(TARGETS crater_centroids_pub crater_diameters_pub
   DESTINATION lib/${PROJECT_NAME})
 
-install(TARGETS basic_astar_planner_node
+install(TARGETS manipulation_planner_node
   DESTINATION lib/${PROJECT_NAME})
 
 install(TARGETS
