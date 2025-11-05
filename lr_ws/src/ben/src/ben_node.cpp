@@ -376,7 +376,6 @@ namespace lr
                                      "[FSM: GLOBAL_NAV_PLANNER] Planning failed for crater #%d: %s",
                                      current_crater_index_,
                                      response->message.c_str());
-                        current_crater_index_++;
                         return;
                     }
 
@@ -494,6 +493,7 @@ namespace lr
                         RCLCPP_INFO(this->get_logger(),
                                     "[FSM: VALIDATION] Grading SUCCESS. Transitioning to GLOBAL_NAV_PLANNER.");
                         validation_attempts_ = 0;
+                        current_crater_index_++;
                         fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_PLANNER);
                         return;
                     }
