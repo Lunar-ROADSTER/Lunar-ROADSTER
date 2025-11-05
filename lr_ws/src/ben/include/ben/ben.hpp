@@ -114,6 +114,8 @@ namespace lr
             rclcpp::Client<lr_msgs::srv::PlanPath>::SharedPtr manipulation_planner_client_;
             bool manipulation_req_sent_{false};
             std::mutex manipulation_planner_mutex_;
+            int current_goal_pose_idx_{0};
+            std::string manipulation_type_{"tool up"};
 
             // fsmRunValidation helpers
             int validation_average_window_{10};

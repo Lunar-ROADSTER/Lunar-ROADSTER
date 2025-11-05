@@ -291,7 +291,7 @@ namespace lr
             if (start_mission_delay_count_ == 0)
             {
                 lr_msgs::msg::MuxMode mux_msg;
-                mux_msg.mode = 0;
+                mux_msg.mode = 2;
                 mux_mode_pub_->publish(mux_msg);
                 RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Changing MUX mode to FULL_AUTONOMY.");
             }
@@ -769,7 +769,19 @@ namespace lr
             if (goal_poses_.empty())
             {
                 RCLCPP_WARN(this->get_logger(), "[FSM: MANIPULATION_PLANNER] No goal poses from perception. Returning to PERCEPTION.");
+                current_goal_pose_idx_ = 0;
                 fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
+                return;
+            }
+
+            if (current_goal_pose_idx_ >= static_cast<int>(goal_poses_.size()))
+            {
+                RCLCPP_INFO(this->get_logger(),
+                            "[FSM: MANIPULATION_PLANNER] Completed all %zu manipulation goal poses. Transitioning to VALIDATION.",
+                            goal_poses_.size());
+                goal_poses_.clear();
+                current_goal_pose_idx_ = 0;
+                fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
                 return;
             }
 
@@ -785,7 +797,12 @@ namespace lr
                 return;
             }
 
-            const auto &goal_pose = goal_poses_.front();
+            const auto &goal_pose = goal_poses_[current_goal_pose_idx_];
+            std::string type = goal_pose_types_[current_goal_pose_idx_];
+            if (type == "source" || type == "source_backblade")
+                manipulation_type_ = "tool down";
+            else
+                manipulation_type_ = "tool up";
 
             auto request = std::make_shared<lr_msgs::srv::PlanPath::Request>();
             request->goal.header.stamp = this->now();
@@ -796,8 +813,10 @@ namespace lr
             request->smooth = true;
 
             RCLCPP_INFO(this->get_logger(),
-                        "[FSM: MANIPULATION_PLANNER] Sending manipulation plan goal (x=%.2f, y=%.2f)...",
-                        goal_pose.pt.x, goal_pose.pt.y);
+                        "[FSM: MANIPULATION_PLANNER] Planning to pose %d/%zu (x=%.2f, y=%.2f) type_raw=%s -> action=%s",
+                        current_goal_pose_idx_, goal_poses_.size(),
+                        goal_pose.pt.x, goal_pose.pt.y,
+                        type.c_str(), manipulation_type_.c_str());
 
             manipulation_req_sent_ = true;
 
@@ -813,25 +832,24 @@ namespace lr
                     if (!response->success)
                     {
                         RCLCPP_ERROR(this->get_logger(),
-                                     "[FSM: MANIPULATION_PLANNER] Manipulation planning failed: %s",
-                                     response->message.c_str());
-                        RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_PLANNER] Retrying PERCEPTION...");
-                        fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
+                                     "[FSM: MANIPULATION_PLANNER] Planning failed for pose index %d: %s",
+                                     current_goal_pose_idx_, response->message.c_str());
                         return;
                     }
 
                     RCLCPP_INFO(this->get_logger(),
-                                "[FSM: MANIPULATION_PLANNER] Manipulation planning success. Path size = %zu",
-                                response->path.poses.size());
+                                "[FSM: MANIPULATION_PLANNER] Planning success for pose index %d. Path size = %zu",
+                                current_goal_pose_idx_, response->path.poses.size());
 
                     manipulation_path_to_send_ = response->path;
+                    ++current_goal_pose_idx_;
 
                     RCLCPP_INFO(this->get_logger(),
                                 "[FSM: MANIPULATION_PLANNER] Transitioning to MANIPULATION_CONTROLLER.");
                     fsm_.setCurrState(lr::ben::FSM::State::MANIPULATION_CONTROLLER);
                 });
 
-            RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_PLANNER] Sent plan request.");
+            RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_PLANNER] Sent plan request for pose index %d.", current_goal_pose_idx_);
         }
 
         void BenNode::fsmRunManipulationController()
