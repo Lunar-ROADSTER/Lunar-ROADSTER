@@ -397,13 +397,84 @@ namespace lr
 
         void BenNode::fsmRunGlobalNavController()
         {
-            RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Running global navigation controller...");
-
-            // Debug
-            RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Transitioning to VALIDATION.");
-            fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
-
             std::lock_guard<std::mutex> lock(nav_mutex_);
+
+            if (nav_goal_active_)
+            {
+                RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Goal is already active, waiting for result...");
+                return;
+            }
+
+            if (nav_last_success_.has_value())
+            {
+                bool success = *nav_last_success_;
+                nav_last_success_.reset();
+
+                if (success)
+                {
+                    RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Path following SUCCEEDED.");
+                    RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Transitioning to VALIDATION.");
+                    fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
+                }
+                else
+                {
+                    RCLCPP_WARN(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Path following FAILED or was CANCELED. Holding in state.");
+                }
+                return;
+            }
+
+            if (!global_path_to_send_.poses.empty())
+            {
+                if (!nav_client_ || !nav_client_->wait_for_action_server(std::chrono::seconds(1)))
+                {
+                    RCLCPP_WARN(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Action server '/follow_path' not available. Waiting...");
+                    return;
+                }
+
+                // Create and send the goal
+                auto goal_msg = FollowPath::Goal();
+                goal_msg.path = global_path_to_send_;
+                goal_msg.direction = "Forward"; // Global navigation is always "Forward"
+
+                global_path_to_send_.poses.clear();
+
+                RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Sending path goal (direction: Forward).");
+                nav_goal_active_ = true;
+
+                auto send_goal_options = rclcpp_action::Client<FollowPath>::SendGoalOptions();
+
+                send_goal_options.result_callback =
+                    [this](const GoalHandleFollowPath::WrappedResult &result)
+                {
+                    std::lock_guard<std::mutex> lock(nav_mutex_);
+                    nav_goal_active_ = false;
+                    if (result.code == rclcpp_action::ResultCode::SUCCEEDED)
+                    {
+                        nav_last_success_ = result.result->success;
+                    }
+                    else
+                    {
+                        nav_last_success_ = false; // Goal was aborted, canceled, or rejected
+                    }
+                    RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Goal finished.");
+                };
+
+                send_goal_options.feedback_callback =
+                    [this](GoalHandleFollowPath::SharedPtr, const std::shared_ptr<const FollowPath::Feedback> feedback)
+                {
+                    if (verbose_trigger_)
+                    {
+                        RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Feedback: Distance to goal: %.2f m", feedback->distance_to_goal);
+                    }
+                };
+
+                nav_client_->async_send_goal(goal_msg, send_goal_options);
+            }
+            else
+            {
+                RCLCPP_WARN(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] No global path to follow. Holding in state.");
+                return;
+            }
         }
 
         void BenNode::fsmRunValidation()
