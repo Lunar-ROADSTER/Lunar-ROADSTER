@@ -799,10 +799,11 @@ namespace lr
 
             const auto &goal_pose = goal_poses_[current_goal_pose_idx_];
             std::string type = goal_pose_types_[current_goal_pose_idx_];
-            if (type == "source" || type == "source_backblade")
-                manipulation_type_ = "tool down";
+            local_goal_type_ = type;
+            if (type == "source" || type == "sink")
+                manipulation_type_ = "foward_manipulation";
             else
-                manipulation_type_ = "tool up";
+                manipulation_type_ = "backward";
 
             auto request = std::make_shared<lr_msgs::srv::PlanPath::Request>();
             request->goal.header.stamp = this->now();

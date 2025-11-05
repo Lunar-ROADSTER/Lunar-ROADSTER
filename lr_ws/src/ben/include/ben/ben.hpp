@@ -115,7 +115,8 @@ namespace lr
             bool manipulation_req_sent_{false};
             std::mutex manipulation_planner_mutex_;
             int current_goal_pose_idx_{0};
-            std::string manipulation_type_{"tool up"};
+            std::string manipulation_type_{"forward_manipulation"};
+            std::string local_goal_type_{"source"};
 
             // fsmRunValidation helpers
             int validation_average_window_{10};
