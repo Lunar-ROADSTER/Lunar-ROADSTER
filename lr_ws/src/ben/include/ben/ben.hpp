@@ -101,6 +101,7 @@ namespace lr
             // fsmRunGlobalNavPlanner helpers
             rclcpp::Client<lr_msgs::srv::PlanPath>::SharedPtr global_planner_client_;
             bool planner_req_sent_{false};
+            std::mutex global_planner_mutex_;
 
             rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr crater_centroids_sub_;
             rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr crater_diameters_sub_;
@@ -112,6 +113,7 @@ namespace lr
             // fsmRunManipulationPlanner helpers
             rclcpp::Client<lr_msgs::srv::PlanPath>::SharedPtr manipulation_planner_client_;
             bool manipulation_req_sent_{false};
+            std::mutex manipulation_planner_mutex_;
 
             // fsmRunValidation helpers
             int validation_average_window_{10};

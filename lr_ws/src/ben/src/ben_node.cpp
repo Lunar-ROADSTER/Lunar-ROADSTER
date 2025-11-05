@@ -318,6 +318,8 @@ namespace lr
 
         void BenNode::fsmRunGlobalNavPlanner()
         {
+            std::lock_guard<std::mutex> lock(global_planner_mutex_);
+
             RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_PLANNER] Running global navigation planner...");
 
             if (!got_crater_data_ || crater_centroids_.empty())
@@ -363,6 +365,8 @@ namespace lr
                 request,
                 [this](rclcpp::Client<lr_msgs::srv::PlanPath>::SharedFuture future)
                 {
+                    std::lock_guard<std::mutex> lock(global_planner_mutex_);
+
                     auto response = future.get();
                     planner_req_sent_ = false;
 
@@ -687,6 +691,8 @@ namespace lr
 
         void BenNode::fsmRunManipulationPlanner()
         {
+            std::lock_guard<std::mutex> lock(manipulation_planner_mutex_);
+
             RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_PLANNER] Running manipulation planner...");
 
             if (goal_poses_.empty())
@@ -715,7 +721,7 @@ namespace lr
             request->goal.header.frame_id = "map";
             request->goal.pose.position.x = goal_pose.pt.x;
             request->goal.pose.position.y = goal_pose.pt.y;
-            request->goal.pose.orientation.w = 1.0; // placeholder
+            request->goal.pose.orientation.w = 1.0;
             request->smooth = true;
 
             RCLCPP_INFO(this->get_logger(),
@@ -728,6 +734,8 @@ namespace lr
                 request,
                 [this](rclcpp::Client<lr_msgs::srv::PlanPath>::SharedFuture future)
                 {
+                    std::lock_guard<std::mutex> lock(manipulation_planner_mutex_);
+
                     manipulation_req_sent_ = false;
                     auto response = future.get();
 
