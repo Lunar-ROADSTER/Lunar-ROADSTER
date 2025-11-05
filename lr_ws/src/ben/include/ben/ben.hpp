@@ -5,6 +5,9 @@
 #include <rclcpp_action/rclcpp_action.hpp>
 #include "nav_msgs/msg/odometry.hpp"
 #include "std_msgs/msg/bool.hpp"
+#include <geometry_msgs/msg/pose_array.hpp>
+#include <std_msgs/msg/float32_multi_array.hpp>
+
 #include <atomic>
 #include <mutex>
 #include <optional>
@@ -17,138 +20,156 @@
 #include <lr_msgs/msg/pose2_d.hpp>
 
 #include <lr_msgs/srv/pose_extract.hpp>
+#include <lr_msgs/srv/plan_path.hpp>
+
 #include <lr_msgs/action/crater_detect.hpp>
-
 #include <lr_msgs/action/run_validation.hpp>
-
 #include "lr_msgs/action/follow_path.hpp"
+
 #include "nav_msgs/msg/path.hpp"
 
-namespace lr{
-namespace ben{
-
-class BenNode : public rclcpp::Node
+namespace lr
 {
-    private:
-        // FSM callback
-        int fsm_timer_callback_ms_;
-        rclcpp::CallbackGroup::SharedPtr fsm_timer_cb_group_;
-        rclcpp::TimerBase::SharedPtr fsm_timer_;
-        void fsmTimerCallback();
+    namespace ben
+    {
 
-        // Global robot state
-        rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr global_robot_state_sub_;
-        nav_msgs::msg::Odometry global_robot_state_;
-        void globalRobotStateCallback(const nav_msgs::msg::Odometry::SharedPtr msg);
+        class BenNode : public rclcpp::Node
+        {
+        private:
+            // FSM callback
+            int fsm_timer_callback_ms_;
+            rclcpp::CallbackGroup::SharedPtr fsm_timer_cb_group_;
+            rclcpp::TimerBase::SharedPtr fsm_timer_;
+            void fsmTimerCallback();
 
-        // Odom robot state
-        rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_robot_state_sub_;
-        nav_msgs::msg::Odometry odom_robot_state_;
-        void odomRobotStateCallback(const nav_msgs::msg::Odometry::SharedPtr msg);
+            // Global robot state
+            rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr global_robot_state_sub_;
+            nav_msgs::msg::Odometry global_robot_state_;
+            void globalRobotStateCallback(const nav_msgs::msg::Odometry::SharedPtr msg);
 
-        // Debug trigger
-        rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr debug_trigger_sub_;
-        bool debug_trigger_ = false;
-        void debugTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
+            // Odom robot state
+            rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_robot_state_sub_;
+            nav_msgs::msg::Odometry odom_robot_state_;
+            void odomRobotStateCallback(const nav_msgs::msg::Odometry::SharedPtr msg);
 
-        // Exit debug trigger
-        rclcpp::Subscription<lr_msgs::msg::ExitDebug>::SharedPtr exit_debug_trigger_sub_;
-        bool exit_debug_trigger_ = false;
-        void exitDebugTriggerCallback(const lr_msgs::msg::ExitDebug::SharedPtr msg);
+            // Debug trigger
+            rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr debug_trigger_sub_;
+            bool debug_trigger_ = false;
+            void debugTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
 
-        // Manual override trigger
-        rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr manual_override_trigger_sub_;
-        bool manual_override_trigger_ = false;
-        void manualOverrideTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
+            // Exit debug trigger
+            rclcpp::Subscription<lr_msgs::msg::ExitDebug>::SharedPtr exit_debug_trigger_sub_;
+            bool exit_debug_trigger_ = false;
+            void exitDebugTriggerCallback(const lr_msgs::msg::ExitDebug::SharedPtr msg);
 
-        // Verbose trigger
-        rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr verbose_trigger_sub_;
-        bool verbose_trigger_ = false;
-        void verboseTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
+            // Manual override trigger
+            rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr manual_override_trigger_sub_;
+            bool manual_override_trigger_ = false;
+            void manualOverrideTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
 
-        // Crater detection
-        rclcpp::Subscription<lr_msgs::msg::CraterStamped>::SharedPtr crater_sub_;
-        std::optional<lr_msgs::msg::CraterStamped> latest_crater_;
-        void onCraterMsgCallback(const lr_msgs::msg::CraterStamped::SharedPtr msg);
+            // Verbose trigger
+            rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr verbose_trigger_sub_;
+            bool verbose_trigger_ = false;
+            void verboseTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg);
 
-        // Finite State Machine
-        lr::ben::FSM fsm_;
+            // Crater detection
+            rclcpp::Subscription<lr_msgs::msg::CraterStamped>::SharedPtr crater_sub_;
+            std::optional<lr_msgs::msg::CraterStamped> latest_crater_;
+            void onCraterMsgCallback(const lr_msgs::msg::CraterStamped::SharedPtr msg);
 
-        // FSM state runners
-        void fsmRunStartMission();
-        void fsmRunGlobalNavPlanner();
-        void fsmRunGlobalNavController();
-        void fsmRunValidation();
-        void fsmRunPerception();
-        void fsmRunManipulationPlanner();
-        void fsmRunManipulationController();
-        void fsmRunEndMission();
-        void fsmRunStopped();
-        void fsmRunDebug();
-        void fsmRunManualOverride();
+            // Finite State Machine
+            lr::ben::FSM fsm_;
 
-        // fsmRunStartMission helpers
-        rclcpp::Publisher<lr_msgs::msg::MuxMode>::SharedPtr mux_mode_pub_;
-        int start_mission_delay_iters_{5};
-        int start_mission_delay_count_{0};
+            // FSM state runners
+            void fsmRunStartMission();
+            void fsmRunGlobalNavPlanner();
+            void fsmRunGlobalNavController();
+            void fsmRunValidation();
+            void fsmRunPerception();
+            void fsmRunManipulationPlanner();
+            void fsmRunManipulationController();
+            void fsmRunEndMission();
+            void fsmRunStopped();
+            void fsmRunDebug();
+            void fsmRunManualOverride();
 
-        // fsmRunValidation helpers
-        int  validation_average_window_{10};
-        bool validation_do_second_pass_{false};
-        int  validation_timeout_sec_{20};
+            // fsmRunStartMission helpers
+            rclcpp::Publisher<lr_msgs::msg::MuxMode>::SharedPtr mux_mode_pub_;
+            int start_mission_delay_iters_{5};
+            int start_mission_delay_count_{0};
 
-        std::mutex validation_mutex_;
-        bool validation_goal_active_{false};
-        std::optional<bool> validation_last_success_;
-        double validation_last_max_z_{0.0};
-        int validation_attempts_{0};
+            // fsmRunGlobalNavPlanner helpers
+            rclcpp::Client<lr_msgs::srv::PlanPath>::SharedPtr global_planner_client_;
+            bool planner_req_sent_{false};
 
-        rclcpp::CallbackGroup::SharedPtr validation_cb_group_;
-        rclcpp_action::Client<lr_msgs::action::RunValidation>::SharedPtr validation_client_;
+            rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr crater_centroids_sub_;
+            rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr crater_diameters_sub_;
+            std::vector<geometry_msgs::msg::Pose> crater_centroids_;
+            std::vector<float> crater_diameters_;
+            int current_crater_index_{0};
+            bool got_crater_data_{false};
 
-        // fsmRunPerception helpers
-        std::mutex perception_mutex_;
-        std::vector<lr_msgs::msg::Pose2D> goal_poses_;
-        std::vector<std::string> goal_pose_types_;
-        bool perception_goal_active_{false};
-        bool pose_request_inflight_{false};
+            // fsmRunManipulationPlanner helpers
+            rclcpp::Client<lr_msgs::srv::PlanPath>::SharedPtr manipulation_planner_client_;
+            bool manipulation_req_sent_{false};
 
-        rclcpp::CallbackGroup::SharedPtr perception_cb_group_;
-        rclcpp::Client<lr_msgs::srv::PoseExtract>::SharedPtr pose_extract_client_;
-        rclcpp_action::Client<lr_msgs::action::CraterDetect>::SharedPtr crater_detect_client_;
-        std::shared_ptr<rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>> crater_detect_goal_handle_;
+            // fsmRunValidation helpers
+            int validation_average_window_{10};
+            bool validation_do_second_pass_{false};
+            int validation_timeout_sec_{20};
 
-        // fsmNav helpers
-        using FollowPath = lr_msgs::action::FollowPath;
-        using GoalHandleFollowPath = rclcpp_action::ClientGoalHandle<FollowPath>;
+            std::mutex validation_mutex_;
+            bool validation_goal_active_{false};
+            std::optional<bool> validation_last_success_;
+            double validation_last_max_z_{0.0};
+            int validation_attempts_{0};
 
-        rclcpp::CallbackGroup::SharedPtr nav_client_cb_group_;
-        rclcpp_action::Client<FollowPath>::SharedPtr nav_client_;
-        
-        std::mutex nav_mutex_;
-        bool nav_goal_active_{false};
-        std::optional<bool> nav_last_success_;
+            rclcpp::CallbackGroup::SharedPtr validation_cb_group_;
+            rclcpp_action::Client<lr_msgs::action::RunValidation>::SharedPtr validation_client_;
 
-        nav_msgs::msg::Path global_path_to_send_;
-        nav_msgs::msg::Path manipulation_path_to_send_;
+            // fsmRunPerception helpers
+            std::mutex perception_mutex_;
+            std::vector<lr_msgs::msg::Pose2D> goal_poses_;
+            std::vector<std::string> goal_pose_types_;
+            bool perception_goal_active_{false};
+            bool pose_request_inflight_{false};
 
-        // fsmRunEndMission helpers
-        int end_mission_delay_iters_{5};
-        int end_mission_delay_count_{0};
+            rclcpp::CallbackGroup::SharedPtr perception_cb_group_;
+            rclcpp::Client<lr_msgs::srv::PoseExtract>::SharedPtr pose_extract_client_;
+            rclcpp_action::Client<lr_msgs::action::CraterDetect>::SharedPtr crater_detect_client_;
+            std::shared_ptr<rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>> crater_detect_goal_handle_;
 
-        // fsmRunDebug helpers
-        std::string exit_debug_target_state_ = "START_MISSION";
-        int exit_debug_crater_index_ = 0;
+            // fsmNav helpers
+            using FollowPath = lr_msgs::action::FollowPath;
+            using GoalHandleFollowPath = rclcpp_action::ClientGoalHandle<FollowPath>;
 
-        // fsmRunManualOverride helpers
-        bool entered_once_ = false;
+            rclcpp::CallbackGroup::SharedPtr nav_client_cb_group_;
+            rclcpp_action::Client<FollowPath>::SharedPtr nav_client_;
 
-    public:
-        // Constructor and destructor
-        BenNode();
-        ~BenNode(){};
-};  
+            std::mutex nav_mutex_;
+            bool nav_goal_active_{false};
+            std::optional<bool> nav_last_success_;
 
-} // namespace ben
+            nav_msgs::msg::Path global_path_to_send_;
+            nav_msgs::msg::Path manipulation_path_to_send_;
+
+            // fsmRunEndMission helpers
+            int end_mission_delay_iters_{5};
+            int end_mission_delay_count_{0};
+
+            // fsmRunDebug helpers
+            std::string exit_debug_target_state_ = "START_MISSION";
+            int exit_debug_crater_index_ = 0;
+
+            // fsmRunManualOverride helpers
+            bool entered_once_ = false;
+
+        public:
+            // Constructor and destructor
+            BenNode();
+            ~BenNode() {};
+        };
+
+    } // namespace ben
 } // namespace lr
 #endif
