@@ -23,12 +23,12 @@ private:
         actuator_msg.steer_position = (msg->angular.z / max_steering_angle) * 100.0;
         actuator_msg.steer_position = std::clamp(actuator_msg.steer_position, -60.0, 60.0);
 
-        actuator_msg.tool_position = msg->linear.x;
+        actuator_msg.tool_position = 100.0;
         
         // Publish the message
         publisher_->publish(actuator_msg);
-        RCLCPP_INFO(this->get_logger(), "Published ActuatorCommand: wheel_velocity=%.2f, steer_position=%.2f",
-                    actuator_msg.wheel_velocity, actuator_msg.steer_position);
+        RCLCPP_INFO(this->get_logger(), "Published ActuatorCommand: wheel_velocity=%.2f, steer_position=%.2f, tool_position=%.2f",
+                    actuator_msg.wheel_velocity, actuator_msg.steer_position, actuator_msg.tool_position);
     }
     
     rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscription_;

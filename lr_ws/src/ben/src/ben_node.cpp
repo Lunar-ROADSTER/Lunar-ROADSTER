@@ -43,10 +43,10 @@ namespace lr
             this->declare_parameter<int>("end_mission_delay_iterations", 5);
             this->get_parameter("end_mission_delay_iterations", end_mission_delay_iters_);
 
-            this->declare_parameter<double>("tool_height_up", 10.0);
+            this->declare_parameter<double>("tool_height_up", 100.0);
             this->get_parameter("tool_height_up", tool_height_up_);
             
-            this->declare_parameter<double>("tool_height_down", 20.0);
+            this->declare_parameter<double>("tool_height_down", 30);
             this->get_parameter("tool_height_down", tool_height_down_);
 
             // FSM callback
@@ -82,8 +82,9 @@ namespace lr
             mux_mode_pub_ = this->create_publisher<lr_msgs::msg::MuxMode>("/mux_mode", 1);
 
             // Command velocity publisher
-            cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 1);
-
+            // cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 1);
+            cmd_vel_pub_ = this->create_publisher<lr_msgs::msg::ActuatorCommand>("/actuator_cmd", 10);
+            
             // Validation action client
             validation_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
             validation_client_ = rclcpp_action::create_client<lr_msgs::action::RunValidation>(this, "/validation/run", validation_cb_group_);
@@ -120,7 +121,7 @@ namespace lr
                     crater_centroids_ = msg->poses;
                     if (!crater_centroids_.empty())
                         got_crater_data_ = true;
-                    RCLCPP_INFO(this->get_logger(), "[BEN] Received %zu crater centroids.", crater_centroids_.size());
+                    // RCLCPP_INFO(this->get_logger(), "[BEN] Received %zu crater centroids.", crater_centroids_.size());
                 });
 
             crater_diameters_sub_ = this->create_subscription<std_msgs::msg::Float32MultiArray>(
@@ -129,7 +130,7 @@ namespace lr
                 [this](const std_msgs::msg::Float32MultiArray::ConstSharedPtr msg)
                 {
                     crater_diameters_ = msg->data;
-                    RCLCPP_INFO(this->get_logger(), "[BEN] Received %zu crater diameters.", crater_diameters_.size());
+                    // RCLCPP_INFO(this->get_logger(), "[BEN] Received %zu crater diameters.", crater_diameters_.size());
                 });
 
             global_planner_client_ = this->create_client<lr_msgs::srv::PlanPath>("/global_astar_planner/plan_path");
@@ -227,6 +228,7 @@ namespace lr
             exit_debug_trigger_ = true;
             exit_debug_target_state_ = msg->current_state;
             exit_debug_crater_index_ = msg->current_crater_index;
+            current_crater_index_ = exit_debug_crater_index_;
 
             RCLCPP_INFO(this->get_logger(),
                         "[EXIT_DEBUG] Requested exit from DEBUG to state '%s' at crater index %d.",
@@ -300,7 +302,7 @@ namespace lr
             if (start_mission_delay_count_ == 0)
             {
                 lr_msgs::msg::MuxMode mux_msg;
-                mux_msg.mode = 2;
+                mux_msg.mode = 0;
                 mux_mode_pub_->publish(mux_msg);
                 RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Changing MUX mode to FULL_AUTONOMY.");
             }
@@ -406,10 +408,12 @@ namespace lr
         void BenNode::fsmRunGlobalNavController()
         {
             std::lock_guard<std::mutex> lock(nav_mutex_);
-
+            lr_msgs::msg::ActuatorCommand tool_pos_msg;
             if (nav_goal_active_)
             {
                 RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Goal is already active, waiting for result...");
+                tool_pos_msg.tool_position = tool_height_up_;
+                cmd_vel_pub_->publish(tool_pos_msg);
                 return;
             }
 
@@ -447,6 +451,11 @@ namespace lr
                 global_path_to_send_.poses.clear();
 
                 RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Sending path goal (direction: Forward).");
+                
+                tool_pos_msg.tool_position = tool_height_up_;
+                cmd_vel_pub_->publish(tool_pos_msg);
+                RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Setting tool height");
+                
                 nav_goal_active_ = true;
 
                 auto send_goal_options = rclcpp_action::Client<FollowPath>::SendGoalOptions();
@@ -866,19 +875,19 @@ namespace lr
         {
             std::lock_guard<std::mutex> lock(nav_mutex_);
 
-            geometry_msgs::msg::Twist tool_pos_msg;
+            lr_msgs::msg::ActuatorCommand tool_pos_msg;
 
             if (nav_goal_active_)
             {
                 RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Goal is already active, waiting for result...");
                 if (local_goal_type_ == "source" || local_goal_type_ == "source_backblade")
                 {
-                    tool_pos_msg.linear.x = tool_height_down_;
+                    tool_pos_msg.tool_position = tool_height_down_;
                     cmd_vel_pub_->publish(tool_pos_msg);
                 }
                 else if (local_goal_type_ == "sink" || local_goal_type_ == "sink_backblade")
                 {
-                    tool_pos_msg.linear.x = tool_height_up_;
+                    tool_pos_msg.tool_position = tool_height_up_;
                     cmd_vel_pub_->publish(tool_pos_msg);
                 }
                 
@@ -921,12 +930,12 @@ namespace lr
 
                 if (local_goal_type_ == "source" || local_goal_type_ == "source_backblade")
                 {
-                    tool_pos_msg.linear.x = tool_height_down_;
+                    tool_pos_msg.tool_position = tool_height_down_;
                     cmd_vel_pub_->publish(tool_pos_msg);
                 }
                 else if (local_goal_type_ == "sink" || local_goal_type_ == "sink_backblade")
                 {
-                    tool_pos_msg.linear.x = tool_height_up_;
+                    tool_pos_msg.tool_position = tool_height_up_;
                     cmd_vel_pub_->publish(tool_pos_msg);
                 }
 
@@ -1048,7 +1057,7 @@ namespace lr
             if (!manual_override_trigger_)
             {
                 lr_msgs::msg::MuxMode mux_msg;
-                mux_msg.mode = 2;
+                mux_msg.mode = 0;
                 mux_mode_pub_->publish(mux_msg);
 
                 RCLCPP_INFO(this->get_logger(),

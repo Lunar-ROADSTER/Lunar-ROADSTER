@@ -13,11 +13,13 @@
 #include <optional>
 #include <string>
 #include <ben/fsm.hpp>
+#include <chrono>
 
 #include "lr_msgs/msg/mux_mode.hpp"
 #include "lr_msgs/msg/exit_debug.hpp"
 #include <lr_msgs/msg/crater_stamped.hpp>
 #include <lr_msgs/msg/pose2_d.hpp>
+#include <lr_msgs/msg/actuator_command.hpp>
 
 #include <lr_msgs/srv/pose_extract.hpp>
 #include <lr_msgs/srv/plan_path.hpp>
@@ -102,6 +104,8 @@ namespace lr
             rclcpp::Client<lr_msgs::srv::PlanPath>::SharedPtr global_planner_client_;
             bool planner_req_sent_{false};
             std::mutex global_planner_mutex_;
+            // std::chrono::steady_clock::time_point planner_req_started_{};
+            // std::chrono::seconds planner_req_timeout_{10};
 
             rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr crater_centroids_sub_;
             rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr crater_diameters_sub_;
@@ -170,6 +174,7 @@ namespace lr
             bool entered_once_ = false;
 
             // Tool Height control
+            rclcpp::Publisher<lr_msgs::msg::ActuatorCommand>::SharedPtr cmd_vel_pub_;
             double tool_height_up_;
             double tool_height_down_;
 

@@ -20,7 +20,7 @@ private:
     {
         // Match order of centroids: C1, C2, C3, C5
         // C1: 0.340 m, C2: 0.320 m, C3: 0.400 m, C5: 0.280 m
-        const std::vector<float> diameters_m = {0.340f, 0.320f, 1.000f, 0.280f, 0.400f};
+        const std::vector<float> diameters_m = {0.340f, 0.320f, 1.000f, 0.200f, 0.280f, 0.400f};
 
         std_msgs::msg::Float32MultiArray msg;
         msg.data = diameters_m;
