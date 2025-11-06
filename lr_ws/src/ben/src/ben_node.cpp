@@ -43,6 +43,12 @@ namespace lr
             this->declare_parameter<int>("end_mission_delay_iterations", 5);
             this->get_parameter("end_mission_delay_iterations", end_mission_delay_iters_);
 
+            this->declare_parameter<double>("tool_height_up", 10.0);
+            this->get_parameter("tool_height_up", tool_height_up_);
+            
+            this->declare_parameter<double>("tool_height_down", 20.0);
+            this->get_parameter("tool_height_down", tool_height_down_);
+
             // FSM callback
             fsm_timer_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
             fsm_timer_ = this->create_wall_timer(std::chrono::milliseconds(fsm_timer_callback_ms_),
@@ -74,6 +80,9 @@ namespace lr
 
             // Mux mode publisher
             mux_mode_pub_ = this->create_publisher<lr_msgs::msg::MuxMode>("/mux_mode", 1);
+
+            // Command velocity publisher
+            cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 1);
 
             // Validation action client
             validation_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
@@ -291,7 +300,7 @@ namespace lr
             if (start_mission_delay_count_ == 0)
             {
                 lr_msgs::msg::MuxMode mux_msg;
-                mux_msg.mode = 0;
+                mux_msg.mode = 2;
                 mux_mode_pub_->publish(mux_msg);
                 RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Changing MUX mode to FULL_AUTONOMY.");
             }
@@ -376,7 +385,6 @@ namespace lr
                                      "[FSM: GLOBAL_NAV_PLANNER] Planning failed for crater #%d: %s",
                                      current_crater_index_,
                                      response->message.c_str());
-                        current_crater_index_++;
                         return;
                     }
 
@@ -494,6 +502,7 @@ namespace lr
                         RCLCPP_INFO(this->get_logger(),
                                     "[FSM: VALIDATION] Grading SUCCESS. Transitioning to GLOBAL_NAV_PLANNER.");
                         validation_attempts_ = 0;
+                        current_crater_index_++;
                         fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_PLANNER);
                         return;
                     }
@@ -769,7 +778,19 @@ namespace lr
             if (goal_poses_.empty())
             {
                 RCLCPP_WARN(this->get_logger(), "[FSM: MANIPULATION_PLANNER] No goal poses from perception. Returning to PERCEPTION.");
+                current_goal_pose_idx_ = 0;
                 fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
+                return;
+            }
+
+            if (current_goal_pose_idx_ >= static_cast<int>(goal_poses_.size()))
+            {
+                RCLCPP_INFO(this->get_logger(),
+                            "[FSM: MANIPULATION_PLANNER] Completed all %zu manipulation goal poses. Transitioning to VALIDATION.",
+                            goal_poses_.size());
+                goal_poses_.clear();
+                current_goal_pose_idx_ = 0;
+                fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
                 return;
             }
 
@@ -785,7 +806,13 @@ namespace lr
                 return;
             }
 
-            const auto &goal_pose = goal_poses_.front();
+            const auto &goal_pose = goal_poses_[current_goal_pose_idx_];
+            std::string type = goal_pose_types_[current_goal_pose_idx_];
+            local_goal_type_ = type;
+            if (type == "source" || type == "sink")
+                manipulation_type_ = "Foward_manipulation";
+            else
+                manipulation_type_ = "Backward";
 
             auto request = std::make_shared<lr_msgs::srv::PlanPath::Request>();
             request->goal.header.stamp = this->now();
@@ -796,8 +823,10 @@ namespace lr
             request->smooth = true;
 
             RCLCPP_INFO(this->get_logger(),
-                        "[FSM: MANIPULATION_PLANNER] Sending manipulation plan goal (x=%.2f, y=%.2f)...",
-                        goal_pose.pt.x, goal_pose.pt.y);
+                        "[FSM: MANIPULATION_PLANNER] Planning to pose %d/%zu (x=%.2f, y=%.2f) type_raw=%s -> action=%s",
+                        current_goal_pose_idx_, goal_poses_.size(),
+                        goal_pose.pt.x, goal_pose.pt.y,
+                        type.c_str(), manipulation_type_.c_str());
 
             manipulation_req_sent_ = true;
 
@@ -813,34 +842,134 @@ namespace lr
                     if (!response->success)
                     {
                         RCLCPP_ERROR(this->get_logger(),
-                                     "[FSM: MANIPULATION_PLANNER] Manipulation planning failed: %s",
-                                     response->message.c_str());
-                        RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_PLANNER] Retrying PERCEPTION...");
-                        fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
+                                     "[FSM: MANIPULATION_PLANNER] Planning failed for pose index %d: %s",
+                                     current_goal_pose_idx_, response->message.c_str());
                         return;
                     }
 
                     RCLCPP_INFO(this->get_logger(),
-                                "[FSM: MANIPULATION_PLANNER] Manipulation planning success. Path size = %zu",
-                                response->path.poses.size());
+                                "[FSM: MANIPULATION_PLANNER] Planning success for pose index %d. Path size = %zu",
+                                current_goal_pose_idx_, response->path.poses.size());
 
                     manipulation_path_to_send_ = response->path;
+                    ++current_goal_pose_idx_;
 
                     RCLCPP_INFO(this->get_logger(),
                                 "[FSM: MANIPULATION_PLANNER] Transitioning to MANIPULATION_CONTROLLER.");
                     fsm_.setCurrState(lr::ben::FSM::State::MANIPULATION_CONTROLLER);
                 });
 
-            RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_PLANNER] Sent plan request.");
+            RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_PLANNER] Sent plan request for pose index %d.", current_goal_pose_idx_);
         }
 
         void BenNode::fsmRunManipulationController()
         {
-            RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Running manipulation controller...");
+            std::lock_guard<std::mutex> lock(nav_mutex_);
 
-            // Debug
-            RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Transitioning to END_MISSION.");
-            fsm_.setCurrState(lr::ben::FSM::State::END_MISSION);
+            geometry_msgs::msg::Twist tool_pos_msg;
+
+            if (nav_goal_active_)
+            {
+                RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Goal is already active, waiting for result...");
+                if (local_goal_type_ == "source" || local_goal_type_ == "source_backblade")
+                {
+                    tool_pos_msg.linear.x = tool_height_down_;
+                    cmd_vel_pub_->publish(tool_pos_msg);
+                }
+                else if (local_goal_type_ == "sink" || local_goal_type_ == "sink_backblade")
+                {
+                    tool_pos_msg.linear.x = tool_height_up_;
+                    cmd_vel_pub_->publish(tool_pos_msg);
+                }
+                
+                return;
+            }
+
+            if (nav_last_success_.has_value())
+            {
+                bool success = *nav_last_success_;
+                nav_last_success_.reset();
+
+                if (success)
+                {
+                    RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Path following SUCCEEDED.");
+                    RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Transitioning to VALIDATION.");
+                    fsm_.setCurrState(lr::ben::FSM::State::MANIPULATION_PLANNER);
+                }
+                else
+                {
+                    RCLCPP_WARN(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Path following FAILED or was CANCELED. Holding in state.");
+                }
+                return;
+            }
+
+            if (!manipulation_path_to_send_.poses.empty())
+            {
+                if (!nav_client_ || !nav_client_->wait_for_action_server(std::chrono::seconds(1)))
+                {
+                    RCLCPP_WARN(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Action server '/follow_path' not available. Waiting...");
+                    return;
+                }
+
+                // Create and send the goal
+                auto goal_msg = FollowPath::Goal();
+                goal_msg.path = manipulation_path_to_send_;
+                goal_msg.direction = manipulation_type_; // Get direction from planner state
+
+                manipulation_path_to_send_.poses.clear();
+                manipulation_type_.clear();
+
+                if (local_goal_type_ == "source" || local_goal_type_ == "source_backblade")
+                {
+                    tool_pos_msg.linear.x = tool_height_down_;
+                    cmd_vel_pub_->publish(tool_pos_msg);
+                }
+                else if (local_goal_type_ == "sink" || local_goal_type_ == "sink_backblade")
+                {
+                    tool_pos_msg.linear.x = tool_height_up_;
+                    cmd_vel_pub_->publish(tool_pos_msg);
+                }
+
+                RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Setting tool height");
+
+                RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Sending path goal (direction: Forward).");
+                nav_goal_active_ = true;
+
+                auto send_goal_options = rclcpp_action::Client<FollowPath>::SendGoalOptions();
+
+                send_goal_options.result_callback =
+                    [this](const GoalHandleFollowPath::WrappedResult &result)
+                {
+                    std::lock_guard<std::mutex> lock(nav_mutex_);
+                    nav_goal_active_ = false;
+                    if (result.code == rclcpp_action::ResultCode::SUCCEEDED)
+                    {
+                        nav_last_success_ = result.result->success;
+                    }
+                    else
+                    {
+                        nav_last_success_ = false; // Goal was aborted, canceled, or rejected
+                    }
+                    RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Goal finished.");
+                };
+
+                send_goal_options.feedback_callback =
+                    [this](GoalHandleFollowPath::SharedPtr, const std::shared_ptr<const FollowPath::Feedback> feedback)
+                {
+                    if (verbose_trigger_)
+                    {
+                        RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Feedback: Distance to goal: %.2f m", feedback->distance_to_goal);
+                    }
+                };
+
+                nav_client_->async_send_goal(goal_msg, send_goal_options);
+            }
+            else
+            {
+                RCLCPP_WARN(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] No global path to follow. Holding in state.");
+                return;
+            }
+
         }
 
         void BenNode::fsmRunEndMission()

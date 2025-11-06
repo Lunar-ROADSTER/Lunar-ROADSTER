@@ -114,6 +114,9 @@ namespace lr
             rclcpp::Client<lr_msgs::srv::PlanPath>::SharedPtr manipulation_planner_client_;
             bool manipulation_req_sent_{false};
             std::mutex manipulation_planner_mutex_;
+            int current_goal_pose_idx_{0};
+            std::string manipulation_type_{"Forward_manipulation"};
+            std::string local_goal_type_{"source"};
 
             // fsmRunValidation helpers
             int validation_average_window_{10};
@@ -165,6 +168,10 @@ namespace lr
 
             // fsmRunManualOverride helpers
             bool entered_once_ = false;
+
+            // Tool Height control
+            double tool_height_up_;
+            double tool_height_down_;
 
         public:
             // Constructor and destructor
