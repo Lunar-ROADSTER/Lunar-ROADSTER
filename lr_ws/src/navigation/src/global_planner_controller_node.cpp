@@ -144,6 +144,7 @@ namespace lr_global_planner_controller
     {
         std::lock_guard<std::mutex> lock(goal_handle_mutex_);
 
+
         if (this->current_goal_handle_)
         {
             RCLCPP_WARN(this->get_logger(), "Aborting previous goal.");
@@ -156,6 +157,10 @@ namespace lr_global_planner_controller
         this->current_path_ = goal_handle->get_goal()->path;
         this->current_direction_ = goal_handle->get_goal()->direction; 
         RCLCPP_INFO(this->get_logger(), "New goal accepted and path stored. Direction: %s", current_direction_.c_str());
+
+        RCLCPP_INFO(this->get_logger(), "Waiting 2 seconds before starting controller...");
+        rclcpp::sleep_for(std::chrono::seconds(2));
+        RCLCPP_INFO(this->get_logger(), "Starting controller execution.");
 
         dev_stats_ = DeviationStats{};
         have_prev_sample_ = false;
