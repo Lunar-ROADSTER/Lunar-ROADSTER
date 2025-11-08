@@ -26,6 +26,10 @@ namespace lr_global_planner_controller
         this->declare_parameter<std::string>("global_frame", "map");
         this->declare_parameter<double>("manipulation_lookahead_distance", 0.2);
         this->declare_parameter<double>("manipulation_goal_tolerance", 0.05);
+        this->declare_parameter<double>("max_linear_speed_pct_ref", 0.5);  // m/s -> 100% wheel
+        this->declare_parameter<double>("max_steering_rate_pct_ref", 0.5); // rad/s -> 100% steer
+        this->declare_parameter<double>("wheel_pct_limit", 65.0);
+        this->declare_parameter<double>("steer_pct_limit", 60.0);
 
         // Load standard parameters
         lookahead_distance_ = this->get_parameter("lookahead_distance").as_double();
@@ -36,6 +40,10 @@ namespace lr_global_planner_controller
         global_frame_ = this->get_parameter("global_frame").as_string();
         manipulation_lookahead_distance_ = this->get_parameter("manipulation_lookahead_distance").as_double();
         manipulation_goal_tolerance_ = this->get_parameter("manipulation_goal_tolerance").as_double();
+        max_linear_speed_pct_ref_ = this->get_parameter("max_linear_speed_pct_ref").as_double();
+        max_steering_rate_pct_ref_ = this->get_parameter("max_steering_rate_pct_ref").as_double();
+        wheel_pct_limit_ = this->get_parameter("wheel_pct_limit").as_double();
+        steer_pct_limit_ = this->get_parameter("steer_pct_limit").as_double();
 
         RCLCPP_INFO(this->get_logger(), "Parameters Loaded Successfully:");
         RCLCPP_INFO(this->get_logger(), "  lookahead_distance: %.2f m", lookahead_distance_);
@@ -57,6 +65,7 @@ namespace lr_global_planner_controller
 
         // Publishers
         cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 10);
+        actuator_pub_ = this->create_publisher<lr_msgs::msg::ActuatorCommand>("/actuator_cmd", 10);
         target_point_pub_ = this->create_publisher<visualization_msgs::msg::Marker>("/lookahead_point", 10);
 
         trail_pub_ = this->create_publisher<nav_msgs::msg::Path>("/tf_trail", 1);
@@ -128,10 +137,12 @@ namespace lr_global_planner_controller
         (void)goal_handle;
         RCLCPP_INFO(this->get_logger(), "Received request to cancel goal. Stopping robot.");
 
-        geometry_msgs::msg::Twist stop_cmd;
-        stop_cmd.linear.x = 0.0;
-        stop_cmd.angular.z = 0.0;
-        cmd_vel_pub_->publish(stop_cmd);
+        // geometry_msgs::msg::Twist stop_cmd;
+        // stop_cmd.linear.x = 0.0;
+        // stop_cmd.angular.z = 0.0;
+        // cmd_vel_pub_->publish(stop_cmd);
+
+        publishActuator(0.0, 0.0);
 
         return rclcpp_action::CancelResponse::ACCEPT;
     }
@@ -155,7 +166,8 @@ namespace lr_global_planner_controller
         this->current_goal_handle_ = goal_handle;
         this->current_path_ = goal_handle->get_goal()->path;
         this->current_direction_ = goal_handle->get_goal()->direction;
-        RCLCPP_INFO(this->get_logger(), "New goal accepted and path stored. Direction: %s", current_direction_.c_str());
+        current_tool_position_ = goal_handle->get_goal()->tool_position;
+        RCLCPP_INFO(this->get_logger(), "New goal accepted and path stored. Direction: %s, tool_position: %.2f", current_direction_.c_str(), current_tool_position_);
 
         RCLCPP_INFO(this->get_logger(), "Waiting 2 seconds before starting controller...");
         // rclcpp::sleep_for(std::chrono::seconds(2));
@@ -385,23 +397,26 @@ namespace lr_global_planner_controller
 
         if (!active_goal_handle)
         {
-            geometry_msgs::msg::Twist stop_cmd;
-            cmd_vel_pub_->publish(stop_cmd);
+            // geometry_msgs::msg::Twist stop_cmd;
+            // cmd_vel_pub_->publish(stop_cmd);
+            publishActuator(0.0, 0.0);
             return;
         }
 
         if (!active_goal_handle->is_active())
         {
-            geometry_msgs::msg::Twist stop_cmd;
-            cmd_vel_pub_->publish(stop_cmd);
+            // geometry_msgs::msg::Twist stop_cmd;
+            // cmd_vel_pub_->publish(stop_cmd);
+            publishActuator(0.0, 0.0);
             return;
         }
 
         geometry_msgs::msg::PoseStamped robot_map;
         if (!lookupRobotInMap(robot_map))
         {
-            geometry_msgs::msg::Twist stop_cmd;
-            cmd_vel_pub_->publish(stop_cmd);
+            // geometry_msgs::msg::Twist stop_cmd;
+            // cmd_vel_pub_->publish(stop_cmd);
+            publishActuator(0.0, 0.0);
             return;
         }
 
@@ -409,8 +424,10 @@ namespace lr_global_planner_controller
         if (active_goal_handle->is_canceling())
         {
             RCLCPP_INFO(this->get_logger(), "Goal canceled by client; stopping.");
-            geometry_msgs::msg::Twist stop_cmd;
-            cmd_vel_pub_->publish(stop_cmd);
+            // geometry_msgs::msg::Twist stop_cmd;
+            // cmd_vel_pub_->publish(stop_cmd);
+            publishActuator(0.0, 0.0);
+
             auto result = std::make_shared<FollowPath::Result>();
             result->success = false;
             active_goal_handle->canceled(result);
@@ -455,10 +472,11 @@ namespace lr_global_planner_controller
         if (distance_to_final_goal < current_goal_tolerance)
         {
             RCLCPP_INFO(this->get_logger(), "Goal reached successfully!");
-            geometry_msgs::msg::Twist stop_cmd;
-            stop_cmd.linear.x = 0.0;
-            stop_cmd.angular.z = 0.0;
-            cmd_vel_pub_->publish(stop_cmd);
+            // geometry_msgs::msg::Twist stop_cmd;
+            // stop_cmd.linear.x = 0.0;
+            // stop_cmd.angular.z = 0.0;
+            // cmd_vel_pub_->publish(stop_cmd);
+            publishActuator(0.0, 0.0);
 
             auto result = std::make_shared<FollowPath::Result>();
             result->success = true;
@@ -503,11 +521,13 @@ namespace lr_global_planner_controller
         double clipped_angular_velocity = std::clamp(
             angular_velocity, -max_angular_velocity_, max_angular_velocity_);
 
-        geometry_msgs::msg::Twist cmd_vel;
-        cmd_vel.linear.x = current_linear_velocity;
-        cmd_vel.angular.z = clipped_angular_velocity;
+        // geometry_msgs::msg::Twist cmd_vel;
+        // cmd_vel.linear.x = current_linear_velocity;
+        // cmd_vel.angular.z = clipped_angular_velocity;
 
-        cmd_vel_pub_->publish(cmd_vel);
+        // cmd_vel_pub_->publish(cmd_vel);
+        publishActuator(current_linear_velocity, clipped_angular_velocity);
+
     }
 
     /**
@@ -557,6 +577,40 @@ namespace lr_global_planner_controller
         trail_.header.stamp = pose_map.header.stamp;
         trail_.header.frame_id = global_frame_;
         trail_pub_->publish(trail_);
+    }
+
+    void GlobalPlannerController::publishActuator(double linear_cmd_mps, double angular_cmd_rps)
+    {
+        lr_msgs::msg::ActuatorCommand msg;
+        msg.header.stamp = this->get_clock()->now();
+
+        // Map linear velocity to wheel % [-limit, +limit]
+        double wheel_pct = 0.0;
+        if (std::abs(max_linear_speed_pct_ref_) > 1e-6)
+        {
+            wheel_pct = (linear_cmd_mps / max_linear_speed_pct_ref_) * 100.0;
+        }
+        wheel_pct = std::clamp(wheel_pct, -wheel_pct_limit_, wheel_pct_limit_);
+        msg.wheel_velocity = wheel_pct;
+
+        // Map angular velocity to steer % [-limit, +limit]
+        double steer_pct = 0.0;
+        if (std::abs(max_steering_rate_pct_ref_) > 1e-6)
+        {
+            steer_pct = (angular_cmd_rps / max_steering_rate_pct_ref_) * 100.0;
+        }
+        steer_pct = std::clamp(steer_pct, -steer_pct_limit_, steer_pct_limit_);
+        msg.steer_position = steer_pct;
+
+        // Always publish the latched tool position from the action goal
+        msg.tool_position = current_tool_position_;
+
+        actuator_pub_->publish(msg);
+
+        RCLCPP_DEBUG(this->get_logger(),
+                     "ActuatorCmd: wheel=%.1f%% steer=%.1f%% tool=%.2f (lin=%.3f m/s, ang=%.3f rad/s)",
+                     msg.wheel_velocity, msg.steer_position, msg.tool_position,
+                     linear_cmd_mps, angular_cmd_rps);
     }
 
 } // namespace lr_global_planner_controller

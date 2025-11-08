@@ -174,9 +174,10 @@ namespace lr
             bool entered_once_ = false;
 
             // Tool Height control
-            rclcpp::Publisher<lr_msgs::msg::ActuatorCommand>::SharedPtr cmd_vel_pub_;
             double tool_height_up_;
             double tool_height_down_;
+            double tool_height_up_second_pass_;
+            double tool_height_down_second_pass_;
 
         public:
             // Constructor and destructor

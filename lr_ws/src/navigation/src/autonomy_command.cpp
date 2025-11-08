@@ -23,7 +23,7 @@ private:
         actuator_msg.steer_position = (msg->angular.z / max_steering_angle) * 100.0;
         actuator_msg.steer_position = std::clamp(actuator_msg.steer_position, -60.0, 60.0);
 
-        actuator_msg.tool_position = 100.0;
+        // actuator_msg.tool_position = 100.0;
         
         // Publish the message
         publisher_->publish(actuator_msg);

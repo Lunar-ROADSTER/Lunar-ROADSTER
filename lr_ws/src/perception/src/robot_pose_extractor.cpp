@@ -151,11 +151,11 @@ int main(int argc, char **argv)
     auto pose_extractor = std::make_shared<lr::perception::PoseExtractor>(node);
 
     RCLCPP_INFO(node->get_logger(), "Pose Extractor Service is ready.");
-    auto service = node->create_service<::perception::srv::PoseExtract>(
+    auto service = node->create_service<::lr_msgs::srv::PoseExtract>(
         "generate_crater_goals",
         [pose_extractor](
-            const std::shared_ptr<::perception::srv::PoseExtract::Request> request,
-            std::shared_ptr<::perception::srv::PoseExtract::Response> response)
+            const std::shared_ptr<::lr_msgs::srv::PoseExtract::Request> request,
+            std::shared_ptr<::lr_msgs::srv::PoseExtract::Response> response)
         {
             std::vector<lr_msgs::msg::Pose2D> goal_poses;
             std::vector<std::string> goal_types;

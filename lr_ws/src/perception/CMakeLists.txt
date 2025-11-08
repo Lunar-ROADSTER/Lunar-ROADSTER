@@ -61,8 +61,8 @@ ament_target_dependencies(pose_extractor
   lr_msgs
 )
 target_link_libraries(pose_extractor Eigen3::Eigen perception_common)
-rosidl_target_interfaces(pose_extractor
-  ${PROJECT_NAME} "rosidl_typesupport_cpp")
+# rosidl_target_interfaces(pose_extractor
+#  ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 ament_export_include_directories(include)
 ament_export_libraries(perception_common)

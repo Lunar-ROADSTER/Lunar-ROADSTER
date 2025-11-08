@@ -276,7 +276,7 @@ class CraterDetectionNode(Node):
 
             for box, conf in zip(results.boxes.xyxy, results.boxes.conf):
                 confidence = float(conf)
-                if confidence < 0.7:
+                if confidence < 0.6:
                     self.has_stable_detection = False
                     continue
 

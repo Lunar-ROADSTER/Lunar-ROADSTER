@@ -12,6 +12,7 @@
 #include "tf2_ros/transform_listener.h"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 #include "lr_msgs/action/follow_path.hpp"
+#include "lr_msgs/msg/actuator_command.hpp"
 
 #include <vector>
 #include <string>
@@ -135,6 +136,8 @@ namespace lr_global_planner_controller
          */
         void sampleTfAndPublishTrail();
 
+        void publishActuator(double linear_cmd_mps, double angular_cmd_rps);
+
         // --- ROS2 Members (Publishers, Subscribers, etc.) ---
 
         // Subscribers
@@ -142,6 +145,7 @@ namespace lr_global_planner_controller
 
         // Publishers
         rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
+        rclcpp::Publisher<lr_msgs::msg::ActuatorCommand>::SharedPtr actuator_pub_;
         rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr target_point_pub_;
         rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr trail_pub_;
 
@@ -163,6 +167,12 @@ namespace lr_global_planner_controller
         std::mutex goal_handle_mutex_; // Protects access to the current_goal_handle_
         nav_msgs::msg::Path current_path_;
         std::string current_direction_; // To store "Forward", "Backward", or "Forward_manipulation"
+        float current_tool_position_{0.0f};
+
+        double max_linear_speed_pct_ref_{0.5};  // [m/s] maps to 100% wheel_velocity
+        double max_steering_rate_pct_ref_{0.5}; // [rad/s] maps to 100% steer_position
+        double wheel_pct_limit_{65.0};          // [%] clamp for wheel_velocity
+        double steer_pct_limit_{60.0};          // [%] clamp for steer_position
 
         // Robot State
         nav_msgs::msg::Odometry current_odometry_;
@@ -178,14 +188,14 @@ namespace lr_global_planner_controller
         nav_msgs::msg::Path trail_;
         double trail_min_step_{0.05};
         size_t trail_max_points_{50000};
-        
+
         // Parameters
         double lookahead_distance_;
         double desired_linear_velocity_;
         double max_angular_velocity_;
         double goal_tolerance_;
         std::string robot_frame_;
-        std::string global_frame_;        
+        std::string global_frame_;
         double manipulation_lookahead_distance_;
         double manipulation_goal_tolerance_;
     };
@@ -193,4 +203,3 @@ namespace lr_global_planner_controller
 } // namespace lr_global_planner_controller
 
 #endif // GLOBAL_PLANNER_CONTROLLER_NODE_HPP_
-

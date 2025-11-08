@@ -49,6 +49,12 @@ namespace lr
             this->declare_parameter<double>("tool_height_down", 30);
             this->get_parameter("tool_height_down", tool_height_down_);
 
+            this->declare_parameter<double>("tool_height_up_second_pass_", 100.0);
+            this->get_parameter("tool_height_up", tool_height_up_second_pass_);
+            
+            this->declare_parameter<double>("tool_height_down_second_pass_", 30);
+            this->get_parameter("tool_height_down", tool_height_down_second_pass_);
+
             // FSM callback
             fsm_timer_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
             fsm_timer_ = this->create_wall_timer(std::chrono::milliseconds(fsm_timer_callback_ms_),
@@ -80,10 +86,6 @@ namespace lr
 
             // Mux mode publisher
             mux_mode_pub_ = this->create_publisher<lr_msgs::msg::MuxMode>("/mux_mode", 1);
-
-            // Command velocity publisher
-            // cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 1);
-            cmd_vel_pub_ = this->create_publisher<lr_msgs::msg::ActuatorCommand>("/actuator_cmd", 10);
             
             // Validation action client
             validation_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
@@ -107,7 +109,7 @@ namespace lr
 
             crater_detect_client_ = rclcpp_action::create_client<lr_msgs::action::CraterDetect>(
                 this,
-                "detect_crater",
+                "/detect_crater",
                 perception_cb_group_);
 
             nav_client_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
@@ -408,12 +410,9 @@ namespace lr
         void BenNode::fsmRunGlobalNavController()
         {
             std::lock_guard<std::mutex> lock(nav_mutex_);
-            lr_msgs::msg::ActuatorCommand tool_pos_msg;
             if (nav_goal_active_)
             {
                 RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Goal is already active, waiting for result...");
-                tool_pos_msg.tool_position = tool_height_up_;
-                cmd_vel_pub_->publish(tool_pos_msg);
                 return;
             }
 
@@ -447,15 +446,12 @@ namespace lr
                 auto goal_msg = FollowPath::Goal();
                 goal_msg.path = global_path_to_send_;
                 goal_msg.direction = "Forward"; // Global navigation is always "Forward"
+                goal_msg.tool_position = tool_height_up_;
 
                 global_path_to_send_.poses.clear();
 
                 RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Sending path goal (direction: Forward).");
-                
-                tool_pos_msg.tool_position = tool_height_up_;
-                cmd_vel_pub_->publish(tool_pos_msg);
-                RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Setting tool height");
-                
+                                
                 nav_goal_active_ = true;
 
                 auto send_goal_options = rclcpp_action::Client<FollowPath>::SendGoalOptions();
@@ -621,6 +617,16 @@ namespace lr
         void BenNode::fsmRunPerception()
         {
             std::lock_guard<std::mutex> lock(perception_mutex_);
+
+            // Skip perceptionif not the first attempt
+            if (validation_attempts_ > 1)
+            {
+                RCLCPP_INFO(this->get_logger(),
+                            "[FSM: PERCEPTION] Skipping perception on attempt %d. Transitioning to MANIPULATION_PLANNER.",
+                            validation_attempts_);
+                fsm_.setCurrState(lr::ben::FSM::State::MANIPULATION_PLANNER);
+                return;
+            }
 
             // Start crater detection action if not already active
             if (!perception_goal_active_)
@@ -875,22 +881,9 @@ namespace lr
         {
             std::lock_guard<std::mutex> lock(nav_mutex_);
 
-            lr_msgs::msg::ActuatorCommand tool_pos_msg;
-
             if (nav_goal_active_)
             {
                 RCLCPP_INFO(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] Goal is already active, waiting for result...");
-                if (local_goal_type_ == "source" || local_goal_type_ == "source_backblade")
-                {
-                    tool_pos_msg.tool_position = tool_height_down_;
-                    cmd_vel_pub_->publish(tool_pos_msg);
-                }
-                else if (local_goal_type_ == "sink" || local_goal_type_ == "sink_backblade")
-                {
-                    tool_pos_msg.tool_position = tool_height_up_;
-                    cmd_vel_pub_->publish(tool_pos_msg);
-                }
-                
                 return;
             }
 
@@ -930,16 +923,28 @@ namespace lr
 
                 if (local_goal_type_ == "source" || local_goal_type_ == "source_backblade")
                 {
-                    tool_pos_msg.tool_position = tool_height_down_;
-                    cmd_vel_pub_->publish(tool_pos_msg);
+                    if (validation_attempts_ > 1)
+                    {
+                        goal_msg.tool_position = tool_height_down_second_pass_;
+                    } 
+                    else
+                    {
+                        goal_msg.tool_position = tool_height_down_;
+                    }
+                    
                 }
                 else if (local_goal_type_ == "sink" || local_goal_type_ == "sink_backblade")
                 {
-                    tool_pos_msg.tool_position = tool_height_up_;
-                    cmd_vel_pub_->publish(tool_pos_msg);
+                    if (validation_attempts_ > 1)
+                    {
+                        goal_msg.tool_position = tool_height_up_second_pass_;
+                    } 
+                    else
+                    {
+                        goal_msg.tool_position = tool_height_up_;
+                    }
                 }
 
-                RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Setting tool height");
 
                 RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Sending path goal (direction: Forward).");
                 nav_goal_active_ = true;

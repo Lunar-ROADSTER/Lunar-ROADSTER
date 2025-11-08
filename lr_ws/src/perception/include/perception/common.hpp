@@ -1,6 +1,7 @@
 #ifndef PERCEPTION__COMMON_HPP
 #define PERCEPTION__COMMON_HPP
 
+#include <rclcpp/rclcpp.hpp>
 #include <cmath> // sqrt, fmod
 #include <Eigen/Dense> // matrix multiplication
 #include <Eigen/Geometry> // homogenous transforms
