@@ -6,7 +6,7 @@ ManipulationPlanner::ManipulationPlanner()
     : Node("manipulation_planner"), map_received_(false)
 {
   this->declare_parameter<std::string>("map_topic", "/map");
-  this->declare_parameter<int>("occupied_threshold", 65);
+  this->declare_parameter<int>("occupied_threshold", 100);
   this->declare_parameter<bool>("use_8_connected", true);
   this->declare_parameter<std::string>("map_frame", "map");
   this->declare_parameter<std::string>("base_frame", "base_link");
@@ -30,6 +30,9 @@ ManipulationPlanner::ManipulationPlanner()
       std::bind(&ManipulationPlanner::planService, this, std::placeholders::_1, std::placeholders::_2));
 
   path_pub_ = this->create_publisher<nav_msgs::msg::Path>("/manipulation_planner/path", 1);
+
+  goal_marker_pub_ = this->create_publisher<visualization_msgs::msg::Marker>(
+      "/manipulation_planner/goal_marker", 10);
 
   tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
   tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
@@ -61,6 +64,28 @@ void ManipulationPlanner::planService(
     RCLCPP_WARN(get_logger(), "[Service] No map yet.");
     return;
   }
+
+  visualization_msgs::msg::Marker goal_marker;
+  goal_marker.header.frame_id = map_frame_;
+  goal_marker.header.stamp = now();
+  goal_marker.ns = "manipulation_goal";
+  goal_marker.id = 0;
+  goal_marker.type = visualization_msgs::msg::Marker::SPHERE;
+  goal_marker.action = visualization_msgs::msg::Marker::ADD;
+
+  goal_marker.pose.position.x = request->goal.pose.position.x;
+  goal_marker.pose.position.y = request->goal.pose.position.y;
+  goal_marker.pose.position.z = 0.0;
+  goal_marker.pose.orientation.w = 1.0;
+
+  goal_marker.scale.x = goal_marker.scale.y = goal_marker.scale.z = 0.3; // size of sphere
+  goal_marker.color.r = 0.0f;
+  goal_marker.color.g = 1.0f;
+  goal_marker.color.b = 0.0f;
+  goal_marker.color.a = 1.0f;
+
+  goal_marker.lifetime = rclcpp::Duration(0, 0); // persist
+  goal_marker_pub_->publish(goal_marker);
 
   geometry_msgs::msg::TransformStamped tfst;
   try

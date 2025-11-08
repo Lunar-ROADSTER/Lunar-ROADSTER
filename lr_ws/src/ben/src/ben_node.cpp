@@ -660,19 +660,23 @@ namespace lr
                     [this](const rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>::WrappedResult &result)
                 {
                     std::lock_guard<std::mutex> lock(perception_mutex_);
-                    perception_goal_active_ = false;
-
+                    
                     if (result.code != rclcpp_action::ResultCode::SUCCEEDED)
                     {
-                        RCLCPP_WARN(this->get_logger(),
-                                    "[FSM: PERCEPTION] Result: detect_crater finished with result code %d.",
-                                    static_cast<int>(result.code));
+                        RCLCPP_WARN(this->get_logger(), "Result code: %s",
+                            (result.code == rclcpp_action::ResultCode::SUCCEEDED ? "SUCCEEDED" :
+                            result.code == rclcpp_action::ResultCode::ABORTED ? "ABORTED" :
+                            result.code == rclcpp_action::ResultCode::CANCELED ? "CANCELED" :
+                            "UNKNOWN"));
+
+                        perception_goal_active_ = false;
                     }
                     else
                     {
                         RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] Result: detect_crater action succeeded.");
                     }
                 };
+                
 
                 // Goal acceptance
                 opts.goal_response_callback =
@@ -712,7 +716,7 @@ namespace lr
             // Ensure the pose-extract service is ready
             if (!pose_extract_client_->service_is_ready())
             {
-                RCLCPP_WARN(this->get_logger(), "[FSM: PERCEPTION] Waiting for generate_crater_goals service...");
+                RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] Waiting for generate_crater_goals service...");
                 return;
             }
 
@@ -762,11 +766,11 @@ namespace lr
                             }
                         }
 
-                        if (crater_detect_goal_handle_)
-                        {
-                            crater_detect_client_->async_cancel_goal(crater_detect_goal_handle_);
-                            crater_detect_goal_handle_.reset();
-                        }
+                        // if (crater_detect_goal_handle_)
+                        // {
+                        //     crater_detect_client_->async_cancel_goal(crater_detect_goal_handle_);
+                        //     crater_detect_goal_handle_.reset();
+                        // }
 
                         latest_crater_.reset();
                         perception_goal_active_ = false;
@@ -825,7 +829,7 @@ namespace lr
             std::string type = goal_pose_types_[current_goal_pose_idx_];
             local_goal_type_ = type;
             if (type == "source" || type == "sink")
-                manipulation_type_ = "Foward_manipulation";
+                manipulation_type_ = "Forward_manipulation";
             else
                 manipulation_type_ = "Backward";
 

@@ -8,6 +8,9 @@ Panels:
         - /Status1
         - /Marker1
         - /MarkerArray2
+        - /TF1
+        - /TF1/Frames1
+        - /Marker2
       Splitter Ratio: 0.5
     Tree Height: 839
   - Class: rviz_common/Selection
@@ -188,13 +191,80 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        {}
+        start_goal_markers: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /start_goal_markers
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        base_link:
+          Value: true
+        imu_link:
+          Value: false
+        map:
+          Value: true
+        odom:
+          Value: true
+        total_station_prism:
+          Value: false
+        zed_camera_center:
+          Value: false
+        zed_camera_link:
+          Value: false
+        zed_imu_link:
+          Value: false
+        zed_left_camera_frame:
+          Value: false
+        zed_left_camera_optical_frame:
+          Value: false
+        zed_right_camera_frame:
+          Value: false
+        zed_right_camera_optical_frame:
+          Value: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        map:
+          odom:
+            base_link:
+              imu_link:
+                {}
+              total_station_prism:
+                {}
+              zed_camera_link:
+                zed_camera_center:
+                  zed_left_camera_frame:
+                    zed_imu_link:
+                      {}
+                    zed_left_camera_optical_frame:
+                      {}
+                  zed_right_camera_frame:
+                    zed_right_camera_optical_frame:
+                      {}
+      Update Interval: 0
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Marker
+      Namespaces:
+        {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /manipulation_planner/goal_marker
       Value: true
   Enabled: true
   Global Options:
@@ -242,16 +312,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 9.4384126663208
+      Distance: 3.9936013221740723
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 3.9358315467834473
-        Y: 3.6427836418151855
-        Z: 0.009118074551224709
+        X: 3.9302144050598145
+        Y: 3.642761707305908
+        Z: 5.624969959259033
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -260,7 +330,7 @@ Visualization Manager:
       Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.1454060077667236
+      Yaw: 3.1404061317443848
     Saved: ~
 Window Geometry:
   Displays:

@@ -24,8 +24,8 @@ namespace lr_global_planner_controller
         this->declare_parameter<double>("goal_tolerance", 0.7);
         this->declare_parameter<std::string>("robot_frame", "base_link");
         this->declare_parameter<std::string>("global_frame", "map");
-        this->declare_parameter<double>("manipulation_lookahead_distance", 0.2);
-        this->declare_parameter<double>("manipulation_goal_tolerance", 0.05);
+        this->declare_parameter<double>("manipulation_lookahead_distance", 0.1);
+        this->declare_parameter<double>("manipulation_goal_tolerance", 0.1);
         this->declare_parameter<double>("max_linear_speed_pct_ref", 0.5);  // m/s -> 100% wheel
         this->declare_parameter<double>("max_steering_rate_pct_ref", 0.5); // rad/s -> 100% steer
         this->declare_parameter<double>("wheel_pct_limit", 65.0);

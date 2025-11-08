@@ -34,7 +34,7 @@ namespace lr
             robot_half_length_ = static_cast<float>(node->get_parameter("robot_half_length").as_double());
             // Nothing else yet; TF buffer and listener are initialized
 
-            RCLCPP_INFO(this->rclcpp::get_logger(), "PoseExtractor initialized.");
+            // RCLCPP_INFO(this->rclcpp::get_logger(), "PoseExtractor initialized.");
         }
 
         void PoseExtractor::makeGoalsfromCraterGeometry(std::vector<lr_msgs::msg::Pose2D> &goalPoses, std::vector<std::string> &goalPose_types, std::vector<double> &craterCentroid, double &craterDiameter)
@@ -42,7 +42,7 @@ namespace lr
             // Get current rover pose
 
             geometry_msgs::msg::PoseStamped rover_pose = getRoverPose("map", "base_link");
-            RCLCPP_INFO(this->rclcpp::get_logger(), "Obtained Rover Pose.");
+            // RCLCPP_INFO(this->rclcpp::get_logger(), "Obtained Rover Pose.");
 
             // Calculate manipulation distance
             float manipulation_distance = (craterDiameter / 2) + manipulation_offset_;
@@ -106,8 +106,8 @@ namespace lr
             goalPose_types.push_back("source_backblade");
             goalPose_types.push_back("sink_backblade");
 
-            RCLCPP_INFO(this->rclcpp::get_logger(), "Generated %zu goal poses for crater at (%.2f, %.2f) with diameter %.2f m.",
-                         goalPoses.size(), craterCentroid[0], craterCentroid[1], craterDiameter);
+            // RCLCPP_INFO(this->rclcpp::get_logger(), "Generated %zu goal poses for crater at (%.2f, %.2f) with diameter %.2f m.",
+            //              goalPoses.size(), craterCentroid[0], craterCentroid[1], craterDiameter);
         }
 
         // TF query for rover pose
@@ -150,7 +150,7 @@ int main(int argc, char **argv)
     const auto node = rclcpp::Node::make_shared("pose_extractor");
     auto pose_extractor = std::make_shared<lr::perception::PoseExtractor>(node);
 
-    RCLCPP_INFO(node->get_logger(), "Pose Extractor Service is ready.");
+    // RCLCPP_INFO(node->get_logger(), "Pose Extractor Service is ready.");
     auto service = node->create_service<::lr_msgs::srv::PoseExtract>(
         "generate_crater_goals",
         [pose_extractor](
