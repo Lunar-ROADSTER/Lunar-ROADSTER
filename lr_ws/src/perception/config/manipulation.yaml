@@ -1,9 +1,13 @@
 pose_extractor:
   ros__parameters:
-    manipulation_offset: 0.1        # metres
-    last_pose_offset: 0.5           # metres
-    backblading_multipler: 1.5      # dimensionless multiplier
+    manipulation_offset: 0.1        # metres - This adds offset to the distance between both source poses 
+    last_pose_offset: 0.5           # metres - don't tune
+    backblading_multipler: 1.5      # dimensionless multiplier - This multiples to manipulation distance for backblading
     boundary_min: 0.4               # metres
     boundary_max: 4.6               # metres
     boundary_increment: 0.01        # metres
     robot_half_length: 0.5          # metres
+    source_pose_offset: 0.0         # individually move source pose
+    sink_pose_offset: 0.0           # individually move sink pose
+    source_backblade_pose_offset: 0.0 # individually move source backblade pose 
+    sink_backblade_pose_offset: 0.0 # individually move sink backblade pose

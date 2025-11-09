@@ -37,14 +37,18 @@ class PoseExtractor{
 
     private:
         
-        float manipulation_offset_;
-        float last_pose_offset_;
-        float backblading_multipler_;
-        float boundary_min_;
-        float boundary_max_ ;
-        float boundary_increment_;
-        float robot_half_length_ ; 
-        
+        float manipulation_offset_ = 0.0;
+        float last_pose_offset_ = 0.0;
+        float backblading_multipler_ = 0.0;
+        float boundary_min_ = 0.0;
+        float boundary_max_ = 0.0;
+        float boundary_increment_ = 0.0;
+        float robot_half_length_ = 0.0;
+        float source_pose_offset_ = 0.0;
+        float sink_pose_offset_ = 0.0;
+        float source_backblade_pose_offset_ = 0.0;
+        float sink_backblade_pose_offset_ = 0.0;
+
         // TF2 members for querying transforms
         tf2_ros::Buffer tf_buffer_;
         tf2_ros::TransformListener tf_listener_;
