@@ -45,13 +45,13 @@ namespace lr
 
             this->declare_parameter<double>("tool_height_up", 100.0);
             this->get_parameter("tool_height_up", tool_height_up_);
-            
-            this->declare_parameter<double>("tool_height_down", 30);
+
+            this->declare_parameter<double>("tool_height_down", 40);
             this->get_parameter("tool_height_down", tool_height_down_);
 
             this->declare_parameter<double>("tool_height_up_second_pass_", 100.0);
             this->get_parameter("tool_height_up", tool_height_up_second_pass_);
-            
+
             this->declare_parameter<double>("tool_height_down_second_pass_", 30);
             this->get_parameter("tool_height_down", tool_height_down_second_pass_);
 
@@ -86,7 +86,7 @@ namespace lr
 
             // Mux mode publisher
             mux_mode_pub_ = this->create_publisher<lr_msgs::msg::MuxMode>("/mux_mode", 1);
-            
+
             // Validation action client
             validation_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
             validation_client_ = rclcpp_action::create_client<lr_msgs::action::RunValidation>(this, "/validation/run", validation_cb_group_);
@@ -360,10 +360,50 @@ namespace lr
                 return;
             }
 
+            if (current_crater_index_ == 2)
+                current_crater_index_++;
+
             auto request = std::make_shared<lr_msgs::srv::PlanPath::Request>();
             request->goal.header.stamp = this->now();
             request->goal.header.frame_id = "map";
-            request->goal.pose = crater_centroids_[current_crater_index_];
+            request->goal.pose.position = crater_centroids_[current_crater_index_].position;
+
+            if (current_crater_index_ == 0)
+            {
+                request->goal.pose.orientation.x = 0.0;
+                request->goal.pose.orientation.y = 0.0;
+                request->goal.pose.orientation.z = 0.011;
+                request->goal.pose.orientation.w = 0.999;
+            }
+            else if (current_crater_index_ == 1)
+            {
+                request->goal.pose.orientation.x = 0.0;
+                request->goal.pose.orientation.y = 0.0;
+                request->goal.pose.orientation.z = 0.785;
+                request->goal.pose.orientation.w = 0.619;
+            }
+            else if (current_crater_index_ == 3)
+            {
+                request->goal.pose.orientation.x = 0.0;
+                request->goal.pose.orientation.y = 0.0;
+                request->goal.pose.orientation.z = -0.998;
+                request->goal.pose.orientation.w = 0.065;
+            }
+            else if (current_crater_index_ == 4)
+            {
+                request->goal.pose.orientation.x = 0.0;
+                request->goal.pose.orientation.y = 0.0;
+                request->goal.pose.orientation.z = -0.684;
+                request->goal.pose.orientation.w = 0.729;
+            }
+            else
+            {
+                request->goal.pose.orientation.x = 0.0;
+                request->goal.pose.orientation.y = 0.0;
+                request->goal.pose.orientation.z = 0.0;
+                request->goal.pose.orientation.w = 0.0;
+            }
+            
             request->smooth = true;
 
             RCLCPP_INFO(this->get_logger(),
@@ -451,7 +491,7 @@ namespace lr
                 global_path_to_send_.poses.clear();
 
                 RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Sending path goal (direction: Forward).");
-                                
+
                 nav_goal_active_ = true;
 
                 auto send_goal_options = rclcpp_action::Client<FollowPath>::SendGoalOptions();
@@ -660,14 +700,13 @@ namespace lr
                     [this](const rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>::WrappedResult &result)
                 {
                     std::lock_guard<std::mutex> lock(perception_mutex_);
-                    
+
                     if (result.code != rclcpp_action::ResultCode::SUCCEEDED)
                     {
                         RCLCPP_WARN(this->get_logger(), "Result code: %s",
-                            (result.code == rclcpp_action::ResultCode::SUCCEEDED ? "SUCCEEDED" :
-                            result.code == rclcpp_action::ResultCode::ABORTED ? "ABORTED" :
-                            result.code == rclcpp_action::ResultCode::CANCELED ? "CANCELED" :
-                            "UNKNOWN"));
+                                    (result.code == rclcpp_action::ResultCode::SUCCEEDED ? "SUCCEEDED" : result.code == rclcpp_action::ResultCode::ABORTED ? "ABORTED"
+                                                                                                     : result.code == rclcpp_action::ResultCode::CANCELED  ? "CANCELED"
+                                                                                                                                                           : "UNKNOWN"));
 
                         perception_goal_active_ = false;
                     }
@@ -676,7 +715,6 @@ namespace lr
                         RCLCPP_INFO(this->get_logger(), "[FSM: PERCEPTION] Result: detect_crater action succeeded.");
                     }
                 };
-                
 
                 // Goal acceptance
                 opts.goal_response_callback =
@@ -827,8 +865,18 @@ namespace lr
 
             const auto &goal_pose = goal_poses_[current_goal_pose_idx_];
             std::string type = goal_pose_types_[current_goal_pose_idx_];
+
+            if (type == "source")
+            {
+                RCLCPP_INFO(this->get_logger(),
+                            "[FSM: MANIPULATION_PLANNER] Skipping goal %d (type=source).",
+                            current_goal_pose_idx_);
+                ++current_goal_pose_idx_;
+
+                return;
+            }
             local_goal_type_ = type;
-            if (type == "source" || type == "sink")
+            if (type == "source" || type == "sink" || type == "source_backblade")
                 manipulation_type_ = "Forward_manipulation";
             else
                 manipulation_type_ = "Backward";
@@ -929,26 +977,24 @@ namespace lr
                 {
                     if (validation_attempts_ > 1)
                     {
-                        goal_msg.tool_position = tool_height_down_second_pass_;
-                    } 
-                    else
-                    {
-                        goal_msg.tool_position = tool_height_down_;
-                    }
-                    
-                }
-                else if (local_goal_type_ == "sink" || local_goal_type_ == "sink_backblade")
-                {
-                    if (validation_attempts_ > 1)
-                    {
                         goal_msg.tool_position = tool_height_up_second_pass_;
-                    } 
+                    }
                     else
                     {
                         goal_msg.tool_position = tool_height_up_;
                     }
                 }
-
+                else if (local_goal_type_ == "sink" || local_goal_type_ == "sink_backblade")
+                {
+                    if (validation_attempts_ > 1)
+                    {
+                        goal_msg.tool_position = tool_height_down_second_pass_;
+                    }
+                    else
+                    {
+                        goal_msg.tool_position = tool_height_down_;
+                    }
+                }
 
                 RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Sending path goal (direction: Forward).");
                 nav_goal_active_ = true;
@@ -987,7 +1033,6 @@ namespace lr
                 RCLCPP_WARN(this->get_logger(), "[FSM: MANIPULATION_CONTROLLER] No global path to follow. Holding in state.");
                 return;
             }
-
         }
 
         void BenNode::fsmRunEndMission()

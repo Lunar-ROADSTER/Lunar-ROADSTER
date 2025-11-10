@@ -273,7 +273,7 @@ class CraterDetectionNode(Node):
             highest_conf_idx = None
             highest_conf = 0.0
             for i, conf in enumerate(results.boxes.conf):
-                if float(conf) >= 0.7 and float(conf) > highest_conf:
+                if float(conf) >= 0.5 and float(conf) > highest_conf:
                     highest_conf = float(conf)
                     highest_conf_idx = i
 

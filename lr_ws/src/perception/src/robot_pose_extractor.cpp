@@ -33,17 +33,29 @@ namespace lr
             node->declare_parameter<double>("robot_half_length", static_cast<double>(robot_half_length_));
             robot_half_length_ = static_cast<float>(node->get_parameter("robot_half_length").as_double());
 
-            node->declare_parameter<double>("source_pose_offset", static_cast<double>(source_pose_offset_));
-            source_pose_offset_ = static_cast<float>(node->get_parameter("source_pose_offset").as_double());
+            node->declare_parameter<double>("source_pose_offset_x", static_cast<double>(source_pose_offset_x_));
+            source_pose_offset_x_ = static_cast<float>(node->get_parameter("source_pose_offset_x").as_double());
 
-            node->declare_parameter<double>("sink_pose_offset", static_cast<double>(sink_pose_offset_));
-            sink_pose_offset_ = static_cast<float>(node->get_parameter("sink_pose_offset").as_double());
+            node->declare_parameter<double>("source_pose_offset_y", static_cast<double>(source_pose_offset_y_));
+            source_pose_offset_y_ = static_cast<float>(node->get_parameter("source_pose_offset_y").as_double());
 
-            node->declare_parameter<double>("sink_backblade_pose_offset", static_cast<double>(sink_backblade_pose_offset_));
-            sink_backblade_pose_offset_ = static_cast<float>(node->get_parameter("sink_backblade_pose_offset").as_double());
+            node->declare_parameter<double>("sink_pose_offset_x", static_cast<double>(sink_pose_offset_x_));
+            sink_pose_offset_x_ = static_cast<float>(node->get_parameter("sink_pose_offset_x").as_double());
 
-            node->declare_parameter<double>("source_backblade_pose_offset", static_cast<double>(source_backblade_pose_offset_));
-            source_backblade_pose_offset_ = static_cast<float>(node->get_parameter("source_backblade_pose_offset").as_double());
+            node->declare_parameter<double>("sink_pose_offset_y", static_cast<double>(sink_pose_offset_y_));
+            sink_pose_offset_y_ = static_cast<float>(node->get_parameter("sink_pose_offset_y").as_double());
+
+            node->declare_parameter<double>("sink_backblade_pose_offset_x", static_cast<double>(sink_backblade_pose_offset_x_));
+            sink_backblade_pose_offset_x_ = static_cast<float>(node->get_parameter("sink_backblade_pose_offset_x").as_double());
+
+            node->declare_parameter<double>("sink_backblade_pose_offset_y", static_cast<double>(sink_backblade_pose_offset_y_));
+            sink_backblade_pose_offset_y_ = static_cast<float>(node->get_parameter("sink_backblade_pose_offset_y").as_double());
+
+            node->declare_parameter<double>("source_backblade_pose_offset_x", static_cast<double>(source_backblade_pose_offset_x_));
+            source_backblade_pose_offset_x_ = static_cast<float>(node->get_parameter("source_backblade_pose_offset_x").as_double());
+
+            node->declare_parameter<double>("source_backblade_pose_offset_y", static_cast<double>(source_backblade_pose_offset_y_));
+            source_backblade_pose_offset_y_ = static_cast<float>(node->get_parameter("source_backblade_pose_offset_y").as_double());
 
             // Nothing else yet; TF buffer and listener are initialized
 
@@ -64,25 +76,25 @@ namespace lr
             double yaw = static_cast<double>(atan2((craterCentroid[1] - rover_pose.pose.position.y), (craterCentroid[0] - rover_pose.pose.position.x)));
 
             // Set up source pose
-            double source_pose_x = craterCentroid[0] - (manipulation_distance + robot_half_length_ + source_pose_offset_) * std::cos(yaw);
-            double source_pose_y = craterCentroid[1] - (manipulation_distance + robot_half_length_ + source_pose_offset_) * std::sin(yaw);
+            double source_pose_x = craterCentroid[0] - (manipulation_distance + robot_half_length_ + source_pose_offset_x_) * std::cos(yaw);
+            double source_pose_y = craterCentroid[1] - (manipulation_distance + robot_half_length_ + source_pose_offset_y_) * std::sin(yaw);
             lr_msgs::msg::Pose2D source_pose = lr::perception::create_pose2d(source_pose_x, source_pose_y, yaw);
 
             // Set up sink pose
-            double sink_pose_x = craterCentroid[0] - sink_pose_offset_ * std::cos(yaw);
-            double sink_pose_y = craterCentroid[1] - sink_pose_offset_ * std::sin(yaw);
+            double sink_pose_x = craterCentroid[0] - sink_pose_offset_x_;
+            double sink_pose_y = craterCentroid[1] - sink_pose_offset_y_;
             lr_msgs::msg::Pose2D sink_pose = lr::perception::create_pose2d(sink_pose_x, sink_pose_y, yaw);
 
             // Set up backblading source pose
-            double backblading_pose_x = sink_pose.pt.x + (manipulation_distance + robot_half_length_ - source_backblade_pose_offset_) * std::cos(yaw);
-            double backblading_pose_y = sink_pose.pt.y + (manipulation_distance + robot_half_length_ - source_backblade_pose_offset_) * std::sin(yaw);
+            double backblading_pose_x = sink_pose.pt.x - source_backblade_pose_offset_x_ + (manipulation_distance + robot_half_length_) * std::cos(yaw);
+            double backblading_pose_y = sink_pose.pt.y - source_backblade_pose_offset_y_ + (manipulation_distance + robot_half_length_) * std::sin(yaw);
             lr_msgs::msg::Pose2D source_pose_backblading = lr::perception::create_pose2d(backblading_pose_x, backblading_pose_y, yaw);
 
             // Set up last offset pose - sink backblade
-            double last_offset_pose_x = backblading_pose_x - (manipulation_distance + robot_half_length_ + sink_backblade_pose_offset_) * std::cos(yaw) * backblading_multipler_;
-            double last_offset_pose_y = backblading_pose_y - (manipulation_distance + robot_half_length_ + sink_backblade_pose_offset_) * std::sin(yaw) * backblading_multipler_;
+            double last_offset_pose_x = backblading_pose_x - (manipulation_distance + robot_half_length_ + sink_backblade_pose_offset_x_) * std::cos(yaw) * backblading_multipler_;
+            double last_offset_pose_y = backblading_pose_y - (manipulation_distance + robot_half_length_ + sink_backblade_pose_offset_y_) * std::sin(yaw) * backblading_multipler_;
             lr_msgs::msg::Pose2D last_offset_pose = lr::perception::create_pose2d(last_offset_pose_x, last_offset_pose_y, yaw);
-            
+
             double last_pose_offset_constrained = last_pose_offset_;
 
             if (last_offset_pose_x > boundary_max_ ||

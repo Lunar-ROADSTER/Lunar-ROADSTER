@@ -226,12 +226,14 @@ std::optional<std::vector<int>> ManipulationPlanner::runAStar(int start_idx, int
 
 bool ManipulationPlanner::isOccupied(int idx) const
 {
-  if (!isValidIndex(idx))
-    return true;
-  int8_t val = map_data_[idx];
-  if (val < 0)
-    return false; // unknown = free
-  return val >= occupied_threshold_;
+  // if (!isValidIndex(idx))
+  //   return true;
+  // int8_t val = map_data_[idx];
+  // if (val < 0)
+  //   return false; // unknown = free
+  // return val >= occupied_threshold_;
+
+  return false;
 }
 
 bool ManipulationPlanner::isValidIndex(int idx) const
