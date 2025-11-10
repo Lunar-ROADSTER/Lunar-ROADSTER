@@ -17,7 +17,7 @@ import tf_transformations
 from lr_msgs.msg import CraterStamped
 
 
-import asyncio
+import threading
 
 class DepthProjector:
     """Handles 2D→3D projection using depth image + camera intrinsics."""
@@ -49,7 +49,7 @@ class DepthProjector:
 
 class CraterDetectionNode(Node):
     
-    def transform_point(self, x, y, z, from_frame='zed_camera_center', to_frame='base_link'):
+    def transform_point(self, x, y, z, from_frame='zed_left_camera_frame', to_frame='base_link'):
         try:
             # Lookup the latest available transform
             trans = self.tf_buffer.lookup_transform(
@@ -84,7 +84,14 @@ class CraterDetectionNode(Node):
         # --- Load YOLO model ---
         model_path = '/root/Lunar_ROADSTER/lr_ws/src/perception/perception/best.pt'
         self.model = YOLO(model_path)
+        self.model.to('cuda')
         self.get_logger().info(f'Loaded YOLOv8 model from {model_path}')
+        # --- Threading for YOLO inference ---
+        # self.frame_lock = threading.Lock()
+        # self.latest_frame = None
+        # self.new_frame_available = False
+        # self.yolo_thread = threading.Thread(target=self.yolo_loop, daemon=True)
+        # self.yolo_thread.start()
 
         # # --- TF setup ---
         # self.tf_buffer = Buffer()
@@ -117,8 +124,8 @@ class CraterDetectionNode(Node):
         # QoS with latched behavior (so data stays alive for planner to read)
         qos_profile = QoSProfile(
             depth=1,
-            reliability=ReliabilityPolicy.RELIABLE,
-            durability=DurabilityPolicy.TRANSIENT_LOCAL
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            durability=DurabilityPolicy.VOLATILE
         )
 
         # Publisher for crater point
@@ -207,20 +214,33 @@ class CraterDetectionNode(Node):
             X, Y, Z, D = np.mean(self.xs), np.mean(self.ys), np.mean(self.zs), np.mean(self.ds)
 
                 # Transform to world (map) frame
-        transformed = self.transform_point(X, Y, Z, from_frame='zed_camera_center', to_frame='map')
+        transformed = self.transform_point(X, Y, Z, from_frame='zed_left_camera_frame', to_frame='base_link')
         if transformed is not None:
-            X, Y, Z = transformed
+            X_base, Y_base, Z_base = transformed
         else:
             self.get_logger().warn("Could not transform crater point to map frame, using camera frame.")
+
+        transformed_map = self.transform_point(X, Y, Z,
+                                   from_frame='zed_left_camera_frame',
+                                   to_frame='map')
+        if transformed_map is not None:
+            X_map, Y_map, Z_map = transformed_map
+            self.get_logger().info(
+                f"[CRATER DEBUG] Map Frame Coordinates -> "
+                f"X: {X_map:.3f}, Y: {Y_map:.3f}, Z: {Z_map:.3f}"
+            )
+        else:
+            self.get_logger().warn("Transform to map frame failed. Using camera frame values.")
+
 
 
         # 4️⃣ Publish averaged crater point
         crater_msg = CraterStamped()
         crater_msg.header.stamp = self.get_clock().now().to_msg()
-        crater_msg.header.frame_id = 'map'  # since you transformed to world frame
-        crater_msg.point.x = float(X)
-        crater_msg.point.y = float(Y)
-        crater_msg.point.z = float(Z)
+        crater_msg.header.frame_id = 'base_link'  # since you transformed to world frame
+        crater_msg.point.x = float(X_base)
+        crater_msg.point.y = float(Y_base)
+        crater_msg.point.z = float(Z_base)
         crater_msg.diameter = float(D)
 
         self.crater_pub.publish(crater_msg)
@@ -267,7 +287,9 @@ class CraterDetectionNode(Node):
             frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
             annotated = frame.copy()
 
-            results = self.model(frame, verbose=False)[0]
+            # results = self.model(frame, verbose=False)[0]
+            results = self.model(frame, stream=False, device=0, verbose=False)
+
 
             # --- Select highest-confidence detection ---
             highest_conf_idx = None
