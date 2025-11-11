@@ -15,6 +15,7 @@ from lr_msgs.action import CraterDetect
 from tf2_ros import Buffer, TransformListener
 import tf_transformations
 from lr_msgs.msg import CraterStamped
+from visualization_msgs.msg import Marker
 
 
 import threading
@@ -49,7 +50,7 @@ class DepthProjector:
 
 class CraterDetectionNode(Node):
     
-    def transform_point(self, x, y, z, from_frame='zed_left_camera_frame', to_frame='base_link'):
+    def transform_point(self, x, y, z, from_frame='zed_camera_link', to_frame='map'):
         try:
             # Lookup the latest available transform
             trans = self.tf_buffer.lookup_transform(
@@ -80,11 +81,14 @@ class CraterDetectionNode(Node):
         self.projector = DepthProjector()
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
+        self.current_frame_detections = []
+        self.marker_pub = self.create_publisher(Marker, '/crater_detection/marker', 10)
+
 
         # --- Load YOLO model ---
         model_path = '/root/Lunar_ROADSTER/lr_ws/src/perception/perception/best.pt'
         self.model = YOLO(model_path)
-        self.model.to('cuda')
+        # self.model.to('cuda')
         self.get_logger().info(f'Loaded YOLOv8 model from {model_path}')
         # --- Threading for YOLO inference ---
         # self.frame_lock = threading.Lock()
@@ -191,7 +195,7 @@ class CraterDetectionNode(Node):
         self.get_logger().info("Collecting crater data for 15 seconds...")
         start_collect = time.time()
         while rclpy.ok() and self.active:
-            feedback.num_craters_detected = len(self.xs)
+            feedback.num_craters_detected = len(self.current_frame_detections)
             goal_handle.publish_feedback(feedback)
             if time.time() - start_collect >= 15.0:
                 break
@@ -214,14 +218,14 @@ class CraterDetectionNode(Node):
             X, Y, Z, D = np.mean(self.xs), np.mean(self.ys), np.mean(self.zs), np.mean(self.ds)
 
                 # Transform to world (map) frame
-        transformed = self.transform_point(X, Y, Z, from_frame='zed_left_camera_frame', to_frame='base_link')
+        transformed = self.transform_point(X, Y, Z, from_frame='zed_camera_link', to_frame='map')
         if transformed is not None:
             X_base, Y_base, Z_base = transformed
         else:
             self.get_logger().warn("Could not transform crater point to map frame, using camera frame.")
 
         transformed_map = self.transform_point(X, Y, Z,
-                                   from_frame='zed_left_camera_frame',
+                                   from_frame='zed_camera_link',
                                    to_frame='map')
         if transformed_map is not None:
             X_map, Y_map, Z_map = transformed_map
@@ -234,14 +238,45 @@ class CraterDetectionNode(Node):
 
 
 
+
         # 4️⃣ Publish averaged crater point
         crater_msg = CraterStamped()
         crater_msg.header.stamp = self.get_clock().now().to_msg()
-        crater_msg.header.frame_id = 'base_link'  # since you transformed to world frame
+        crater_msg.header.frame_id = 'map' 
         crater_msg.point.x = float(X_base)
         crater_msg.point.y = float(Y_base)
         crater_msg.point.z = float(Z_base)
         crater_msg.diameter = float(D)
+        
+        # Visualization Marker
+        marker = Marker()
+        marker.header.frame_id = 'map'  # or 'map' if transformed to map frame
+        marker.header.stamp = self.get_clock().now().to_msg()
+        marker.ns = "crater_centroid"
+        marker.id = 0
+        marker.type = Marker.SPHERE
+        marker.action = Marker.ADD
+        marker.pose.position.x = float(X_base)
+        marker.pose.position.y = float(Y_base)
+        marker.pose.position.z = float(Z_base)
+        marker.pose.orientation.x = 0.0
+        marker.pose.orientation.y = 0.0
+        marker.pose.orientation.z = 0.0
+        marker.pose.orientation.w = 1.0
+
+        # Diameter of sphere = crater diameter
+        marker.scale.x = float(D)
+        marker.scale.y = float(D)
+        marker.scale.z = 0.05  # thin height for visualization if you want
+
+        # Color RGBA
+        marker.color.r = 1.0
+        marker.color.g = 0.0
+        marker.color.b = 0.0
+        marker.color.a = 0.8
+
+        marker.lifetime.sec = 0  # 0 = forever
+        self.marker_pub.publish(marker)
 
         self.crater_pub.publish(crater_msg)
         self.get_logger().info(f"Published crater in map frame -> "
@@ -287,9 +322,26 @@ class CraterDetectionNode(Node):
             frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
             annotated = frame.copy()
 
-            # results = self.model(frame, verbose=False)[0]
-            results = self.model(frame, stream=False, device=0, verbose=False)
+            results = self.model(frame, verbose=False)[0]
+            # results = self.model(frame, stream=False, device=0, verbose=False)
+            self.current_frame_detections = results.boxes.xyxy  # store current frame boxes
 
+            # --- Draw all detections ---
+            for i, box in enumerate(results.boxes.xyxy):
+                conf = float(results.boxes.conf[i])
+                # if conf < 0.5:
+                #     continue  # skip low-confidence
+                x1, y1, x2, y2 = map(int, box)
+                cv2.rectangle(annotated, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                cv2.putText(
+                    annotated,
+                    f"{conf:.2f}",
+                    (x1, y1 - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.5,
+                    (0, 255, 0),
+                    2
+                )
 
             # --- Select highest-confidence detection ---
             highest_conf_idx = None
@@ -329,7 +381,7 @@ class CraterDetectionNode(Node):
 
             self.has_stable_detection = True
 
-            frame_has_valid_detection = True
+            frame_has_valid_detection = point_3d is not None
             if not frame_has_valid_detection:
                 if self.projector.fx is None:
                     self.get_logger().warn("No camera intrinsics yet (fx=None)")
@@ -344,12 +396,17 @@ class CraterDetectionNode(Node):
 
         except Exception as e:
             self.get_logger().error(f'Error in image_callback: {e}')
+    
+        cv2.imshow("YOLO Crater Detections", annotated)
+        cv2.waitKey(1)
+
 
 
 def main(args=None):
     rclpy.init(args=args)
     node = CraterDetectionNode()
     rclpy.spin(node)
+    cv2.destroyAllWindows()
     rclpy.shutdown()
 
 

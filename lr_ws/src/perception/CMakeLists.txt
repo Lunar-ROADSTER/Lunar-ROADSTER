@@ -16,6 +16,8 @@ find_package(std_msgs REQUIRED)
 find_package(lr_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
 
@@ -59,6 +61,8 @@ ament_target_dependencies(pose_extractor
   tf2_ros
   tf2
   lr_msgs
+  tf2_geometry_msgs
+  visualization_msgs
 )
 target_link_libraries(pose_extractor Eigen3::Eigen perception_common)
 # rosidl_target_interfaces(pose_extractor

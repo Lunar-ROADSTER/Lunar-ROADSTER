@@ -96,9 +96,14 @@ namespace lr
 
             rclcpp::SubscriptionOptions sub_opts;
             sub_opts.callback_group = perception_cb_group_;
+
+            auto qos = rclcpp::QoS(1)
+                           .best_effort();
+            qos.durability(rmw_qos_durability_policy_t::RMW_QOS_POLICY_DURABILITY_VOLATILE);
+
             crater_sub_ = this->create_subscription<lr_msgs::msg::CraterStamped>(
                 "/crater_detection/crater",
-                rclcpp::QoS(10).transient_local(),
+                qos,
                 std::bind(&BenNode::onCraterMsgCallback, this, std::placeholders::_1),
                 sub_opts);
 
@@ -403,7 +408,7 @@ namespace lr
                 request->goal.pose.orientation.z = 0.0;
                 request->goal.pose.orientation.w = 0.0;
             }
-            
+
             request->smooth = true;
 
             RCLCPP_INFO(this->get_logger(),

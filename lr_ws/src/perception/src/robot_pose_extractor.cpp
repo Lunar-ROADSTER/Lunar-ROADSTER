@@ -60,6 +60,8 @@ namespace lr
             // Nothing else yet; TF buffer and listener are initialized
 
             // RCLCPP_INFO(this->rclcpp::get_logger(), "PoseExtractor initialized.");
+            marker_pub = node->create_publisher<visualization_msgs::msg::MarkerArray>(
+                "/goal_markers", 10);
         }
 
         void PoseExtractor::makeGoalsfromCraterGeometry(std::vector<lr_msgs::msg::Pose2D> &goalPoses, std::vector<std::string> &goalPose_types, std::vector<double> &craterCentroid, double &craterDiameter)
@@ -73,7 +75,13 @@ namespace lr
             float manipulation_distance = (craterDiameter / 2) + manipulation_offset_;
 
             // Find angle of approach to the crater (yaw)
-            double yaw = static_cast<double>(atan2((craterCentroid[1] - rover_pose.pose.position.y), (craterCentroid[0] - rover_pose.pose.position.x)));
+            // double yaw = static_cast<double>(atan2((craterCentroid[1] - rover_pose.pose.position.y), (craterCentroid[0] - rover_pose.pose.position.x)));
+            geometry_msgs::msg::Quaternion quat_msg = rover_pose.pose.orientation;
+
+            tf2::Quaternion quat_tf;
+            tf2::fromMsg(quat_msg, quat_tf);
+
+            double yaw = tf2::getYaw(quat_tf);
 
             // Set up source pose
             double source_pose_x = craterCentroid[0] - (manipulation_distance + robot_half_length_ + source_pose_offset_x_) * std::cos(yaw);
@@ -81,13 +89,13 @@ namespace lr
             lr_msgs::msg::Pose2D source_pose = lr::perception::create_pose2d(source_pose_x, source_pose_y, yaw);
 
             // Set up sink pose
-            double sink_pose_x = craterCentroid[0] - sink_pose_offset_x_;
-            double sink_pose_y = craterCentroid[1] - sink_pose_offset_y_;
+            double sink_pose_x = craterCentroid[0] - sink_pose_offset_x_ * std::cos(yaw);
+            double sink_pose_y = craterCentroid[1] - sink_pose_offset_y_ * std::sin(yaw);
             lr_msgs::msg::Pose2D sink_pose = lr::perception::create_pose2d(sink_pose_x, sink_pose_y, yaw);
 
             // Set up backblading source pose
-            double backblading_pose_x = sink_pose.pt.x - source_backblade_pose_offset_x_ + (manipulation_distance + robot_half_length_) * std::cos(yaw);
-            double backblading_pose_y = sink_pose.pt.y - source_backblade_pose_offset_y_ + (manipulation_distance + robot_half_length_) * std::sin(yaw);
+            double backblading_pose_x = sink_pose.pt.x + (manipulation_distance + robot_half_length_ - source_backblade_pose_offset_x_) * std::cos(yaw);
+            double backblading_pose_y = sink_pose.pt.y + (manipulation_distance + robot_half_length_ - source_backblade_pose_offset_y_) * std::sin(yaw);
             lr_msgs::msg::Pose2D source_pose_backblading = lr::perception::create_pose2d(backblading_pose_x, backblading_pose_y, yaw);
 
             // Set up last offset pose - sink backblade
@@ -178,7 +186,7 @@ int main(int argc, char **argv)
     // RCLCPP_INFO(node->get_logger(), "Pose Extractor Service is ready.");
     auto service = node->create_service<::lr_msgs::srv::PoseExtract>(
         "generate_crater_goals",
-        [pose_extractor](
+        [pose_extractor, node](
             const std::shared_ptr<::lr_msgs::srv::PoseExtract::Request> request,
             std::shared_ptr<::lr_msgs::srv::PoseExtract::Response> response)
         {
@@ -197,6 +205,32 @@ int main(int argc, char **argv)
             response->goal_types = goal_types;
             response->success = !goal_poses.empty();
             response->message = "Generated " + std::to_string(goal_poses.size()) + " goal poses.";
+            
+            visualization_msgs::msg::MarkerArray marker_array;
+            for (size_t i = 0; i < goal_poses.size(); ++i)
+            {
+                visualization_msgs::msg::Marker marker;
+                marker.header.frame_id = "map";
+                marker.header.stamp = node->now();
+                marker.ns = "goal_poses";
+                marker.id = i;
+                marker.type = visualization_msgs::msg::Marker::SPHERE;
+                marker.action = visualization_msgs::msg::Marker::ADD;
+
+                marker.pose.position.x = goal_poses[i].pt.x;
+                marker.pose.position.y = goal_poses[i].pt.y;
+                marker.pose.position.z = 0.0;
+                marker.pose.orientation.w = 1.0;
+
+                marker.scale.x = marker.scale.y = marker.scale.z = 0.2;
+                marker.color.r = 1.0;
+                marker.color.g = 0.0;
+                marker.color.b = 1.0;
+                marker.color.a = 1.0;
+
+                marker_array.markers.push_back(marker);
+            }
+            pose_extractor->marker_pub->publish(marker_array);
         });
 
     rclcpp::spin(node);
