@@ -46,13 +46,13 @@ namespace lr
             this->declare_parameter<double>("tool_height_up", 100.0);
             this->get_parameter("tool_height_up", tool_height_up_);
 
-            this->declare_parameter<double>("tool_height_down", 40);
+            this->declare_parameter<double>("tool_height_down", 30);
             this->get_parameter("tool_height_down", tool_height_down_);
 
             this->declare_parameter<double>("tool_height_up_second_pass_", 100.0);
             this->get_parameter("tool_height_up", tool_height_up_second_pass_);
 
-            this->declare_parameter<double>("tool_height_down_second_pass_", 30);
+            this->declare_parameter<double>("tool_height_down_second_pass_", 20);
             this->get_parameter("tool_height_down", tool_height_down_second_pass_);
 
             // FSM callback
@@ -236,6 +236,7 @@ namespace lr
             exit_debug_target_state_ = msg->current_state;
             exit_debug_crater_index_ = msg->current_crater_index;
             current_crater_index_ = exit_debug_crater_index_;
+            validation_attempts_ = 0;
 
             RCLCPP_INFO(this->get_logger(),
                         "[EXIT_DEBUG] Requested exit from DEBUG to state '%s' at crater index %d.",
@@ -850,7 +851,7 @@ namespace lr
                 RCLCPP_INFO(this->get_logger(),
                             "[FSM: MANIPULATION_PLANNER] Completed all %zu manipulation goal poses. Transitioning to VALIDATION.",
                             goal_poses_.size());
-                goal_poses_.clear();
+                // goal_poses_.clear();
                 current_goal_pose_idx_ = 0;
                 fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
                 return;

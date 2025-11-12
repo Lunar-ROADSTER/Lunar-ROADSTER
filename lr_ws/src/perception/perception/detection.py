@@ -221,6 +221,9 @@ class CraterDetectionNode(Node):
         transformed = self.transform_point(X, Y, Z, from_frame='zed_camera_link', to_frame='map')
         if transformed is not None:
             X_base, Y_base, Z_base = transformed
+            Z_base = 0.0
+            Y_base = Y_base - 0.35
+            X_base = X_base - 0.20
         else:
             self.get_logger().warn("Could not transform crater point to map frame, using camera frame.")
 

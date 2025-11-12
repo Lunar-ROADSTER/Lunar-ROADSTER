@@ -49,16 +49,18 @@ PointCloudHandler::PointCloudHandler() : Node("pc_handler_node")
 
 void PointCloudHandler::setupCommunications()
 {
+    auto qos = rclcpp::SensorDataQoS();
+
     // Subscribers
-    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("zed/zed_node/point_cloud/cloud_registered", 10,
+    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("zed/zed_node/point_cloud/cloud_registered", qos,
                                                                                       std::bind(&PointCloudHandler::processPointCloud, this, std::placeholders::_1));
     // Publishers
-    transformed_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("sensing/transformed_pointcloud", 10);
-    ground_height_publisher_ = this->create_publisher<std_msgs::msg::Float64>("sensing/pcl_ground_height", 10);
-    ground_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("sensing/ground_pointcloud", 10);
+    transformed_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("sensing/transformed_pointcloud", qos);
+    ground_height_publisher_ = this->create_publisher<std_msgs::msg::Float64>("sensing/pcl_ground_height", qos);
+    ground_pointcloud_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("sensing/ground_pointcloud", qos);
 
     // Transform Listener
-    tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock(), tf2::durationFromSec(100000000));
+    tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock(), tf2::durationFromSec(10));
     tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 }
 

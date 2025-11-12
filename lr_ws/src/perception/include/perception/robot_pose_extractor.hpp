@@ -41,21 +41,22 @@ namespace lr
             rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr marker_pub;
 
         private:
-            float manipulation_offset_ = 0.1;
+            float lookahead_distance_ = 0.6;
+            float manipulation_offset_ = 0.0;
             float last_pose_offset_ = 0.5;
-            float backblading_multipler_ = 1.5;
+            float backblading_multipler_ = 2.0;
             float boundary_min_ = 0.4;
             float boundary_max_ = 4.6;
             float boundary_increment_ = 0.01;
             float robot_half_length_ = 0.5;
             float source_pose_offset_x_ = 0.0;
             float source_pose_offset_y_ = 0.0;
-            float sink_pose_offset_x_ = 0.0;             // 0.2
+            float sink_pose_offset_x_ = -lookahead_distance_;             // 0.2
             float sink_pose_offset_y_ = 0.0;             // 0.3
             float source_backblade_pose_offset_x_ = 0.0; // 0.7;
             float source_backblade_pose_offset_y_ = 0.0;
-            float sink_backblade_pose_offset_x_ = 0.0;
-            float sink_backblade_pose_offset_y_ = 0.0;
+            float sink_backblade_pose_offset_x_ = 1.4;
+            float sink_backblade_pose_offset_y_ = 1.4;
 
             // TF2 members for querying transforms
             tf2_ros::Buffer tf_buffer_;
