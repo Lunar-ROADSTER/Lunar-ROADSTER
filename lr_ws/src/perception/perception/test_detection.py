@@ -51,7 +51,7 @@ class CraterDetectionNode(Node):
         # --- Load YOLO model ---
         model_path = '/root/Lunar_ROADSTER/lr_ws/src/perception/perception/best.pt'
         self.model = YOLO(model_path)
-        # self.model.to('cuda')
+        self.model.to('cuda')
         self.get_logger().info(f'Loaded YOLOv8 model from {model_path}')
 
         # --- TF setup ---

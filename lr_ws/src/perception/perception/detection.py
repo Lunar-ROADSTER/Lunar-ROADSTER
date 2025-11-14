@@ -17,6 +17,8 @@ import tf_transformations
 from lr_msgs.msg import CraterStamped
 from visualization_msgs.msg import Marker
 
+import pdb
+
 
 import threading
 
@@ -83,12 +85,14 @@ class CraterDetectionNode(Node):
         self.tf_listener = TransformListener(self.tf_buffer, self)
         self.current_frame_detections = []
         self.marker_pub = self.create_publisher(Marker, '/crater_detection/marker', 10)
+        
+        self.device = 'cpu'
 
 
         # --- Load YOLO model ---
         model_path = '/root/Lunar_ROADSTER/lr_ws/src/perception/perception/best.pt'
         self.model = YOLO(model_path)
-        # self.model.to('cuda')
+        self.model.to(self.device)
         self.get_logger().info(f'Loaded YOLOv8 model from {model_path}')
         # --- Threading for YOLO inference ---
         # self.frame_lock = threading.Lock()
@@ -326,7 +330,8 @@ class CraterDetectionNode(Node):
             annotated = frame.copy()
 
             results = self.model(frame, verbose=False)[0]
-            # results = self.model(frame, stream=False, device=0, verbose=False)
+            # pdb.set_trace()
+            # results = self.model(frame, stream=False, device=self.device, verbose=False)
             self.current_frame_detections = results.boxes.xyxy  # store current frame boxes
 
             # --- Draw all detections ---
@@ -350,7 +355,7 @@ class CraterDetectionNode(Node):
             highest_conf_idx = None
             highest_conf = 0.0
             for i, conf in enumerate(results.boxes.conf):
-                if float(conf) >= 0.5 and float(conf) > highest_conf:
+                if float(conf) >= 0.1 and float(conf) > highest_conf:
                     highest_conf = float(conf)
                     highest_conf_idx = i
 

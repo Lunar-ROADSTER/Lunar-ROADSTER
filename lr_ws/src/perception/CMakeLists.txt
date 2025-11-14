@@ -85,6 +85,7 @@ install(
 # --- Install Python Nodes ---
 install(PROGRAMS
   perception/detection.py
+  perception/detection_ankit.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

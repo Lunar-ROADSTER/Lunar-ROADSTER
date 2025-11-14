@@ -113,6 +113,7 @@ namespace lr
             std::vector<float> crater_diameters_;
             int current_crater_index_{0};
             bool got_crater_data_{false};
+            int first_time_counter_{0};
 
             // fsmRunManipulationPlanner helpers
             rclcpp::Client<lr_msgs::srv::PlanPath>::SharedPtr manipulation_planner_client_;

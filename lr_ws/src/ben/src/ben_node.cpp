@@ -237,6 +237,7 @@ namespace lr
             exit_debug_crater_index_ = msg->current_crater_index;
             current_crater_index_ = exit_debug_crater_index_;
             validation_attempts_ = 0;
+            first_time_counter_ = 0;
 
             RCLCPP_INFO(this->get_logger(),
                         "[EXIT_DEBUG] Requested exit from DEBUG to state '%s' at crater index %d.",
@@ -330,6 +331,7 @@ namespace lr
 
             got_crater_data_ = false;
             current_crater_index_ = 0;
+            first_time_counter_ = 0;
 
             RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Transitioning to GLOBAL_NAV_PLANNER.");
             fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_PLANNER);
@@ -470,8 +472,17 @@ namespace lr
                 if (success)
                 {
                     RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Path following SUCCEEDED.");
-                    RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Transitioning to VALIDATION.");
-                    fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
+                    if (first_time_counter_ == 0)
+                    {
+                        first_time_counter_++;
+                        RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Running Nav again...");
+                        fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_PLANNER);
+                    }
+                    else
+                    {
+                        RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Transitioning to VALIDATION.");
+                        fsm_.setCurrState(lr::ben::FSM::State::VALIDATION);
+                    }
                 }
                 else
                 {
@@ -553,6 +564,7 @@ namespace lr
                         RCLCPP_INFO(this->get_logger(),
                                     "[FSM: VALIDATION] Grading SUCCESS. Transitioning to GLOBAL_NAV_PLANNER.");
                         validation_attempts_ = 0;
+                        first_time_counter_ = 0;
                         current_crater_index_++;
                         fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_PLANNER);
                         return;
@@ -695,9 +707,12 @@ namespace lr
                 {
                     if (fb && verbose_trigger_)
                     {
-                        RCLCPP_INFO(this->get_logger(),
-                                    "[FSM: PERCEPTION] Verbose Feedback: craters detected so far: %d",
-                                    fb->num_craters_detected);
+                        RCLCPP_INFO_THROTTLE(
+                            this->get_logger(),
+                            *this->get_clock(),
+                            2000,
+                            "[FSM: PERCEPTION] Verbose Feedback: craters detected so far: %d",
+                            fb->num_craters_detected);
                     }
                 };
 

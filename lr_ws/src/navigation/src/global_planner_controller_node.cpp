@@ -28,7 +28,7 @@ namespace lr_global_planner_controller
         this->declare_parameter<double>("manipulation_goal_tolerance", 0.7);
         this->declare_parameter<double>("max_linear_speed_pct_ref", 0.5);  // m/s -> 100% wheel
         this->declare_parameter<double>("max_steering_rate_pct_ref", 0.5); // rad/s -> 100% steer
-        this->declare_parameter<double>("wheel_pct_limit", 55.0);
+        this->declare_parameter<double>("wheel_pct_limit", 40.0);
         this->declare_parameter<double>("steer_pct_limit", 60.0);
 
         // Load standard parameters
@@ -154,6 +154,7 @@ namespace lr_global_planner_controller
         const std::shared_ptr<GoalHandleFollowPath> goal_handle)
     {
         std::lock_guard<std::mutex> lock(goal_handle_mutex_);
+        lr_msgs::msg::ActuatorCommand msg;
 
         if (this->current_goal_handle_)
         {
@@ -169,9 +170,25 @@ namespace lr_global_planner_controller
         current_tool_position_ = goal_handle->get_goal()->tool_position;
         RCLCPP_INFO(this->get_logger(), "New goal accepted and path stored. Direction: %s, tool_position: %.2f", current_direction_.c_str(), current_tool_position_);
 
-        RCLCPP_INFO(this->get_logger(), "Waiting 2 seconds before starting controller...");
-        // rclcpp::sleep_for(std::chrono::seconds(2));
-        RCLCPP_INFO(this->get_logger(), "Starting controller execution.");
+        msg.tool_position = current_tool_position_;
+
+        RCLCPP_INFO(this->get_logger(), "Publishing tool_position for 5 seconds...");
+        auto start = std::chrono::steady_clock::now();
+        while (rclcpp::ok())
+        {
+            auto now = std::chrono::steady_clock::now();
+            double elapsed = std::chrono::duration<double>(now - start).count();
+
+            if (elapsed >= 5.0)
+                break;
+
+            msg.tool_position = current_tool_position_;
+            actuator_pub_->publish(msg);
+
+            rclcpp::sleep_for(std::chrono::milliseconds(100));
+        }
+
+        RCLCPP_INFO(this->get_logger(), "Done. Starting controller execution.");
 
         dev_stats_ = DeviationStats{};
         have_prev_sample_ = false;
