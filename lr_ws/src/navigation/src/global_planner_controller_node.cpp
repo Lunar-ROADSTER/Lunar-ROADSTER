@@ -65,7 +65,7 @@ namespace lr_global_planner_controller
 
         // Publishers
         cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/command_vel", 10);
-        actuator_pub_ = this->create_publisher<lr_msgs::msg::ActuatorCommand>("/actuator_cmd", 10);
+        actuator_pub_ = this->create_publisher<lr_msgs::msg::ActuatorCommand>("/autonomy_cmd", 10);
         target_point_pub_ = this->create_publisher<visualization_msgs::msg::Marker>("/lookahead_point", 10);
 
         trail_pub_ = this->create_publisher<nav_msgs::msg::Path>("/tf_trail", 1);
@@ -179,10 +179,12 @@ namespace lr_global_planner_controller
             auto now = std::chrono::steady_clock::now();
             double elapsed = std::chrono::duration<double>(now - start).count();
 
-            if (elapsed >= 5.0)
+            if (elapsed >= 10.0)
                 break;
 
             msg.tool_position = current_tool_position_;
+            publishActuator(0.0, 0.0);
+            RCLCPP_INFO(this->get_logger(), "Printing tool position %.f", msg.tool_position);
             actuator_pub_->publish(msg);
 
             rclcpp::sleep_for(std::chrono::milliseconds(100));

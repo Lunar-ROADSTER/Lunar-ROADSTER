@@ -49,8 +49,8 @@ namespace lr
             float boundary_max_ = 4.6;
             float boundary_increment_ = 0.01;
             float robot_half_length_ = 0.5;
-            float source_pose_offset_x_ = 0.0;
-            float source_pose_offset_y_ = 0.0;
+            float source_pose_offset_x_ = -0.15;
+            float source_pose_offset_y_ = -0.15;
             float sink_pose_offset_x_ = -lookahead_distance_;
             float sink_pose_offset_y_ = -lookahead_distance_;
             float source_backblade_pose_offset_x_ = 0.0;

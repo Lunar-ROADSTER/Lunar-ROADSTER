@@ -52,7 +52,7 @@ namespace lr
             this->declare_parameter<double>("tool_height_up_second_pass_", 100.0);
             this->get_parameter("tool_height_up", tool_height_up_second_pass_);
 
-            this->declare_parameter<double>("tool_height_down_second_pass_", 20);
+            this->declare_parameter<double>("tool_height_down_second_pass_", 10);
             this->get_parameter("tool_height_down", tool_height_down_second_pass_);
 
             // FSM callback
@@ -311,7 +311,7 @@ namespace lr
             if (start_mission_delay_count_ == 0)
             {
                 lr_msgs::msg::MuxMode mux_msg;
-                mux_msg.mode = 0;
+                mux_msg.mode = 2;
                 mux_mode_pub_->publish(mux_msg);
                 RCLCPP_INFO(this->get_logger(), "[FSM: START_MISSION] Changing MUX mode to FULL_AUTONOMY.");
             }
@@ -320,6 +320,9 @@ namespace lr
             if (start_mission_delay_count_ < start_mission_delay_iters_)
             {
                 start_mission_delay_count_++;
+                lr_msgs::msg::MuxMode mux_msg;
+                mux_msg.mode = 2;
+                mux_mode_pub_->publish(mux_msg);
                 RCLCPP_INFO(this->get_logger(),
                             "[FSM: START_MISSION] Waiting for MUX mode switch... (%d/%d)",
                             start_mission_delay_count_,
@@ -887,15 +890,15 @@ namespace lr
             const auto &goal_pose = goal_poses_[current_goal_pose_idx_];
             std::string type = goal_pose_types_[current_goal_pose_idx_];
 
-            if (type == "source")
-            {
-                RCLCPP_INFO(this->get_logger(),
-                            "[FSM: MANIPULATION_PLANNER] Skipping goal %d (type=source).",
-                            current_goal_pose_idx_);
-                ++current_goal_pose_idx_;
+            // if (type == "source")
+            // {
+            //     RCLCPP_INFO(this->get_logger(),
+            //                 "[FSM: MANIPULATION_PLANNER] Skipping goal %d (type=source).",
+            //                 current_goal_pose_idx_);
+            //     ++current_goal_pose_idx_;
 
-                return;
-            }
+            //     return;
+            // }
             local_goal_type_ = type;
             if (type == "source" || type == "sink" || type == "source_backblade")
                 manipulation_type_ = "Forward_manipulation";
@@ -1009,13 +1012,17 @@ namespace lr
                 {
                     if (validation_attempts_ > 1)
                     {
-                        goal_msg.tool_position = tool_height_down_second_pass_;
+                        goal_msg.tool_position = 10.0;
+                        RCLCPP_INFO(this->get_logger(), "Tool going lower ...");
                     }
                     else
                     {
                         goal_msg.tool_position = tool_height_down_;
                     }
                 }
+                RCLCPP_INFO(this->get_logger(), "Tool position: %.f", goal_msg.tool_position);
+
+                RCLCPP_INFO(this->get_logger(), "Validation attempt number: %d", validation_attempts_);
 
                 RCLCPP_INFO(this->get_logger(), "[FSM: GLOBAL_NAV_CONTROLLER] Sending path goal (direction: Forward).");
                 nav_goal_active_ = true;
