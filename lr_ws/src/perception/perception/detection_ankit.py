@@ -388,7 +388,7 @@ class CraterDetectionNode(Node):
 
             if highest_conf_idx is None:
                 self.has_stable_detection = False
-                self.get_logger().warn("No valid detection above confidence threshold this frame.")
+                self.get_logger().warn("No valid detection above confidence threshold () this frame.")
                 return
 
             # Only process the highest-confidence box

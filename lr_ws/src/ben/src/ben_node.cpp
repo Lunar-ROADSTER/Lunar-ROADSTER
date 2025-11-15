@@ -46,13 +46,13 @@ namespace lr
             this->declare_parameter<double>("tool_height_up", 100.0);
             this->get_parameter("tool_height_up", tool_height_up_);
 
-            this->declare_parameter<double>("tool_height_down", 30);
+            this->declare_parameter<double>("tool_height_down", 10.0);
             this->get_parameter("tool_height_down", tool_height_down_);
 
             this->declare_parameter<double>("tool_height_up_second_pass_", 100.0);
             this->get_parameter("tool_height_up", tool_height_up_second_pass_);
 
-            this->declare_parameter<double>("tool_height_down_second_pass_", 10);
+            this->declare_parameter<double>("tool_height_down_second_pass_", 0.0);
             this->get_parameter("tool_height_down", tool_height_down_second_pass_);
 
             // FSM callback
@@ -381,6 +381,8 @@ namespace lr
 
             if (current_crater_index_ == 0)
             {
+                request->goal.pose.position.x += 0.05;
+                request->goal.pose.position.y += 0.01;
                 request->goal.pose.orientation.x = 0.0;
                 request->goal.pose.orientation.y = 0.0;
                 request->goal.pose.orientation.z = 0.011;
@@ -577,7 +579,18 @@ namespace lr
                         RCLCPP_WARN(this->get_logger(),
                                     "[FSM: VALIDATION] Grading FAILED. Transitioning to PERCEPTION.");
                         validation_attempts_++;
-                        fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
+                        if (validation_attempts_ > 2)
+                        {
+                            RCLCPP_INFO(this->get_logger(), "[FSM: VALIDATION] Grading not satisfacory even after 3 attempts. Moving to next crater. Transitioning to GLOBAL_NAV_PLANNER.");
+                            validation_attempts_ = 0;
+                            first_time_counter_ = 0;
+                            current_crater_index_++;
+                            fsm_.setCurrState(lr::ben::FSM::State::GLOBAL_NAV_PLANNER);
+                        }
+                        else
+                        {
+                            fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
+                        }
                         return;
                     }
                 }
@@ -1012,7 +1025,7 @@ namespace lr
                 {
                     if (validation_attempts_ > 1)
                     {
-                        goal_msg.tool_position = 10.0;
+                        goal_msg.tool_position = 0.0;
                         RCLCPP_INFO(this->get_logger(), "Tool going lower ...");
                     }
                     else
