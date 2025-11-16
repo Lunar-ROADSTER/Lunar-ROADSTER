@@ -12,7 +12,7 @@
  *
  * Maintainer: Boxiang (William) Fu  
  * Team: Lunar ROADSTER  
- * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D?Souza, Boxiang (William) Fu
  *
  * Subscribers:
  * - /mux_mode: [lr_msgs::msg::MuxMode] Updates the active command source mode (e.g. teleop, autonomy).
@@ -114,7 +114,7 @@ void CmdMuxNode::populateDiagnosticsStatus(diagnostic_updater::DiagnosticStatusW
 void CmdMuxNode::timerCallback()
 {
   // Report the current mode
-  RCLCPP_INFO(this->get_logger(), "Current multiplexer mode: %d", curr_mux_mode_);
+  RCLCPP_INFO_THROTTLE(this->get_logger(), *this->get_clock(), 2000, "Current multiplexer mode: %d", curr_mux_mode_);
 
   // Handle message based on current multiplexer mode
   if (curr_mux_mode_ == lr_msgs::msg::MuxMode::IDLE)
@@ -122,6 +122,10 @@ void CmdMuxNode::timerCallback()
     // Publish last message, with wheel velocity set to zero
     cmd_msg_.wheel_velocity = 0.0;
   }
+
+  // Add GUI command overlay
+  cmd_msg_.wheel_velocity += cum_gui_cmd_.linear.x;
+  cmd_msg_.steer_position += cum_gui_cmd_.angular.z;
 
   // Clamp commands
   cmd_msg_.wheel_velocity = std::max(-40.0, std::min(cmd_msg_.wheel_velocity, 40.0)); // [-100.0, 100.0]
@@ -187,6 +191,14 @@ void CmdMuxNode::autonomyCallback(const lr_msgs::msg::ActuatorCommand::SharedPtr
 void CmdMuxNode::guiCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
 {
   curr_gui_cmd_ = *msg;
+  cum_gui_cmd_.linear.x += msg->linear.x;
+  cum_gui_cmd_.linear.y += msg->linear.y;
+  cum_gui_cmd_.linear.z += msg->linear.z;
+
+  cum_gui_cmd_.angular.x += msg->angular.x;
+  cum_gui_cmd_.angular.y += msg->angular.y;
+  cum_gui_cmd_.angular.z += msg->angular.z;
+
   RCLCPP_INFO(this->get_logger(), "Received GUI command: linear=(%.2f, %.2f, %.2f), angular=(%.2f, %.2f, %.2f)",
               curr_gui_cmd_.linear.x, curr_gui_cmd_.linear.y, curr_gui_cmd_.linear.z,
               curr_gui_cmd_.angular.x, curr_gui_cmd_.angular.y, curr_gui_cmd_.angular.z);

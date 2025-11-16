@@ -32,6 +32,7 @@ private:
   /* Message data */
   lr_msgs::msg::ActuatorCommand cmd_msg_;
   geometry_msgs::msg::Twist curr_gui_cmd_;
+  geometry_msgs::msg::Twist cum_gui_cmd_;
 
   /* Callbacks */
   void modeCallback(const lr_msgs::msg::MuxMode::SharedPtr msg);
@@ -42,7 +43,6 @@ private:
 
   /* Variables */
   uint8_t curr_mux_mode_;
-
 
   /* Diagnostics */
   diagnostic_updater::Updater diagnostic_updater_;
