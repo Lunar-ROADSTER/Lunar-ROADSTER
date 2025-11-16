@@ -81,6 +81,7 @@ namespace lr
 
             // Finite State Machine
             lr::ben::FSM fsm_;
+            rclcpp::Publisher<std_msgs::msg::String>::SharedPtr fsm_state_pub_;
 
             // FSM state runners
             void fsmRunStartMission();

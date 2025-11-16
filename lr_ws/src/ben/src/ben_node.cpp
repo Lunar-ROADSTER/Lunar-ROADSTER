@@ -87,6 +87,9 @@ namespace lr
             // Mux mode publisher
             mux_mode_pub_ = this->create_publisher<lr_msgs::msg::MuxMode>("/mux_mode", 1);
 
+            // FSM state publisher
+            fsm_state_pub_ = this->create_publisher<std_msgs::msg::String>("/fsm_state", 1);
+
             // Validation action client
             validation_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
             validation_client_ = rclcpp_action::create_client<lr_msgs::action::RunValidation>(this, "/validation/run", validation_cb_group_);
@@ -205,6 +208,15 @@ namespace lr
             default:
                 RCLCPP_WARN(this->get_logger(), "[FSM] State not recognized!");
                 break;
+            }
+
+            // Publish current FSM state
+            if (fsm_.getCurrState() != lr::ben::FSM::State::DEBUG &&
+                fsm_.getCurrState() != lr::ben::FSM::State::MANUAL_OVERRIDE)
+            {
+                std_msgs::msg::String fsm_state_msg;
+                fsm_state_msg.data = std::string("[FSM STATE] ") + fsm_.currStateToString();
+                fsm_state_pub_->publish(fsm_state_msg);
             }
         }
 
