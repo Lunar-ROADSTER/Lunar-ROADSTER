@@ -23,6 +23,7 @@
  *
  * Publishers:
  * - /actuator_cmd: [lr_msgs::msg::ActuatorCommand] Final multiplexed actuator command sent to the vehicle.
+ * - /cum_gui_cmd: [lr_msgs::msg::ActuatorCommand] Cumulative GUI overlay commands for debugging.
  * - /diagnostics: [diagnostic_msgs::msg::DiagnosticArray] Diagnostic information including command frequency and mux state.
  *
  * Services:
@@ -43,6 +44,9 @@ namespace cmdmux {
     // Actuator command to Arduino
     cmd_pub_ = this->create_publisher<lr_msgs::msg::ActuatorCommand>(
         "/actuator_cmd", 1);
+
+    gui_cmd_pub_ = this->create_publisher<lr_msgs::msg::ActuatorCommand>(
+        "/cum_gui_cmd", 1);
 
     // Multiplexer mode number
     mode_sub_ = this->create_subscription<lr_msgs::msg::MuxMode>(
@@ -86,6 +90,18 @@ namespace cmdmux {
     this->get_parameter("freq_tol_act_cmd", freq_tol_act_cmd_);
     this->declare_parameter<int>("freq_window_act_cmd", 5);
     this->get_parameter("freq_window_act_cmd", freq_window_act_cmd_);
+    this->declare_parameter<double>("clamp_wheel_velocity_min", -40.0);
+    this->get_parameter("clamp_wheel_velocity_min", clamp_wheel_velocity_min_);
+    this->declare_parameter<double>("clamp_wheel_velocity_max", 40.0);
+    this->get_parameter("clamp_wheel_velocity_max", clamp_wheel_velocity_max_);
+    this->declare_parameter<double>("clamp_steer_position_min", -65.0);
+    this->get_parameter("clamp_steer_position_min", clamp_steer_position_min_);
+    this->declare_parameter<double>("clamp_steer_position_max", 65.0);
+    this->get_parameter("clamp_steer_position_max", clamp_steer_position_max_);
+    this->declare_parameter<double>("clamp_tool_position_min", 0.0);
+    this->get_parameter("clamp_tool_position_min", clamp_tool_position_min_);
+    this->declare_parameter<double>("clamp_tool_position_max", 100.0);
+    this->get_parameter("clamp_tool_position_max", clamp_tool_position_max_);
 
     // Initialize Diagnostics
     diagnostic_updater_.add("cmd_mux", this, &CmdMuxNode::populateDiagnosticsStatus);
@@ -137,14 +153,22 @@ void CmdMuxNode::timerCallback()
   cmd_msg_.tool_position += cum_gui_cmd_.linear.z;
 
   // Clamp commands
-  cmd_msg_.wheel_velocity = std::max(-40.0, std::min(cmd_msg_.wheel_velocity, 40.0)); // [-100.0, 100.0]
-  cmd_msg_.steer_position = std::max(-65.0, std::min(cmd_msg_.steer_position, 65.0)); // [-100.0, 100.0]
-  cmd_msg_.tool_position = std::max(0.0, std::min(cmd_msg_.tool_position, 100.0)); // [0.0, 100.0]
+  cmd_msg_.wheel_velocity = std::max(clamp_wheel_velocity_min_, std::min(cmd_msg_.wheel_velocity, clamp_wheel_velocity_max_)); // [-100.0, 100.0]
+  cmd_msg_.steer_position = std::max(clamp_steer_position_min_, std::min(cmd_msg_.steer_position, clamp_steer_position_max_)); // [-100.0, 100.0]
+  cmd_msg_.tool_position = std::max(clamp_tool_position_min_, std::min(cmd_msg_.tool_position, clamp_tool_position_max_)); // [0.0, 100.0]
 
   // Publish the message
   cmd_msg_.header.stamp = this->get_clock()->now();
   cmd_pub_->publish(cmd_msg_); // Keep using the same message, so last message is retained unless changed
   actuator_cmd_freq_->tick(); // Log frequency for diagnostics
+
+  // Publish cumulative GUI command overlay for debugging
+  cum_gui_msg_.wheel_velocity = cum_gui_cmd_.linear.x;
+  cum_gui_msg_.steer_position = cum_gui_cmd_.angular.z;
+  cum_gui_msg_.tool_position = cum_gui_cmd_.linear.z;
+
+  cum_gui_msg_.header.stamp = this->get_clock()->now();
+  gui_cmd_pub_->publish(cum_gui_msg_);
 }
 
 void CmdMuxNode::modeCallback(const lr_msgs::msg::MuxMode::SharedPtr msg)
@@ -199,18 +223,18 @@ void CmdMuxNode::autonomyCallback(const lr_msgs::msg::ActuatorCommand::SharedPtr
 
 void CmdMuxNode::guiDriveCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
 {
-  cum_gui_cmd_.linear.x += msg->linear.x;
-  cum_gui_cmd_.angular.z += msg->angular.z;
+  cum_gui_cmd_.linear.x = std::max(clamp_wheel_velocity_min_, std::min(cum_gui_cmd_.linear.x + msg->linear.x, clamp_wheel_velocity_max_));
+  cum_gui_cmd_.angular.z = std::max(clamp_steer_position_min_, std::min(cum_gui_cmd_.angular.z + msg->angular.z, clamp_steer_position_max_));
 
-  RCLCPP_INFO(this->get_logger(), "Received GUI command overlay: linear.x=%.2f, angular.z=%.2f", msg->linear.x, msg->angular.z);
+  RCLCPP_WARN(this->get_logger(), "Cumulative GUI command overlay: linear.x=%.2f, angular.z=%.2f", cum_gui_cmd_.linear.x, cum_gui_cmd_.angular.z);
 }
 
 void CmdMuxNode::guiToolCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
 {
-  cum_gui_cmd_.linear.z += msg->linear.z;
+  cum_gui_cmd_.linear.z = std::max(clamp_tool_position_min_, std::min(cum_gui_cmd_.linear.z + msg->linear.z, clamp_tool_position_max_));
 
-  RCLCPP_INFO(this->get_logger(), "Received GUI tool command overlay: tool_position change=%.2f", msg->linear.z);
+  RCLCPP_WARN(this->get_logger(), "Cumulative GUI tool command overlay: tool_position change=%.2f", cum_gui_cmd_.linear.z);
 }
 
 } // namespace cmdmux
-} // namespace lr
+} // namespace lr`

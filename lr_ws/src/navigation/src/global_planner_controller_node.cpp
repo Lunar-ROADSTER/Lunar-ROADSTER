@@ -28,7 +28,7 @@ namespace lr_global_planner_controller
         this->declare_parameter<double>("manipulation_goal_tolerance", 0.7);
         this->declare_parameter<double>("max_linear_speed_pct_ref", 0.5);  // m/s -> 100% wheel
         this->declare_parameter<double>("max_steering_rate_pct_ref", 0.5); // rad/s -> 100% steer
-        this->declare_parameter<double>("wheel_pct_limit", 30.0);
+        this->declare_parameter<double>("wheel_pct_limit", 40.0);
         this->declare_parameter<double>("steer_pct_limit", 60.0);
 
         // Load standard parameters

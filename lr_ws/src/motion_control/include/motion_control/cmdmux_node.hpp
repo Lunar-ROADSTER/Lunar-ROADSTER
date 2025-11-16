@@ -19,6 +19,7 @@ public:
 private: 
   /* Publishers and Subscribers */
   rclcpp::Publisher<lr_msgs::msg::ActuatorCommand>::SharedPtr cmd_pub_;
+  rclcpp::Publisher<lr_msgs::msg::ActuatorCommand>::SharedPtr gui_cmd_pub_;
 
   rclcpp::Subscription<lr_msgs::msg::MuxMode>::SharedPtr mode_sub_;
   rclcpp::Subscription<lr_msgs::msg::ActuatorCommand>::SharedPtr teleop_sub_;
@@ -32,6 +33,7 @@ private:
 
   /* Message data */
   lr_msgs::msg::ActuatorCommand cmd_msg_;
+  lr_msgs::msg::ActuatorCommand cum_gui_msg_;
   geometry_msgs::msg::Twist cum_gui_cmd_;
 
   /* Callbacks */
@@ -55,6 +57,14 @@ private:
   double freq_max_act_cmd_;
   double freq_tol_act_cmd_;
   int freq_window_act_cmd_;
+
+  // Clamp values
+  double clamp_wheel_velocity_min_ = -40.0;
+  double clamp_wheel_velocity_max_ = 40.0;
+  double clamp_steer_position_max_ = 65.0;
+  double clamp_steer_position_min_ = -65.0;
+  double clamp_tool_position_min_ = 0.0;
+  double clamp_tool_position_max_ = 100.0;
 
 }; // class CmdMuxNode
 
