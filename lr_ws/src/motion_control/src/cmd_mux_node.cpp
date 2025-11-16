@@ -7,8 +7,8 @@
  * Additionally, it publishes diagnostic information about command frequency and mux state.
  *
  * @author Boxiang (William) Fu
- * @version 1.0.0
- * @date 2025-06-23
+ * @version 1.0.1
+ * @date 2025-11-15
  *
  * Maintainer: Boxiang (William) Fu  
  * Team: Lunar ROADSTER  
@@ -18,6 +18,8 @@
  * - /mux_mode: [lr_msgs::msg::MuxMode] Updates the active command source mode (e.g. teleop, autonomy).
  * - /teleop_cmd: [lr_msgs::msg::ActuatorCommand] Actuator commands from teleoperation interface.
  * - /autonomy_cmd: [lr_msgs::msg::ActuatorCommand] Actuator commands from the autonomy stack.
+ * - /gui_drive_cmd: [geometry_msgs::msg::Twist] Overlay commands from GUI for driving control.
+ * - /gui_tool_cmd: [geometry_msgs::msg::Twist] Overlay commands from GUI for tool control.
  *
  * Publishers:
  * - /actuator_cmd: [lr_msgs::msg::ActuatorCommand] Final multiplexed actuator command sent to the vehicle.
@@ -49,14 +51,20 @@ namespace cmdmux {
     // Teleop and autonomy control messages
     teleop_sub_ = this->create_subscription<lr_msgs::msg::ActuatorCommand>(
         "/teleop_cmd", 1, std::bind(&CmdMuxNode::teleopCallback, this, std::placeholders::_1));
+
     autonomy_sub_ = this->create_subscription<lr_msgs::msg::ActuatorCommand>(
         "/autonomy_cmd", 1, std::bind(&CmdMuxNode::autonomyCallback, this, std::placeholders::_1));
 
     // GUI command subscription
-    gui_cmd_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
-        "/gui_cmd",
+    gui_drive_cmd_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
+        "/gui_drive_cmd",
         10,
-        std::bind(&CmdMuxNode::guiCmdCallback, this, std::placeholders::_1));
+        std::bind(&CmdMuxNode::guiDriveCmdCallback, this, std::placeholders::_1));
+    
+    gui_tool_cmd_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
+        "/gui_tool_cmd",
+        10,
+        std::bind(&CmdMuxNode::guiToolCmdCallback, this, std::placeholders::_1));
 
     diagnostic_pub_ = this->create_publisher<diagnostic_msgs::msg::DiagnosticArray>(
         "/diagnostics", 1);
@@ -126,6 +134,7 @@ void CmdMuxNode::timerCallback()
   // Add GUI command overlay
   cmd_msg_.wheel_velocity += cum_gui_cmd_.linear.x;
   cmd_msg_.steer_position += cum_gui_cmd_.angular.z;
+  cmd_msg_.tool_position += cum_gui_cmd_.linear.z;
 
   // Clamp commands
   cmd_msg_.wheel_velocity = std::max(-40.0, std::min(cmd_msg_.wheel_velocity, 40.0)); // [-100.0, 100.0]
@@ -188,20 +197,19 @@ void CmdMuxNode::autonomyCallback(const lr_msgs::msg::ActuatorCommand::SharedPtr
   
 }
 
-void CmdMuxNode::guiCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
+void CmdMuxNode::guiDriveCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
 {
-  curr_gui_cmd_ = *msg;
   cum_gui_cmd_.linear.x += msg->linear.x;
-  cum_gui_cmd_.linear.y += msg->linear.y;
-  cum_gui_cmd_.linear.z += msg->linear.z;
-
-  cum_gui_cmd_.angular.x += msg->angular.x;
-  cum_gui_cmd_.angular.y += msg->angular.y;
   cum_gui_cmd_.angular.z += msg->angular.z;
 
-  RCLCPP_INFO(this->get_logger(), "Received GUI command: linear=(%.2f, %.2f, %.2f), angular=(%.2f, %.2f, %.2f)",
-              curr_gui_cmd_.linear.x, curr_gui_cmd_.linear.y, curr_gui_cmd_.linear.z,
-              curr_gui_cmd_.angular.x, curr_gui_cmd_.angular.y, curr_gui_cmd_.angular.z);
+  RCLCPP_INFO(this->get_logger(), "Received GUI command overlay: linear.x=%.2f, angular.z=%.2f", msg->linear.x, msg->angular.z);
+}
+
+void CmdMuxNode::guiToolCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
+{
+  cum_gui_cmd_.linear.z += msg->linear.z;
+
+  RCLCPP_INFO(this->get_logger(), "Received GUI tool command overlay: tool_position change=%.2f", msg->linear.z);
 }
 
 } // namespace cmdmux

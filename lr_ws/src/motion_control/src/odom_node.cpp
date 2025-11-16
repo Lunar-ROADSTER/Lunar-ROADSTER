@@ -3,8 +3,8 @@
  * @brief Computes differential-drive odometry from actuator encoder telemetry and publishes odometry and actuator state messages.
  *
  * @author Boxiang (William) Fu
- * @version 1.0.0
- * @date 2025-06-23
+ * @version 1.0.1
+ * @date 2025-11-15
  *
  * Maintainer: Boxiang (William) Fu  
  * Team: Lunar ROADSTER  

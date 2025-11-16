@@ -23,7 +23,8 @@ private:
   rclcpp::Subscription<lr_msgs::msg::MuxMode>::SharedPtr mode_sub_;
   rclcpp::Subscription<lr_msgs::msg::ActuatorCommand>::SharedPtr teleop_sub_;
   rclcpp::Subscription<lr_msgs::msg::ActuatorCommand>::SharedPtr autonomy_sub_;
-  rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr gui_cmd_sub_;
+  rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr gui_drive_cmd_sub_;
+  rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr gui_tool_cmd_sub_;
 
   rclcpp::Publisher<diagnostic_msgs::msg::DiagnosticArray>::SharedPtr diagnostic_pub_;
 
@@ -31,14 +32,14 @@ private:
 
   /* Message data */
   lr_msgs::msg::ActuatorCommand cmd_msg_;
-  geometry_msgs::msg::Twist curr_gui_cmd_;
   geometry_msgs::msg::Twist cum_gui_cmd_;
 
   /* Callbacks */
   void modeCallback(const lr_msgs::msg::MuxMode::SharedPtr msg);
   void teleopCallback(const lr_msgs::msg::ActuatorCommand::SharedPtr msg);
   void autonomyCallback(const lr_msgs::msg::ActuatorCommand::SharedPtr msg);
-  void guiCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg);
+  void guiDriveCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg);
+  void guiToolCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg);
   void timerCallback(); // For looping publish in idle mode
 
   /* Variables */
