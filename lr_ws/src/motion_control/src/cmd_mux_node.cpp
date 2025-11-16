@@ -52,6 +52,12 @@ namespace cmdmux {
     autonomy_sub_ = this->create_subscription<lr_msgs::msg::ActuatorCommand>(
         "/autonomy_cmd", 1, std::bind(&CmdMuxNode::autonomyCallback, this, std::placeholders::_1));
 
+    // GUI command subscription
+    gui_cmd_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
+        "/gui_cmd",
+        10,
+        std::bind(&CmdMuxNode::guiCmdCallback, this, std::placeholders::_1));
+
     diagnostic_pub_ = this->create_publisher<diagnostic_msgs::msg::DiagnosticArray>(
         "/diagnostics", 1);
 
@@ -176,6 +182,14 @@ void CmdMuxNode::autonomyCallback(const lr_msgs::msg::ActuatorCommand::SharedPtr
     cmd_msg_ = *msg;
   }
   
+}
+
+void CmdMuxNode::guiCmdCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
+{
+  curr_gui_cmd_ = *msg;
+  RCLCPP_INFO(this->get_logger(), "Received GUI command: linear=(%.2f, %.2f, %.2f), angular=(%.2f, %.2f, %.2f)",
+              curr_gui_cmd_.linear.x, curr_gui_cmd_.linear.y, curr_gui_cmd_.linear.z,
+              curr_gui_cmd_.angular.x, curr_gui_cmd_.angular.y, curr_gui_cmd_.angular.z);
 }
 
 } // namespace cmdmux

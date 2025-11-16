@@ -16,6 +16,7 @@ find_package(rclcpp REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(lr_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(diagnostic_updater REQUIRED)
 find_package(Eigen3 REQUIRED)
 
@@ -34,6 +35,7 @@ ament_target_dependencies(cmd_mux
   nav_msgs
   lr_msgs
   diagnostic_updater
+  geometry_msgs
 )
 add_executable(odom_node src/odom_main.cpp
   src/odom_node.cpp
