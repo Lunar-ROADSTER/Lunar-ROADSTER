@@ -28,7 +28,7 @@ namespace lr_global_planner_controller
         this->declare_parameter<double>("manipulation_goal_tolerance", 0.7);
         this->declare_parameter<double>("max_linear_speed_pct_ref", 0.5);  // m/s -> 100% wheel
         this->declare_parameter<double>("max_steering_rate_pct_ref", 0.5); // rad/s -> 100% steer
-        this->declare_parameter<double>("wheel_pct_limit", 40.0);
+        this->declare_parameter<double>("wheel_pct_limit", 30.0);
         this->declare_parameter<double>("steer_pct_limit", 60.0);
 
         // Load standard parameters
@@ -179,7 +179,7 @@ namespace lr_global_planner_controller
             auto now = std::chrono::steady_clock::now();
             double elapsed = std::chrono::duration<double>(now - start).count();
 
-            if (elapsed >= 10.0)
+            if (elapsed >= 5.0)
                 break;
 
             msg.tool_position = current_tool_position_;
@@ -535,7 +535,7 @@ namespace lr_global_planner_controller
         double lookahead_dist_sq = current_lookahead_distance * current_lookahead_distance;
         double curvature = (lookahead_dist_sq > 1e-6) ? (2.0 * y_lateral_error) / lookahead_dist_sq : 0.0;
 
-        double angular_velocity = curvature / 10.0;
+        double angular_velocity = curvature / 8.0;
 
         double clipped_angular_velocity = std::clamp(
             angular_velocity, -max_angular_velocity_, max_angular_velocity_);

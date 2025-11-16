@@ -118,6 +118,7 @@ class CraterDetectionNode(Node):
         self.detections = []
 
         self.baseline = 0.12  # m offset from left camera to camera_center
+        self.threshold_value = 0.1
 
         # Parameters
         self.declare_parameter('filter_type', 'mean')  # mean or median
@@ -214,6 +215,8 @@ class CraterDetectionNode(Node):
         else:
             X, Y, Z, D = np.mean(self.xs), np.mean(self.ys), np.mean(self.zs), np.mean(self.ds)
 
+
+        self.get_logger().info(f"Crater Point in Camera Frame -> X: {X:.3f}, Y: {Y:.3f}, Z: {Z:.3f}, Diameter: {D:.3f}m")
                 # Transform to world (map) frame
         transformed = self.transform_point(X, Y, Z, from_frame='zed_camera_link', to_frame='map')
         if transformed is not None:
@@ -380,22 +383,39 @@ class CraterDetectionNode(Node):
 
             # --- Select highest-confidence detection ---
             highest_conf_idx = None
-            highest_conf = 0.0
-            for i, conf in enumerate(results.boxes.conf):
-                if float(conf) >= 0.1 and float(conf) > highest_conf:
-                    highest_conf = float(conf)
-                    highest_conf_idx = i
+            # highest_conf = 0.0
+            # for i, conf in enumerate(results.boxes.conf):
+            #     if float(conf) >= 0.1 and float(conf) > (highest_conf-0.2):
+            #         highest_conf = float(conf)
+            #         highest_conf_idx = i
+            #         self.get_logger().info("Print highest conf: {highest_conf}")
 
-            if highest_conf_idx is None:
+            if results.boxes.conf.shape[0] > 0:
+                for conf in results.boxes.conf:
+                    if conf > self.threshold_value: 
+                        self.has_stable_detection = True
+                    else: 
+                        self.has_stable_detection = False
+                        self.get_logger().warn("No valid detection above confidence threshold this frame.")
+                        return
+            else: 
                 self.has_stable_detection = False
-                self.get_logger().warn("No valid detection above confidence threshold () this frame.")
+                self.get_logger().warn("No detections this frame.")
                 return
+            
+            highest_conf_idx = np.argmax(results.boxes.conf.cpu().numpy())
+
 
             # Only process the highest-confidence box
             box = results.boxes.xyxy[highest_conf_idx]
             x1, y1, x2, y2 = map(int, box)
             cx, cy = int((x1 + x2) / 2), int((y1 + y2) / 2)
             point_3d = self.projector.pixel_to_camera(cx, cy)
+
+            self.get_logger().info(f"Highest-confidence detection box: ({x1}, {y1}), ({x2}, {y2}) with center at ({cx}, {cy})")
+            self.get_logger().info(f"Point 3D at crater center: {point_3d}")
+            self.get_logger().info(f"Camera Intrinsics: fx={self.projector.fx}, fy={self.projector.fy}, cx={self.projector.cx}, cy={self.projector.cy}")
+
             if point_3d is None:
                 self.has_stable_detection = False
                 self.get_logger().warn("Highest-confidence detection has invalid depth.")
@@ -414,7 +434,7 @@ class CraterDetectionNode(Node):
             self.zs.append(Z_center)
             self.ds.append(diameter)
 
-            self.has_stable_detection = True
+            # self.has_stable_detection = True
 
             frame_has_valid_detection = point_3d is not None
             if not frame_has_valid_detection:
