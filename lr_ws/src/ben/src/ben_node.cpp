@@ -581,7 +581,7 @@ namespace lr
                         validation_attempts_++;
                         if (validation_attempts_ > 2)
                         {
-                            RCLCPP_INFO(this->get_logger(), "[FSM: VALIDATION] Grading not satisfacory even after 3 attempts. Moving to next crater. Transitioning to GLOBAL_NAV_PLANNER.");
+                            RCLCPP_INFO(this->get_logger(), "[FSM: VALIDATION] Grading not satisfacory even after 2 attempts. Moving to next crater. Transitioning to GLOBAL_NAV_PLANNER.");
                             validation_attempts_ = 0;
                             first_time_counter_ = 0;
                             current_crater_index_++;
@@ -1025,7 +1025,14 @@ namespace lr
                 {
                     if (validation_attempts_ > 1)
                     {
-                        goal_msg.tool_position = 0.0;
+                        if (local_goal_type_ == "sink_backblade")
+                        {
+                            goal_msg.tool_position = 0.0;
+                        }
+                        else
+                        {
+                            goal_msg.tool_position = 5.0;
+                        }
                         RCLCPP_INFO(this->get_logger(), "Tool going lower ...");
                     }
                     else
