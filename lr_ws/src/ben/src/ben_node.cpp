@@ -89,6 +89,7 @@ namespace lr
 
             // FSM state publisher
             fsm_state_pub_ = this->create_publisher<std_msgs::msg::String>("/fsm_state", 1);
+            start_time_ = this->now();
 
             // Validation action client
             validation_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
@@ -214,8 +215,21 @@ namespace lr
             if (fsm_.getCurrState() != lr::ben::FSM::State::DEBUG &&
                 fsm_.getCurrState() != lr::ben::FSM::State::MANUAL_OVERRIDE)
             {
+                auto now = this->now();
+                rclcpp::Duration elapsed = now - start_time_;
+                int64_t total_sec = static_cast<int64_t>(elapsed.seconds());
+
+                int hours   = total_sec / 3600;
+                int minutes = (total_sec % 3600) / 60;
+                int seconds = total_sec % 60;
+
+                char time_str[20];
+                snprintf(time_str, sizeof(time_str), "%02d:%02d:%02d", hours, minutes, seconds);
+
                 std_msgs::msg::String fsm_state_msg;
-                fsm_state_msg.data = std::string("[FSM STATE] ") + fsm_.currStateToString();
+                // fsm_state_msg.data = "[STATE] " + fsm_.currStateToString() +
+                //                     "\n[TIME] " + std::string(time_str);
+                fsm_state_msg.data = "[MISSION TIME] " + std::string(time_str);
                 fsm_state_pub_->publish(fsm_state_msg);
             }
         }
@@ -250,6 +264,7 @@ namespace lr
             current_crater_index_ = exit_debug_crater_index_;
             validation_attempts_ = 0;
             first_time_counter_ = 0;
+            current_goal_pose_idx_ = 0;
 
             RCLCPP_INFO(this->get_logger(),
                         "[EXIT_DEBUG] Requested exit from DEBUG to state '%s' at crater index %d.",

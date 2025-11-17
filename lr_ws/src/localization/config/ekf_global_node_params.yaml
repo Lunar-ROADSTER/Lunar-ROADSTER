@@ -174,7 +174,7 @@ ekf_global_node:
       false, false, false, # x, y, z
       false,  false,  false, # roll, pitch, yaw
       false, false, false, # xdot, ydot, zdot
-      true, true, true, #roll_dot, pitch_dot, yaw_dot
+      false, false, true, #roll_dot, pitch_dot, yaw_dot
       false,  false, false # xddot, yddot, zddot
     ]
     imu0_queue_size: 5

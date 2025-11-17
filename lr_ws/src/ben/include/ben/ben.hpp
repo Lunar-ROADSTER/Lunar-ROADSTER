@@ -5,6 +5,7 @@
 #include <rclcpp_action/rclcpp_action.hpp>
 #include "nav_msgs/msg/odometry.hpp"
 #include "std_msgs/msg/bool.hpp"
+#include "std_msgs/msg/string.hpp"
 #include <geometry_msgs/msg/pose_array.hpp>
 #include <std_msgs/msg/float32_multi_array.hpp>
 
@@ -82,6 +83,7 @@ namespace lr
             // Finite State Machine
             lr::ben::FSM fsm_;
             rclcpp::Publisher<std_msgs::msg::String>::SharedPtr fsm_state_pub_;
+            rclcpp::Time start_time_;
 
             // FSM state runners
             void fsmRunStartMission();
