@@ -212,8 +212,9 @@ namespace lr
             }
 
             // Publish current FSM state
-            if (fsm_.getCurrState() != lr::ben::FSM::State::DEBUG &&
-                fsm_.getCurrState() != lr::ben::FSM::State::MANUAL_OVERRIDE)
+            // if (fsm_.getCurrState() != lr::ben::FSM::State::DEBUG &&
+            //     fsm_.getCurrState() != lr::ben::FSM::State::MANUAL_OVERRIDE)
+            if (true)
             {
                 auto now = this->now();
                 rclcpp::Duration elapsed = now - start_time_;
