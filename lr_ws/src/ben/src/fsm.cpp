@@ -27,6 +27,8 @@ std::string FSM::currStateToString() {
 			return "GLOBAL_NAV_CONTROLLER";
 		case State::VALIDATION:
 			return "VALIDATION";
+		case State::TOOL_PLANNER:
+			return "TOOL_PLANNER";
 		case State::PERCEPTION:
 			return "PERCEPTION";
 		case State::MANIPULATION_PLANNER:
@@ -55,6 +57,8 @@ FSM::State FSM::stringToState(const std::string &state_str) {
 		return State::GLOBAL_NAV_CONTROLLER;
 	} else if (state_str == "VALIDATION") {
 		return State::VALIDATION;
+	} else if (state_str == "TOOL_PLANNER") {
+		return State::TOOL_PLANNER;
 	} else if (state_str == "PERCEPTION") {
 		return State::PERCEPTION;
 	} else if (state_str == "MANIPULATION_PLANNER") {

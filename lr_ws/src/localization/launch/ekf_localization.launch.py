@@ -46,10 +46,16 @@ def generate_launch_description():
         ('odometry/filtered', 'odometry/filtered/ekf_global_node')
       ]
     ),
+    # Node(
+    #         package='localization',
+    #         executable='ts_prism_transformer',
+    #         name='ts_prism_transformer',
+    #         output='screen'
+    # ),
     Node(
             package='localization',
-            executable='ts_prism_transformer',
-            name='ts_prism_transformer',
+            executable='ceiltrack_transformer_node',
+            name='ceiltrack_transformer_node',
             output='screen'
     ),
     # Static tf publisher

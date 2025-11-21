@@ -95,6 +95,6 @@ def generate_launch_description():
         zed_static_tf_pub,
         # realsense_launch,
         # imu_launch,
-        # fisheye_node,
+        fisheye_node,
         pc_handler_node
     ])

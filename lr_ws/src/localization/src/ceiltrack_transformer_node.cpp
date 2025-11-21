@@ -1,0 +1,333 @@
+/**
+ * @file ceiltrack_transformer_node.hpp
+ * @brief Transforms ceiling-based pose estimates into base_link poses and provides IMU yaw calibration through an action server.
+ *
+ * This node fuses raw ceiling pose measurements (e.g., from a fisheye/ceiltrack localization system) with IMU orientation data
+ * to estimate the 6-DOF transform of the robot base (`base_link`) in the map frame. A fixed transform between the
+ * ceiltrack sensor and base_link is used to compute the final position, and the yaw is optionally corrected using an offset
+ * obtained via IMU calibration.
+ *
+ * The calibration action computes a yaw offset between the IMU orientation and bearing changes inferred from ceiltrack
+ * position deltas. This offset is applied to correct IMU yaw drift or misalignment. The node also provides TF publishing
+ * and listening capabilities.
+ *
+ * @version 1.0.0
+ * @date 2025-11-20
+ *
+ * Maintainer: Bhaswanth Ayapilla, Boxiang (William) Fu
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
+ *
+ * Subscribers:
+ * - /ceiling_pose_with_covariance: [geometry_msgs::msg::PoseWithCovarianceStamped] Raw ceiltrack pose of the sensor in the map frame.
+ * - /imu/data/base_link: [sensor_msgs::msg::Imu] IMU orientation for estimating robot heading.
+ *
+ * Publishers:
+ * - /transformed_ceiling_pose: [geometry_msgs::msg::PoseWithCovarianceStamped] Transformed pose of base_link in the map frame.
+ * - TF: [geometry_msgs::msg::TransformStamped] Optional transform updates (map → base_link, base_link → ceiltrack sensor).
+ *
+ * Action Servers:
+ * - ceiltrack_transformer/calibrate_imu: [CalibrateImu] Records ceiltrack + IMU data over time to compute a yaw calibration offset.
+ *
+ * Parameters:
+ * - Hardcoded static transform: (x, y, z) from ceiltrack sensor (fisheye/prism frame) to base_link in the robot frame.
+ * - pub_freq: Frequency of TF updates (default: 10 Hz).
+ *
+ * Features:
+ * - Applies a static transform from the ceiltrack sensor to base_link.
+ * - Uses tf2 to listen and broadcast transforms.
+ * - Maintains a yaw offset based on the IMU–ceiltrack calibration procedure.
+ *
+ * @credit CalibrateImu action adapted from pose alignment techniques in field robotics localization pipelines.
+ */
+
+#include "localization/ceiltrack_transformer_node.hpp"
+
+using std::placeholders::_1;
+using std::placeholders::_2;
+
+namespace lr
+{
+  namespace ceiltrack
+  {
+
+    CeiltrackTransformer::CeiltrackTransformer() : Node("ceiltrack_transformer_node")
+    {
+
+      /* Publishers and Subscribers */
+      ceiltrack_subscription_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
+          "/ceiling_pose_with_covariance", 10, std::bind(&CeiltrackTransformer::ceiltrack_callback, this, _1));
+
+      imu_subscription_ = this->create_subscription<sensor_msgs::msg::Imu>(
+          "/imu/data/base_link", 10, std::bind(&CeiltrackTransformer::imu_callback, this, _1));
+
+      transformed_ceiltrack_pub_ = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>(
+          "/transformed_ceiling_pose", 1);
+      
+      int pub_freq{10};
+      tf_timer_ = this->create_wall_timer(
+          std::chrono::milliseconds(1000 / pub_freq),
+          std::bind(&CeiltrackTransformer::tf_Callback, this));
+
+      // Tf listeners
+      tf_buffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
+      transform_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+
+      // Tf broadcaster
+      transform_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
+
+      // Setup IMU calibration action server
+      yaw_offset_ = 0.0;
+      calibration_complete_ = false;
+      calibrate_imu_action_server_ = rclcpp_action::create_server<CalibrateImu>(
+          this,
+          "ceiltrack_transformer/calibrate_imu",
+          std::bind(&CeiltrackTransformer::handle_goal, this, _1, _2),
+          std::bind(&CeiltrackTransformer::handle_cancel, this, _1),
+          std::bind(&CeiltrackTransformer::handle_accepted, this, _1));
+
+    }
+
+    double CeiltrackTransformer::addAngles(double a1, double a2)
+    {
+      double sum = a1 + a2;
+
+      if(sum > M_PI)
+        sum -= 2.0 * M_PI;
+      else if(sum < -M_PI)
+        sum += 2.0 * M_PI;
+      
+      return sum;
+    }
+
+    double CeiltrackTransformer::calculateAverageAngle(const std::vector<double>& angles)
+    {
+      double sumX = 0.0, sumY = 0.0;
+      for (const auto& angle : angles) {
+        sumX += cos(angle);
+        sumY += sin(angle);
+      }
+      double averageRadians = atan2(sumY, sumX);
+
+      return addAngles(averageRadians, 0);
+    }
+
+    void CeiltrackTransformer::append_Ceiltrack_IMU_Data(std::vector<std::pair<geometry_msgs::msg::Point, double>> & Ceiltrack_IMU_Data, int itr)
+    {
+      (void) itr;
+      // Use the latest TS prism position and current IMU yaw
+      tf2::Quaternion imu_q(
+        imu_last.orientation.x,
+        imu_last.orientation.y,
+        imu_last.orientation.z,
+        imu_last.orientation.w);
+      double imu_yaw = tf2::getYaw(imu_q);
+      Ceiltrack_IMU_Data.push_back(std::make_pair(updated_pose_.pose.pose.position, imu_yaw));
+    }
+
+    void CeiltrackTransformer::ceiltrack_callback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr ceiltrack_msg)
+    {
+      updated_pose_ = *ceiltrack_msg;
+      if (got_imu)
+      {
+        // Obtain roll/pitch/yaw from IMU in quaternion forms
+        tf2::Quaternion imu_q(
+          imu_last.orientation.x,
+          imu_last.orientation.y,
+          imu_last.orientation.z,
+          imu_last.orientation.w);
+
+        // Convert quaternions to roll/pitch/yaw
+        tf2::Matrix3x3 imu_m(imu_q);
+        double imu_roll, imu_pitch, imu_yaw;
+        imu_m.getRPY(imu_roll, imu_pitch, imu_yaw);
+
+        // Compute 3DOF orientation from map to base_link, based on raw IMU and bearing measurements
+        tf2::Quaternion map_to_base_link_q;
+        map_to_base_link_q.setRPY(imu_roll, imu_pitch, imu_yaw);
+
+        if(calibration_complete_)
+        {
+          double calibrated_yaw = addAngles(imu_yaw, yaw_offset_);
+          map_to_base_link_q.setRPY(imu_roll, imu_pitch, calibrated_yaw);
+        }
+
+        Eigen::Quaternion<double> map_to_base_link_rotation(
+          map_to_base_link_q.w(),
+          map_to_base_link_q.x(),
+          map_to_base_link_q.y(),
+          map_to_base_link_q.z()
+        );
+
+        // TODO parametrize this hard-coded translation
+        // Get static TS prism to base_link translation from transform/parameters
+        Eigen::Vector3d fisheye_to_base_link_translation(
+          // ts_prism_transformStamped.transform.translation.x,
+          // ts_prism_transformStamped.transform.translation.y,
+          // ts_prism_transformStamped.transform.translation.z
+          -0.20033, -0.020133, -0.75628
+        );
+
+        // Rotate translation such that it is axis aligned with base_link
+        Eigen::Vector3d rotated_fisheye_to_base_link_translation = map_to_base_link_rotation * fisheye_to_base_link_translation;
+
+        // Get position of TS prism in map frame, from raw TS measurement
+        Eigen::Vector3d map_to_fisheye_translation(
+          updated_pose_.pose.pose.position.x,
+          updated_pose_.pose.pose.position.y,
+          updated_pose_.pose.pose.position.z
+        );
+
+        // Get position of base_link in map frame by translating position of TS prism
+        Eigen::Vector3d map_to_base_link_translation = map_to_fisheye_translation + rotated_fisheye_to_base_link_translation;
+        updated_pose_.pose.pose.position.x = map_to_base_link_translation.x();
+        updated_pose_.pose.pose.position.y = map_to_base_link_translation.y();
+        updated_pose_.pose.pose.position.z = map_to_base_link_translation.z();
+        updated_pose_.pose.pose.orientation.w = map_to_base_link_rotation.w();
+        updated_pose_.pose.pose.orientation.x = map_to_base_link_rotation.x();
+        updated_pose_.pose.pose.orientation.y = map_to_base_link_rotation.y();
+        updated_pose_.pose.pose.orientation.z = map_to_base_link_rotation.z();
+
+        transformed_ceiltrack_pub_->publish(updated_pose_);
+
+      } else {
+        std::cout << "No imu received\n";
+      }
+    }
+
+    void CeiltrackTransformer::imu_callback(const sensor_msgs::msg::Imu::SharedPtr imu_msg)
+    {
+      imu_last = *imu_msg;
+      got_imu = true;
+    }
+
+    // Update tf transforms
+    // TODO investigate if tf_Callback and tf_Update are still needed
+    void CeiltrackTransformer::tf_Callback()
+    {
+
+      // Get Translation between base_link and prism in base_link_frame
+      bool got_tf1 = tf_update(prism_frame, base_link_frame, ceiltrack_transformStamped);
+
+      // Get Orientation between map and base_link in map_frame
+      bool got_tf2 = tf_update(map_frame, base_link_frame, base_link_transform);
+      got_tf = got_tf1 && got_tf2;
+    }
+
+    // Update given tf transform
+    bool CeiltrackTransformer::tf_update(std::string toFrameRel, std::string fromFrameRel, geometry_msgs::msg::TransformStamped &transform)
+    {
+      try
+      {
+        transform = tf_buffer_->lookupTransform(
+            toFrameRel, fromFrameRel,
+            tf2::TimePointZero);
+        return true;
+      }
+      catch (tf2::TransformException &ex)
+      {
+        RCLCPP_INFO(
+            this->get_logger(), "Could not transform %s to %s: %s",
+            toFrameRel.c_str(), fromFrameRel.c_str(), ex.what());
+        return false;
+      }
+    }
+
+    rclcpp_action::GoalResponse CeiltrackTransformer::handle_goal(
+        const rclcpp_action::GoalUUID & uuid,
+        std::shared_ptr<const CalibrateImu::Goal> goal)
+    {
+      RCLCPP_INFO(this->get_logger(), "Received calibrate IMU request");
+      (void)uuid;
+      (void)goal;
+      return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
+    }
+
+    rclcpp_action::CancelResponse CeiltrackTransformer::handle_cancel(
+        const std::shared_ptr<GoalHandleCalibrateImu> goal_handle)
+    {
+      RCLCPP_INFO(this->get_logger(), "Received request to cancel calibrate IMU action");
+      (void)goal_handle;
+      return rclcpp_action::CancelResponse::ACCEPT;
+    }
+
+    void CeiltrackTransformer::handle_accepted(
+        const std::shared_ptr<GoalHandleCalibrateImu> goal_handle)
+    {
+      std::thread{std::bind(&CeiltrackTransformer::executeCalibrateIMU, this, std::placeholders::_1), goal_handle}.detach();
+    }
+
+    void CeiltrackTransformer::executeCalibrateIMU(
+        const std::shared_ptr<GoalHandleCalibrateImu> goal_handle)
+    {
+      RCLCPP_INFO(this->get_logger(), "Executing calibrate IMU action");
+      const auto goal = goal_handle->get_goal();
+      auto feedback = std::make_shared<CalibrateImu::Feedback>();
+      auto result = std::make_shared<CalibrateImu::Result>();
+
+      double calibrate_duration = (goal->time > 0) ? goal->time : 6.5;
+      std::vector<std::pair<geometry_msgs::msg::Point, double>> Ceiltrack_IMU_Data;
+      auto start_time = this->get_clock()->now();
+      rclcpp::Rate loop_rate(1);
+
+      while(rclcpp::ok() && !goal_handle->is_canceling())
+      {
+        auto current_time = this->get_clock()->now();
+        if((current_time - start_time).seconds() >= calibrate_duration)
+        {
+          RCLCPP_INFO(this->get_logger(), "Calibration period complete");
+          break;
+        }
+        append_Ceiltrack_IMU_Data(Ceiltrack_IMU_Data, 0);
+        loop_rate.sleep();
+      }
+
+      if(goal_handle->is_canceling() || !rclcpp::ok())
+      {
+        RCLCPP_INFO(this->get_logger(), "Calibrate IMU action cancelled");
+        result->success = false;
+        goal_handle->abort(result);
+        return;
+      }
+
+      if(Ceiltrack_IMU_Data.size() < 2)
+      {
+        RCLCPP_INFO(this->get_logger(), "Not enough data recorded, aborting calibration");
+        result->success = false;
+        goal_handle->abort(result);
+        return;
+      }
+
+      std::vector<double> yaw_offsets;
+      for(size_t i = 0; i < Ceiltrack_IMU_Data.size() - 1; i++)
+      {
+        double angle_diff = addAngles(Ceiltrack_IMU_Data[i+1].second, -Ceiltrack_IMU_Data[i].second);
+        if (fabs(angle_diff) > 20.0 * M_PI / 180.0)
+        {
+          continue;
+        }
+        double avg_imu_yaw = addAngles((Ceiltrack_IMU_Data[i].second + Ceiltrack_IMU_Data[i+1].second) / 2.0, 0);
+        double ceiltrack_bearing = atan2(Ceiltrack_IMU_Data[i+1].first.y - Ceiltrack_IMU_Data[i].first.y,
+                                  Ceiltrack_IMU_Data[i+1].first.x - Ceiltrack_IMU_Data[i].first.x);
+        double yaw_offset = addAngles(ceiltrack_bearing, -avg_imu_yaw);
+        yaw_offsets.push_back(yaw_offset);
+      }
+
+      if(yaw_offsets.empty())
+      {
+        RCLCPP_INFO(this->get_logger(), "No valid yaw offsets calculated, calibration failed");
+        result->success = false;
+        goal_handle->abort(result);
+        return;
+      }
+
+      double new_yaw_offset = calculateAverageAngle(yaw_offsets);
+      yaw_offset_ = new_yaw_offset;
+      calibration_complete_ = true;
+      RCLCPP_INFO(this->get_logger(), "Calibration complete, new yaw offset: %f", yaw_offset_);
+      result->success = true;
+      goal_handle->succeed(result);
+    }
+
+  } // namespace ceiltrack
+} // namespace lr

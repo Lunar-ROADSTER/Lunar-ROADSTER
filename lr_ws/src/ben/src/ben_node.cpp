@@ -1,6 +1,70 @@
 /**
- * TODO:
- * Update date: 2025-11-01
+ * @file ben_node.cpp
+ * @brief Behaviour Executive Node (BEN): high-level finite state machine that sequences
+ *        global navigation, perception, manipulation, validation, and mission-level modes.
+ *
+ * This ROS 2 node implements the top-level Behaviour Executive for the Lunar ROADSTER rover.
+ * It maintains a finite state machine (FSM) that:
+ *  - Switches rover MUX modes between IDLE, FULL_AUTONOMY, and FULL_TELEOP.
+ *  - Plans and executes global navigation to crater sites.
+ *  - Triggers crater perception and goal-pose generation.
+ *  - Plans and executes manipulation/tool trajectories around craters.
+ *  - Runs terrain validation and uses grading results to decide on second passes or next craters.
+ *  - Provides DEBUG and MANUAL_OVERRIDE states for safe field debugging and teleoperation.
+ *
+ * The FSM advances on a periodic timer callback, consuming odometry, crater detections, and
+ * planner/validation responses to drive the mission from START_MISSION to END_MISSION / STOPPED.
+ *
+ * @version 1.0.0
+ * @date 2025-11-20
+ *
+ * Maintainer: Boxiang (William) Fu  
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu
+ *
+ * Subscribers:
+ * - /odometry/filtered/ekf_global_node : [nav_msgs::msg::Odometry] Global (map-frame) odometry used as the global robot state.
+ * - /odometry/filtered/ekf_odom_node : [nav_msgs::msg::Odometry] Local (odom-frame) odometry used as the local robot state.
+ * - /ben_debug_trigger : [std_msgs::msg::Bool] External trigger to enter DEBUG state.
+ * - /ben_exit_debug_trigger : [lr_msgs::msg::ExitDebug] Request to exit DEBUG with a specified target state and crater index.
+ * - /ben_verbose_trigger : [std_msgs::msg::Bool] Toggle for verbose logging (e.g., detailed feedback from actions and services).
+ * - /ben_manual_override_trigger : [std_msgs::msg::Bool] Toggle for entering/exiting MANUAL_OVERRIDE state (teleop vs autonomy).
+ * - /crater_detection/crater : [lr_msgs::msg::CraterStamped] Latest crater detection used as input to crater-goal generation.
+ * - /crater_centroids : [geometry_msgs::msg::PoseArray] Crater centroid poses in map frame, used as global navigation targets.
+ * - /crater_diameters : [std_msgs::msg::Float32MultiArray] Crater diameters aligned with /crater_centroids, used for planning/validation.
+ *
+ * Publishers:
+ * - /mux_mode : [lr_msgs::msg::MuxMode] Rover control mode selector (e.g., 0=IDLE, 2=FULL_AUTONOMY, 3=FULL_TELEOP).
+ * - /fsm_state : [std_msgs::msg::String] Mission-time stamped FSM state string for logging/monitoring.
+ *
+ * Service Clients:
+ * - /global_astar_planner/plan_path : [lr_msgs::srv::PlanPath] Global path planner to drive from current pose to a crater centroid.
+ * - /manipulation_planner/plan_path : [lr_msgs::srv::PlanPath] Local manipulation planner for tool approach/retreat paths around a crater.
+ * - /generate_crater_goals : [lr_msgs::srv::PoseExtract] Generates local goal poses (source/sink/backblade, etc.) around a detected crater.
+ *
+ * Action Clients:
+ * - /validation/run : [lr_msgs::action::RunValidation] Runs terrain validation and returns grading metrics (mean/max slope, z-stats, success flag).
+ * - /detect_crater : [lr_msgs::action::CraterDetect] Runs crater detection and reports progress via feedback.
+ * - /follow_path : [lr_msgs::action::FollowPath] Follows a provided nav_msgs::msg::Path with a specified direction and tool position.
+ *
+ * Parameters:
+ * - debug_trigger                       : [bool]   Initial debug trigger (also overridable via /ben_debug_trigger) (default: false).
+ * - verbose_trigger                     : [bool]   Initial verbose logging flag (also overridable via /ben_verbose_trigger) (default: false).
+ * - fsm_timer_callback_ms               : [int]    FSM timer period in milliseconds (default: 2000).
+ * - exit_debug_target_state             : [string] FSM state name to jump to when exiting DEBUG (default: "START_MISSION").
+ * - exit_debug_crater_index             : [int]    Crater index to restore when exiting DEBUG (default: 0).
+ * - start_mission_delay_iterations      : [int]    FSM cycles to wait after switching MUX to FULL_AUTONOMY (default: 5).
+ * - validation_average_window           : [int]    Window size for RunValidation averaging (default: 10).
+ * - validation_do_second_pass           : [bool]   Whether validation should request a 2nd smoothing/grading pass (default: false).
+ * - validation_timeout_sec              : [int]    Timeout for RunValidation action (seconds) (default: 20).
+ * - end_mission_delay_iterations        : [int]    FSM cycles to wait after switching MUX to IDLE at mission end (default: 5).
+ * - tool_height_up                      : [double] Raised tool height for global navigation and approach (default: 100.0).
+ * - tool_height_down                    : [double] Lowered tool height for excavation/sink poses (default: 10.0).
+ * - tool_height_up_second_pass_         : [double] Raised tool height during second-pass trajectories (default: 100.0).
+ * - tool_height_down_second_pass_       : [double] Lowered tool height during second-pass trajectories (default: 0.0).
+ * - use_dynamic_tool_height             : [bool]   Enable dynamic tool height based on validation max_z (default: false).
+ * - tool_height_dynamic                 : [double] Initial dynamic tool height (updated from validation results) (default: 0.0).
+ * - elevation_to_tool_height_multiplier : [double] Multiplier mapping terrain elevation (e.g., max_z) to tool height (default: 500.0).
  */
 
 #include "ben/ben.hpp"
@@ -54,6 +118,15 @@ namespace lr
 
             this->declare_parameter<double>("tool_height_down_second_pass_", 0.0);
             this->get_parameter("tool_height_down", tool_height_down_second_pass_);
+
+            this->declare_parameter<bool>("use_dynamic_tool_height", false);
+            this->get_parameter("use_dynamic_tool_height", use_dynamic_tool_height_);
+
+            this->declare_parameter<double>("tool_height_dynamic", 0.0);
+            this->get_parameter("tool_height_dynamic", tool_height_dynamic_);
+
+            this->declare_parameter<double>("elevation_to_tool_height_multiplier", 500.0);
+            this->get_parameter("elevation_to_tool_height_multiplier", elevation_to_tool_height_multiplier_);
 
             // FSM callback
             fsm_timer_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
@@ -178,6 +251,10 @@ namespace lr
                 fsmRunValidation();
                 break;
 
+            case lr::ben::FSM::State::TOOL_PLANNER:
+                fsmRunToolPlanner();
+                break;
+
             case lr::ben::FSM::State::PERCEPTION:
                 fsmRunPerception();
                 break;
@@ -212,27 +289,22 @@ namespace lr
             }
 
             // Publish current FSM state
-            // if (fsm_.getCurrState() != lr::ben::FSM::State::DEBUG &&
-            //     fsm_.getCurrState() != lr::ben::FSM::State::MANUAL_OVERRIDE)
-            if (true)
-            {
-                auto now = this->now();
-                rclcpp::Duration elapsed = now - start_time_;
-                int64_t total_sec = static_cast<int64_t>(elapsed.seconds());
+            auto now = this->now();
+            rclcpp::Duration elapsed = now - start_time_;
+            int64_t total_sec = static_cast<int64_t>(elapsed.seconds());
 
-                int hours   = total_sec / 3600;
-                int minutes = (total_sec % 3600) / 60;
-                int seconds = total_sec % 60;
+            int hours   = total_sec / 3600;
+            int minutes = (total_sec % 3600) / 60;
+            int seconds = total_sec % 60;
 
-                char time_str[20];
-                snprintf(time_str, sizeof(time_str), "%02d:%02d:%02d", hours, minutes, seconds);
+            char time_str[20];
+            snprintf(time_str, sizeof(time_str), "%02d:%02d:%02d", hours, minutes, seconds);
 
-                std_msgs::msg::String fsm_state_msg;
-                // fsm_state_msg.data = "[STATE] " + fsm_.currStateToString() +
-                //                     "\n[TIME] " + std::string(time_str);
-                fsm_state_msg.data = "[MISSION TIME] " + std::string(time_str);
-                fsm_state_pub_->publish(fsm_state_msg);
-            }
+            std_msgs::msg::String fsm_state_msg;
+            // fsm_state_msg.data = "[STATE] " + fsm_.currStateToString() +
+            //                     "\n[TIME] " + std::string(time_str);
+            fsm_state_msg.data = "[MISSION TIME] " + std::string(time_str);
+            fsm_state_pub_->publish(fsm_state_msg);
         }
 
         void BenNode::debugTriggerCallback(const std_msgs::msg::Bool::SharedPtr msg)
@@ -605,7 +677,7 @@ namespace lr
                     else
                     {
                         RCLCPP_WARN(this->get_logger(),
-                                    "[FSM: VALIDATION] Grading FAILED. Transitioning to PERCEPTION.");
+                                    "[FSM: VALIDATION] Grading FAILED. Transitioning to TOOL_PLANNER.");
                         validation_attempts_++;
                         if (validation_attempts_ > 2)
                         {
@@ -617,7 +689,7 @@ namespace lr
                         }
                         else
                         {
-                            fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
+                            fsm_.setCurrState(lr::ben::FSM::State::TOOL_PLANNER);
                         }
                         return;
                     }
@@ -669,9 +741,11 @@ namespace lr
                     if (res.code == rclcpp_action::ResultCode::SUCCEEDED && res.result)
                     {
                         validation_last_success_ = res.result->grading_success;
+                        validation_last_min_z_ = res.result->min_z;
                         validation_last_max_z_ = res.result->max_z;
+                        validation_last_avg_z_ = res.result->avg_z;
                         RCLCPP_INFO(this->get_logger(),
-                                    "[FSM: VALIDATION] Result: success=%s mean=%.2f rmse=%.2f max=%.2f max_trav=%.2f min_z=%.2f max_z=%.2f avg_z=%.2f",
+                                    "[FSM: VALIDATION] Result: success=%s mean=%.2f rmse=%.2f max=%.2f max_trav=%.2f min_z=%.4f max_z=%.4f avg_z=%.4f",
                                     res.result->grading_success ? "true" : "false",
                                     res.result->mean_gradient,
                                     res.result->rmse_gradient,
@@ -716,11 +790,27 @@ namespace lr
             RCLCPP_INFO(this->get_logger(), "[FSM: VALIDATION] Goal in progress. Waiting for result.");
         }
 
+        void BenNode::fsmRunToolPlanner()
+        {
+            if (use_dynamic_tool_height_)
+            {
+                tool_height_dynamic_ = validation_last_max_z_ * elevation_to_tool_height_multiplier_;
+                tool_height_dynamic_ = std::clamp(tool_height_dynamic_, 0.0, tool_height_down_);
+                RCLCPP_INFO(this->get_logger(),
+                            "[FSM: TOOL_PLANNER] Dynamic tool height set to %.2f based on last max_z=%.4f.",
+                            tool_height_dynamic_,
+                            validation_last_max_z_);
+            }
+            
+            RCLCPP_INFO(this->get_logger(), "[FSM: TOOL_PLANNER] Transitioning to PERCEPTION.");
+            fsm_.setCurrState(lr::ben::FSM::State::PERCEPTION);
+        }
+
         void BenNode::fsmRunPerception()
         {
             std::lock_guard<std::mutex> lock(perception_mutex_);
 
-            // Skip perceptionif not the first attempt
+            // Skip perception if not the first attempt
             if (validation_attempts_ > 1)
             {
                 RCLCPP_INFO(this->get_logger(),
@@ -1066,6 +1156,12 @@ namespace lr
                     else
                     {
                         goal_msg.tool_position = tool_height_down_;
+                    }
+
+                    if (use_dynamic_tool_height_)
+                    {
+                        goal_msg.tool_position = tool_height_dynamic_;
+                        RCLCPP_INFO(this->get_logger(), "Using dynamic tool height: %.f", goal_msg.tool_position);
                     }
                 }
                 RCLCPP_INFO(this->get_logger(), "Tool position: %.f", goal_msg.tool_position);

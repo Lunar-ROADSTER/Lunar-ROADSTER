@@ -8,3 +8,11 @@ cmd_mux:
     freq_max_act_cmd: 50.0 # Maximum allowable frequency [double]
     freq_tol_act_cmd: 0.05 # Allowable frequency tolerance as percentage of min or max [double]
     freq_window_act_cmd : 5 # Number of messages for calculating frequency statistics [int]
+
+    # Clamp checking for actuator commands
+    clamp_wheel_velocity_min: -40.0
+    clamp_wheel_velocity_max: 40.0
+    clamp_steer_position_min: -65.0
+    clamp_steer_position_max: 65.0
+    clamp_tool_position_min: 0.0
+    clamp_tool_position_max: 100.0

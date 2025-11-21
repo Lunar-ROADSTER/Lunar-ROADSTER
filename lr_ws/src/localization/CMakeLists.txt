@@ -68,6 +68,23 @@ ament_target_dependencies(ts_prism_transformer
 )
 target_link_libraries(ts_prism_transformer tf2_ros::tf2_ros)  
 
+# ----------------------- Ceiltrack Transformer -----------------------
+add_executable(ceiltrack_transformer_node 
+  src/ceiltrack_transformer_main.cpp
+  src/ceiltrack_transformer_node.cpp
+)
+ament_target_dependencies(ceiltrack_transformer_node
+  rclcpp
+  geometry_msgs
+  sensor_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  Eigen3
+  lr_msgs
+)
+target_link_libraries(ceiltrack_transformer_node tf2_ros::tf2_ros)  
+
 # ----------------------- IMU TF Publisher -----------------------
 add_executable(imu_tf_publisher
   src/imu_tf_publisher_main.cpp
@@ -95,6 +112,9 @@ install(TARGETS slip_estimate_node
   DESTINATION lib/${PROJECT_NAME})
 
 install(TARGETS ts_prism_transformer
+  DESTINATION lib/${PROJECT_NAME})
+
+install(TARGETS ceiltrack_transformer_node
   DESTINATION lib/${PROJECT_NAME})
 
 install(TARGETS imu_tf_publisher  # ? Install IMU TF Publisher

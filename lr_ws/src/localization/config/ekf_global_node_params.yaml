@@ -187,7 +187,8 @@ ekf_global_node:
     imu0_remove_gravitational_acceleration: true
 
     # Total Station
-    pose0: transformed_total_station_prism
+    # pose0: transformed_total_station_prism
+    pose0: transformed_ceiling_pose
     pose0_config: [
       true, true, true,
       false, false, false,  # was all false before

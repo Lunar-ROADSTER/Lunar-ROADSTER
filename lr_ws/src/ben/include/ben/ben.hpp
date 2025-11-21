@@ -90,6 +90,7 @@ namespace lr
             void fsmRunGlobalNavPlanner();
             void fsmRunGlobalNavController();
             void fsmRunValidation();
+            void fsmRunToolPlanner();
             void fsmRunPerception();
             void fsmRunManipulationPlanner();
             void fsmRunManipulationController();
@@ -134,11 +135,23 @@ namespace lr
             std::mutex validation_mutex_;
             bool validation_goal_active_{false};
             std::optional<bool> validation_last_success_;
+            double validation_last_min_z_{0.0};
             double validation_last_max_z_{0.0};
+            double validation_last_avg_z_{0.0};
             int validation_attempts_{0};
 
             rclcpp::CallbackGroup::SharedPtr validation_cb_group_;
             rclcpp_action::Client<lr_msgs::action::RunValidation>::SharedPtr validation_client_;
+
+            // fsmRunToolPlanner helpers
+            bool use_dynamic_tool_height_{false};
+            double tool_height_dynamic_{0.0};
+            double elevation_to_tool_height_multiplier_{10.0};
+
+            double tool_height_up_;
+            double tool_height_down_;
+            double tool_height_up_second_pass_;
+            double tool_height_down_second_pass_;
 
             // fsmRunPerception helpers
             std::mutex perception_mutex_;
@@ -152,7 +165,7 @@ namespace lr
             rclcpp_action::Client<lr_msgs::action::CraterDetect>::SharedPtr crater_detect_client_;
             std::shared_ptr<rclcpp_action::ClientGoalHandle<lr_msgs::action::CraterDetect>> crater_detect_goal_handle_;
 
-            // fsmNav helpers
+            // fsmRunManipulationPlanner helpers
             using FollowPath = lr_msgs::action::FollowPath;
             using GoalHandleFollowPath = rclcpp_action::ClientGoalHandle<FollowPath>;
 
@@ -176,12 +189,6 @@ namespace lr
 
             // fsmRunManualOverride helpers
             bool entered_once_ = false;
-
-            // Tool Height control
-            double tool_height_up_;
-            double tool_height_down_;
-            double tool_height_up_second_pass_;
-            double tool_height_down_second_pass_;
 
         public:
             // Constructor and destructor
