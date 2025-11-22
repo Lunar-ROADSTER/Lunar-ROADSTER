@@ -253,6 +253,8 @@ namespace navigation
         bool solve3x3(double M[3][3], double b[3], double x[3]) const;
         bool refineCircleGaussNewton(double &cx, double &cy, double &R, int iters = 10, double huber_k = 0.0) const;
         DeviationStats computeDeviationStatsWeighted(const nav_msgs::msg::Path &path, double cx, double cy, double R) const;
+
+        void trimPathAtGoal(nav_msgs::msg::Path &path, const NodeState &goal) const;
     };
 }
 

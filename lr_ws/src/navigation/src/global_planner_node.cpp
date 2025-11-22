@@ -291,6 +291,29 @@ namespace navigation
         res->message = ok ? "OK" : "Planning failed";
     }
 
+    void AStarPlanner::trimPathAtGoal(nav_msgs::msg::Path &path, const NodeState &goal) const
+    {
+        if (path.poses.empty())
+            return;
+
+        nav_msgs::msg::Path trimmed;
+        trimmed.header = path.header;
+
+        for (const auto &ps : path.poses)
+        {
+            trimmed.poses.push_back(ps);
+
+            NodeState st = nodeFromPose(ps);
+
+            if (goalReached(st, goal))
+            {
+                break;
+            }
+        }
+
+        path = std::move(trimmed);
+    }
+
     bool AStarPlanner::planOnce(const geometry_msgs::msg::PoseStamped &goal_msg,
                                 nav_msgs::msg::Path &out_path,
                                 bool do_smooth)
@@ -397,6 +420,15 @@ namespace navigation
         {
             return false;
         }
+
+        NodeState final_goal;
+        final_goal.x = goal_x_;
+        final_goal.y = goal_y_;
+        final_goal.yaw = goal_yaw_;
+        auto proj_goal = projectOntoRing(goal_x_, goal_y_);
+        final_goal.s_on_ring = proj_goal.s;
+
+        trimPathAtGoal(final_planned_path_, final_goal);
 
         if (do_smooth)
         {
