@@ -481,7 +481,7 @@ namespace lr
 
             if (current_crater_index_ == 0)
             {
-                request->goal.pose.position.x += 0.05;
+                request->goal.pose.position.x += 0.1;
                 request->goal.pose.position.y += 0.01;
                 request->goal.pose.orientation.x = 0.0;
                 request->goal.pose.orientation.y = 0.0;

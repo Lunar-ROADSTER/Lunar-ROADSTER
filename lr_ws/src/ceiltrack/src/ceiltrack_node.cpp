@@ -505,7 +505,8 @@ void CeiltrackNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
     p_world.pose.pose.position.z = 0.0;
 
     tf2::Quaternion q;
-    q.setRPY(0.0, 0.0, yaw_rel);
+    // q.setRPY(0.0, 0.0, yaw_rel);
+    q.setRPY(0.0, 0.0, 0.0); // Disable yaw
     p_world.pose.pose.orientation = tf2::toMsg(q);
 
     for (double &c : p_world.pose.covariance)
