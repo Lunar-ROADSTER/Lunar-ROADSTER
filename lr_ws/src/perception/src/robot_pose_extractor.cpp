@@ -1,3 +1,96 @@
+
+/**
+ * @file pose_extractor.cpp
+ * @brief Generates crater-interaction goal poses (source, sink, backblade) from crater geometry and rover pose.
+ *
+ * This node provides the geometric processing backend for the Lunar ROADSTER crater grading system.
+ * It exposes a ROS2 service that accepts a crater centroid and diameter and returns four
+ * manipulation-ready goal poses for the rover:
+ *
+ *   1. Source Pose
+ *   2. Sink Pose
+ *   3. Source Backblade Pose
+ *   4. Sink Backblade (Last Offset) Pose
+ *
+ * The node retrieves the rover’s current pose from TF, computes the crater approach direction,
+ * applies configurable geometric offsets, and enforces boundary constraints to ensure safe and
+ * feasible goal generation. It also publishes RViz marker visualization for debugging.
+ *
+ * @version 1.0.0
+ * @date 2025-12-02
+ *
+ * Maintainer: Ankit Aggarwal 
+ * Contributors: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu  
+ * Team: Lunar ROADSTER
+ *
+ * -----------------------------------------------------------------------------
+ * Subscribers:
+ *   - None
+ *     This node uses TF transforms instead of direct topic subscription.
+ *
+ * Publishers:
+ *   - /goal_markers  
+ *       Type: visualization_msgs::msg::MarkerArray  
+ *       Publishes visualization spheres for generated poses to RViz.
+ *
+ * Service Servers:
+ *   - /generate_crater_goals  
+ *       Type: lr_msgs::srv::PoseExtract  
+ *       Input: crater centroid (x,y,z) and diameter  
+ *       Output: vector of Pose2D poses + type labels  
+ *       Function: Core interface for generating crater manipulation poses.
+ *
+ * Service Clients:
+ *   - None
+ *
+ * Action Servers / Action Clients:
+ *   - None
+ *
+ * TF Interfaces:
+ *   - Lookup: map → base_link  
+ *     Used to compute rover approach direction (yaw) relative to crater position.
+ *
+ * Parameters:
+ *   - manipulation_offset (double)
+ *       Offset added to crater radius to determine source pose stand-off distance.
+ *
+ *   - last_pose_offset (double)
+ *       Initial offset for sink backblade last pose, before constraint checks.
+ *
+ *   - backblading_multipler (double)
+ *       Scaling factor used to compute backblading retreat distances.
+ *
+ *   - boundary_min, boundary_max (double)
+ *       Limits for constraining the last pose within safe map boundaries.
+ *
+ *   - boundary_increment (double)
+ *       Incremental safety margin applied when adjusting last pose.
+ *
+ *   - robot_half_length (double)
+ *       Half of rover’s wheelbase—used for approach geometry if needed.
+ *
+ *   - source_pose_offset_x / source_pose_offset_y (double)
+ *       Additional tunable offsets applied to source pose.
+ *
+ *   - sink_pose_offset_x / sink_pose_offset_y (double)
+ *       Additional tunable offsets applied to sink pose.
+ *
+ *   - source_backblade_pose_offset_x / source_backblade_pose_offset_y (double)
+ *       Offsets applied to computing the source backblade pose.
+ *
+ *   - sink_backblade_pose_offset_x / sink_backblade_pose_offset_y (double)
+ *       Offsets applied to computing the sink backblade final pose.
+ *
+ * Features:
+ *   - Computes yaw alignment based on rover pose.
+ *   - Generates 4 crater manipulation poses with proper geometry.
+ *   - Applies boundary clamping to ensure valid sink backblade poses.
+ *   - Publishes RViz markers for debugging.
+ *   - Fully configurable via ROS2 param server.
+ *
+ * @credit Core component of the Lunar ROADSTER dozing and manipulation pipeline.
+ */
+
 #include "perception/robot_pose_extractor.hpp"
 #include "lr_msgs/srv/pose_extract.hpp"
 

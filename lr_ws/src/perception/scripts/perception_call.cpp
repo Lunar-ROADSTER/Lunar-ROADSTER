@@ -1,3 +1,86 @@
+/**
+ * @file perception_call_tester.cpp
+ * @brief Test node that listens for crater detections and triggers PoseExtract
+ *        service calls to generate approach/goal poses for Lunar ROADSTER.
+ *
+ * This node subscribes to the output of the crater detection module
+ * (`lr_msgs::msg::CraterStamped`) and, for every received crater message,
+ * sends a request to the `perception::srv::PoseExtract` service
+ * ("generate_crater_goals"). The service computes rover goal poses based on the
+ * crater centroid and diameter, returning a set of 2D poses and their
+ * associated semantic types (e.g., ENTRY, EXIT, ALIGNMENT).
+ *
+ * The node stores the returned poses and prints them in a formatted manner
+ * for verification and debugging. It also prevents multiple simultaneous
+ * service calls by enforcing an in-flight request flag.
+ *
+ * @version 1.0.0
+ * @date 2025-12-02
+ *
+ * Maintainer: Ankit Aggarwal, Deepam Ameria
+ * Contributors: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla,
+ *               Simson D’Souza, Boxiang (William) Fu  
+ * Team: Lunar ROADSTER
+ *
+ * ------------------------------------------------------------------------------
+ * SUBSCRIBERS
+ * ------------------------------------------------------------------------------
+ * - /crater_detection/crater
+ *     Type: lr_msgs::msg::CraterStamped  
+ *     Final crater centroid + diameter after detection and filtering.
+ *     Used as input to generate rover goal poses.
+ *
+ * ------------------------------------------------------------------------------
+ * SERVICE CLIENTS
+ * ------------------------------------------------------------------------------
+ * - generate_crater_goals
+ *     Type: perception::srv::PoseExtract  
+ *     Computes goal poses based on crater geometry.
+ *     Called asynchronously every time a crater message is received.
+ *
+ * ------------------------------------------------------------------------------
+ * PARAMETERS / INTERNAL STATE
+ * ------------------------------------------------------------------------------
+ * - pending_request_ (bool)
+ *     Tracks whether a PoseExtract request is currently in flight.
+ *     Prevents multiple overlapping service calls.
+ *
+ * - goalPoses (std::vector<lr_msgs::msg::Pose2D>)
+ *     Goal poses returned from the service.
+ *
+ * - goalPosesTypes (std::vector<std::string>)
+ *     Semantic type labels returned with each pose.
+ *
+ * ------------------------------------------------------------------------------
+ * FEATURES
+ * ------------------------------------------------------------------------------
+ * - Waits for crater detections and triggers pose generation automatically.
+ * - Avoids duplicate service requests using a request-in-flight guard.
+ * - Pretty-prints crater information and resulting goal poses.
+ * - Gracefully handles service availability issues.
+ *
+ * ------------------------------------------------------------------------------
+ * WORKFLOW
+ * ------------------------------------------------------------------------------
+ * 1. Node starts and waits for incoming crater detections.
+ * 2. On crater callback:
+ *        - Checks service availability.
+ *        - Sends asynchronous PoseExtract request.
+ *        - Passes crater dimensions as service input.
+ * 3. On service response:
+ *        - Stores returned poses + types.
+ *        - Prints all results to the ROS2 logger.
+ * 4. Ready for next crater message.
+ *
+ * ------------------------------------------------------------------------------
+ * NOTES
+ * ------------------------------------------------------------------------------
+ * - Designed as a lightweight integration tester for crater → pose generation.
+ * - Useful for verifying correctness of perception and planning handoff.
+ * - Does not publish or drive the rover — only tests perception-service logic.
+ *
+ */
+
 #include <chrono>
 #include <iomanip>
 #include <sstream>

@@ -1,4 +1,84 @@
 #!/usr/bin/env python3
+"""
+================================================================================
+CRATER DETECTION NODE (ROS2)
+================================================================================
+
+Version: 1.0.0
+Date   : 2025-12-02
+--------------------------------------------------------------------------------
+
+Maintainer: Deepam Ameria, Ankit Aggarwal 
+Contributors: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla, Simson D’Souza, Boxiang (William) Fu  
+Team: Lunar ROADSTER
+ 
+Node  : crater_detection_node_ankit
+Desc  : 
+    Performs real-time crater detection using YOLOv8 on ZED RGB + depth data.
+    Projects 2D detections to 3D using depth and camera intrinsics, transforms
+    crater coordinates to the map frame, smooths detections over time, and
+    publishes:
+        - Crater centroid (CraterStamped)
+        - RViz visualization marker
+        - Annotated RGB debugging image
+
+    Activated through an action server (detect_crater). The state machine sends
+    a goal to trigger detection, wait for stable detections, collect samples,
+    filter them, and return final averaged crater coordinates.
+
+--------------------------------------------------------------------------------
+SUBSCRIBERS
+--------------------------------------------------------------------------------
+1. /zed/zed_node/rgb/image_rect_color  (sensor_msgs/Image)
+2. /zed/zed_node/depth/depth_registered (sensor_msgs/Image)
+3. /zed/zed_node/rgb/camera_info        (sensor_msgs/CameraInfo)
+
+Subscribers are activated only during an action request and destroyed after
+completion to reduce CPU/GPU usage.
+
+--------------------------------------------------------------------------------
+PUBLISHERS
+--------------------------------------------------------------------------------
+1. /crater_detection/crater     (lr_msgs/CraterStamped)
+2. /crater_detection/marker     (visualization_msgs/Marker)
+3. /crater_detection/annotated  (sensor_msgs/Image)
+
+--------------------------------------------------------------------------------
+ACTION SERVER
+--------------------------------------------------------------------------------
+Action Name: detect_crater  
+Action Type: lr_msgs/action/CraterDetect
+
+Workflow:
+    1. Wait for stable >0.7 conf crater detection for ≥ 3 sec.
+    2. Collect (X, Y, Z, diameter) samples for 15 sec.
+    3. Apply mean/median filter.
+    4. Transform crater point to map frame.
+    5. Publish CraterStamped + RViz marker.
+    6. Shutdown subscribers.
+
+--------------------------------------------------------------------------------
+UTILITIES / INTERNAL MODULES
+--------------------------------------------------------------------------------
+• YOLOv8 model inference on GPU
+• DepthProjector 
+      - Manages camera intrinsics
+      - Converts (u, v) pixel to 3D point
+• TF2 transform handling (camera → map)
+• GPU memory cleanup + warmup
+• Smoothing, filtering, confidence gating
+• Annotated image visualization
+
+--------------------------------------------------------------------------------
+NOTES
+--------------------------------------------------------------------------------
+- Designed for Jetson Orin (JetPack 6.1, CUDA 12.6)
+- Ensure ZED node publishes synchronized RGB + depth
+- Requires best.pt YOLO weights placed at configured path
+
+================================================================================
+"""
+
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer
