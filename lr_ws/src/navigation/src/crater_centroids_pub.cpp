@@ -1,3 +1,40 @@
+/**
+ * @file crater_centroids_publisher.cpp
+ * @brief Publishes fixed crater centroid locations as a PoseArray for testing global planning and navigation.
+ *
+ * This node periodically publishes a predefined set of crater centroids to the "/crater_centroids" topic.
+ * These centroids represent crater or waypoint positions in the "map" frame and are used for
+ * debugging, visualization, planner testing, or simulating crater detections in the Lunar ROADSTER system.
+ *
+ * The centroids are hard-coded into the node and published at a constant frequency (1 Hz). Each centroid is
+ * expressed as a geometry_msgs::msg::Pose with zero yaw and z = 0, wrapped in a PoseArray.
+ *
+ * @version 1.0.0
+ * @date 2025-12-02
+ *
+ * Maintainer: Bhaswanth Ayapilla
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla,
+ *               Simson D’Souza, Boxiang (William) Fu
+ *
+ * Publishers:
+ * - /crater_centroids
+ *     geometry_msgs::msg::PoseArray
+ *     A set of static 2D crater/waypoint coordinates published in the "map" frame.
+ *
+ * Parameters:
+ * - (none)
+ *     All crater coordinates are currently hard-coded into the source file.
+ *
+ * Features:
+ * - Publishes a PoseArray of predefined crater centroids at a fixed rate.
+ * - Useful for testing global planners, costmap behavior, navigation pipelines,
+ *   and visualization in RViz.
+ * - Provides consistent repeatable inputs for system-level debugging.
+ *
+ * @credit Utility tool for crater-based navigation experiments within the Lunar ROADSTER autonomy stack.
+ */
+
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/pose_array.hpp>
 #include <geometry_msgs/msg/pose.hpp>
@@ -22,7 +59,7 @@ private:
         // C1: (2.780,  1.466)
         // Int1: (4.697, 1.219)
         // C2: (5.588,  2.431)
-        // C3: (5.353,  5.431) 
+        // C3: (5.353,  5.431)
         // Int2: (4.361, 5.597)
         // C4: (3.068,  5.839)
         // Int3: (1.589, 5.378)

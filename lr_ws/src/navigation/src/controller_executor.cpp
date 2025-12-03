@@ -1,3 +1,62 @@
+/**
+ * @file controller_executor_node.cpp
+ * @brief Coordinates global planning and path-following control by chaining a planner service and a FollowPath action.
+ *
+ * This node listens for goal poses on the "/goal_pose" topic (e.g., from RViz or a higher-level behavior node),
+ * transforms them into the global planning frame (usually "map"), and then:
+ *   1. Asynchronously calls the global planner service (lr_msgs::srv::PlanPath) to generate a path.
+ *   2. Forwards the resulting nav_msgs::msg::Path to the FollowPath action server for execution.
+ *
+ * The node handles TF transformations for incoming goals, manages goal preemption (canceling the previous controller
+ * goal when a new goal arrives), and passes configuration options such as smoothing and direction to both planner
+ * and controller. It acts as a lightweight coordination layer between planning and path execution.
+ *
+ * @version 1.0.0
+ * @date 2025-12-02
+ *
+ * Maintainer: Bhaswanth Ayapilla, Simson D’Souza
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla,
+ *               Simson D’Souza, Boxiang (William) Fu
+ *
+ * Subscribers:
+ * - /goal_pose
+ *     geometry_msgs::msg::PoseStamped
+ *     Target pose for the robot, typically from RViz or a higher-level autonomy module.
+ *
+ * Service Clients:
+ * - planner_service_name  (default: /global_astar_planner/plan_path)
+ *     lr_msgs::srv::PlanPath
+ *     Global planner service that returns a collision-free nav_msgs::msg::Path.
+ *
+ * Action Clients:
+ * - controller_action_name  (default: follow_path)
+ *     lr_msgs::action::FollowPath
+ *     Path-execution controller that follows the given trajectory and provides feedback/results.
+ *
+ * Parameters:
+ * - planner_service_name (string)
+ *     Name of the planning service used for global path requests.
+ * - controller_action_name (string)
+ *     Name of the FollowPath action server for executing paths.
+ * - global_frame (string)
+ *     The global planning frame into which goal poses are transformed (e.g., "map").
+ * - smooth (bool)
+ *     Whether to request a smoothed path from the global planner.
+ * - direction (string)
+ *     Driving direction hint passed to the controller (e.g., "Forward", "Reverse").
+ *
+ * Features:
+ * - Transforms incoming goal poses into the global planning frame using TF2.
+ * - Sends asynchronous service requests to the global planner without blocking callbacks.
+ * - Sends planned paths to an action server for execution.
+ * - Handles preemption by canceling previously active controller goals.
+ * - Provides detailed logging for planning, transformation, and controller feedback.
+ *
+ * @credit Developed as the integration layer between global planning and path-following
+ *         control within the Lunar ROADSTER autonomy stack.
+ */
+
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <nav_msgs/msg/path.hpp>

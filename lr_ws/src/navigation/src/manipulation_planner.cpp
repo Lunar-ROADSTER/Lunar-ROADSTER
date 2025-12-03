@@ -1,3 +1,67 @@
+/**
+ * @file manipulation_planner_node.cpp
+ * @brief Short-range A* grid planner for precise manipulation positioning.
+ *
+ * This node provides a lightweight, local manipulation planner used to
+ * reposition the Lunar ROADSTER base near the worksite. It:
+ *  - Subscribes to a 2D occupancy grid map (nav_msgs::msg::OccupancyGrid).
+ *  - Retrieves the robot’s current pose via TF (map_frame ← base_frame).
+ *  - Receives a goal pose through the PlanPath service.
+ *  - Performs 4- or 8-connected A* search over the grid.
+ *  - Outputs a nav_msgs::msg::Path suitable for slow, precise alignment
+ *    before deploying the grading tool.
+ *
+ * This planner is distinct from the larger crater ring planner and is
+ * intended for the `Forward_manipulation` phase, where fine placement
+ * matters more than global travel efficiency.
+ *
+ * @version 1.0.0
+ * @date 2025-12-02
+ *
+ * Maintainer: Bhaswanth Ayapilla
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria,
+ *               Bhaswanth Ayapilla, Simson D’Souza,
+ *               Boxiang (William) Fu
+ *
+ * Subscribers:
+ *  - map_topic (default: /map)
+ *      nav_msgs::msg::OccupancyGrid
+ *      Occupancy map used as the planning grid.
+ *
+ * Service Servers:
+ *  - /manipulation_planner/plan_path (lr_msgs::srv::PlanPath)
+ *      Request:
+ *        goal (geometry_msgs::msg::PoseStamped)
+ *        smooth (bool, unused)
+ *      Response:
+ *        success (bool)
+ *        message (string)
+ *        path (nav_msgs::msg::Path)
+ *
+ * Publishers:
+ *  - /manipulation_planner/path
+ *      nav_msgs::msg::Path (A* result path)
+ *  - /manipulation_planner/goal_marker
+ *      visualization_msgs::msg::Marker (green sphere at goal)
+ *
+ * Parameters:
+ *  - map_topic (string, "/map")
+ *  - occupied_threshold (int, 100)
+ *  - use_8_connected (bool, true)
+ *  - map_frame (string, "map")
+ *  - base_frame (string, "base_link")
+ *
+ * Features:
+ *  - Uses Euclidean heuristic in world coordinates.
+ *  - Selectable 4- or 8-connected neighborhood.
+ *  - Cleanly integrates with ring planner via shared PlanPath interface.
+ *  - Designed for slow and precise base alignment near the manipulation site.
+ *
+ * @credit Local manipulation planner for fine base positioning in the
+ *         Lunar ROADSTER autonomy stack.
+ */
+
 #include "navigation/manipulation_planner.hpp"
 
 using PlanPath = lr_msgs::srv::PlanPath;

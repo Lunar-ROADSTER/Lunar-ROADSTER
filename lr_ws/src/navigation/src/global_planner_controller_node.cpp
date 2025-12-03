@@ -1,3 +1,109 @@
+/**
+ * @file global_planner_controller_node.cpp
+ * @brief Pure Pursuit–style global path follower that drives the Lunar ROADSTER using an action-based FollowPath interface.
+ *
+ * This node implements a GlobalPlannerController as a FollowPath action server. Given a global path
+ * (nav_msgs::msg::Path) and a direction/mode, it:
+ *  - Tracks the path using a Pure Pursuit–like lookahead controller in the global frame.
+ *  - Queries TF to obtain the robot pose (global_frame -> robot_frame).
+ *  - Generates actuator commands (wheel and steering percentages) for the drive system.
+ *  - Publishes a visualization marker for the current lookahead target.
+ *  - Builds and publishes a trail of past robot poses for debugging in RViz.
+ *
+ * The controller supports multiple driving modes via the "direction" goal field:
+ *  - "Forward"                : nominal navigation parameters.
+ *  - "Backward"               : same controller, but with negative linear velocity and manipulation tolerances.
+ *  - "Forward_manipulation"   : forward driving with manipulation-tuned lookahead and tolerance.
+ *
+ * The node also computes path deviation statistics (mean, RMS, max deviation) for debugging and
+ * performance evaluation of the tracking behavior.
+ *
+ * @version 1.0.0
+ * @date 2025-12-02
+ *
+ * Maintainer: Bhaswanth Ayapilla, Simson D’Souza
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla,
+ *               Simson D’Souza, Boxiang (William) Fu
+ *
+ * Action Server:
+ * - follow_path
+ *     Type: lr_msgs::action::FollowPath
+ *     Receives a global path, drive direction, and tool position. The controller tracks the path until
+ *     the goal tolerance is met, the goal is canceled, or an error occurs. Feedback includes distance_to_goal;
+ *     the result indicates success or failure.
+ *
+ * Publishers:
+ * - /command_vel
+ *     geometry_msgs::msg::Twist
+ *     (Currently unused/commented out; previously used as a cmd_vel interface for low-level control.)
+ *
+ * - /autonomy_cmd
+ *     lr_msgs::msg::ActuatorCommand
+ *     Low-level actuator commands (wheel_velocity, steer_position, tool_position) derived from the
+ *     tracking controller outputs and the latched tool position from the action goal.
+ *
+ * - /lookahead_point
+ *     visualization_msgs::msg::Marker
+ *     RViz marker for the active Pure Pursuit lookahead point in the global frame.
+ *
+ * - /tf_trail
+ *     nav_msgs::msg::Path
+ *     A time-sampled trail of robot poses (global_frame) for visualizing the executed trajectory in RViz.
+ *
+ * Parameters:
+ * - lookahead_distance (double, default: 0.7)
+ *     Lookahead distance (meters) used for "Forward" navigation mode.
+ *
+ * - desired_linear_velocity (double, default: 5.0)
+ *     Nominal forward linear speed (m/s) for navigation; may be negated in "Backward" mode.
+ *
+ * - max_angular_velocity (double, default: 3.0)
+ *     Maximum allowable angular velocity (rad/s) used to clamp the controller's angular output.
+ *
+ * - goal_tolerance (double, default: 0.7)
+ *     Distance threshold (meters) for considering the final goal reached in "Forward" mode.
+ *
+ * - robot_frame (string, default: "base_link")
+ *     Robot body frame used for control and transformations (TF target for lookahead point).
+ *
+ * - global_frame (string, default: "map")
+ *     Global planning frame in which the path is defined and TF lookups are performed.
+ *
+ * - manipulation_lookahead_distance (double, default: 0.7)
+ *     Lookahead distance (meters) used in "Forward_manipulation" and "Backward" modes.
+ *
+ * - manipulation_goal_tolerance (double, default: 0.7)
+ *     Goal tolerance (meters) used in "Forward_manipulation" and "Backward" modes.
+ *
+ * - max_linear_speed_pct_ref (double, default: 0.5)
+ *     Reference linear speed (m/s) that maps to 100% wheel command. Used by publishActuator to normalize
+ *     linear velocity into wheel velocity percentage.
+ *
+ * - max_steering_rate_pct_ref (double, default: 0.5)
+ *     Reference steering rate (rad/s) that maps to 100% steering command. Used by publishActuator to
+ *     normalize angular velocity into steering percentage.
+ *
+ * - wheel_pct_limit (double, default: 40.0)
+ *     Saturation limit for wheel_velocity percentage in ActuatorCommand ([-wheel_pct_limit, +wheel_pct_limit]).
+ *
+ * - steer_pct_limit (double, default: 60.0)
+ *     Saturation limit for steer_position percentage in ActuatorCommand ([-steer_pct_limit, +steer_pct_limit]).
+ *
+ * Features:
+ * - Implements a Pure Pursuit–like controller using a configurable lookahead distance.
+ * - Uses TF2 to obtain the robot pose in the global frame and to transform the lookahead target into robot_frame.
+ * - Supports multiple driving modes ("Forward", "Backward", "Forward_manipulation") with distinct tolerances
+ *   and lookahead behavior.
+ * - Publishes actuator-level commands instead of raw cmd_vel, aligning with the Lunar ROADSTER drive interface.
+ * - Computes and logs path deviation metrics (mean, RMS, max, cumulative error, path length) for debugging.
+ * - Publishes a visual lookahead point and a trail of executed poses for RViz visualization.
+ * - Handles goal lifecycle for the FollowPath action: acceptance, execution, cancellation, and abort on errors.
+ *
+ * @credit Core global path-following controller for the Lunar ROADSTER rover, integrating global planning,
+ *         TF-based localization, and actuator-space command generation.
+ */
+
 #include "navigation/global_planner_controller_node.hpp"
 #include <algorithm>
 #include <chrono>
@@ -546,7 +652,6 @@ namespace lr_global_planner_controller
 
         // cmd_vel_pub_->publish(cmd_vel);
         publishActuator(current_linear_velocity, clipped_angular_velocity);
-
     }
 
     /**

@@ -1,3 +1,147 @@
+/**
+ * @file global_planner_node.cpp
+ * @brief Crater-aware global planner using a ring-shaped lattice A* over a Catmull–Rom crater spline.
+ *
+ * This node implements the Lunar ROADSTER global planner as an A* search over a kinematically feasible
+ * 4-wheel-steering (4WS) lattice, biased to follow a crater “latitude” ring. It:
+ *  - Subscribes to crater centroids and diameters, fuses them into a set of craters, and fits a circle.
+ *  - Builds a closed Catmull–Rom spline ring through gradable craters in counter-clockwise order.
+ *  - Projects the robot pose and final goal onto this ring and generates intermediate sub-goals along it.
+ *  - Runs a lattice A* planner between successive sub-goals, accounting for 4WS kinematics and occupancy.
+ *  - Optionally smooths the final path and publishes visualization markers and statistics.
+ *
+ * The planning is exposed as a synchronous service (lr_msgs::srv::PlanPath) that takes a goal pose in the
+ * "map" frame and returns a nav_msgs::msg::Path that follows the crater ring while avoiding obstacles and
+ * respecting ring alignment and kinematic constraints.
+ *
+ * @version 1.0.0
+ * @date 2025-12-02
+ *
+ * Maintainer: Bhaswanth Ayapilla
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla,
+ *               Simson D’Souza, Boxiang (William) Fu
+ *
+ * Subscribers:
+ * - /map
+ *     nav_msgs::msg::OccupancyGrid
+ *     2D occupancy grid used for obstacle cost evaluation along motion primitives.
+ *
+ * - /crater_centroids
+ *     geometry_msgs::msg::PoseArray
+ *     Crater center positions (map frame). Used to construct the crater ring spline.
+ *
+ * - /crater_diameters
+ *     std_msgs::msg::Float32MultiArray
+ *     Crater diameters (meters), ordered to match /crater_centroids. Used to classify gradable vs. obstacle craters.
+ *
+ * Service Servers:
+ * - ~/plan_path
+ *     lr_msgs::srv::PlanPath
+ *     Request:
+ *       - goal (geometry_msgs::msg::PoseStamped, frame_id = "map")
+ *       - smooth (bool) – whether to apply path smoothing.
+ *     Response:
+ *       - success (bool)
+ *       - message (string)
+ *       - path (nav_msgs::msg::Path) – planned global path in "map" frame.
+ *
+ * Publishers:
+ * - ring_path
+ *     nav_msgs::msg::Path
+ *     Discretized crater ring spline used as a geometric reference for planning.
+ *
+ * - crater_debug
+ *     visualization_msgs::msg::MarkerArray
+ *     Markers showing gradable craters (green) and obstacle craters (red).
+ *
+ * - planned_path
+ *     nav_msgs::msg::Path
+ *     Final planned and optionally smoothed path for the most recent planning request.
+ *
+ * - start_goal_markers
+ *     visualization_msgs::msg::MarkerArray
+ *     Markers for the start and goal poses and intermediate sub-goals along the ring.
+ *
+ * - latitude_circle
+ *     visualization_msgs::msg::Marker
+ *     Marker representing the best-fit crater circle used as a “latitude” reference.
+ *
+ * Parameters:
+ * - crater_threshold (double)
+ *     Diameter threshold separating gradable vs. obstacle craters.
+ *
+ * - ring_bias_k (double)
+ *     Weight for penalizing lateral deviation from the ring (signed offset cost).
+ *
+ * - align_k (double)
+ *     Weight for penalizing heading misalignment w.r.t. the ring tangent.
+ *
+ * - wheelbase (double)
+ *     Effective wheelbase used in the 4WS curvature model.
+ *
+ * - step_length (double)
+ *     Forward step length (meters) for each lattice primitive.
+ *
+ * - max_steer_front_deg (double, default: 25.0)
+ * - max_steer_rear_deg  (double, default: 25.0)
+ *     Maximum front and rear steering angles (degrees) used to generate 4WS primitives.
+ *
+ * - occupancy_threshold (int)
+ *     Occupancy value above which a cell is considered an obstacle (hard collision).
+ *
+ * - obstacle_weight (double)
+ *     Weight applied to averaged occupancy along motion primitives.
+ *
+ * - sample_ds (double)
+ *     Spatial step used when sampling primitives for obstacle cost evaluation.
+ *
+ * - goal_x, goal_y (double)
+ *     Default goal position (meters) in map frame (used when not supplied externally).
+ *
+ * - goal_yaw_deg (double)
+ *     Default goal yaw (degrees) in map frame.
+ *
+ * - goal_ccw_advance (double)
+ *     Additional arc-length advance along the ring beyond the projected goal (for grading patterns).
+ *
+ * - goal_s_tolerance (double)
+ *     Allowed arc-length deviation along the ring between final state and desired goal s.
+ *
+ * - xy_tolerance (double)
+ *     Cartesian distance tolerance for considering the goal reached.
+ *
+ * - yaw_tolerance_deg (double, default: 15.0)
+ *     Heading tolerance (degrees) for goal acceptance.
+ *
+ * - max_expansions (int)
+ *     Upper bound on A* node expansions per plan call.
+ *
+ * - weight_data (double)
+ * - weight_smooth (double)
+ *     Weights for path smoothing (data vs. smoothness trade-off).
+ *
+ * Features:
+ * - Fuses crater centroids and diameters into a crater set and fits a robust circle using normal equations
+ *   and optional Gauss–Newton refinement with Huber weighting.
+ * - Builds a closed Catmull–Rom spline ring through gradable craters and maintains an arc-length parameterization.
+ * - Projects arbitrary points onto the ring to obtain arc coordinate s, tangent yaw, and signed lateral offset.
+ * - Generates sub-goals along the ring between projected start and goal locations, properly handling wrap-around.
+ * - Performs lattice A* search in a 4WS state space with motion primitives that include:
+ *     - length cost,
+ *     - steering change cost,
+ *     - ring bias (lateral deviation),
+ *     - heading alignment cost,
+ *     - forward-progress penalty,
+ *     - occupancy-based obstacle cost.
+ * - Provides a heuristic combining Euclidean distance and ring/heading error terms.
+ * - Applies a simple gradient-descent style smoother to the final path and re-orients poses along the path tangent.
+ * - Publishes rich RViz visualization for craters, ring, start/goal/sub-goals, and the latitude circle.
+ *
+ * @credit Global crater-ring planner for the Lunar ROADSTER rover, integrating crater geometry, occupancy maps,
+ *         and 4WS lattice planning into a single ROS 2 service node.
+ */
+
 #include "navigation/global_planner_node.hpp"
 
 namespace navigation

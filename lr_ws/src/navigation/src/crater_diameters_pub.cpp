@@ -1,3 +1,40 @@
+/**
+ * @file crater_diameters_publisher.cpp
+ * @brief Publishes fixed crater diameter measurements as a Float32MultiArray for testing crater-aware navigation.
+ *
+ * This node periodically publishes a predefined list of crater diameters to the "/crater_diameters" topic.
+ * These diameters correspond to crater sizes in meters and are aligned with the ordering of crater centroids
+ * published elsewhere in the system. The data provides synthetic crater size measurements for debugging,
+ * visualization, and planner testing within the Lunar ROADSTER autonomy stack.
+ *
+ * The diameters are hard-coded and published at 1 Hz as a std_msgs::msg::Float32MultiArray message.
+ *
+ * @version 1.0.0
+ * @date 2025-12-02
+ *
+ * Maintainer: Bhaswanth Ayapilla
+ * Team: Lunar ROADSTER
+ * Team Members: Ankit Aggarwal, Deepam Ameria, Bhaswanth Ayapilla,
+ *               Simson D’Souza, Boxiang (William) Fu
+ *
+ * Publishers:
+ * - /crater_diameters
+ *     std_msgs::msg::Float32MultiArray
+ *     Ordered crater diameters (meters) corresponding to the published crater centroids.
+ *
+ * Parameters:
+ * - (none)
+ *     All crater diameter values are currently hard-coded into the source.
+ *
+ * Features:
+ * - Publishes a vector of crater diameters at a fixed rate (1 Hz).
+ * - Provides synthetic crater size information for integration testing and debugging.
+ * - Ensures consistent ordering aligned with crater centroid publishing.
+ *
+ * @credit Utility tool for crater-based path planning and grading experiments
+ *         in the Lunar ROADSTER autonomy system.
+ */
+
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/float32_multi_array.hpp>
 #include <chrono>
