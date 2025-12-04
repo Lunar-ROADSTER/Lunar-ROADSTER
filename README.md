@@ -1,108 +1,215 @@
-# Lunar ROADSTER Bringup
+# 🚀 Lunar ROADSTER – System Bring-Up & Operation Guide
 
-These are the steps to bring up the full Lunar ROADSTER system on the Jetson Xavier, including micro-ROS agents, localization, teleoperation, and full navigation using Nav2. For the navigation stack, refer to the repository [lr-navigation2](https://github.com/Lunar-ROADSTER/lr-navigation2).
+This document provides complete startup, bring-up, and debugging instructions for running the full Lunar ROADSTER autonomy stack on the NVIDIA Jetson Orin platform.
 
-## Jetson Setup 
+For details about the project’s motivation, system architecture, and team, visit:  
+https://mrsdprojects.ri.cmu.edu/2025teami/
 
-```bash
-sudo ./jetsonstartup.zsh
-```
+---
 
-Runs a custom startup script on the Jetson to initialize device permissions, mounts, or system-level configurations necessary before launching Docker or ROS.
+# 📦 Orin System Bring-Up (Standard Startup)
 
-## Docker
+Follow these steps when launching the system outside Docker for quick startup.
 
-```bash
-cd /sd_card/Lunar-ROADSTER/lr_ws
-docker start -i lunar_roadster_dev_jetson
-```
+### 1. Set UDEV Rules  
+`sudo ./set-udev-rules-orin.sh`
 
-Starts and attaches to the main development container which has ROS 2 and all dependencies pre-installed.
+### 2. Configure Fisheye Camera
+`./set_fisheye.sh`
 
-To open a new terminal in container, run:
+### 3. Start Sensors  
+`./start_sensors.sh`
 
-```bash
-sudo docker exec -it lunar_roadster_dev_jetson zsh
-```
+### 4. Launch Autonomy Stack  
+`./autonomy_start.sh`
 
-## Start Micro-ROS Agent
+---
+
+# 🐳 Orin Full System Bring-Up (with Docker)
+
+Used for full deployment & development. This is a deeper dive into the same commands that the startup script launches.
+
+### 1. Set UDEV Rules  
+`./set-udev-rules-orin.sh`
+
+### 2. Start Docker Container  
+`docker start -i lunar_roadster_dev_orin`
+
+Open another terminal inside Docker:  
+`docker exec -it lunar_roadster_dev_orin zsh`
+
+---
+
+# 📡 Micro-ROS Bring-Up (Arduino + Sensor Drivers)
+
+Inside Docker:
 
 ```bash
 cd ~/microros_ws
 source install/local_setup.zsh
 ros2 run micro_ros_setup create_agent_ws.sh
-ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/cg_dev/tty_arduino -v6
+ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/lr_dev/tty_arduino -v6
 ```
 
-This sets up and starts the micro-ROS agent which bridges communication between the microcontroller (Arduino) and the Jetson host via serial.
 
-## Start Teleoperation
+---
+
+# 🎮 Teleoperation Bring-Up (Manual Control)
 
 ```bash
 cd Lunar_ROADSTER/lr_ws
 source install/setup.zsh
 ros2 launch motion_control motion_control_launch.py
-ros2 topic pub /mux_mode lr_msgs/msg/MuxMode "{mode: 3}" --once
-```
-Launches the motion control node to interpret teleop commands. The mux mode switch tells the robot to listen to teleop commands rather than autonomous input.
-
-## Start Localization
-
-```bash
-# Launch VectorNav driver
-ros2 launch vectornav vectornav.launch.py
-
-# Launch IMU transformation node
-ros2 launch imu imu_launch.py
-
-# Launch EKF localization
-ros2 launch localization ekf_localization.launch.py
-
-# Calibrate IMU
-ros2 action send_goal /ts_prism_transformer/calibrate_imu lx_msgs/action/CalibrateImu "{dont_move_rover: false, time: 4}"
 ```
 
-## Start Navigation
+
+Switch MUX to teleop:  
+`ros2 topic pub /mux_mode lr_msgs/msg/MuxMode "{mode: 3}" --once`
+
+---
+
+# 🧭 Localization Bring-Up
+
+### 1. Launch VectorNav  
+`ros2 launch vectornav vectornav.launch.py`
+
+### 2. Launch IMU Transform Pipeline  
+`ros2 launch imu imu_launch.py`
+
+### 3. Launch EKF Localization  
+`ros2 launch localization ekf_localization.launch.py`
+
+### 4. Calibrate IMU  
+
+`
+ros2 action send_goal /ts_prism_transformer/calibrate_imu lr_msgs/action/CalibrateImu "{dont_move_rover: false, time: 4}"
+`
+
+
+---
+
+# 🗺️ Navigation Bring-Up
+
+### 1. Map Server  
+
+`ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=/root/Lunar_ROADSTER/lr_ws/src/navigation/maps/global_costmap.yaml -p frame_id:=map`
+
+If `/map` is not publishing:
 
 ```bash
-# Start map server
-ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=/root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_bringup/maps/map.yaml
-
-# If map_server doesn't publish to /map:
 ros2 lifecycle set /map_server configure
 ros2 lifecycle set /map_server activate
-
-# Launch navigation bringup
-ros2 launch nav2_bringup bringup_launch.py slam:=False map:=/root/Lunar_ROADSTER/lr_ws/src/navigation2/nav2_bringup/maps/map.yaml use_sim_time:=false
-
-# Start autonomy command
-ros2 run nav2_bringup autonomy_command
 ```
 
-This launches the full Nav2 navigation stack using a preloaded static map. It sets the lifecycle of map_server, brings up Nav2 modules (planner, controller, recoveries, etc.), and starts the command node for autonomous execution.
 
-## Launch Visualization
+### 2. Publish Crater Features
 
 ```bash
-ros2 launch launcher launch.py
+ros2 run navigation crater_centroids_pub
+ros2 run navigation crater_diameters_pub
 ```
 
-This launches the RViz visualizer along with any additional visual tools or debug layers required.
+### 3. Global Navigation Planner  
 
-## Launch Planning Stack
+`ros2 run navigation global_astar_node --ros-args --params-file /root/Lunar_ROADSTER/lr_ws/src/navigation/config/global_plan_params.yaml`
+
+### 4. Local Navigation Planner
+
+`ros2 run navigation manipulation_planner_node`
+
+
+### 5. Navigation Controller  
+
+`ros2 run navigation global_planner_controller_main --ros-args -p yaml_filename:=/root/Lunar_ROADSTER/lr_ws/src/navigation/config/global_planner_controller.yaml`
+
+---
+
+# 🧪 Validation Stack Bring-Up
 
 ```bash
-ros2 launch planning planning_launch.py
+ros2 launch sensing sensing_launch.py
+ros2 launch validation validation.launch.py
 ```
 
-Starts the global planner used for sending waypoints or tasks to the robot autonomously.
+---
 
-## Debug Trigger
+# 👁️ Perception Bring-Up
 
-Send this to trigger state transition when rover gets stuck:
+### 1. Launch YOLOv8
 
 ```bash
-ros2 topic pub /behavior_exec_debug_trigger std_msgs/msg/Bool "{data: true}" --once
+conda activate <env_name>
+source ~/.zshrc
+ros2 run perception detection_ankit.py
 ```
+### 2. Run Pose Extractor
 
-**Note:** Always ensure that the transforms are active and all hardware is connected before launching autonomous components.
+`ros2 run perception pose_extractor`
+
+---
+
+# 🧩 BEN (Finite-State Machine) Bring-Up
+
+`ros2 launch ben ben.launch.py`
+
+---
+
+# 🐞 Debug Mode Instructions
+
+### Enter Debug Mode  
+`ros2 topic pub /ben_debug_trigger std_msgs/msg/Bool "{data: true}" --once`
+
+### Exit Debug Mode  
+Provide current crater index + current state:
+
+`ros2 topic pub --once /ben_exit_debug_trigger lr_msgs/msg/ExitDebug '{current_crater_index: 0, current_state: "START_MISSION"}'`
+
+
+### Valid States  
+- START_MISSION  
+- GLOBAL_NAV_PLANNER  
+- GLOBAL_NAV_CONTROLLER  
+- VALIDATION  
+- TOOL_PLANNER  
+- PERCEPTION  
+- MANIPULATION_PLANNER  
+- MANIPULATION_CONTROLLER  
+- END_MISSION  
+- STOPPED  
+- DEBUG  
+
+**Do NOT transition to `MANUAL_OVERRIDE` via `/ben_exit_debug_trigger`.**  
+Always use the manual override trigger.
+
+---
+
+# 🎮 Manual Override (Teleop Mode)
+
+You must already be in **DEBUG** state.
+
+### Enter Manual Override  
+`ros2 topic pub /ben_manual_override_trigger std_msgs/msg/Bool "{data: true}" --once`
+
+### Exit Manual Override  
+(Returns to DEBUG.)  
+`ros2 topic pub /ben_manual_override_trigger std_msgs/msg/Bool "{data: false}" --once`
+
+---
+
+# 📘 Additional Documentation
+
+For project overview, motivation, hardware design, and team details: https://mrsdprojects.ri.cmu.edu/2025teami/
+
+---
+
+# © Team I – CMU MRSD 2025
+
+The Lunar ROADSTER system is developed as part of the Carnegie Mellon University MRSD Program.  
+Feel free to file issues or contact the team regarding deployment or development.
+
+Team:
+- [Bhaswanth Ayapilla](https://github.com/Bhaswanth-A)
+- [Boxiang (William) Fu](https://github.com/williamfbx)
+- [Ankit Aggarwal](https://github.com/AnkitAggarwal0)
+- [Deepam Ameria](https://github.com/Deepam-Ameria)
+- [Simson D'Souza](https://github.com/simsondsouza)
