@@ -85,6 +85,8 @@ Switch MUX to teleop:
 ros2 action send_goal /ts_prism_transformer/calibrate_imu lr_msgs/action/CalibrateImu "{dont_move_rover: false, time: 4}"
 `
 
+### 5. (Optional) Ceiltrack Localization
+`ros2 launch ceiltrack ceiltrack.launch.py`
 
 ---
 
