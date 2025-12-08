@@ -140,7 +140,7 @@ ros2 launch validation validation.launch.py
 ### 1. Launch YOLOv8
 
 ```bash
-conda activate <env_name>
+conda activate cudatry
 source ~/.zshrc
 ros2 run perception detection_ankit.py
 ```
